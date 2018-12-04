@@ -1,0 +1,3 @@
+1.必须先安装st_flow.sql 表结构与存储过程，其中存储过程中含有用户名信息，请切记修改为PHP连接Mysql的用户名一致
+2.st_flow_menu.sql 必须在st_flow_function.sql 之前安装，由于外键的关系 
+3.t_flow_sys_numcollate.sql文件过大，如果是测试平台功能可先不安装。该表为号码归属地，用于号码充值流量使用，
