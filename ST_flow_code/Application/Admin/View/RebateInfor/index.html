@@ -1,0 +1,119 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>统计报表</em>><em>代理商返利记录</em></span>
+        </div>
+          <div class="operation_info">
+              <isshow url="RebateInfor/export_excel">
+                  <button class="btn  export_button" data-url="RebateInfor">
+                      <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                  </button>
+              </isshow>
+          </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/RebateInfor/index">
+    <div class="search_nav minheight60" >
+      <ul>
+
+        <if condition="$user_type eq 2">
+            <li>
+              <input type="text" class="inputtext" name="keyw" value="{$Think.get.keyw}" placeholder="下级用户"/>
+            </li>
+        <else />
+            <li>
+                <input type="text" class="inputtext" name="keypcode" value="{$Think.get.keypcode}" placeholder="代理商编号"/>
+            </li>
+            <li>
+                <input type="text" class="inputtext" name="keypname" value="{$Think.get.keypname}" placeholder="代理商名称"/>
+            </li>
+        </if>
+       <!-- <li>
+            <label class="inputlabel">操作时间：</label>
+            <input type="text" class="inputtext" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+            <em class="inputto">至</em>
+            <input type="text" class="inputtext" name="end_datetime" placeholder="结束时间" value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly />
+        </li>-->
+          <li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+        <div class="prepaidtip">
+            返利总额：【<span style="color:#5cb95c;">{$operater_price_sum|default='0.000'}</span>元】
+        </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="60" class="change">运营商</th>
+                    <th width="60" class="change">流量大小</th>
+                    <th width="50" class="change">省份</th>
+                    <if condition="$user_type eq 1"><th width="100" class="change">代理商名称</th></if>
+                    <th width="100" class="change">下级用户</th>
+                    <th width="80" class="change">基础售价(元)</th>
+                    <th width="60" class="change">自身折扣</th>
+                    <th width="60" class="change">下级折扣</th>
+                    <th width="100" class="change">返利金额(元)</th>
+                    <th width="180" class="change">订单号</th>
+                    <th width="110" class="change">返利时间</th>
+                    <!-- <th width="40">操作</th> -->
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.operator_id|get_operator_name=###}</td>
+                    <td>{$vo.size}M</td>
+                    <td>{$vo.province_name}</td>
+                    <if condition="$user_type eq 1"> <td>{$vo.proxy_id_name}</td> </if>
+                    <td>{$vo.proxy_name}{$vo.enterprise_name}</td>
+                    <td class="money_style">{$vo.price}</td>
+                    <td>{$vo['self_dc']*10}</td>
+                    <td>{$vo['down_dc']*10}</td>
+                    <td class="money_style">{$vo.operater_price}</td>
+                    <td>{$vo.order_code}</td>
+                    <td>{$vo.record_date}</td>
+                    <!-- <td class="operation_td">
+                      <button class="operationbtn proxyRecord_detailed_function" value="{$vo.record_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                          <span>查看</span>
+                      </button>
+                    </td> -->
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

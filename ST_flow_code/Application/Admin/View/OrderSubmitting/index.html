@@ -1,0 +1,246 @@
+<include file="Common/header" />
+<script>
+    $(function(){
+        $("label.checkbox").on('click',function(){
+            var val = $(this).attr('value');
+            if(val > 0){
+                var ischeck = $(this).hasClass('checked');
+                if(!ischeck == false){
+                    $(this).addClass('checked');
+                }else{
+                    $(this).removeClass('checked');
+                }
+            }
+        })
+
+        $('label.allcheck').on('click',function(){
+            var ischeck = $(this).hasClass('checked');
+            var name = $(this).attr('data');
+            if(!ischeck){
+                $("table."+name+' label.checkbox').addClass('checked');
+            }else{
+                $("table."+name+' label.checkbox').removeClass('checked');
+            }
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>提交中充值记录</em></span>
+            </div>
+            <div class="operation_info">
+                <if condition="is_jurisdiction('OrderSubmitting/batch_callback')">
+                    <button class="btn add_btn channel_user_set_channel_info_user_box"
+                            onclick="set_batch_callback();">
+                        <i class="minicon submitoperation_icon"></i><span>批量回调失败</span>
+                    </button>
+                    <if condition="is_jurisdiction('OrderSubmitting/batch_callback') or is_jurisdiction('OrderSubmitting/export_excel')">
+                        <span class="line">|</span>
+                    </if>
+                </if>
+                <isshow url="OrderSubmitting/export_excel">
+                    <button class="btn  export_button" data-url="OrderSubmitting">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form method="get" name="excel" action="/index.php/Admin/OrderSubmitting/index">
+            <div class="search_nav minheight60">
+                <ul>
+                    <if condition="$upper_role neq 1">
+                        <li>
+                            <input type="text" class="inputtext" name="proxy_name" value="{$Think.get.proxy_name}" placeholder="用户名称" style="min-width:120px;" />
+                        </li>
+                    </if>
+                    <li>
+                        <input type="text" class="inputtext" name="mobile" value="{$Think.get.mobile}" placeholder="手机号" style="min-width:120px;"/>
+                    </li>
+                    <!--//联想的方式展现**************************-->
+                    <if condition="($user_type eq '1') and ($upper_role neq 1)">
+                        <li>
+                            <input type="text" class="inputtext shui_channel_name" name="channel_name" value="{$Think.get.channel_name}" placeholder="主充值通道" style="min-width:80px;max-width: 90px;" data-id-name="channel_id" autocomplete="off"  is-role="{$is_role}">
+                            <input type='hidden' class="inputtext" name='channel_id' id='channel_id' value='{$Think.get.channel_id}'>
+                        </li>
+
+                        <li>
+                            <input type="text" class="inputtext shui_channel_name" name="bc_channel_name" value="{$Think.get.bc_channel_name}" placeholder="备充值通道" style="min-width:80px;max-width: 90px;" data-id-name="bc_channel_id" autocomplete="off" is-role="{$is_role}">
+                            <input type='hidden' class="inputtext" name='bc_channel_id' id='bc_channel_id' value='{$Think.get.bc_channel_id}'>
+                        </li>
+                    </if>
+
+                    <li>
+                        <label class="inputlabel">运营商：</label>
+                        <select class="select" name="operator_id" style="min-width:80px">
+                            <option value="">请选择</option>
+                            <volist name="operator" id="voo">
+                                <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">归属地省份：</label>
+                        <select class="select" name="province_id" style="min-width:80px">
+                            <option value="">请选择</option>
+                            <volist name="province" id="voo2">
+                                <option value="{$voo2.province_id}" <if condition='$Think.get.province_id eq $voo2["province_id"]'>selected</if> >{$voo2.province_name}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+
+                    <li>
+                        <label class="inputlabel">订单状态：</label>
+                        <select class="select" name="order_status" style="min-width:80px">
+                            <option value="9">请选择</option>
+                            <volist name="order_status_list['items']" id="vos">
+                                <option value="{$vos.order_status}" <if condition='$Think.get.order_status eq $vos["order_status"]'>selected</if> >{$vos.text}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">充值时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$default_start}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({minDate:'%y-%M-{%d-7} 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$default_end}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({maxDate:'%y-%M-%d {%H-12}:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+            <div class="prepaidtip">
+                <p> 提交成功：【<span style="color:#5cb95c;">{$counts.@submit_success_count|default=0}</span>条，共<span style="color:#5cb95c;">{$counts.@submit_success_amount|default='0.000'}</span>元】</p>
+                <p><if condition="$user_type eq 1">等待提交<else />正在送充</if>：【<span class="blue">{$counts.@p_wait_count|default=0}</span>条，共<span class="blue">{$counts.@p_wait_amount|default='0.000'}</span>元】</p>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="40%" style="background:#eff2f8;">
+                                <label class="checkbox allcheck" data="submitting_list" ><em></em></label>
+                            </th>
+                            <th width="50">序号</th>
+                            <if condition="$upper_role neq 1"><th width="130" class="change">用户名称</th></if>
+                            <if condition="($user_type eq 1) and ($upper_role neq 1)">
+                                <th width="130" class="change">顶级代理</th>
+                            </if>
+                            <th width="120" class="change">手机号</th>
+                            <th width="70" class="change">运营商</th>
+                            <th width="100" claas="change">归属地</th>
+                            <th width="100" class="change" title="流量包名称">流量包名称</th>
+                            <th width="90" class="change" class="money_style" title="折后价格(元)">折后价格(元)</th>
+
+                            <if condition="($user_type eq '1') and ($upper_role neq 1)">
+                                <th width="90" class="change">通道编码</th>
+                            </if>
+
+                            <th width="110" class="change">提交时间</th>
+                            <th width="95" class="change">订单状态</th>
+                            <th width="60" class="change">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <table class="submitting_list">
+                    <volist name="order_list" id="vo">
+                        <tr>
+                            <td><label class="checkbox" value="{$vo.order_id}"><em></em></label></td>
+                            <td>{$vo.sort_no}</td>
+                            <if condition="$upper_role neq 1"><td title="{$vo.proxy_name}">{$vo.proxy_name}</td></if>
+                            <if condition="($user_type eq 1) and ($upper_role neq 1)">
+                                <td title="{$vo.top_proxy_name}">{$vo.top_proxy_name}</td>
+                            </if>
+                            <!--   <td>{$vo.order_code}</td>-->
+                            <td><span title="{$vo.mobile}">{$vo.mobile}</span></td>
+                            <td title="{$vo.operator_name}">{$vo.operator_name}</td>
+                            <td title="{$vo.city_name}">{$vo.province_name}{$vo.city_name}</td>
+                            <td><if condition="$vo.province_id eq '1'">全国<else />省内</if>{$vo.product_name}</td>
+                            <!--       <td>{$vo.price}</td> -->
+                            <td title="{$vo.discount_price}">{$vo.discount_price}</td>
+                            <if condition="($user_type eq '1') and ($upper_role neq 1)">
+                                <if condition="($vo.order_status eq 3) or ($vo.order_status eq 4)">
+                                    <td title="{$vo.bc_channel_code}">{$vo.bc_channel_code}</td>
+                                    <else />
+                                    <td title="{$vo.channel_code}">{$vo.channel_code}</td>
+                                </if>
+                            </if>
+                            <td title="{$vo.order_date|strtotime|date='m-d H:i:s',###}">{$vo.order_date|strtotime|date="m-d H:i:s",###}</td>
+                            <td>
+                                <if condition="$vo.order_status eq '0'">
+                                    <span class="recharge_statue recharge_send"><em>等待提交(主)</em></span>
+                                    <elseif condition="$vo.order_status eq '1'"/><span class="recharge_statue recharge_send"><em>提交成功(主)</em></span>
+                                    <elseif condition="$vo.order_status eq '4'"/><span class="recharge_statue recharge_send"><em>提交成功(备)</em></span>
+                                    <elseif condition="$vo.order_status eq 3" /><span class="recharge_statue recharge_send"><em>等待提交(备)</em></span>            </if>
+                            </td>
+                            <td class="operation_td">
+                                <isshow url="OrderSubmitting/show">
+                                    <button class="operationbtn OrderSubmitting_view_btn" value="{$vo.order_id}">
+                                        <span>查看</span>
+                                    </button>
+                                </isshow>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+    parent.layer.closeAll();
+    function set_batch_callback(){
+        //获取需回调的订单id
+        var order_str = '';
+        $('table.submitting_list').find('label.checked').each(function(){
+            order_str += $(this).attr('value') + ',';
+        });
+        order_str = order_str.substring(0,order_str.length-1);
+
+        if(!order_str){
+            var data=new Array()
+            data.status = 0;
+            data.info = '请选择需回调的订单！';
+
+            alertbox(data);
+            return　false;
+        }
+
+        $.ajax({
+            url :"/index.php/Admin/OrderSubmitting/batch_callback",
+            type : 'post',
+            data :{order_str:order_str},
+            dataType :'json',
+            success : function(data) {
+                location.reload();
+                alertbox(data);
+            }
+        });
+    }
+</script>
+</body>
+</html>

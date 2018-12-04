@@ -1,0 +1,23 @@
+.mui-grid-9::after{
+	height: 0px !important;
+}
+
+.mui-table-view-cell.mui-active.unselectcell {
+	background-color: white !important;
+}
+
+
+
+input::-ms-input-placeholder{
+	padding-top: 5px;
+}
+
+input::-webkit-input-placeholder{
+	padding-top: 5px;
+} 
+
+
+/*公告*/
+.notice{padding-bottom: 0.5rem;}
+.notice h3{line-height: 2.6666rem;font-size: 1.4rem;text-align: center;}
+.notice span{display: block;padding-left: 1.2rem; line-height: 1.2rem;font-size: 0.8rem;}

@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>爱讯充值</title>
+<link href="{$role}css/reset.css?!" rel="stylesheet" type="text/css">
+<link href="{$role}css/layer.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{$role}js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src="{$role}js/layer.js"></script>
+  <script>
+    $(function(){
+		//1为支付宝 2为微信
+		var paystype = 2;
+
+		$("#pay_btn").click(function(){
+			//页面层
+			if(paystype == 2)
+			{
+					parent.layer.open({
+								type: 1,
+								title:'支付二维码',
+								area: ['300px', '300px'], //宽高
+								content: $('#payment_box'),
+								btn:['已支付', '取消'],
+								yes: function(){
+									layer.closeAll();
+
+									 var pay_order_id = $("#pay_order_id").val();
+										//判定是否支付成功
+										$.ajax({
+											type: "POST",
+											url: "/index.php/Sdk/WebPayment/get_paystatue",
+											data: {
+												pay_order_id: pay_order_id
+											},
+											contentType: "application/x-www-form-urlencoded",
+											success: function(data) {
+													if(data.data == 1)
+													{
+														//支付失败
+															parent.layer.open({
+																type: 1,
+																title:'支付二维码',
+																area: ['360px', '220px'], //宽高
+																content: $('#payfail_box'),
+																btn:['确定'],
+															}); 
+													}
+													else
+													{
+													 	var keycode = $("#keycode").val();
+														//支付成功
+														var url = "/index.php/Sdk/WebPayment/paysuccess?"+keycode;;
+														location.href = url;
+													}
+													
+											},
+											error: function(data) {}
+										});
+
+								},
+								btn2: function(){
+									layer.closeAll();
+								}
+							});
+			}
+			else
+			{
+					var pay_order_id = $("#pay_order_id").val();
+					var url = "/index.php/Sdk/WebPayment/pc_alipay?pay_order_id=" + pay_order_id;
+					location.href = url;
+			}
+		});
+		
+		$("#payfailbtn").click(function(){
+			//页面层
+			parent.layer.open({
+				type: 1,
+				title:'支付失败',
+				area: ['360px', '220px'], //宽高
+				content: $('#payfail_box'),
+				btn:['确定'],
+			});
+		});
+
+
+		// $("#paymentbtn").click(function(){
+		// 	//支付宝
+		// 		// paystype = 1;
+		// 		// $("#wxpay").removeClass().addClass("minradio");
+		// 		// $("#pay").removeClass().addClass("minradio checked");
+		// });
+
+		$("#wxpaymentbtn").click(function(){
+			//微信
+				paystype = 2;
+				$("#wxpay").removeClass().addClass("minradio checked");
+				$("#pay").removeClass().addClass("minradio");
+		});
+	})
+
+  </script>
+</head>
+<body>
+<div class="layout">
+  <div class="prepaid_mess">
+      <!--<img src="{$role}images/wechat_03.png" alt="img"/>-->
+      <div class="prepaidmess_con">
+          <h5>{$sizename}</h5>
+          <p>订单编号：{$pay_order_code}</p>
+          <p>充值号码：{$phone}</p>
+      </div>
+      <span class="money"><em>{$discount_money}</em>元</span>
+  </div>
+  <div class="hr-18"></div>
+  <div class="tit">
+    <h2><em>平台支付</em></h2>
+  </div>
+  <div class="pay_con">
+    <p>平台支付同时只能选择一种支付方式</p>
+    <ul>
+      <li id="paymentbtn" >
+        <label id = "pay" class="minradio"><i></i></label>
+        <div class="pay_logo">
+          <img src="{$role}images/pay_logo_26.png" alt="img"/>
+        </div>
+      </li>
+      <li id="wxpaymentbtn">
+        <label id = "wxpay" class="minradio checked"><i></i></label>
+        <div class="pay_logo">
+          <img src="{$role}images/pay_logo_28.png" alt="img"/>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <a href="#" id = "pay_btn" class="pay_btn">立即支付</a>
+</div>
+<!--支付二维码 开始-->
+<div id="payment_box" class="payment_box" style="display:none;">
+	<div class="wechat_con">
+		<img src="{$qrurl}" />
+		<p>请使用微信支付扫描此二维码</p>
+	</div>
+</div>
+<!--支付二维码 结束-->
+<!--支付失败 开始-->
+<div id="payfail_box" class="payfail_box" style="display:none;">
+	<div class="payfail_con">
+		<p><i class="payfail_icon"></i>支付失败，请选择其他方式支付。</p>
+	</div>
+</div>
+<!--支付失败 结束-->
+		<input type="hidden" name="pid" id="pid" value="{$pid}">
+		<input type="hidden" name="pay_order_id" id="pay_order_id" value="{$pay_order_id}">
+		<input type="hidden" name="keycode" id="keycode" value="{$keycode}">
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PeRgT2l367OTeS4m0KpWWrnjc5woO54A"></script>
+	<title>活动商圈位置离你有多远</title>
+</head>
+<body>
+	<input type="hidden" name="latitude" id="latitude" value="{$latitude}">
+	<input type="hidden" name="longitude" id="longitude" value="{$longitude}">
+	<input type="hidden" name="userlatitude" id="userlatitude" value="{$userlatitude}">
+	<input type="hidden" name="userlongitude" id="userlongitude" value="{$userlongitude}">
+	<div id="allmap"></div>
+</body>
+
+<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+<script type="text/javascript">
+		//获取流量数据s
+		window.onload = function(){
+			alert("不在活动范围之内!");
+			var userlongitude=$("#userlongitude").val();
+			var userlatitude=$("#userlatitude").val();
+			var longitude=$("#longitude").val();
+			var latitude=$("#latitude").val();
+			// 百度地图API功能
+			var map = new BMap.Map("allmap");// 创建Map实例
+			var p1 = new BMap.Point(userlongitude,userlatitude);// 创建起点坐标
+			var p2 = new BMap.Point(longitude,latitude);//创建终点坐标
+			
+			map.centerAndZoom(p1, 11);
+
+			// var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+			// driving.search(p1, p2);
+
+
+			var walking = new BMap.WalkingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
+			walking.search(p1,p2);
+		}
+</script>
+</html>
+
+

@@ -1,0 +1,158 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>系统管理</em>><em>用户管理</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="User/add">
+              <button class="btn add_btn" id="user_add_btn">
+                <i class="minicon addoperation_icon"></i><span>新增用户</span>
+              </button>
+            </isshow>
+            <if condition="is_jurisdiction('User/add') and is_jurisdiction('User/export_excel')">
+                <span class="line">|</span>
+            </if>
+			<if condition="is_jurisdiction('User/export_excel')">
+                <button class="btn  export_button" data-url="User">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+			</if>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form name="excel" method="get" action="/index.php/Admin/User/index">
+      <div class="search_nav">
+        <ul>
+          <li>
+            <input type="text" class="inputtext" name="user_name" value="{$Think.get.user_name}" placeholder="用户姓名"/>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="login_name_full" value="{$Think.get.login_name_full}" placeholder="登录名称"/>
+          </li>
+            <li>
+                <label class="inputlabel">所属部门：</label>
+                <select class="select" name="depart_id" style="min-width:80px;">
+                    <option value="-1" <if condition='$depart_id eq "-1"'>selected</if> >全部</option>
+                    <volist name="arr_depart" id="vo">
+                        <option value="{$vo.depart_id}" <if condition="$vo['depart_id'] eq $depart_id">selected</if> >{$vo.depart_name}</option>
+                    </volist>
+                </select>
+            </li>
+          <li>
+            <input type="text" class="inputtext" name="mobile" value="{$Think.get.mobile}" placeholder="联系电话"/>
+          </li>
+          <li>
+          <label class="inputlabel">状态：</label>
+          <select class="select" name="status" style="min-width:80px;">
+            <option value="9" <if condition='$status eq "9"'>selected</if> >全部</option>
+            <option value="1" <if condition='$status eq "1"'>selected</if> >正常</option>
+            <option value="0" <if condition='$status eq "0"'>selected</if>>已禁用</option>
+          </select>
+              <input type="hidden" value="1"/>
+          </li>
+        
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="80" class="change">用户姓名</th>
+                    <th width="110" class="change">登录名称</th>
+                    <th width="80" class="change">性别</th>
+                    <th width="80" class="change">所属部门</th>
+                    <th width="70" class="change">职务</th>
+                    <th width="200">角色</th>
+                    <th width="100">联系电话</th>
+                    <!--
+                    <th width="130" class="change">邮箱</th>
+                    -->
+                    <th width="250" >操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="user_list" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td class="name">{$vo.user_name}
+                    <!--
+                      <button class="operationbtn user_show" value="{$vo.user_id}">
+                        <span class="user_name">{$vo.user_name}</span>
+                      </button>
+                    -->
+                  </td>
+                  <td>{$vo.login_name_full}</td>
+                  <td><if condition="$vo.sex eq 1">男<elseif condition="$vo.sex eq 2" />女</if></td>
+                  <td>{$vo.depart_name}</td>
+                  <td>{$vo.posts}</td>
+                  <td title="{$vo.role_name}">{$vo.role_name}</td>
+                  <td>{$vo.mobile}</td>
+                  <!--
+                  <td>{$vo.email}</td>
+                  -->
+                  <td class="operation_td">
+                    <isshow url="user/show">
+                    <button class="operationbtn user_show" value="{$vo.user_id}">
+                      <span>查看</span>
+                    </button>
+                    </isshow>
+                    <if condition="($vo.is_manager eq '0') or ($is_admin eq true)">
+                      <isshow url="user/edit">
+                      <button class="operationbtn user_edit" value="{$vo.user_id}">
+                        <span>编辑</span>
+                      </button>
+                      </isshow>
+                        <if condition="$vo.is_manager eq '0' ">
+                          <isshow url="role/set_role">
+                            <button  class="operationbtn user_set_role" value="{$vo.user_id}" >
+                              <span>设置角色</span>
+                            </button>
+                          </isshow>
+                        </if>
+                      <isshow url="user/reset_password">
+                        <button  class="operationbtn user_reset_password" value="{$vo.user_id}" >
+                          <span>重置密码</span>
+                        </button>
+                      </isshow>
+                      <isshow url="user/toggle_status">
+                        <button class="operationbtn user_toggle_status" data="{$vo.status}" value="{$vo.user_id}">
+                          <span> <if condition="$vo.status eq 1">禁用<else />启用</if> </span>
+                        </button>
+                      </isshow>
+                      </if>
+                  </td>
+
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

@@ -1,0 +1,63 @@
+<!-- 添加通道 -->
+<div id="channel_account_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="channel_account_form">
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>通道属性：</h5>
+          <div class="add_value"><span>{$list.attribute_id|get_attribute_lists}</span></div>
+      </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道名称：</h5>
+        <div class="add_value"><span style="padding-right: 20px;">{$list.channel_name}</span></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道编码：</h5>
+        <div class="add_value"><span style="padding-right: 20px;">{$list.channel_code}</span></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道文件名称：</h5>
+        <div class="add_value"><span style="padding-right: 20px;">{$list.channel_file_name}</span></div>
+    </div>
+      <!--<div class="add_list">
+          <h5><em class="wildcard">*</em>移动折扣：</h5>
+          <div class="add_value"><span>{$list.discount_mobile|show_discount_ten=###}</span>
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>联通折扣：</h5>
+          <div class="add_value"><span>{$list.discount_unicom|show_discount_ten=###}</span>
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>电信折扣：</h5>
+          <div class="add_value"><span>{$list.discount_telecom|show_discount_ten=###}</span>
+          </div>
+      </div>-->
+      <div class="add_list">  
+            <h5><em class="wildcard">*</em>省份：</h5>
+            <div class="add_value"><span>{$list.city_id|get_city_province_name=$list['province_id']}</span></div>
+      </div>
+      <div class="add_list">
+          <h5>市：</h5>
+          <div class="add_value"><span>{$list.city_name|default='--'}</span></div>
+      </div>
+      <div class="add_list">
+          <h5>是否过滤通道：</h5>
+          <div class="add_value">
+              <span><if condition="$list.is_filter eq '0'">否<else />是</if></span>
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>通道账户名称：</h5>
+          <div class="add_value">
+              <select name="account_id" class="select" empty="true" msg="请选择通道账户名称" style="width:200px;">
+                  <option value="" >请选择</option>
+                  <volist name="account" id="vop">
+                      <option value="{$vop.account_id}" <if condition='$list.account_id eq $vop["account_id"]'>selected</if> >{$vop.account_name}</option>
+                  </volist>
+              </select>
+          </div>
+      </div>
+      <input type="hidden" name="channel_id" value="{$list.channel_id}">
+  </form>
+</div>
+

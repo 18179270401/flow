@@ -1,0 +1,175 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>流量中心</em>><em>号码黑名单</em></span>
+        </div>
+        <div class="operation_info">
+          <if condition="is_jurisdiction('MobileBlack/add')">
+            <button class="btn add_btn mobileblack_add_btn">
+              <i class="minicon addoperation_icon"></i><span>新增号码黑名单</span>
+            </button>
+          </if>
+
+          <if condition="is_jurisdiction('MobileBlack/add') and (is_jurisdiction('MobileBlack/excel_add') or is_jurisdiction('MobileBlack/excel_delete')  or is_jurisdiction('MobileBlack/export_excel') )">
+              <span class="line">|</span>
+          </if>
+
+          <if condition="is_jurisdiction('MobileBlack/excel_add')">
+            <button class="btn add_btn" onclick="upexcel(1);">
+              <i class="minicon exportoperation_icon"></i><span>导入新增</span>
+            </button>
+          </if>
+
+          <if condition="is_jurisdiction('MobileBlack/excel_add') and (is_jurisdiction('MobileBlack/excel_delete')  or is_jurisdiction('MobileBlack/export_excel') )">
+              <span class="line">|</span>
+          </if>
+
+          <if condition="is_jurisdiction('MobileBlack/excel_delete')">
+            <button class="btn add_btn"  onclick="upexcel(0);">
+              <i class="minicon exportoperation_icon"></i><span>导入删除</span>
+            </button>
+          </if>
+
+          <if condition="is_jurisdiction('MobileBlack/excel_delete') and is_jurisdiction('MobileBlack/export_excel') ">
+            <span class="line">|</span>
+          </if>
+
+          <if condition="is_jurisdiction('MobileBlack/export_excel')">
+            <button class="btn  export_button" data-url="MobileBlack">
+              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+            </button>
+          </if>
+          <span style="display:none;">
+             <form name="mobile_form">
+                <input type="file" name="file" id="openfile" value=""/>
+             </form>
+         </span>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form  method="get"   name="excel" action="/index.php/Admin/MobileBlack/index">
+      <div class="search_nav">
+        <ul>
+          <li>
+            <input type="text" class="inputtext" name="mobile" maxlength="11" style='min-width:80px' value="{$Think.get.mobile}" placeholder="手机号码"/>
+          </li>
+
+            <li>
+            <input readonly style="border:0px; width:200px;" type="text" class="inputtext" placeholder="注：被禁用的号码会直接提交失败"/>
+          </li>
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con " data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="50" class="change">手机号码</th>
+                    <th width="150" class="change">备注</th>
+                    <th width="50" class="change">操作人</th>
+                    <th width="100" class="change">操作时间</th>
+                    <th width="130">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td>{$vo.mobile}</td>
+                  <td>{$vo.remark}</td>
+                  <td>{$vo.user_name}</td>
+                  <td>{$vo.modify_date}</td>
+                  <td class="operation_td">
+                    <button class="operationbtn  mobileblack_show_btn" value="{$vo.mobile_id}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>查看</span>
+                    </button>
+
+                    <if condition="is_jurisdiction('MobileBlack/delete')">
+                      <button class="operationbtn mobileblack_delete_btn" value="{$vo.mobile_id}" data-name="{$vo.mobile}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>删除</span>
+                      </button>
+                    </if>
+
+                  </td>
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">  
+    //模拟点击选择文件按钮
+    function upexcel(t){
+        $("#openfile").click();
+        upfile_post(t);
+    }
+    //文件选择完成自行上传
+    function upfile_post(t){
+        if($("#openfile").val()!=""){
+            post_upfile(t);
+        }else{
+            setTimeout("upfile_post("+t+")",1000);
+        }
+    }
+    //上传excel手机号码
+    function post_upfile(t){
+        var formData = new FormData($("form[name='mobile_form']")[0]);
+        var opt = '';
+        if(t == 1){
+          opt = 'excel_add';
+        }else{
+          opt = 'excel_delete';
+        }
+        $.ajax({  
+            url: '/index.php/Admin/MobileBlack/'+opt ,  
+            type: 'POST',  
+            data: formData,
+            async: false,  
+            cache: false,  
+            contentType: false,  
+            processData: false,  
+            success: function (data) {  
+                if(data.status == 'success'){
+                    location.reload();
+                }
+                alertbox(data);
+                $("#openfile").after($("#openfile").clone().val(""));   
+                $("#openfile").remove();
+            }
+        });
+    }
+
+</script>
+<include file="Common/footer" />
+
+
+
+

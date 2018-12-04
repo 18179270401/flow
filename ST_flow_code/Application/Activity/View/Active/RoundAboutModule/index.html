@@ -1,0 +1,122 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>大转盘</title>
+		<link rel="stylesheet" type="text/css" href="{$role}css/lottery.css" />
+	</head>
+
+	<body>
+		<div class="ly-plate">
+			<div class="ribbos"><img src="{$role}images/ribbons.png" id="ribbosImg" /></div>
+<!--<canvas id="rotate-bgId" width="800" height="800"></canvas>-->
+			<div class="rotate-bg"><canvas id="rotate-bgId" width="800" height="800"></canvas></div>
+			<div class="lottery-starBg"><img src="{$role}images/rotate-staticBg.png"></div>
+
+			<div class="lottery-star"><img src="{$role}images/rotate-static.png" id="lotteryBtn"></div>
+
+		</div>
+		<div class="ActivityRules">
+			<div class="ActivityRuleslefthr">
+				<hr>
+			</div>
+			<div class="ActivityRulescenter">
+				<span>您当前参与活动的手机号码</span>
+			</div>
+			<div class="ActivityRulesrighthr">
+				<hr>
+			</div>
+		</div>
+
+		<div class="barDiv">
+			<div class="phoneNumberContent">
+				<span id="phoneNumber">158 1132 5272<span>
+		</div> 
+			<img src="{$role}images/bar.png" id = "barImg">
+	</div>
+		<div class="activeTime">
+			{$activeTime}
+			<!--活动时间:2016-04-22 00:00:00 至2016-06-06:00:00:00-->
+		</div>
+	<if condition="$type eq 1">
+		<form action="{:U('FlowValue/foot')}" method="post" id='form1'> 
+	<else/>
+		<form action="{:U('Index/foot')}" method="post" id='form1'> 
+	</if>
+		<!--活动场景id-->
+		<input type="hidden" name='active' id="active" value="{$active}">
+		<input type="hidden" name='phone' id="phone" value="{$phone}">
+		<input type="hidden" name="activity_id" id="activity_id" value="{$activity_id}">
+		<input type="hidden" name="user_activity_id" id="user_activity_id" value="{$user_activity_id}">
+		<input type="hidden" name="openid" id="openid" value="{$openid}">
+		<input type="hidden" name="nickname" id="nickname" value="{$nickname}">
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}"> 
+		<input type="hidden" name="headimgurl" id="headimgurl" value="{$headimgurl}">
+		<input type="hidden" name="flowSize" id="flowSize" value="">
+		<input type="hidden" name="orderid" id="orderid" value="">  
+	</form>
+		<!--流量分享需求-->
+		<input type="hidden" name="mod" id="mod" value="{$mod}">
+		<input type="hidden" name="func" id="func" value="{$func}">
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<!--流量分享需求-->
+</body>
+
+<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+<script src="__PUBLIC__/utils/js/jQueryRotate.2.2.js"></script>
+<script src="__PUBLIC__/utils/js/jquery.easing.min.js"></script>
+<script src="__PUBLIC__/utils/js/get_para.js"></script>
+
+<!--分享流量-->
+<!--<script type="text/javascript" src="{$role}js/shareFlowRed.js"></script>-->
+<!--<script type="text/javascript" src="__PUBLIC__/utils/js/shareFlowRed.js"></script>-->
+<script>
+	var jsonData={$rt};
+	if(jsonData.data.length%2 == 0)
+	{
+		jsonData.data.push(0);
+	}
+	jsonData.data.push(0);
+
+
+//	var jsonString = ;
+//	alert(jsonString);
+//
+
+</script>
+
+<script>
+htmlFontSize();
+window.onresize = function() {
+	htmlFontSize();
+}
+ 
+
+function htmlFontSize() {
+	var w = document.documentElement.clientWidth;
+	var i = (parseInt(w)-15.0/375.0*parseInt(w)) / 768.0;
+
+		document.documentElement.style.fontSize = (i) * 40.0 +"px";
+
+	if ($('body').height() < parseInt(document.documentElement.clientHeight)) {
+		$('body').height(parseInt(document.documentElement.clientHeight) +10);
+	}
+	
+	
+
+}
+
+</script>
+<script src="{$role}js/lottery.js"></script>
+
+</html>

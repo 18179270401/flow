@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	
+<title>拆红包</title>
+<script src="{$role}js/zepto.min.js"></script>
+<script src="{$role}js/touch.js"></script>
+<script src="{$role}js/openfile.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="{$role}js/location.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{$role}css/animations.css">
+<link rel="stylesheet" type="text/css" href="{$role}css/openflowred.css">
+	
+<script type="text/javascript" charset="utf-8">   
+   
+</script>
+
+						<!--流量分享需求-->
+						<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+						<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+						<input type="hidden" name="signature" id="signature" value="{$signature}">
+						<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+						<!--流量分享需求-->
+</head>
+<body style="margin: 0px;">
+	
+<div>
+	<div>
+		<img id="redbg_view" class="bgview" src="{$role}img/redbgimg.png" style="margin: 0px; position: absolute; width:100%; height: 100%;">
+		<img id="updiv_view"src="{$role}img/updiv_bgimg.png" style="position: absolute; width:100%; height: 65%;">
+
+		<div id="Success_view">
+				<div style="background:url({$role}img/redsuccessbg.png);
+    background-repeat:no-repeat; background-size:100%,100%;">
+					<div style="text-align: center;">
+						<div style="text-align :center;margin-top: 6rem;display: inline-block;background-repeat:no-repeat;background-size: 100%,auto; ">
+							<img class="mui-icon-weixin" id="avatar-img" src="{$role}img/icon_head.jpg" style="width: 6rem;border-radius: 5rem; padding-left:9px;">
+							<div>test</div>
+						</div>
+						<h1>恭喜</h1>
+						<div style="display: block;">
+							<div style="float:left">11<div><div style="float:left">33</div>
+						</div>
+						<div>18070104948</div>
+					</div>
+					<ul class="mui-table-view mui-table-view-chevron" id="mui-table-view" style="background: none;height: 26rem; overflow: hidden;pointer-events: none; ">
+						
+					</ul>
+			</div>
+		</div>
+			
+			
+		<input id="Getred" type="image" style="position: absolute; top: 55%; left: 36%; width: 33%; height: 20%;" src="{$role}img/redbtn.png" onclick='doLogin()' tabindex="5" 
+				style="border-style:none; background-repeat:no-repeat;" />
+	</div>
+</div>
+<!-- End 红包 -->
+</body>
+</html>

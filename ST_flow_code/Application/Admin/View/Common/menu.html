@@ -1,0 +1,84 @@
+<!--
+<div class="navbox mCustomScrollbar_y" data-mcs-theme="dark">
+  <dl class="panel_con" id="mynav">
+      <volist name="menulist" id="vo">
+        <dd class="panel">
+          <div class="panel_tit">
+              <a class="collapsed" data-toggle="collapse" data-parent="#mynav" href="#{$vo.menu_id}">
+               <i class="midicon {$vo.icon_path}"></i>
+               <em>{$vo.menu_name }</em>
+               <i class="caret"></i>
+              </a>
+          </div>
+          <div id="{$vo.menu_id}" class="panel_body collapse">
+              <ul>
+                 <volist name="vo.son" id="vvo">
+                   <li id="<?php echo str_replace('/','',$vvo['page_url']);?>" onclick="openMenu({$vvo.menu_id},'{$vvo.menu_name}','{:U($vvo['page_url'])}');" data-icon="{$vo.icon_path}"><a href="javascript:void(0)"><em></em>{$vvo.menu_name}</a></li>
+                 </volist>
+              </ul>
+          </div>
+        </dd>
+     </volist>
+   </dl>
+</div>
+-->
+
+<div class="navbox mCustomScrollbar_y menustyletwo" data-mcs-theme="dark">
+    <div class="home_pannel" onclick="openMenu(0,'','main.html')"><a href="JavaScript:void(0);"><i class="midicon home_icon"></i><em>工作台</em></a></div>
+    <div class="navcon">
+        <dl>
+
+            <volist name="menulist" id="vo">
+            <dd>
+                <div class="navone">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#mynav" href="#{$vo.menu_id}">
+                        <i class="midicon {$vo.icon_path}"></i>
+                        <em>{$vo.menu_name }</em>
+                        <i class="caret"></i>
+                    </a>
+                </div>
+                <div class="navonecon">
+                    <ul>
+                        <volist name="vo.son" id="vvo" key="key">
+                            <?php $key_title = $key;?>
+                            <if condition="is_numerics($key)">
+                                <li id="<?php echo str_replace('/','',$vvo['page_url']);?>" onclick="openMenu({$vvo.menu_id},'{$vvo.menu_name}','{:U($vvo['page_url'])}');" data-icon="{$vo.icon_path}" data-title="{$vo.menu_name }|{$vvo.menu_name}">
+                                    <div class="navtwo">
+                                        <a href="javascript:void(0);">
+                                            <i class="minus_icon"></i>
+                                            <em>{$vvo.menu_name}</em>
+                                        </a>
+                                    </div>
+                                </li>
+                            <else />
+                                <li>
+                                    <div class="navtwo">
+                                        <a href="javascript:">
+                                            <i class="plus_icon"></i>
+                                            <em>{$key}</em>
+                                        </a>
+                                    </div>
+                                    <div class="navtwocon">
+                                        <ul>
+                                            <volist name="vvo" id="vvvo" key="k">
+                                                <li id="<?php echo str_replace('/','',$vvvo['page_url']);?>" onclick="openMenu({$vvvo.menu_id},'{$vvvo.menu_name}','{:U($vvvo['page_url'])}');" data-icon="{$vo.icon_path}" data-title="{$vo.menu_name }|{$key_title}|{$vvvo.menu_name}">
+                                                    <a href="javascript:void(0);"><em></em>{$vvvo.menu_name}</a>
+                                                </li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </if>
+                        </volist>
+                    </ul>
+                </div>
+            </dd>
+            </volist>
+
+        </dl>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,110 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <!--<thead>
+            <tr>
+                <th width="100%" colspan="4">代理商提现信息</th>
+            </tr>
+        </thead>-->
+        <tbody>
+        <tr>
+            <th width="20%">代理商名称：</th>
+            <td width="30%">{$proxyw.proxy_name}</td>
+            <th width="20%">代理商名称：</th>
+            <td width="30%">{$proxyw.proxy_code}</td>
+        </tr>
+        <tr>
+            <th>开户银行：</th>
+            <td>{$proxyw.bank_account}</td>
+            <th>开户省市：</th>
+            <td>{$proxyw.account_opening}</td>
+        </tr>
+        <tr>
+            <th>收款人姓名：</th>
+            <td>{$proxyw.beneficiary_name}</td>
+            <th>收款人电话：</th>
+            <td>{$proxyw.mobile}</td>
+        </tr>
+        <tr>
+            <th>银行卡号：</th>
+            <td>{$proxyw.card_number}</td>
+            <th>提现金额：</th>
+            <td>{$proxyw.apply_money|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>审核状态：</th>
+            <td>{$proxyw.approve_status|get_apply_status}</td>
+            <th>打款状态：</th>
+            <td>
+                <if condition="$is_play_money eq 1">
+                    已打款
+                    <elseif condition="$is_paly_money eq 2"/>
+                    打款驳回
+                    <else/>
+                    未打款
+                </if>
+            </td>
+        </tr>
+        <if condition='$proxyw.is_play_money eq 1'>
+            <tr>
+                <th>打款银行：</th>
+                <td>{$proxyw.payment_bank}</td>
+                <th>打款账户：</th>
+                <td>{$proxyw.payment_account}</td>
+            </tr>
+            <tr>
+                <th>交易号：</th>
+                <td colspan="3">{$proxyw.transaction_number}</td>
+            </tr>
+            <tr>
+                <th>打款金额：</th>
+                <td>{$proxyw.payment_money|default="0.000"}元</td>
+                <th>打款时间：</th>
+                <td colspan="3">{$proxyw.payment_date}</td>
+            </tr>
+        </if>
+        <tr>
+            <th>送审人：</th>
+            <td colspan="3" >{$proxyw.create_user_id|get_user_name}</td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$proxyw.remark}</td>
+        </tr>
+        </tbody>
+    </table>
+    <volist name="process" id="vo" empty="">
+        <table width="100%">
+            <thead>
+             <tr>
+                <th width="100%" colspan="4">{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                    <elseif condition="$vo.approve_stage eq 2" />
+                        {$vo.approve_status|get_apply_status2=3}
+                    <else/>
+                       {$vo.approve_status|get_apply_status2=4}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+            </tr> 
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+               
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+
+</div>

@@ -1,0 +1,98 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+                <i></i><span></span>
+        </div>
+         <div class="operation_info">
+          <if condition="is_jurisdiction('ProductDiscountRecord/export_excel_record')">
+            <button class="btn  export_button" data-url="ProductDiscountRecord/export_excel_record" data-type="url">
+              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+            </button>
+          </if>
+        </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" action="" name="excel" action="/index.php/Admin/ProductDiscountRecord/index_record">
+    <div class="search_nav"> 
+      <ul>
+          <li>
+              <label class="inputlabel">运营商：</label>
+              <select class="select" name="operator_id" style="min-width:80px;">
+                  <option value="">请选择</option>
+                  <volist name="operator" id="voo">
+                      <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                  </volist>
+              </select>
+              <input type="hidden" value=""/>
+          </li>
+          <li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+        <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con" data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+        <div class="tablelist_thead">
+          <table>
+            <tr>
+                <th width="50">序号</th>
+                <th width="100" class="change">用户编号</th>
+                <th width="120" class="change">用户名称</th>
+                <th width="80" class="change">运营商</th>
+                <th width="80" class="change">地区</th>
+                <th width="80" class="change">流量包名称</th>
+                <th width="100" class="change">操作前折扣数</th>
+                <th width="100" class="change">操作后折扣数</th>
+                <th width="100" class="change">操作人</th>
+                <th width="150" class="change">操作时间</th>
+            </tr>
+          </table>
+        </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.enterprise_code}</td>
+                    <td>{$vo.enterprise_name}</td>
+                    <td>{$vo.operator_id|get_operator_name}</td>
+                    <td>{$vo.city_id|get_city_province_name=$vo['province_id']}{$vo.city_id|get_city_name}</td>
+                    <td>{$vo.product_name}</td>
+                    <td>{$vo['discount_before']|show_discount_ten=###} 折</td>
+                    <td>{$vo['discount_after']|show_discount_ten=###} 折</td>
+                    <td>{$vo.create_user_id|get_user_name=proxy}</td>
+                    <td>{$vo.create_date}</td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+
+<include file="Common/footer" />

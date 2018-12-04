@@ -1,0 +1,92 @@
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, input, th, td
+{margin: 0; padding: 0; border: 0; outline: none;}
+body{
+	background-color: #f7e99e;
+}
+.content{
+	background: url(../image/bg.jpg);
+	background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+	height: 36rem;
+    position: relative;
+}
+.slogan{
+    background: url(../image/slogan.png);
+	background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 8rem;
+    width: 16rem;
+    position: absolute;
+    z-index: 1;
+    left:2rem;
+    top:1rem;
+}
+.count-down{
+    background: url(../image/panel.png);
+	background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 8rem;
+    width: 16rem;
+    position: absolute;
+    z-index: 1;
+    left:2rem;
+    top:10rem;
+    text-align: center;
+}
+.item-m,item-h,item-s{
+    margin: 0 1rem;
+}
+
+#countDown{
+    margin-top: 0.8rem;
+}
+.num{
+    margin: 0;
+    display: inline-block;
+}
+.num-item{
+    background: url(../image/num_bg.png);
+	background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 2rem;
+    color: #cec4ad;
+    display: inline;
+    padding: 0.2rem;
+}
+.unit{
+    color: #e2dbce;
+    font-size: 0.8rem;
+}
+.count-down p{
+    margin-top: 2.4rem;
+    color: #ffe64a;
+    font-size: 0.8rem;
+    font-style: bold;
+}
+.rulelayout{
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    left:2rem;
+    top:20rem;
+    height: 10rem;
+    width: 16rem;
+}
+.rule-line{
+    background: url(../image/rule_line.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1rem;
+}
+.rule-content{
+    color: white;
+    font-size: 0.6rem;
+    text-align: left;
+    margin-top: 0.2rem;
+}

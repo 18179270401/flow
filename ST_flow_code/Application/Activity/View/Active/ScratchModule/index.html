@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>刮刮乐</title>
+		<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+		<link rel="stylesheet" type="text/css" href="{$role}css/scratch.css" />
+<!--分享流量-->
+<script type="text/javascript" src="__PUBLIC__/utils/js/shareFlowRed.js"></script>
+		<style>
+			#wipe {
+				margin: 10px auto;
+				width: 284px;
+				height: 145px;
+				margin-left: 8px;
+				margin-top: 8px;
+				background:  no-repeat;
+				background-size: 100% 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="scratch-logo">
+			<img src="{$role}images/scratch_logo.png" width="70%" />
+		</div>
+
+		<div id="gua1" style="width:295px;margin: 0 auto;">
+			<img id="gua1_img" src="{$role}images/gua_image.png" style="width:300px;height:160px;position: absolute;">
+			<span id="gua_span" style="position: absolute;width:300px;height:160px;font-size: 3rem;color: grey;margin-top: 3rem;"></span>
+			<div id="wipe" style="position: absolute;no-repeat">
+			</div>
+		</div>
+
+		<div class="ActivityRules" style="margin-top: 15rem;">
+			<div class="ActivityRuleslefthr">
+				<hr>
+			</div>
+			<div class="ActivityRulescenter">
+				<span>您当前参与活动的手机号码</span>
+			</div>
+			<div class="ActivityRulesrighthr">
+				<hr>
+			</div>
+		</div>
+
+		<div class="barDiv">
+			<div class="phoneNumberContent">
+				<span id="phoneNumber">{$phone}<span>
+		</div> 
+			<img src="{$role}images/bar.png" id = "barImg">
+	</div>
+		<div class="activeTime">
+			{$activeTime}
+			<!--活动时间:2016-04-22 00:00:00 至2016-06-06:00:00:00-->
+		</div>
+		
+	
+	<if condition="$type eq 1">
+		<form action="{:U('FlowValue/foot')}" method="get" id='form1'> 
+	<else/>
+		<form action="{:U('Index/foot')}" method="post" id='form1'> 
+	</if>
+		<input type="hidden" name='active' id="active" value="{$active}">
+		<input type="hidden" name='phone' id="phone" value="{$phone}">
+		<input type="hidden" name="activity_id" id="activity_id" value="{$activity_id}">
+		<input type="hidden" name="user_activity_id" id="user_activity_id" value="{$user_activity_id}">
+		<input type="hidden" name="nickname" id="nickname" value="{$nickname}">
+		<input type="hidden" name="headimgurl" id="headimgurl" value="{$headimgurl}">
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		<input type="hidden" name="openid" id="openid" value="{$openid}"> 
+		<input type="hidden" name="flowSize" id="flowSize" value="">
+		<input type="hidden" name="orderid" id="orderid" value="">  
+	</form>	
+		<!--流量分享需求-->
+		<input type="hidden" name="mod" id="mod" value="{$mod}">
+		<input type="hidden" name="func" id="func" value="{$func}">
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<!--流量分享需求-->
+	<script src="{$role}js/scratch.js"></script>
+	<script src="{$role}js/wipe.js"></script>
+
+	<script>
+	var wipe = new Wipe({
+		el: '#wipe',
+		fg: '{$role}images/scratch_covered.png',
+		size: 50,
+		debug: true,
+		autoWipe: false,
+		data: null,
+		onswiping: function (percent) {
+			if (percent > 35) {
+				
+					if(confirm(dataInfo.msg)) {
+						$("#flowSize").val(dataInfo.data.size);
+						$("#orderid").val(dataInfo.data.orderID);
+			   			$("#form1").submit();
+					}
+				
+			}
+		}
+	});
+	</script>
+	</body>
+	
+</html>

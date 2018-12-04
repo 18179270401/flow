@@ -1,0 +1,19 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="enterpriseAccount_voucher_form" >
+        
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>企业名称：</h5>
+            <div class="add_value">
+                <select name="source" class="select">
+                    <option value="0">请选择</option>
+                    <select name="enterprise_id" class="select">
+                        <option value="0">请选择</option>
+                        <volist name="list" id="vo">
+                            <option value="{$vo.enterprise_id}">{$vo.enterprise_name}</option>
+                        </volist>
+                    </select>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>

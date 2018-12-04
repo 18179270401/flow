@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>流量产品</title>
+		<link href="{$role}css/Flowproduct.css" rel="stylesheet" />
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<script src="{$role}js/Flowproduct.js?s={$version_number}"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	</head>
+	<body style="background:#EEEEF5;">
+		<div class="helpCenter_list">
+			<ul>
+				<li class="type">
+					<br>
+					<ul>
+						<a href="{$url}/index.php/Sdk/FlowRed/flowreddetail/Type/1">
+							<li class="list">
+								<div class="imgCustom">
+									<img class="iconImg" src="{$role}images/TrafficRed_Mobile_icon.png">
+								</div>
+									<span class="listspan">移动流量</span>
+									<span class="listrightspan ChinaMobileCount">0个</span>
+								<img class="arrow" src="/Application/Sdk/View/FlowRootIndex/images/help_list_ico.png">
+							</li>
+						</a>
+						</ul>
+					<br>
+						<ul>
+						<a href="{$url}/index.php/Sdk/FlowRed/flowreddetail/Type/2">
+							<li class="list packet">
+								<div class="imgCustom">
+									<img class="iconImg" src="{$role}images/TrafficRed_Unicom_icon.png">
+								</div>
+									<span class="listspan">联通流量</span>
+									<span class="listrightspan ChinaUnicomCount">0个</span>
+								<img class="arrow" src="/Application/Sdk/View/FlowRootIndex/images/help_list_ico.png">
+							</li>
+						</a>
+						</ul>
+						<br>
+						<ul>
+				
+						<a href="{$url}/index.php/Sdk/FlowRed/flowreddetail/Type/3">
+							<li class="list">
+								<div class="imgCustom">
+									<img class="iconImg" src="{$role}images/TrafficRed_Telecom_icon.png">
+								</div>
+									<span class="listspan">电信流量</span>
+									<span class="listrightspan ChinaTelecomArrayCount">0个</span>
+								<img class="arrow" src="/Application/Sdk/View/FlowRootIndex/images/help_list_ico.png">
+							</li>
+						</a>
+						</ul>
+					<br>
+						<ul>
+							<li class="list">
+									<span style="display: inline-block; height: 50px;margin-left: 10px; line-height: 50px;font-size: 14px;">红包总数</span>
+									<span class="TotalCount" style="; text-align:right; width: 73%; height: 50px;display: inline-block; line-height: 50px;font-size: 14px; ">0个</span>
+							</li>
+						</ul>
+					<br>
+					<ul>
+						<li class="list">
+								<span style="display: inline-block; height: 50px;margin-left: 10px; line-height: 50px;font-size: 14px;">备注</span>
+								<span style="display: inline-block; width: 80%; height: 50px; text-align: right; ">
+									<input class="spaninput" id="spaninput" placeholder="现在流行发流量红包!" type="text" />
+								<span>	
+						</li>
+					</ul>
+					<br>
+					<br>
+						<div class="TotalMoney" style="font-size: 1rem; text-align: center;">¥0.00</div>
+					<br>
+						<div class="btn_subumit">
+							<input onclick="Successinput()" type="button"  style="background:url({$role}images/TrafficRed_Success.png) no-repeat;" name="sub" class="submit" style="border-radius: 1rem;" value="塞进流量红包" />
+						</div>
+					<la>
+				</li>
+		</div>
+		 <form action="{:U('FlowRed/wxpaymentflowred')}" method="get" id='form1'>
+       	 <input type="hidden" name='remark' id="remark">
+       	 <input type="hidden" name="packages" id="packages" value="">
+       	 <input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+       	 <input type="hidden" name="openid" id='openid' value="{$openid}">
+       	 <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+   		</form>
+    
+	</body>
+</html>

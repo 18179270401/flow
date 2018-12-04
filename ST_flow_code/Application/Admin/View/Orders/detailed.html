@@ -1,0 +1,79 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <thead>
+        <tr>
+            <th width="100%" colspan="4">基本信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <if condition="$user_type eq 1">
+            <tr>
+                <th>代理商编号：</th>
+                <td>{$proxy_code}</td>
+                <th>代理商名称：</th>
+                <td>{$proxy_name}</td>
+            </tr>
+            <else/>
+            <tr>
+                <th>企业编号：</th>
+                <td>{$enterprise_code}</td>
+                <th>企业名称：</th>
+                <td>{$enterprise_name}</td>
+            </tr>
+        </if>
+        <tr>
+            <th>运营商：</th>
+            <td>{$operator_name}</td>
+            <th>通道编码：</th>
+            <td>{$channel_code}</td>
+
+        </tr>
+        <tr>
+            <th width="20%">订单编号：</th>
+            <td width="30%">
+                {$order_code}
+            </td>
+            <th width="20%">省份：</th>
+            <td width="30%">{$province_name}</td>
+        </tr>
+        <tr>
+            <th>产品：</th>
+            <td>{$product_name}</td>
+            <th>手机号：</th>
+            <td>{$mobile}</td>
+        </tr>
+        <tr>
+            <th>价格：</th>
+            <td class="money_style">{$price|default="0.000"}元</td>
+            <th>折后价格：</th>
+            <td class="money_style">{$discount_price|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>支付方式：</th>
+            <td><if condition="$pay_type eq 1">汇款<elseif condition="$pay_type eq 2" /> 微信支付<elseif condition="$pay_type eq 3" />支付宝支付</if></td>
+            <th>订单状态：</th>
+            <td>{$order_status|get_order_status}</td>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <table width="100%">
+        <thead>
+        <tr>
+            <th width="100%" colspan="4" >订单信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="4">
+                {$back_content|back_content}
+            </td>
+        </tr>
+        <tr>
+            <th width="20%">订单完成时间：</th>
+            <td colspan="3">{$complete_time|default="--"}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

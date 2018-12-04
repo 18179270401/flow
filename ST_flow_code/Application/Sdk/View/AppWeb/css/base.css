@@ -1,0 +1,28 @@
+
+
+body{width: 100%;height: 100%; background: url(../images/bg.png) no-repeat top center;background-size: cover}
+
+.down_btn{width: 8.6434rem;height: 2.3255rem;line-height: 2.3255rem;border: none; text-align: center; background: url(../images/down_btn_03.png) no-repeat center;background-size: 100%;position: fixed;bottom: 5.31rem;left: 50%;-webkit-transform: translateX(-50%);}
+.down_btn span{font-size: 0.7752rem;color: #fff;text-shadow: 2px 2px 4px #793200;}
+.down_btn span>em{display: inline-block;width: 0.9814rem;height: 1.1627rem;background: url(../images/tel_icon_03.png) no-repeat center;background-size: 100%;vertical-align: top;margin: 0.56rem 0.25rem 0 0;}
+
+.copy{position: fixed;bottom: 0;left: 50%;-webkit-transform: translateX(-50%);}
+.copy p{font-size: 0.6589rem;color: #939393;height: 3.1395rem;line-height: 3.1395rem;}
+/*.logo{display: flex;justify-content: center;align-items: center;height: 16.59rem;text-align: center;}
+
+.logo_icon{display: inline-block;width: 3.7209rem;height: 3.7209rem;background: url(../images/logo_03.png) no-repeat;background-size: 100%;}
+
+.logo_row h2{font-size: 1.2403rem;color: #fff;font-weight: bold;}*/
+
+.share_bg{
+	width: 100%;
+	height: 101.5%;
+	position:absolute;
+	z-index: 9999;
+	background-color: #000000;
+	opacity: 0.8;
+	margin-top: -1rem;
+}
+.share_bg img{
+	width: 100%;
+}

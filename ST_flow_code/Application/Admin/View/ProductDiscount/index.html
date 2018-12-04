@@ -1,0 +1,144 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+            <i></i><span></span>
+        </div>
+        <div class="operation_info">
+		  <if condition="is_jurisdiction('ProductDiscount/add')">
+            <button class="btn add_btn" onclick="top.openMenu('800_0','产品折扣设置','{:U('ProductDiscount/add')}');"><!-- discount_add_btn -->
+              <i class="minicon addoperation_icon"></i><span>产品折扣设置</span>
+            </button>
+		</if>
+            <if condition="is_jurisdiction('ProductDiscount/add') and is_jurisdiction('ProductDiscount/export_excel')">
+                <span class="line">|</span>
+            </if>
+            <isshow url="ProductDiscount/export_excel">
+                <button class="btn  export_button" data-url="ProductDiscount">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/ProductDiscount/index">
+      <div class="search_nav">
+        <ul>
+         <!-- <li>
+            <label class="inputlabel">用户类型：</label>
+            <select class="select" name="user_type" style="min-width:80px;">
+              <option value="">请选择</option>
+              <volist name="arruser_type" id="vot">
+                  <option value="{$vot.user_type_id}" <if condition='$Think.get.user_type eq $vot["user_type_id"]'>selected</if> >{$vot.user_type_name}</option>
+              </volist>
+            </select>
+              <input type="hidden" value=""/>
+          </li>-->
+          <li>
+            <input type="text" class="inputtext " style="min-width:80px;width:80px;" maxlength="6" name="user_code"  value="{$Think.get.user_code}" placeholder="用户编号"/>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="user_type_name" value="{$Think.get.user_type_name}" placeholder="用户名称"/>
+          </li>
+          <li>
+            <label class="inputlabel">运营商：</label>
+            <select class="select" name="operator_id" style="min-width:80px;">
+              <option value="">请选择</option>
+              <volist name="operator" id="voo">
+                  <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+              </volist>
+            </select>
+              <input type="hidden" value=""/>
+          </li>
+          <li>
+            <label class="inputlabel">省份：</label>
+            <select class="select" name="province_id" id="province_id"  style="min-width:80px;" onchange="get_is_filter(1)">
+              <option value="">请选择</option>
+              <volist name="province" id="vop">
+                  <option value="{$vop.province_id}" <if condition='$Think.get.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+              </volist>
+            </select>
+              <input type="hidden" value=""/>
+          </li>
+            <li>
+                <label class="inputlabel">市：</label>
+                <select class="select" name="city_id" id="city_id" style='min-width:100px'>
+                    <option value="">请选择</option>
+                    <volist name="citys" id="v">
+                        <option value="{$v.city_id}" <if condition='$Think.get.city_id eq $v["city_id"]'>selected</if> >{$v.city_name}</option>
+                    </volist>
+                </select>
+                <input type="hidden" value=""/>
+            </li>
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="100" class="change">用户编号</th>
+                    <th width="200" class="change">用户名称</th>
+                    <th width="80" class="change">用户类型</th>
+                    <th width="100" class="change">运营商</th>
+                    <th width="100" class="change">省份</th>
+                    <th width="100" class="change">市</th>
+                    <th width="100" class="change">流量包名称</th>
+                    <th width="60" class="change">折扣数</th>
+                    <th width="80" class="change">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="discount_list" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td>{$vo.proxy_code}{$vo.enterprise_code}</td>
+                  <td>{$vo.proxy_name}{$vo.enterprise_name}</td>
+                  <td><if condition="$vo['user_type'] eq 1">代理商<else />企业</if></td>
+                  <td>{$vo.operator_name}</td>
+                  <td>{$vo.city_id|get_city_province_name=$vo['province_id']}</td>
+                  <td>{$vo.city_name|default='--'}</td>
+                  <td>{$vo.product_name}</td>
+                  <td class="money_style">{$vo['discount_number']|show_discount_ten=###} 折</td>
+                  <td class="operation_td">
+                  	  <button class="operationbtn productdiscount_show_btn" value="{$vo.discount_id}">
+                      <span>查看</span>
+                      </button>
+                      <isshow url="ProductDiscount/edit">
+                      <button class="operationbtn productdiscount_edit" value="{$vo.discount_id}">
+                      <!-- <i class="minicon edit_icon"></i> -->
+                      <span>编辑</span>
+                      </button>
+                      </isshow>
+                  </td>
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

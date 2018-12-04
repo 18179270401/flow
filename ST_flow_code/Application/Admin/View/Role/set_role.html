@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    $(function(){
+        var depart_id = '{$user.depart_id}';
+        if(parseInt(depart_id) > 0){
+            $(".add_value label.checkbox[data != '"+depart_id+"']",top.document).hide();
+        }
+
+
+        $('select.select.depart',top.document).change(function(){
+            var val = $(this).val();
+            $('.add_value label.checkbox',top.document).show();
+            if(val != ''){
+                $(".add_value label.checkbox[data != '"+val+"']",top.document).hide();
+            }
+        })
+
+    })
+</script>
+<div id="user_set_role_box" class="add_box mCustomScrollbar_y"  data-mcs-theme="dark" style="display:none;">
+  <form name="set_role_form">
+    <div class="add_list">  
+        <h5><span class="wildcard"></span>用户名称：</h5>
+        <div class="add_value maxauto">
+           <span>{$user.user_name}</span>
+        </div>
+    </div>
+    <input type="hidden" value="{$Think.get.user_id}" name="user_id">
+    <div class="add_list">
+          <h5>部门：</h5>
+          <div class="add_value">
+              <select class="select depart" name="depart_id" empty="true" field="部门">
+                <option value="">请选择部门</option>
+                 <volist name="depart_list" id="vo">
+                  <option value="{$vo.depart_id}" {$vo.ischecked}>{$vo.depart_name}</option>
+                 </volist>
+              </select>
+          </div>
+      </div>
+    <div class="add_list">  
+        <h5><span class="wildcard"></span>角色名称：</h5>
+        <div class="add_value maxauto">
+            <volist name="rolealllist" id="vo">
+                <input type="checkbox" {$vo.haschecked}  name="role_ids[]" value="{$vo.role_id}" style="display:none" id="{$vo.role_id}_role">
+              <label class="checkbox {$vo.haschecked} " data="{$vo.depart_id}"  for="{$vo.role_id}_role" ><em class="checkbox_alignment">{$vo.role_name}</em></label>
+            </volist>
+        </div>
+    </div>
+
+    </form>
+</div>

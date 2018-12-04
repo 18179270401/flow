@@ -1,0 +1,94 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <thead>
+             <tr>
+                <th width="100%" colspan="4">企业提现信息</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th width="20%">企业名称：</th>
+            <td width="30%">{$enterprise_name}</td>
+            <th width="20%">提现金额：</th>
+            <td width="30%">{$apply_money|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>开户人姓名：</th>
+            <td>{$beneficiary_name}</td>
+            <th>开户人电话：</th>
+            <td >{$mobile}</td>
+        </tr>
+        <tr>
+            <th>银行卡号：</th>
+            <td >{$card_number}</td>
+            <th >开户银行：</th>
+            <td >{$bank_account}</td>
+        </tr>
+        <tr>
+            <th>开户省市：</th>
+            <td >{$account_opening}</td>
+            <th>审核状态：</th>
+            <td>{$approve_status|get_apply_status}</td>
+        </tr>
+        <tr>
+            <th>打款状态：</th>
+            <td>
+                <if condition="$is_play_money eq 1">
+                    已打款
+                <elseif condition="$is_paly_money eq 2"/>
+                    打款驳回
+                <else/>
+                    未打款
+                </if>
+            </td>
+        </tr>
+        <!--<if condition="$approve_status eq 7">
+            <tr>
+                <th>付款交易号：</th>
+                <td>{$transaction_number}</td>
+                <th>付款账户：</th>
+                <td>{$payment_account}</td>
+            </tr>
+            <tr>
+                <th>付款金额：</th>
+                <td>{$payment_money|default="0.00"}元</td>
+                <th>付款日期：</th>
+                <td>{$payment_date}</td>
+            </tr>
+        </if>-->
+
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+    </tbody>
+    </table>
+    <volist name="process" id="vo" empty="">
+        <table width="100%">
+            <thead>
+             <tr>
+                <th width="100%" colspan="4">{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            </tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">{$vo.approve_status|get_apply_status2}</td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+               
+            </tr> 
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+               
+            </tr>
+        </tbody>
+        </table>
+    </volist>
+
+</div>

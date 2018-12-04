@@ -1,0 +1,54 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" id="character_box" style="display:none;">
+    <div class="detail_box" style="padding:0 0;">
+        <table width="100%">
+                <tbody>
+                <tr>
+                    <th width="17%">企业名称：</th>
+                    <td width="25%">{$enterprise_name}</td>
+                    <th width="20%">企业编号：</th>
+                    <td width="33%">{$enterprise_code}</td>
+                </tr>
+                <tr>
+                    <th>申请金额：</th>
+                    <td>{$apply_money|default="0.000"}元</td>
+                    <th>冻结申请时间：</th>
+                    <td>{$apply_date}</td>
+                 </tr>
+                <tr>
+                    <th>账户余额：</th>
+                    <td>{$account_balance|default="0.000"}元</td>
+                    <th>冻结金额：</th>
+                    <td>{$freeze_money}元</td>
+                </tr>
+                <tr>
+                    <th>备注：</th>
+                    <td colspan="3">{$frozen_remark}</td>
+                </tr>
+            </tbody>
+        </table>
+        <form name="enterprise_frozen_approve_form">
+            <input type="hidden"  name="apply_id" value="{$apply_id}" />
+            <div class="checkinfo_con">
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>审核：</h5>
+                    <div class="add_value">
+                        <empty name="type">
+                            <label class="radio  checked" value="1"><em>复审通过</em></label>
+                            <label class="radio"  value="2"><em>复审驳回</em></label>
+                        <else/>
+                            <label class="radio  checked" value="1"><em>初审通过</em></label>
+                            <label class="radio"  value="2"><em>初审驳回</em></label>
+                        </empty>
+                        <input type="hidden" name="approve_status"  value="1" />
+                    </div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>审核原因：</h5>
+                    <div class="add_value">
+                        <textarea class="textarea" name="approve_remark" empty="true"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

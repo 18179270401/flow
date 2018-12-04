@@ -1,0 +1,131 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span></span>
+        </div>
+          <div class="operation_info">
+              <isshow url="EnterpriseRecord/self_record_export_excel">
+                  <button class="btn  export_button" data-url="EnterpriseRecord/self_record_export_excel" data-type="url">
+                      <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                  </button>
+              </isshow>
+          </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/EnterpriseRecord/self_record">
+    <div class="search_nav">
+      <ul>
+          <li>
+              <label class="inputlabel">用途：</label>
+              <select class="select" name="operate_type" style="min-width:100px">
+                  <option value="" selected>全部</option>
+                  <option value="1" <if condition='$Think.get.operate_type eq 1'>selected</if>>购买流量</option>
+                  <option value="2" <if condition='$Think.get.operate_type eq 2'>selected</if>>充值</option>
+                  <option value="3" <if condition='$Think.get.operate_type eq 3'>selected</if>>提现</option>
+                  <option value="5" <if condition='$Think.get.operate_type eq 5'>selected</if>>返还</option>
+                  <!--<option value="6" <if condition='$Think.get.operate_type eq 6'>selected</if>>分红</option>-->
+                  <option value="7" <if condition='$Think.get.operate_type eq 7'>selected</if>>退款</option>
+                  <option value="8" <if condition='$Think.get.operate_type eq 8'>selected</if>>测试款</option>
+                  <option value="9" <if condition='$Think.get.operate_type eq 9'>selected</if>>账户冻结</option>
+                  <option value="10" <if condition='$Think.get.operate_type eq 10'>selected</if>>账户解冻</option>
+              </select>
+              <input type="hidden" value=""/>
+          </li>
+          <!--<li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext" name="end_datetime" placeholder="结束时间" value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly />
+          </li>-->
+          <li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+       <!-- <div class="prepaidtip" >
+            <p> 收入总额：【共：<span style="color:#5cb95c;">{$all_income|default=0.00}</span>元】，支出总额：【共：<span style="color:red;">{$all_out|default=0.00}</span>元】</p>
+        </div>-->
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="80" class="change">操作者编号</th>
+                    <th width="130" class="change">操作者名称</th>
+                    <th width="60" class="change">用途</th>
+                    <th width="60" class="change">操作人</th>
+                    <th width="70" class="change">操作金额(元)</th>
+                    <!--<th width="80" class="change">操作前余额(元)</th>
+                    <th width="80" class="change">操作后余额(元)</th>-->
+                    <th width="120" class="change">操作时间</th>
+                    <!--<th width="80">操作</th>-->
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <if condition="($vo.operate_type eq 9) or ($vo.operate_type eq 10)" >
+                        <td>--</td>
+                        <td>--</td>
+                        <else/>
+                        <if condition="$vo.obj_user_type eq 1">
+                            <td>{$vo.obj_proxy_id|obj_data=1,'code'}</td>
+                            <td>{$vo.obj_proxy_id|obj_data=1,'name'}</td>
+                            <elseif condition="$vo.obj_user_type eq 2" />
+                            <td>{$vo.obj_enterprise_id|obj_data=2,'code'}</td>
+                            <td>{$vo.obj_enterprise_id|obj_data=2,'name'}</td>
+                        </if>
+                    </if>
+                    <td>{$vo.operate_type|get_operate_type}</td>
+                    <td>{$vo.user_id|get_user_name}</td>
+                    <td class="money_style"> <if condition="$vo.balance_type eq 2">-</if>{$vo.operater_price}</td>
+                    <!--<td class="money_style">{$vo.operater_before_balance}</td>
+                    <td class="money_style">{$vo.operater_after_balance}</td>-->
+                    <td>{$vo.record_date}</td>
+
+                      <!--<isshow url="EnterpriseDetails/detailed">
+                       <td>
+                        <button class="operationbtn enterprisedetailed_btn" value="{$vo.record_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                            <span>查看</span>
+                        </button>
+                         </td>
+                      </isshow>-->
+
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

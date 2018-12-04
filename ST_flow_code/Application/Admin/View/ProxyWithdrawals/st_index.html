@@ -1,0 +1,151 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>资金管理</em>><em>代理商提现管理</em></span>
+        </div>
+          <div class="operation_info">
+              <isshow url="ProxyWithdrawals/export_excel">
+                  <button class="btn  export_button" data-url="ProxyWithdrawals">
+                      <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                  </button>
+                </isshow>
+          </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get"  name="excel" action="/index.php/Admin/ProxyWithdrawals/index">
+    <div class="search_nav minheight60">
+      <ul>
+            <li>
+              <input type="text" class="inputtext" name="proxy_code" maxlength="6" style='min-width:80px' value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+            </li>
+            <li>
+              <input type="text" class="inputtext" name="proxy_name" value="{$Think.get.proxy_name}" placeholder="代理商名称"/>
+            </li>
+            <li>
+              <input type="text" class="inputtext" name="apply_code" maxlength="20" value="{$Think.get.apply_code}" placeholder="申请编号"/>
+            </li>
+            <li>
+          <label class="inputlabel">审核状态：</label>
+          <select class="select" name="approve_status" style='min-width:80px'>
+            <option value="9" selected>全部</option>
+            <option value="2" <if condition='$Think.get.approve_status eq 2'>selected</if>>待审核</option>
+            <option value="3" <if condition='$Think.get.approve_status eq 3'>selected</if>>初审通过</option>
+            <option value="4" <if condition='$Think.get.approve_status eq 4'>selected</if>>初审驳回</option>
+            <option value="5" <if condition='$Think.get.approve_status eq 5'>selected</if>>复审通过</option>
+            <option value="6" <if condition='$Think.get.approve_status eq 6'>selected</if>>复审驳回</option>
+          </select>
+                <input type="hidden" value="9"/>
+        </li>
+        <li>
+          <label class="inputlabel">是否打款：</label>
+          <select class="select" name="is_play_money" style='min-width:80px'>
+              <option value="9" <if condition='$Think.get.is_play_money eq 9 || $Think.get.is_play_money eq null'>selected</if>>全部</option>
+              <option value="1" <if condition='$Think.get.is_play_money eq "1"'>selected</if> >已打款</option>
+              <option value="2" <if condition='$Think.get.is_play_money eq 2'>selected</if>>打款驳回</option>
+              <option value="0" <if condition='$Think.get.is_play_money eq 0 && $Think.get.is_play_money neq null'>selected</if>>未打款</option>
+          </select>
+            <input type="hidden" value="9"/>
+        </li>
+            <li>
+                <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                <em class="inputto">至</em>
+                <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+        <div class="prepaidtip" >
+            <p> 提现金额合计：【<span style="color:#5cb95c;">{$sum_results.sum_money_one|default="0.000"}</span>元】</p>
+        </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="80" class="change">代理商编号</th>
+                    <th width="120" class="change">代理商名称</th>
+                    <th width="120" class="change">申请编号</th>
+                    <th width="80" class="change">提现金额(元)</th>
+                    <th width="100" class="change">申请时间</th>
+                    <th width="80" class="change">审核状态</th>
+                    <th width="80" class="change">打款状态</th>
+                    <th width="100" class="change">审核时间</th>
+                    <th width="120">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="proxyw_list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.proxy_code} </td>
+                    <td>{$vo.proxy_name} </td>
+                    <td>{$vo.apply_code} </td>
+                    <td class="money_style">{$vo.apply_money}</td>
+                    <td>{$vo.create_date}</td>
+                    <td>{$vo.approve_status|get_apply_status}</td>
+                    <td><if condition='$vo.is_play_money eq 1'>已打款<elseif condition='$vo.is_play_money eq 2'/>打款驳回<else/>未打款</if></td>
+                    <td>{$vo.last_approve_date|default="--"}</td>
+                    <td class="operation_td">
+                        <button class="operationbtn proxywithdrawals_detailed_btn" value="{$vo.apply_id}">
+                            <!--<i class="minicon detailed_icon"></i>-->
+                            <span>查看</span>
+                        </button>
+                    <if condition="$vo.top_proxy_id eq $proxy_id">
+                    <if condition="(is_jurisdiction('proxywithdrawals/proxy_approve_c')) AND ($vo.approve_status eq 2)">
+                      <isshow url="proxywithdrawals/proxy_approve_c">
+                        <button class="operationbtn proxywithdrawals_approve_btn" data-value="proxy_approve_c" value="{$vo.apply_id}">
+                          <!--<i class="minicon check_icon"></i>-->
+                          <span>初审</span>
+                        </button>
+                      </isshow>
+                  </if>
+                  <if condition="(is_jurisdiction('proxywithdrawals/proxy_approve')) AND ($vo.approve_status eq 3)">
+                    <isshow url="proxywithdrawals/proxy_approve">
+                      <button class="operationbtn proxywithdrawals_approve_btn" data-value="proxy_approve" value="{$vo.apply_id}">
+                        <!--<i class="minicon check_icon"></i>-->
+                        <span>复审</span>
+                      </button>
+                    </isshow>
+                  </if>
+                  <if condition="(is_jurisdiction('proxywithdrawals/proxy_remittance')) AND ($vo.approve_status eq 5) AND (($vo.is_play_money eq 0) or ($vo.is_play_money eq ''))">
+                    <isshow url="proxywithdrawals/proxy_remittance">
+                      <button class="operationbtn proxywithdrawals_approve_btn" data-value="proxy_remittance" value="{$vo.apply_id}">
+                          <!--<i class="minicon check_icon"></i>-->
+                          <span>打款</span>
+                      </button>
+                    </isshow>
+                  </if>
+                </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

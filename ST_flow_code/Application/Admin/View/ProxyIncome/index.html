@@ -1,0 +1,108 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+</script>
+
+<div class="main_con">
+    <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+                <i></i><span><em>统计报表</em>><em>代理收入统计</em></span>
+        </div>
+          <div class="operation_info">
+              <if condition="is_jurisdiction('ProxyIncome/export_excel')">
+                  <button class="btn  export_button" data-url="ProxyIncome">
+                      <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                  </button>
+              </if>
+          </div>
+    </div>
+    </div>
+    <div class="search_box pdb26">
+        <form method="get" action="/index.php/Admin/ProxyIncome/index" name="excel">
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="enterprise_code" maxlength="20" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+                    </li>
+                    <li>
+                        <input type="text" class="inputtext" name="enterprise_name"  value="{$Think.get.enterprise_name}" placeholder="企业名称"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">操作时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_datetime" placeholder="{$default_start}" value="{$default_start}" style='min-width:80px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_datetime" placeholder="{$default_end}" value="{$default_end}" style='min-width:80px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly/>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+            <div class="prepaidtip">
+                消费总额：【共<span style="color:#5cb95c;">{$expense_sum_total}</span>元】，
+                成本总额：【共<span style="color:#5cb95c;">{$cost_sum_total}</span>元】，
+                应收返利：【共<span style="color:#5cb95c;">{$rebate_sum_total}</span>元】，
+                利润总额：【共<span style="color:#5cb95c;">{$profit_sum_total}</span>元】
+            </div>
+        </form>
+    </div>
+
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="80" class="change">企业编号</th>
+                            <th width="120" class="change">企业名称</th>
+                            <th width="100" claas="change" class="money_style">消费总额(元)</th>
+                            <th width="100" class="change" class="money_style">成本总额(元)</th>
+                            <th width="100" class="change" class="money_style">应收返利(元)</th>
+                            <th width="100" class="change" class="money_style">利润总额(元)</th>
+                            <th width="100" class="change" class="money_style">毛利率</th>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+             <div class="tablelist_tbody" data-mcs-theme="dark">
+                 <table>
+                     <volist name="list" id="vo">
+                         <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td title="{$vo.enterprise_name}">{$vo.enterprise_code}</td>
+                            <td title="{$vo.enterprise_name}">{$vo.enterprise_name}</td>
+                            <td class="money_style">{$vo.all_expense_sum|default="0.00"}</td>
+                            <td class="money_style">{$vo.all_cost_sum|default="0.00"}</td>
+                             <td class="money_style">{$vo.all_rebate_sum|default="0.00"}</td>
+                            <td class="money_style">{$vo.all_profit_sum|default="0.00"}</td>
+                            <td class="money_style">{$vo.profit_percent} %</td>
+                        </tr>
+                     </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+    parent.layer.closeAll();
+</script>
+</body>
+</html>

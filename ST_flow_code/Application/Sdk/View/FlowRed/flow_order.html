@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>订单信息</title>
+		<link href="{$role}css/flowOrder.css?s={$version_number}" rel="stylesheet" />
+		<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<script type="text/javascript" src="{$role}js/flowOrder.js?s={$version_number}"></script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/utils/css/loaders.css?s={$version_number}" />
+		<script type="text/javascript" charset="UTF-8">
+		var isClick = false;
+		function payWx() {
+			
+			if(isClick == false){
+				isClick = true;
+				var localred_order_code = $("#red_order_code").val();
+				var openid=$("#openid").val();
+				var price_market = $("#pay_price").val();
+				var user_type = $("#user_type").val();
+				var user_id = $("#user_id").val();
+				
+				$(".modelClass").css("display","block");
+				$.ajax({
+					type: "POST",
+					url: "/index.php/Sdk/Api/GetBalance",
+					data: {
+						user_type: user_type,
+						user_id: user_id
+					},
+					contentType: "application/x-www-form-urlencoded",
+					success: function(jsondata) {
+						
+						setTimeout(function(){
+							isClick = false;
+							$(".modelClass").css("display","none");
+						},1550);
+									    
+						//查询当前余额
+						var lastmoney = parseFloat(jsondata.data);
+						price_market = parseFloat(price_market);
+						if (lastmoney < price_market) {
+							var url = 'http://' + window.location.host + '/index.php/Sdk/FlowRed/limitmoney';
+							location.href = url;
+							return;
+						}
+			
+						var url = "/index.php/Sdk/FlowRed/red_wxpay/red_order_code/"+localred_order_code+"/openid/"+openid; 
+						//location.href = url;
+						$("#wxpay").load(url);
+					},
+					error: function(data) {
+						isClick = false;
+					}
+				});
+			}
+			
+		};	
+		</script>
+	</head>
+	<body style="background: #fffaf5;">
+		<div class="modelClass" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);position: absolute;z-index: 9999;display: none;margin-top: -2rem;;">
+			<div class="loader" style="text-align: center;margin-left: auto;margin-right: auto;width: 100%;height:100%;">
+				<div class="loader-inner ball-spin-fade-loader" style="display: inline-block;">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="orderInfo_list">
+			<ul>
+				<li class="list list1">
+					<span>订单名称:</span><span class="orderInfoValue">流量红包</span>
+				</li>
+				
+				<hr class="line"/>
+				<li class="list list2">
+					<span>交易金额:</span><span class="orderInfoValue OrderTotalMoney">¥{$pay_price}</span>
+				</li>
+				<hr class="line"/>
+				
+				<li class="list list3">
+					<span>交易时间:</span><span class="orderInfoValue">{$order_date}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="paymentBlock">
+			<input onclick="payWx()" style="border: none;width: 100%;padding-top: 0.7rem;padding-bottom: 0.7rem;margin-left: auto;margin-right: auto;background: url({$role}/images/payment_btn.png);background-size: 100% 100%;color: #FFFFFF;font-size: 0.8rem;"
+	 id="paymentButton" class="paymentButton" type="button" value="确认支付" />
+		</div>
+		<div id="wxpay"></div>
+		<input type="hidden" name="pay_price" id="pay_price" value="{$pay_price}">
+		<input type="hidden" name="openid" id="openid" value="{$openid}">
+		<input type="hidden" name="red_order_code" id="red_order_code" value="{$red_order_code}">
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		<script type="text/javascript">
+			htmlFontSize();
+			window.onresize = function() {  
+				htmlFontSize();
+			}
+			function htmlFontSize() {
+				var w = document.documentElement.clientWidth;
+				var i = parseInt(w) / 768;
+				var h = document.documentElement.clientHeight;
+				document.documentElement.style.fontSize = (parseInt(w) / 768) * 40 + "px";
+					$('.loader-inner').css('margin-top', (h - $('.loader-inner').height()) / 2 + 'px');
+			}
+		</script>
+	</body>
+</html>

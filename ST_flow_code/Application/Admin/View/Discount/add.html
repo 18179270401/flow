@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>爱讯流量</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<!-- Bootstrap 3.3.2 -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<!-- FontAwesome 4.3.0 -->
+<link href="__PUBLIC__/Admin/css/discountset/Font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<!-- Ionicons 2.0.1 -->
+<link href="__PUBLIC__/Admin/css/discountset/Ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+<!-- Theme style -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/dist/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+folder instead of downloading all of them to reduce the load. -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
+<!-- iCheck -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css"/>
+<!-- Morris chart -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/morris/morris.css" rel="stylesheet" type="text/css"/>
+<!-- jvectormap -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
+<!-- Bootstrap time Picker -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet"/>
+<!-- Date Picker -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
+<!-- Daterange picker -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+<!-- bootstrap wysihtml5 - text editor -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet"
+type="text/css"/>
+<!-- DATA TABLES -->
+<link href="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+<!-- Bootstrap-Switch-Master -->
+<link href="__PUBLIC__/Admin/css/discountset/Bootstrap-Switch-Master/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet"
+type="text/css"/>
+
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+<link href="__PUBLIC__/Admin/css/discountset/discountset.css" rel="stylesheet" type="text/css"> 
+<link href="__PUBLIC__/Admin/css/discountset/icheck/skins/line/_all.css" rel="stylesheet">
+<style>
+.btnbg{float:right; margin-top:8px; margin-right:6px; padding:0px 6px; background-color:#FFF; font-size:14px; color:#15a5fb;}
+.btnbg:hover{ background-color:#15a5fb; color:#FFF;}
+.dropdown-menu-title{ padding-top:6px; background:#4995E7; overflow:hidden;}
+.dropdown-menu-title span{ float:left; padding:0 18px; height:25px; line-height:25px; border-top-left-radius:3px; border-top-right-radius:3px; color:#fff; cursor:pointer;}
+.dropdown-menu-title span.active{ background-color:#fff; color:#4995e7;}
+.dropdown-menu-new {
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    display: none;
+    float: left;
+    font-size: 12px;
+    left: 0;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    min-width: 160px;
+    height: 250px;
+    padding: 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: 1000;
+    overflow:auto;
+}
+.dropdown-menu-new span{color: #777;}
+.dropdown-menu-new .new-w{color:white;}
+.col-md-3{margin-top:5px;}
+.col-md-3 a{cursor:default;}
+.city-q{display: none;}
+.active{display: block;}
+</style>
+</head>
+<body class="skin-blue">
+<input type="hidden" name="create_proxy_type" id="create_proxy_type" value="{$create_proxy_info.proxy_type}" />
+<div class="wrapper">
+
+<div style="width:100%;margin-left: 0px;" class="content-wrapper">
+<!-- Main content -->
+<section class="content">
+<!-- Small boxes (Stat box) -->
+<div class="row">
+<div class="col-lg-12 col-xs-12">
+<div class="" style="min-height: 500px">
+<div style="height:40px; background-color:#FFF; border:1px solid #e0e3f2; border-bottom:0 none;">
+          <h3 style=" float:left; line-height:38px;padding:0; padding-left:10px; margin:0; font-size:14px; font-weight:bold;">折扣设置</h3>
+          
+  </div>
+<div class="row">
+<div class="">
+<div class="box box-info">
+<div class="box-header with-border">
+  <h3 class="box-title" style="font-weight: 600;">选定要设置的用户：</h3>
+  <div class="btn-group pull-right">
+      <button type="button" class="btn btn-warning btn-flat" id="userrech" style="padding:0px 12px;">重选</button>
+  </div>
+  
+</div>
+<div class="box-body" >
+ <div class="row">
+     <if condition="session('sid') eq 1">
+         <div class="col-lg-2 col-xs-4 userBox" style="display: none;" data-user="0">
+             <div class="user_box">
+                 <input name="uid" type="hidden" value="0" />
+                 <span><i class="fa fa-fw fa-user pull-left"></i></span>
+                 <button class="btn btn-box-tool pull-right userDel"><i class="fa fa-times"></i></button><br />
+                 <span>前台个人用户</span><br />
+                 <span>--</span><br />
+                 <span>个人用户</span><br />
+             </div>
+         </div>
+     </if>
+     <noempty name="agency_list">
+     <volist name="agency_list" id="vo" empty="">
+     <div class="col-lg-2 col-xs-4 userBox" style="display: none;" data-user="0">
+         <div class="user_box">
+             <input name="uid" type="hidden" value="{$vo.proxy_id}" data="proxy">
+             <span><i class="fa fa-fw fa-user pull-left"></i></span>
+             <button class="btn btn-box-tool pull-right userDel"><i class="fa fa-times"></i></button><br />
+             <span>{$vo.proxy_name}</span><br />
+             <span>{$vo.proxy_code}</span><br />
+             <span>代理商</span><br />
+         </div>
+     </div>
+     </volist>
+     </noempty>
+
+     <noempty name="company_list">
+         <volist name="company_list" id="vo" empty="">
+             <div class="col-lg-2 col-xs-4 userBox" style="display: none;" data-user="0">
+                 <div class="user_box">
+                     <input name="uid" type="hidden" value="{$vo.enterprise_id}"  data="enterprise" >
+                     <span><i class="fa fa-fw fa-user pull-left"></i></span>
+                     <button class="btn btn-box-tool pull-right userDel"><i class="fa fa-times"></i></button><br />
+                     <span>{$vo.enterprise_name}</span><br />
+                     <span>{$vo.enterprise_code}</span><br />
+                     <span>企业</span><br />
+                 </div>
+             </div>
+         </volist>
+     </noempty>
+     <!-- 添加用户 -->
+     <div class="col-lg-2 col-xs-4">
+         <div class="user_box">
+             <button id="openModal" class="btn btn-box-tool">
+                 <i class="fa fa-plus-circle" style="font-size: 95px;"></i>
+             </button>
+         </div>
+     </div>
+ </div>
+  <div class="row">
+      <div class="col-lg-12">
+          <div id="UserModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                          <h4 class="modal-title" id="myLargeModalLabel">折扣设置-添加选定用户</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <table id="example1" class="table table-bordered table-striped">
+                                      <thead>
+                                          <tr>
+                                              <th><input type="checkbox" onclick="choose(this)"></th>
+                                              <th style="display: none;">uid</th>
+                                              <th>序号</th>
+                                              <th>用户名</th>
+                                              <th>编号</th>
+                                              <th>角色</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                      <!-- <if condition="session('sid') eq 1">
+                                          <tr>
+                                              <td><input type="checkbox"></td>
+                                              <td name="uid" style="display: none;">0</td>
+                                              <td>0</td>
+                                              <td>前台个人用户</td>
+                                              <td>--</td>
+                                              <td>个人用户</td>
+                                          </tr>
+                                      </if> -->
+                                      <noempty name="agency_list">
+                                          <volist name="agency_list" id="vo" key="k" empty="">
+                                              <tr>
+                                                  <td><input type="checkbox"></td>
+                                                  <td name="uid" style="display: none;" type="proxy">{$vo.proxy_id}</td>
+                                                  <td>{$k}</td>
+                                                  <td>{$vo.proxy_name}</td>
+                                                  <td>{$vo.proxy_code}</td>
+                                                  <td>代理商</td>
+                                              </tr>
+                                          </volist>
+                                      </noempty>
+                                      <noempty name="company_list">
+                                          <volist name="company_list" id="vo" key="k" empty="">
+                                              <tr>
+                                                  <td><input type="checkbox"></td>
+                                                  <td name="uid" style="display: none;" type="enterprise" >{$vo.enterprise_id}</td>
+                                                  <td>{$k+$num}</td>
+                                                  <td>{$vo.enterprise_name}</td>
+                                                  <td>{$vo.enterprise_code}</td>
+                                                  <td>企业</td>
+                                              </tr>
+                                          </volist>
+                                      </noempty>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                          <button id="userAdd" type="button" class="btn btn-primary">添加</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div><!-- /.box-body -->
+</div>
+</div>
+</div>
+<div class="row discountlist">
+<div class="">
+<div class="box box-info">
+
+<div class="box-header with-border">
+  <h3 class="box-title" style="font-weight: 600;">设置折扣：</h3>
+  <select id="province_city" style="float:right;height:30px;width:70px;">
+    <option value="1">省折扣</option>
+	<option value="2">市折扣</option>
+  </select>
+</div>
+ 
+<div class="box-body">
+  <div class="row">
+      <div class="col-lg-4 col-xs-12">
+      <div class="box box-solid box-primary oprator yd">
+          <div class="box-header">
+              <h3 class="box-title">中国移动</h3>
+          </div>
+          <div class="box-body" style="min-height:250px;">
+              <div class="row">
+                  <div class="col-lg-12 areaall">
+                      <div class="col-lg-6 areaadd">
+                          <button class="btn bg-primary btn-flat dropdown-toggle-new" style="width:60px;" data-toggle="dropdown" type="button">
+                              <i class="fa fa-plus-circle" style="font-size: 18px;"></i>
+                          </button>
+                          <ul class="dropdown-menu-new" name="area" style="right: -124px;width: 472px;">
+                                  <li class="dropdown-menu-title">
+                                      <span class="new-w province-q active"  data-value="province" value="">地区</span>
+                                      <span class="new-w city-q"  data-value="city">市区</span>
+                                  </li>
+                              <!--<li><a ><i class="fa fa-fw fa-map-marker"></i><span data-areano="all">所有地区</span></a>
+                              </li>-->
+                              <div class="province">
+								<!-- 列表省份 -->
+								<volist name='province_list' id='vo'>
+									<li class="col-md-3">
+										<a ><i class="fa fa-fw fa-map-marker"></i><span data-areano="{$key}" data-type="1" data-name="{$vo}">{$vo}</span></a>
+									</li>
+								</volist>
+                              </div>
+                              <div class="city" display="none">
+                              </div>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+      <div class="col-lg-4 col-xs-12">
+          <div class="box box-solid box-primary oprator lt">
+              <div class="box-header">
+                  <h3 class="box-title">中国联通</h3>
+              </div>
+              <div class="box-body" style="min-height:250px;">
+                  <div class="row">
+                      <div class="col-lg-12 areaall">
+                          <div class="col-lg-6 areaadd">
+                              <button class="btn bg-primary btn-flat dropdown-toggle-new"  style="width:60px;"  data-toggle="dropdown" type="button">
+                                  <i class="fa fa-plus-circle" style="font-size: 18px;"></i>
+                              </button>
+                              <ul class="dropdown-menu-new" name="area" style="right: -124px;width: 472px;">
+                                  <li class="dropdown-menu-title">
+                                      <span class="new-w province-q active"  data-value="province" value="">地区</span>
+                                      <span class="new-w city-q"  data-value="city">市区</span>
+                                  </li>
+                                  <!--<li><a ><i class="fa fa-fw fa-map-marker"></i><span data-areano="all">所有地区</span></a>
+                                  </li>-->
+                                  <div class="province">
+									<!-- 列表省份 -->
+									<volist name='province_list' id='vo'>
+										<li class="col-md-3">
+											<a ><i class="fa fa-fw fa-map-marker"></i><span data-areano="{$key}" data-type="2" data-name="{$vo}">{$vo}</span></a>
+										</li>
+									</volist>
+                                  </div>
+                                  <div class="city" display="none">
+                                  </div>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4 col-xs-12">
+          <div class="box box-solid box-primary oprator dx">
+              <div class="box-header">
+                  <h3 class="box-title">中国电信</h3>
+              </div>
+              <div class="box-body" style="min-height:250px;">
+                  <div class="row">
+                      <div class="col-lg-12 areaall">
+                          <div class="col-lg-6 areaadd">
+                              <button class="btn bg-primary btn-flat dropdown-toggle-new"  style="width: 60px;"  data-toggle="dropdown" type="button">
+                                  <i class="fa fa-plus-circle" style="font-size: 18px;"></i>
+                              </button>
+                              <ul class="dropdown-menu-new" name="area" style="position: relative;width: 472px;left: -288px;">
+                                  <li class="dropdown-menu-title">
+                                      <span class="new-w province-q active"  data-value="province" value="">地区</span>
+                                      <span class="new-w city-q"  data-value="city">市区</span>
+                                  </li>
+                                  <!--<li><a ><i class="fa fa-fw fa-map-marker"></i><span data-areano="all">所有地区</span></a>-->
+                                  </li>
+                                  <div class="province">
+                                    <!-- 列表省份 -->
+									<volist name='province_list' id='vo'>
+										<li class="col-md-3">
+											<a ><i class="fa fa-fw fa-map-marker"></i><span data-areano="{$key}" data-type="3" data-name="{$vo}">{$vo}</span></a>
+										</li>
+									</volist>
+                                  </div>
+                                  <div class="city"  display="none">
+                                  </div>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<div class="row" style="margin-bottom:10px;">
+        <button type="button" id="submit" class="btn btn-block btn-success" style="padding:5px;">保存</button>
+</div>
+</div>
+</div>
+</div>
+<!-- /.row -->
+<!-- Main row -->
+</section>
+<!-- /.content -->
+</div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.1.3 -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/jQuery/jquery-1.11.2.min.js"></script>
+<!-- jQuery UI 1.11.2 -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/jQueryUI/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!-- jQuery Knob Chart -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/knob/jquery.knob.js" type="text/javascript"></script>
+<!-- daterangepicker -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<!-- datepicker -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+<!-- Slimscroll -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- FastClick -->
+<script src='__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/fastclick/fastclick.min.js'></script>
+<!-- AdminLTE App -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
+
+<!-- Bootstrap-Switch-Master -->
+<script src="__PUBLIC__/Admin/css/discountset/bootstrap-switch-master/dist/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+<!-- JQuery-Form -->
+<script src="__PUBLIC__/Admin/css/discountset/JQuery-Form/jquery.form.js" type="text/javascript"></script>
+
+
+<!-- DATA TABES SCRIPT -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+
+<!-- bootstrap time picker -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+<!-- date-range-picker -->
+<script src="__PUBLIC__/Admin/css/discountset/AdminLTE/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
+<script src="__PUBLIC__/Admin/css/discountset/icheck/icheck.js"></script>
+<script src="__PUBLIC__/Admin/css/discountset/discountset.js?s={$version_number}" type="text/javascript"></script>
+<script>
+$(function () {
+$("#example1").dataTable();
+$('#example2').dataTable({
+"bPaginate": true,
+"bLengthChange": false,
+"bFilter": false,
+"bSort": true,
+"bInfo": true,
+"bAutoWidth": false,
+"sPaginationType" : 'full_numbers',
+"iDisplayLength" : 6
+});
+});
+</script>
+<script>
+    parent.layer.closeAll();
+</script>
+</body>
+</html>

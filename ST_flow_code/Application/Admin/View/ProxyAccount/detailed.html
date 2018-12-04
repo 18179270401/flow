@@ -1,0 +1,48 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <!--<div class="add_list">
+        <h5>代理商名称：</h5>
+        <div class="add_value"><span>{$proxy_name}</span></div>
+    </div>
+    <div class="add_list">
+        <h5>代理商编号：</h5>
+        <div class='add_value'><span>{$proxy_code}</span></div>
+    </div>
+    <div class="add_list">
+        <h5>上级代理商名称：</h5>
+        <div class="add_value"><span>{$top_proxy_name}</span></div>
+    </div>
+    <div class="add_list">
+        <h5>上级代理商编号：</h5>
+        <div class="add_value"><span>{$top_proxy_code}</span></div>
+    </div>
+    <div class="add_list">
+        <h5>账号余额：</h5>
+        <div class="add_value"><span>{$account_balance|default="0.00"}元</span></div>
+    </div>
+    <div class="add_list">
+        <h5>冻结余额：</h5>
+        <div class='add_value'><span>{$freeze_money|default="0.00"}元</span></div>
+    </div>-->
+    <table width="100%">
+        <tr>
+            <th width="45%">代理商名称：</th>
+            <td>{$proxy_name}</td>
+        </tr>
+        <tr>
+            <th>代理商编号：</th>
+            <td>{$proxy_code}</td>
+        </tr>
+        <tr>
+            <th>账户余额：</th>
+            <td class="money_style"><php>echo ($account_balance-$loan_money);</php>元</td>
+        </tr>
+        <tr>
+            <th>授信金额：</th>
+            <td class="money_style">{$loan_money|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>冻结金额：</th>
+            <td class="money_style">{$freeze_money|default="0.000"}元</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,38 @@
+<!-- 添加菜单 -->
+<div id="add_flowcode_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="add_flowcode_form">
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>流量包属性：</h5>
+            <div class="add_value">
+                <select name="type" id="type" class="select" msg="请选择流量包属性">
+                    <option value="">请选择</option>
+                    <volist name="types" id="vo">
+                        <option value="{$key}">{$vo}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+        <h5><em class="wildcard">*</em>流量包大小：</h5>
+        <div class="add_value">
+            <select name="product_name" id="product_name" class="select" msg="请选择流量包大小">
+                <option value="">请选择</option>
+                <volist name="product_names" id="vo">
+                    <option value="{$vo}">{$vo}</option>
+                </volist>
+            </select>
+        </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>生成个数：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="生成个数" name="number" /></div>
+        </div>
+        <div class="add_list">
+          <h5>截止时间：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext start_datetime" name="end_time" placeholder="截止时间" empty="true" value=""  style="" onclick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="" />
+          </div>
+        </div>
+    </form>
+</div>
+

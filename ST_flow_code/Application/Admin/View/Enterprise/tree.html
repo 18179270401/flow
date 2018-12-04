@@ -1,0 +1,41 @@
+<include file="Common/header" />
+<style>
+.red{color:red;}
+</style>
+<script>
+
+function loca(value,obj){
+
+  var url = "{:U('Enterprise/index')}";
+  var parameter = "?type=table&top_proxy_id="+value+'&istree=1';
+  $("#treetable").attr('src',url+parameter);
+  $(".tree_box .filetree span.red").removeClass('red');
+  $(obj).children('span').addClass('red');
+
+}
+
+
+$(function(){
+    /*树形结构初始化*/
+    $("#navigation").treeview({
+        persist: "location",
+        collapsed: false,
+        unique: true
+    });
+})
+
+
+
+</script>
+<div class="tree_box">
+  <div class="tree_con mCustomScrollbar_xy"  data-mcs-theme="dark">
+      <ul id="navigation" class="filetree">
+          {$tree_html} 
+      </ul>
+  </div>
+</div>
+<div class="tree_tablelist">
+  <iframe id="treetable" width="100%" height="100%" src="{:U('Enterprise/index',array('type'=>'table'))}" frameborder="0" border="0" scrolling="auto"></iframe>
+</div>
+
+<include file="Common/footer" />

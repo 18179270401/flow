@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>爱讯充值</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="{$role}css/qrcode.css?!" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+<link href="{$role}css/layer.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{$role}js/layer.js"></script>
+  <script>
+    $(function(){
+		
+		$("#payfailbtn").click(function(){
+			//页面层
+			parent.layer.open({
+				type: 1,
+				title:'支付失败',
+				area: ['360px', '220px'], //宽高
+				content: $('#payfail_box'),
+				btn:['确定'],
+			});
+		});
+
+		$("#cancel_btn").click(function(){
+			//取消支付
+			var keycode = $("#keycode").val();
+			var url = "/index.php/Sdk/WxFlowPayment/aindex?"+keycode;;
+			location.href = url;
+		});
+
+		$("#pay_btn").click(function(){
+			//判定支付状态
+			 var pay_order_id = $("#pay_order_id").val();
+										//判定是否支付成功
+										$.ajax({
+											type: "POST",
+											url: "/index.php/Sdk/WebPayment/get_paystatue",
+											data: {
+												pay_order_id: pay_order_id
+											},
+											contentType: "application/x-www-form-urlencoded",
+											success: function(data) {
+													if(data.data == 1)
+													{
+														//支付失败
+															parent.layer.open({
+																type: 1,
+																title:'支付二维码',
+																area: ['360px', '220px'], //宽高
+																content: $('#payfail_box'),
+																btn:['确定'],
+															}); 
+													}
+													else
+													{
+													 	var keycode = $("#keycode").val();
+														//支付成功
+														var url = "/index.php/Sdk/WxFlowPayment/paysuccess?"+keycode;;
+														location.href = url;
+													}
+											},
+											error: function(data) {}
+										});
+		});
+
+		htmlFontSize();
+		window.onresize = function() {
+				htmlFontSize();
+		}
+
+		function htmlFontSize() {
+				var w = document.documentElement.clientWidth;
+				var h = parseInt(document.documentElement.clientHeight);
+				var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+				document.documentElement.style.fontSize = (i) * 40.0 + "px";
+		}
+	})
+
+  </script>
+</head>
+<body>
+<div class="layout">
+  <div class="prepaid_mess">
+      <!--<img src="{$role}images/wechat_03.png" alt="img"/>-->
+      <div class="prepaidmess_con">
+          <h5>{$sizename}</h5>
+          <p>订单编号：{$pay_order_code}</p>
+          <p>充值号码：{$phone}</p>
+      </div>
+      <span class="money"><em>{$discount_money}</em>元</span>
+  </div>
+  <div class="hr-18"></div>
+  <div class="tit">
+    <h2><em>扫码支付</em></h2>
+  </div>
+  <div class="pay_con">
+	<div class="wechat_con">
+		<img src="{$qrurl}" />
+		<p>请使用微信支付扫描此二维码</p>
+	<div class="qrcode_btn">
+	<a href="#" id = "cancel_btn" class="cancel_btn">取消</a>
+	<a href="#" id = "pay_btn" class="pay_btn">已支付</a>
+  	</div>
+	</div>
+  </div>
+</div>
+<!--支付失败 开始-->
+<div id="payfail_box" class="payfail_box" style="display:none;">
+	<div class="payfail_con">
+		<p><i class="payfail_icon"></i>支付失败，请稍后重试。</p>
+	</div>
+</div>
+<!--支付失败 结束-->
+		<input type="hidden" name="pid" id="pid" value="{$pid}">
+		<input type="hidden" name="pay_order_id" id="pay_order_id" value="{$pay_order_id}">
+		<input type="hidden" name="keycode" id="keycode" value="{$keycode}">
+</body>
+</html>

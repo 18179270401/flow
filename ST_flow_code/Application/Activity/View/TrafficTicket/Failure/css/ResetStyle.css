@@ -1,0 +1,14 @@
+/* 重置样式 */
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{box-sizing:border-box; border:0px; padding:0px; margin:0px;}
+img,a img{box-sizing:border-box; margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;}
+h1,h2,h3,h4,h5,h6{box-sizing:border-box; font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{box-sizing:border-box; list-style:none;}
+address,cite,code,em,th,i{box-sizing:border-box; font-weight:normal; font-style:normal;}
+table{ box-sizing:border-box; border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{box-sizing:border-box; font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{ box-sizing:border-box; line-height:normal;}
+a{box-sizing:border-box;  color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{box-sizing:border-box;  color:#e76f12; text-decoration:none; }
+a:active{ box-sizing:border-box; outline: none; star:expression(this.onFocus=this.blur());}
+

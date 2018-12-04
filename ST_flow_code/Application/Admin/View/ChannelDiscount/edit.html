@@ -1,0 +1,37 @@
+<!-- 修改通道折扣 -->
+<div id="channel_discount_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="channel_discount_edit_form">
+        <div class="add_list">
+            <h5>通道名称：</h5>
+            <div class="add_value"><span>{$info.channel_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>运营商：</h5>
+            <div class='add_value'><span>{$info.operator_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>省份：</h5>
+            <div class="add_value"><span>{$info.city_id|get_city_province_name=$info['province_id']}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>市：</h5>
+            <div class="add_value"><span>{$info.city_name|default='--'}</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>折扣数：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" field="折扣数" vtype="money" name="discount_number" maxlength="5" value="{$info.discount_number|show_discount_ten=###}" style="width:160px;" />
+            </div>
+            <div class="promptinfo"><span>折&nbsp;（如8.6折）</span></div>
+        </div>
+        <div class="add_list">
+            <h5>返利折扣数：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" field="返利折扣数" vtype="money" name="rebate_discoun" maxlength="5" value="{$info.rebate_discoun|show_discount_ten=###}" empty="true" style="width:160px;" />
+            </div>
+            <div class="promptinfo"><span>折&nbsp;（如8.6折）</span></div>
+        </div>
+        <input type="hidden" name="discount_id" value="{$info.discount_id}" />
+    </form>
+</div>
+

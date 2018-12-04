@@ -1,0 +1,237 @@
+<include file="Common/header" />
+<style>
+    .input-phone{  position: absolute;  margin-top: 13rem;  text-align: center;  height: 2.4rem;  width: 100%;  }
+    .phoneNumber {  display: inline-block;  /*background: url(/Public/Admin/images/input_bg.png);  background-size: 100%;*/  background-repeat: no-repeat;  width: 60%;  font-size: 1rem;  height: 2rem; }
+    .receive-btn {  display: inline-block;  background: url(/Public/Admin/images/input_btn.png);  background-size: 120%;  background-repeat: no-repeat;  width: 20%;  margin-left: -0.5rem;  font-size: 1rem;  color: white;  height: 2rem; }
+    .activity-rule {  position: absolute;  text-align: center;  width: 100%;  bottom: 0px;  height: 2rem;  }
+    .activity-rule a {  color: cornflowerblue;  font-size: 1rem;  text-decoration:underline  }
+</style>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.zclip.min.js?s={$version_number}"></script>
+<input type="hidden" name="swfpath" id="swfpath" value="__PUBLIC__/Admin/js/ZeroClipboard.swf" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span></span>
+            </div>
+        </div>
+    </div>
+    <div class="graphicsset_box">
+        <form name="flowcode_set_form" id="form1" style="height:100%">
+            <input type="hidden" name="set_id" value="{$list.set_id}" />
+            <div class="graphicsset_left">
+                <div class="graphicssetleft_content mCustomScrollbar_y" style="height:calc(100% - 48px);" >
+                    <div class="graphicsset_nav">
+                        <dl>
+                            <dt><h2>流量码活动</h2></dt>
+                            <dd>
+                                <h3 style="  padding-top: 13px;">活动时间</h3>
+                                <span class="graphicsset_span">
+                                <input type="text" class="inputtext" field="活动开始时间" name="start_time" placeholder="开始时间" value="{$list.start_time}" style="min-width:70px;" onclick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="" /><span style="margin-left:2px;margin-right: 1px;font-size:10px;">—</span>
+                                <input type="text" class="inputtext " field="活动结束时间" name="end_time" placeholder="结束时间" value="{$list.end_time}" style="min-width:70px;" onclick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="" />
+                                </span>
+                            </dd>
+                            <dd>
+                                <h3>企业LOGO</h3>
+                                <div class="graphicsset_img"><img src="{$list.logo_img}" id="flowcode_upload_img2" alt="企业LOGO"/></div>
+                                <div class="graphicsset_con">
+                                    <button class="btn add_btn"><span>上传</span></button>
+                                    <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowcodeSet/img_download',array('download'=>'logo_img','set_id'=>$list['set_id']))}')">
+                                        <span>下载</span>
+                                    </button>
+                                    <input type="file" id="flowcode_upload2" name="logo_img" class="file"/>
+                                </div>
+                            </dd>
+                            <dd>
+                                <h3>企业宣传图</h3>
+                                <div class="graphicsset_img"><img src="{$list.background_img}" id="flowcode_upload_img1" alt="企业宣传图" /></div>
+                                <div class="graphicsset_con">
+                                    <button class="btn add_btn"><span>上传</span></button>
+                                    <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowcodeSet/img_download',array('download'=>'background_img','set_id'=>$list['set_id']))}')">
+                                        <span>下载</span>
+                                    </button>
+                                    <input type="file" id="flowcode_upload1" name="background_img" class="file"/>
+                                </div>
+                            </dd>
+                            <dd>
+                                <h3>活动规则</h3>
+                                <span class="graphicsset_span">
+                                    <textarea name="activity_rule" style="width:500px;height:220px;color: #000;font-size: 12px;font-weight: normal;" empty="true">{$list.activity_rule}</textarea>
+                                </span>
+                            </dd>
+                            <dd>
+                                <h3>兑换地址</h3>
+                                <span class="graphicsset_span">{$list.url}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="graphicsset_nav">
+                        <dl>
+                            <dt><h2>分享内容设置</h2></dt>
+                            <dd>
+                                <h3>分享标题</h3>
+                                <span class="graphicsset_span"><input type="text" class="inputtext" name="share_title" empty="true" value="{$list.share_title}"/></span>
+                            </dd>
+                            <dd>
+                                <h3>分享内容</h3>
+                                <span class="graphicsset_span"><input type="text" class="inputtext" name="share_content" empty="true" value="{$list.share_content}"/></span>
+                            </dd>
+                            <dd>
+                                <h3>分享图标</h3>
+                                <div class="graphicsset_img">
+                                    <img src="{$list.share_img}" id="flowcode_upload_img4" alt="分享图"/>
+                                </div>
+                                <div class="graphicsset_con">
+                                    <button class="btn add_btn"><span>上传</span></button>
+                                    <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowcodeSet/img_download',array('download'=>'share_img','set_id'=>$list['set_id']))}')">
+                                        <span>下载</span>
+                                    </button>
+                                    <input type="file" id="flowcode_upload4" name="share_img" class="file" empty="true"/>
+                                    <span class="description">图片尺寸大小（300x300）</span>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="savecon">
+                    <button class="btn add_btn" onclick="flowcode_alladd()"><span>保存</span></button>
+                </div>
+            </div>
+            <div class="graphicsset_right mCustomScrollbar_y">
+                <div class="graphicsset_tit">
+                    <h3>移动端展示图</h3>
+                </div>
+                <div class="exploded_view_con">
+                    <div class="phone_box">
+                        <div class="phone_header">
+                            <img src="__PUBLIC__/Admin/images/phone_header_01.jpg" alt="img"/>
+                        </div>
+                        <div class="phone_inner">
+                            <input type="hidden" name="background_img_phone" id="background_img_phone" value="{$list.background_img}" />
+                            <div class="input-phone">
+                                <input type="tel" value="" class="phoneNumber" name="phoneNumber" id="phoneNumber" placeholder="请输入手机号"/>
+                                <button type="button" class="receive-btn">领取</button>
+                            </div>
+                            <div class="activity-rule">
+                                <a onclick="showActivityRule()">活动规则</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--微信分享开始-->
+                <div class="share_box">
+                    <span class="head_img"><img src="__PUBLIC__/Admin/images/event_01.png"></span>
+                    <div class="share_con">
+                        <i class="triangle"></i>
+                        <div class="share_hd">
+                            <h3>流量码活动</h3>
+                            <div class="article">
+                                <img src="{$list.share_img}" id="upload_phone_img4">
+                                <p>流量码上有！还有更多的游戏等待参与</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var background_img_phone = $("input[name='background_img_phone']").val();
+        $('.phone_inner').css("background-image", "url("+background_img_phone+")");
+
+        //图片上传预览
+        $("#flowcode_upload1").on("change", function(e){ //宣传图
+            var file = e.target.files[0];
+            preview(file,"flowcode_upload_img1","phone_inner");
+            flowcode_set_add("flowcode_upload1");
+        });
+        $("#flowcode_upload2").on("change", function(e){ //logo
+            var file = e.target.files[0];
+            preview(file,"flowcode_upload_img2","upload_phone_img2");
+            flowcode_set_add("flowcode_upload2");
+        });
+        $("#flowcode_upload3").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"flowcode_upload_img3","phone_inner");
+            flowcode_set_add("flowcode_upload3");
+        });
+        $("#flowcode_upload4").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"flowcode_upload_img4","upload_phone_img3");
+            flowcode_set_add("flowcode_upload4");
+        });
+        $(".btn_copy").zclip({
+            path:$("#swfpath").val(), //记得把ZeroClipboard.swf引入到项目中
+            copy:function(){
+                return $(this).attr("data-addr");
+            }
+        });
+    });
+
+    //显示上传图片
+    function preview(file, idadd, bg_idadd) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+idadd).attr("src", e.target.result);
+            if(bg_idadd == "phone_inner"){
+                $('.'+bg_idadd).css("background-image", "url("+e.target.result+")");
+            } else {
+                $('#'+bg_idadd).attr("src", e.target.result);
+            }
+        }
+        reader.readAsDataURL(file);
+    }
+
+    //提交信息
+    function flowcode_set_add(sid) {
+        var formData = new FormData($("form[name='flowcode_set_form']")[0]);
+        $.ajax({
+            url :"/index.php/Admin/FlowcodeSet/index/type/operation",
+            type : 'post',
+            data : formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.status == 'success') {
+                    $("#"+sid).val("");
+                } else {
+                    alertbox(data);
+                    location.reload();
+                }
+            },
+            error: function (data) {
+                alertbox(data);
+            }
+        });
+    }
+
+    function flowcode_alladd() {
+        var formData = new FormData($("form[name='flowcode_set_form']")[0]);
+        $.ajax({
+            url :"/index.php/Admin/FlowcodeSet/index/type/operation",
+            type : 'post',
+            data : formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.status == 'success') {
+                    alertbox(data);
+                    //location.reload();
+                } else {
+                    alertbox(data);
+                }
+            },
+            error: function (data) {
+                alertbox(data);
+            }
+        });
+    }
+
+</script>
+<include file="Common/footer" />

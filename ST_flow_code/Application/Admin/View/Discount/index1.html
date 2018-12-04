@@ -1,0 +1,119 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>产品管理</em>><em>折扣管理</em></span>
+        </div>
+        <div class="operation_info">
+          <isshow url="Discount/add">
+            <a href="{:U('discount/add')}"><button class="btn add_btn">
+              <i class="minicon addoperation_icon"></i><span>折扣设置</span>
+            </button></a>
+          </isshow>
+            <isshow url="export_button">
+                <span class="line">|</span>
+                <button class="btn  export_button">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form method="get" action="{:U('discount/index')}">
+      <div class="search_nav">
+        <ul>
+          <li>
+            <label class="inputlabel">用户类型：</label>
+            <select class="select" name="user_type">
+              <option value="">请选择</option>
+              <volist name="arruser_type" id="vot">
+                  <option value="{$vot.user_type_id}" <if condition='$Think.get.user_type eq $vot["user_type_id"]'>selected</if> >{$vot.user_type_name}</option>
+              </volist>
+            </select>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="user_type_name" value="{$Think.get.user_type_name}" placeholder="用户名称"/>
+          </li>
+          <li>
+            <label class="inputlabel">运营商：</label>
+            <select class="select" name="operator_id">
+              <option value="">请选择</option>
+              <volist name="operator" id="voo">
+                  <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+              </volist>
+            </select>
+          </li>
+          <li>
+            <label class="inputlabel">省份：</label>
+            <select class="select" name="province_id">
+              <option value="">请选择</option>
+              <volist name="province" id="vop">
+                  <option value="{$vop.province_id}" <if condition='$Think.get.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+              </volist>
+            </select>
+          </li>
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_thead">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50px">序号</th>
+                    <th width="100px" class="change">用户编号</th>
+                    <th width="200px" class="change">用户名称</th>
+                    <th width="80px" class="change">用户类型</th>
+                    <th width="100px" class="change">运营商</th>
+                    <th width="100px" class="change">省份</th>
+                    <th width="60px" class="change">折扣数</th>
+                    <th width="60px" class="change">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="discount_list" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td>{$vo.proxy_code}{$vo.enterprise_code}</td>
+                  <td>{$vo.proxy_name}{$vo.enterprise_name}</td>
+                  <td><if condition="$vo['user_type'] eq 1">代理商<else />企业</if></td>
+                  <td>{$vo.operator_name}</td>
+                  <td>{$vo.province_name}</td>
+                  <td class="money_style">{$vo['discount_number']*10}</td>
+                  <td class="operation_td">
+                    <isshow url="Discount/edit">  
+                      <button class="operationbtn discount_edit" value="{$vo.discount_id}">
+                      <!-- <i class="minicon edit_icon"></i> -->
+                      <span>编辑</span>
+                      </button>
+                    </isshow>
+                  </td>
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

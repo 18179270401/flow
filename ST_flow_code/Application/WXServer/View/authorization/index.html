@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="x-ua-compatible" content="ie=8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta name="format-detection" content="telephone=no">
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+		<meta name="apple-touch-fullscreen" content="YES">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	</head>
+	<script type="text/javascript">
+		function authclick()
+		{
+			var pre_auth_code=$("#pre_auth_code").val();
+			var APPID=$("#APPID").val();
+			var redirect_uri=$("#redirect_uri").val();
+			var submiturl = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid="+APPID+"&pre_auth_code="+pre_auth_code+"&redirect_uri="+redirect_uri;
+		
+			location.href = submiturl;
+		}
+	</script>
+	<body style="text-align: center;">
+			{$pre_auth_code}
+			<input type="hidden" name="pre_auth_code" id="pre_auth_code" value="{$pre_auth_code}">
+			<input type="hidden" name="redirect_uri" id="redirect_uri" value="{$redirect_uri}">
+			{$APPID}
+			<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<button style="color: red; width: 100%;height: 40%;" id="qButton" type="button"  onclick="authclick()">点击授权</button>
+	</body>
+	
+	
+</html>

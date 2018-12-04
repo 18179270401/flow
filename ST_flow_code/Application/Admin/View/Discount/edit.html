@@ -1,0 +1,49 @@
+<!-- 添加折扣 -->
+<div id="discount_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="discount_edit_form">
+	<input type="hidden" name="discount_id" value="{$discountinfo.discount_id}" />
+
+    <div class="add_list">  
+        <h5><em class="wildcard">*</em>运营商：</h5>
+        <div class="add_value">
+        	<span>{$discountinfo.operator_name}</span>
+        </div>
+    </div>
+    <div class="add_list">  
+        <h5><em class="wildcard">*</em>用户名称：</h5>
+        <div class="add_value">
+	        <span>{$discountinfo.user_type_name}</span>
+        </div>
+    </div>
+    <div class="add_list">
+      <h5>省份：</h5>
+      <div class="add_value">
+          <select name="province_id" id="province_id" class="select" msg="请选择省份" onchange="get_is_filter(1)" empty="true">
+              <option value="" >请选择</option>
+              <volist name="province" id="vop">
+                  <option value="{$vop.province_id}" <if condition='$discountinfo.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+              </volist>
+          </select>
+      </div>
+    </div>
+    <div class="add_list" id="filter_city">
+      <h5>市：</h5>
+      <div class="add_value">
+          <select name="city_id" id="city_id" class="select" empty="true">
+              <option value="" <if condition='$info.city_id eq 0'>selected</if> >请选择</option>
+              <volist name="citys" id="v">
+                  <option value="{$v.city_id}" <if condition='$discountinfo.city_id eq $v["city_id"]'>selected</if> >{$v.city_name}</option>
+              </volist>
+          </select>
+      </div>
+    </div>
+    <div class="add_list">  
+        <h5><em class="wildcard">*</em>折扣数：</h5>
+        <div class="add_value">
+        	<input type="text" class="inputtext" name="discount_number" value="{$discountinfo['discount_number']|show_discount_ten=###}" field="折扣数" vtype="money" maxlength="5" style="width: 50px;" />
+        </div>
+        <div class="promptinfo"><span>折，取值范围(0,20)</span></div>
+    </div>
+  </form>
+   
+</div>

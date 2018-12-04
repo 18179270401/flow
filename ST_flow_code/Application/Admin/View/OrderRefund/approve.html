@@ -1,0 +1,101 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" id="orderrefund_box">
+    <div class="detail_box" style="padding:0 0;">
+        <table width="100%">
+            <thead>
+            <tr>
+                <th width="100%" colspan="4">退款信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="15%">用户名称：</th>
+                <td width="45%"><if condition="$orderrefund.proxy_name eq ''">{$orderrefund.enterprise_name}<else />{$orderrefund.proxy_name}</if></td>
+                <th width="15%">退款金额：</th>
+                <td width="25%">{$orderrefund.discount_price}元</td>
+            </tr>
+            <tr>
+                <th>退款理由：</th>
+                <td colspan="3">{$orderrefund.remark}</td>
+            </tr>
+            <tr>
+                <th>退款原因：</th>
+                <td>{$orderrefund.refund_cause|get_refund_cause}</td>
+                <th>退款状态：</th>
+                <td><if condition="$orderrefund.status eq '1'">待审核<elseif condition="$orderrefund.status eq '2'"/>初审通过<elseif condition="$orderrefund.status eq '3'"/>初审驳回<elseif condition="$orderrefund.status eq '4'"/>退款成功<else />退款失败</if></td>
+            </tr>
+            <tr>
+                <th>附件凭证：</th>
+                <td colspan="3"><if condition="$orderrefund.credential_one eq ''">没有附件<else /> <img src="{$orderrefund.credential_one}" STYLE="width: 20px;height: 15px;" class="imginput"><span><php> echo basename($orderrefund['credential_one']);</php></span>
+                    <button type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('OrderRefund/show',array('refund_id'=>$orderrefund['refund_id'],'download'=>1))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                </if></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="100%">
+            <thead>
+            <tr>
+                <th width="100%" colspan="4">订单信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th  width="15%">通道编码：</th>
+                <td  width="45%">{$orderrefund.channel_code}</td>
+                <th  width="15%">通道订单号：</th>
+                <td  width="25%">{$orderrefund.o_channel_order_code}</td>
+            </tr>
+            <tr>
+                <th>订单号：</th>
+                <td>{$orderrefund.order_code}</td>
+                <th>手机号：</th>
+                <td>{$orderrefund.mobile}</td>
+            </tr>
+            <tr>
+                <th>运营商：</th>
+                <td>{$orderrefund.o_operator_id|get_operator_name}</td>
+                <th>归属地：</th>
+                <td>{$orderrefund.city_name}</td>
+            </tr>
+            <tr>
+                <th>流量包名称：</th>
+                <td>{$orderrefund.product_name}</td>
+                <th>折后价格：</th>
+                <td>{$orderrefund.discount_price|default="0.00"}元</td>
+            </tr>
+            <tr>
+                <th>订单信息：</th>
+                <td colspan="3">{$orderrefund.back_content}</td>
+            </tr>
+            </tbody>
+        </table>
+        <form name="orderrefund_approve_form">
+            <input type="hidden"  name="refund_id" value="{$orderrefund.refund_id}" />
+            <div class="checkinfo_con">
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>审核：</h5>
+                    <div class="add_value">
+                        <empty name="type">
+                            <label class="radio  checked" value="1"><em>复审通过</em></label>
+                            <label class="radio"  value="2"><em>复审驳回</em></label>
+                            <else/>
+                            <label class="radio  checked" value="1"><em>初审通过</em></label>
+                            <label class="radio"  value="2"><em>初审驳回</em></label>
+                        </empty>
+                        <input type="hidden" name="approve_status"  value="1" />
+                    </div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>审核原因：</h5>
+                    <div class="add_value">
+                        <textarea class="textarea" name="approve_remark" empty="true"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    
+</div>

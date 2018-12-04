@@ -1,0 +1,102 @@
+<include file="Common/header" />
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>营销场景</em>><em>场景管理</em></span>
+        </div>
+        <div class="operation_info">
+          <isshow url="Marketing/add">
+            <button class="btn add_btn marketing_add_btn">
+              <i class="minicon addoperation_icon"></i><span>新增场景</span>
+            </button>
+          </isshow>
+
+          <if condition="is_jurisdiction('Marketing/add') and is_jurisdiction('Marketing/export_excel')">
+            <span class="line">|</span>
+          </if>
+
+          <if condition="is_jurisdiction('Marketing/export_excel')">
+            <button class="btn  export_button" data-url="Marketing">
+              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+            </button>
+          </if>
+        </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/Marketing/index">
+    <div class="search_nav">
+      <ul>
+        <li>
+          <input type="text" class="inputtext" name="activity_name" value="{$Think.get.activity_name}" placeholder="活动名称"/>
+        </li>
+  
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="100" class="change">活动名称</th>
+                    <th width="100" class="change">活动文件名称</th>
+                    <th width="130">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.activity_name}</td>
+                    <td>{$vo.activity_file_name}</td>
+                                          
+                    <!--<td><if condition="$vo.status eq 1">正常<else />已禁用</if></td>-->
+                    <td class="operation_td">
+                        <button class="operationbtn marketing_show_btn" value="{$vo.activity_id}">
+                            <!--<i class="minicon edit_icon"></i>-->
+                            <span>查看<span>
+                        </button>
+                      <isshow url="Marketing/edit">
+                        <button class="operationbtn marketing_edit_btn" value="{$vo.activity_id}">
+                          <!--<i class="minicon edit_icon"></i>-->
+                          <span>编辑</span>
+                        </button>
+                      </isshow>
+                        <isshow url="Marketing/delete">
+                            <button class="operationbtn marketing_delete_btn" value="{$vo.activity_id}">
+                                <!--<i class="minicon edit_icon"></i>-->
+                                <span>删除</span>
+                            </button>
+                        </isshow>
+                    </td>
+                </tr>
+       </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+
+<include file="Common/footer" />

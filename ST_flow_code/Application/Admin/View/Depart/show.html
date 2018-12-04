@@ -1,0 +1,20 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="30%">部门名称：</th>
+            <td width="70%">{$depart_name}</td>
+        </tr>
+        <tr>
+            <th>上级部门：</th>
+            <td>{$bdepart_name|default="顶级部门"}</td>
+        </tr>
+        <tr>
+            <th>部门负责人：</th>
+            <td>{$depart_manager_name}</td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td>{$remark}</td>
+        </tr>
+    </table>
+</div>

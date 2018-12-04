@@ -1,0 +1,235 @@
+<include file="Common/header" />
+<script>
+    $(function(){
+        $(document).on('click',"label.checkbox",function(){
+            var val = $(this).attr('value');
+            if(val > 0){
+                var ischeck = $(this).hasClass('checked');
+                if(!ischeck){
+                    $(this).addClass('checked');
+                }else{
+                    $(this).removeClass('checked');
+                }
+            }
+        })
+
+        /**
+         * 点击通道，选取，并且异步显示用户
+         */
+        $(document).on('click','tbody.channel_list tr',function(){
+            $('.radio.checked').removeClass('checked');
+            $(this).children('td').children('label.radio').addClass('checked');
+            var val = $(this).attr('value');
+            get_users_by_channel(val);
+        })
+
+
+        $(document).on('click','tbody.have_list tr,tbody.no_list tr',function(){
+            var ischeck = $(this).children('td').eq(0).children('label').hasClass('checked');
+            if(!ischeck){
+                $(this).children('td').eq(0).children('label').addClass('checked');
+            }else{
+                $(this).children('td').eq(0).children('label').removeClass('checked');
+            }
+        })
+
+        $('label.checkbox.allcheck').on('click',function(){
+            var ischeck = $(this).hasClass('checked');
+            var name = $(this).attr('data');
+            if(!ischeck){
+                $("tbody."+name+' label.checkbox').addClass('checked');
+            }else{
+                $("tbody."+name+' label.checkbox').removeClass('checked');
+            }
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="receivingset_box" style="height:calc(100% - 60px); background-color:#ecf0f1;">
+        <div class="toallocate" style="width: calc(30%);">
+            <div class="agentset_box">
+                <div class="agentset_con">
+                    <div class="agentset_search">
+                        <input type="text" class="inputtext"  name="seach_channel_info_user" data="channel_list" placeholder="通道名称/编码"/>
+                        <button class="btn add_btn seach_set_right2"  data="seach_channel_info_user" value="2,3">
+                            <i class="minicon search_icon"></i><span>查询</span>
+                        </button>
+                    </div>
+                    <div class="agentset_thead">
+                        <table width="100%">
+                            <thead>
+                            <tr>
+                                <th width="100%" colspan="4" style="text-align:center;font-weight:700;background:#fff;">已分配通道</th>
+                            </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="agentset_tbody heightcalc_80 mCustomScrollbar_y" data-mcs-theme="dark">
+                        <table width="100%">
+                            <tr>
+                                <td width="40%"  style="background:#eff2f8;"></td>
+                                <td width="50%" style="background:#eff2f8;">序号</td>
+                                <td width="100%" style="background:#eff2f8;">通道编码</td>
+                                <td width="100%" style="background:#eff2f8;">通道名称</td>
+                            </tr>
+                            <php>$channel_id = explode(',',$channel_id);</php>
+                            <tbody class="channel_list">
+
+                            <volist name="channel_list" id="vo" empty='$volistempty'>
+
+                                <tr class="set_channel_info_allot_user" value="{$vo.channel_id}" >
+                                    <td><label class="radio" value="{$vo.channel_id}"><em></em></label></td>
+                                    <td >{$vo.sort_no}</td>
+                                    <td>{$vo.channel_code}</td>
+                                    <td>{$vo.channel_name}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toallocate" style="width: calc(40%);">
+            <div class="agentset_box">
+                <div class="agentset_con">
+                    <div class="agentset_search">
+                        <input type="text" class="inputtext" name="seach_channel_info_user1" data="have_list"  placeholder="用户名称/编号"/>
+                        <button class="btn add_btn  seach_set_right2"  data="seach_channel_info_user1" value="2,3" >
+                            <i class="minicon search_icon"></i><span>查询</span>
+                        </button>
+                    </div>
+                    <div class="agentset_thead">
+                        <table width="100%">
+                            <thead>
+
+                            <tr>
+                                <th width="100%" colspan="3" style="text-align:center;font-weight:700;background:#fff;">用户列表</th>
+
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="agentset_tbody heightcalc_80 mCustomScrollbar_y" data-mcs-theme="dark">
+                        <table width="100%">
+                            <tr>
+                                <td width="40%" style="background:#eff2f8;">
+                                    <label class="checkbox allcheck" data="have_list" ><em></em></label>
+                                </td>
+                                <td width="50%" style="background:#eff2f8;">序号</td>
+                                <td width="80%" style="background:#eff2f8;">用户编号</td>
+                                <td  width="120%"  style="background:#eff2f8;">用户名称</td>
+                                <td  width="80%"  style="background:#eff2f8;">用户类型</td>
+                            </tr>
+                            <tbody class="have_list">
+                            <volist name="data.have" id="vo" empty='$volistempty'>
+                                <tr>
+                                    <td><label class="checkbox" value="{$vo.user_code}"><em></em></label></td>
+                                    <td >{$vo.sort_no}</td>
+                                    <td >{$vo.user_code}</td>
+                                    <td >{$vo.user_name}</td>
+                                    <td >{$vo.user_type}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toallocate " style="width: calc(30%);">
+            <div class="agentset_box">
+                <div class="agentset_con">
+                    <div class="agentset_search">
+                        <input type="text" class="inputtext" name="seach_channel_info_user2"  data="no_list"  placeholder="通道名称/编码"/>
+                        <button class="btn add_btn seach_relate_checkbox" data="seach_channel_info_user2" value="2,3">
+                            <i class="minicon search_icon"></i><span>查询</span>
+                        </button>
+                    </div>
+                    <div class="agentset_thead">
+                        <table width="100%">
+                            <thead>
+                            <tr>
+                                <th width="50%" colspan="3" style="text-align:center;font-weight:700;background:#fff;">需切换通道</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="agentset_tbody heightcalc_80 mCustomScrollbar_y" data-mcs-theme="dark">
+                        <table width="100%">
+                            <tr>
+                                <td width="40%" style="background:#eff2f8;">
+                                    <label class="checkbox allcheck" data="no_list" ><em></em></label>
+                                </td>
+                                <td width="50%" style="background:#eff2f8;">序号</td>
+                                <td width="100%" style="background:#eff2f8;">通道编码</td>
+                                <td width="100%" style="background:#eff2f8;">通道名称</td>
+                            </tr>
+                            <tbody class="no_list">
+                            <volist name="channel_list" id="vo" empty='$volistempty'>
+
+                                <tr class="set_channel_info_allot_user" value="{$vo.channel_id}" >
+                                    <td><label class="checkbox" value="{$vo.channel_id}"><em></em></label></td>
+                                    <td >{$vo.sort_no}</td>
+                                    <td>{$vo.channel_code}</td>
+                                    <td>{$vo.channel_name}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="graphicsset_bottom">
+        <button class="btn add_btn fr" onclick="set_exchange()"><span>保存</span></button>
+    </div>
+</div>
+<script type="text/javascript">
+    function set_exchange(){
+        var original_channel_id = $('tbody.channel_list').find('label.checked').attr('value');
+
+        //获取需修改的用户
+        var user_str = '';
+        $('tbody.have_list').find('label.checked').each(function(){
+            user_str += $(this).attr('value') + ',';
+        });
+        user_str = user_str.substring(0,user_str.length-1);
+
+        //获取需切换的通道
+        var channel_str = '';
+        $('tbody.no_list').find('label.checked').each(function(){
+            channel_str += $(this).attr('value') + ',';
+        });
+        channel_str = channel_str.substring(0,channel_str.length-1);
+
+        if(!original_channel_id || !user_str || !channel_str){
+            var data=new Array()
+            data.status = 0;
+            data.info = '提交信息有误，请认真核查！';
+
+            alertbox(data);
+            return　false;
+        }
+
+        $.ajax({
+            url :"/index.php/Admin/ChannelUser/exchange_channel_batch",
+            type : 'post',
+            data :{
+                original_channel_id:original_channel_id,
+                user_str:user_str,
+                channel_str:channel_str
+            },
+            dataType :'json',
+            success : function(data) {
+                location.reload();
+                alertbox(data);
+            }
+        });
+    }
+</script>
+<include file="Common/footer" />

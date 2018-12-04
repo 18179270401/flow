@@ -1,0 +1,90 @@
+<include file="Common/header" />
+<style>
+    .add_list h5{width:160px;}
+    .add_value{margin-left:165px;max-width:500px;}
+    .add_value .inputtext,.add_value .textarea{width:380px;}
+</style>
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>系统管理</em>><em>系统设置</em></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="receivingset_box white">
+        <div class="receivingset_choice bottomnone">
+            <form name="form1" id="form1" action="/index.php/Admin/Set/index">
+
+                <div class="add_list">
+                    <h5 class="form_add_list_left"><span class="wildcard"></span>代理商额度提醒：</h5>
+                    <div class="add_value">
+                        <input type="text" class="inputtext" name="proxy_quota_remind" vtype="money" value="{$list.proxy_quota_remind}" />
+                    </div>
+                    <div class="promptinfo"><span style="color:#333333;">元</span></div>
+                </div>
+
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>企业额度提醒：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="enterprise_quota_remind" vtype="money" value="{$list.enterprise_quota_remind}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">元</span></div>
+                </div>
+                <!--
+                <div class="add_list hidden">
+                    <h5><span class="wildcard"></span>额度、余额不足提醒人：</h5>
+                    <div class="add_value"><textarea class="textarea" name="channel_quota_remind">{$list.channel_quota_remind}</textarea></div>
+                    <div class="promptinfo"><span style="color:#333333;">通道额度、余额不足短信提醒人；多个电话号码请用英文逗号（,）分开</span></div>
+                </div>
+                -->
+
+                <div class="add_list hidden">
+                    <h5><span class="wildcard"></span>通道预警提醒人：</h5>
+                    <div class="add_value"><textarea class="textarea" name="early_warning_people">{$list.early_warning_people}</textarea></div>
+                    <div class="promptinfo"><span style="color:#333333;">多个电话号码请用英文逗号（,）分开</span></div>
+                </div>
+
+                <!--<div class="add_list hidden">
+                    <h5><span class="wildcard"></span>通道预警提醒人备注：</h5>
+                    <div class="add_value"><textarea class="textarea" name="early_warning_people_remark" style="height:120px;">{$list.early_warning_people_remark}</textarea></div>
+                    <div class="promptinfo"><span style="color:#333333;">姓名排序与电话号码一至；多个姓名请用英文逗号（,）分开</span></div>
+                </div>-->
+
+                <div class="add_list hidden">
+                    <h5><span class="wildcard"></span>卡单提醒人：</h5>
+                    <div class="add_value"><textarea class="textarea" name="card_warning_people" style="color:#333333;">{$list.card_warning_people}</textarea></div>
+                    <div class="promptinfo"><span style="color:#333333;">请使用中文名称，多个提醒人请用逗（,）分开</span></div>
+                </div>
+
+                <div class="add_list hidden">
+                    <h5><span class="wildcard"></span>备注：</h5>
+                    <div class="add_value"><textarea class="textarea" name="channel_quota_remark" style="height:180px;">{$list.channel_quota_remark}</textarea></div>
+                    <div class="promptinfo"><span style="color:#333333;">姓名与电话号码备注<br />姓名排序与电话号码一至；多个姓名请用英文逗号（,）分开</span></div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="graphicsset_bottom">
+        <button class="btn add_btn fr" onclick="set_add()"><span>保存</span></button>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function set_add(){
+        $.ajax({
+			url :"/index.php/Admin/Set/index/type/operation",
+			type : 'post',
+			data :$("#form1").serialize(),
+			dataType :'json',
+			success : function(data) {
+                location.reload();
+                alertbox(data);
+			}
+		});
+    }
+</script>
+<include file="Common/footer" />

@@ -1,0 +1,44 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <tr>
+            <th width="30%">流量码：</th>
+            <td width="70%">{$info.flowcode_code}</td>
+        </tr>
+        <tr>
+            <th>运营商：</th>
+            <td>{$info.operator_id|get_operator_name}</td>
+        </tr>
+        <tr>
+            <th>流量包名称：</th>
+            <td>{$info.product_name}</td>
+        </tr>
+        <tr>
+            <th>手机号：</th>
+            <td>{$info.phone}</td>
+        </tr>
+        <tr>
+            <th>属性：</th>
+            <td>{$info.type|get_flowcode_type}</td>
+        </tr>
+        <tr>
+            <th>兑换时间：</th>
+            <td>{$info.order_time}</td>
+        </tr>
+        <tr>
+            <th>充值订单号：</th>
+            <td>{$info.order_code}</td>
+        </tr>
+        <tr>
+            <th>充值状态：</th>
+            <td>
+                <if condition="$info.order_code eq null"><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                <elseif condition="$info.orderstatus eq '6'" /><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                <elseif condition="$info.orderstatus eq '2'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                <elseif condition="$info.orderstatus eq '5'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                <else /><span class="recharge_statue recharge_send"><em>正在送充</em></span></if>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

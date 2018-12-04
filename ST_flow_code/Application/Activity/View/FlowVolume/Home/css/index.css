@@ -1,0 +1,59 @@
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, input, th, td, button
+{margin: 0; padding: 0; border: 0; outline: none;}
+body{
+	background-color: #f7e99e;
+}
+.content{
+	background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+	height: 36rem;
+    position: relative;
+}
+.input-phone{
+	
+    position: absolute;
+    margin-top: 13rem;
+    text-align: center;
+    height: 2.4rem;
+    width: 100%;
+}
+.phoneNumber {
+	display: inline-block;
+	background: url(../imgs/input_bg.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	width: 60%;
+	font-size: 1rem;
+	height: 2.4rem;
+}
+
+.receive-btn {
+	display: inline-block;
+	background: url(../imgs/input_btn.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	width: 20%;
+	margin-left: -0.5rem;
+	font-size: 1rem;
+	color: white;
+	height: 2.4rem;
+}
+.receive-btn:active {
+	/*点击效果*/
+	/*color: red;*/
+}
+
+.activity-rule {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	bottom: 0px;
+	height: 2rem;
+}
+.activity-rule a {
+	color: cornflowerblue;
+	font-size: 1rem;
+	text-decoration:underline
+}

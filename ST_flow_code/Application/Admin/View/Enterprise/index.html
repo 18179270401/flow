@@ -1,0 +1,230 @@
+<include file="Common/header" />
+<div class="main_con minwidth800">
+
+    <div class="operation_box ">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>企业管理</em>><em>企业信息</em></span>
+            </div>
+            <div class="operation_info">
+                <if condition="$is_top_proxy_admin eq false">
+                    <if condition="is_jurisdiction('Enterprise/add')">
+                        <button class="btn add_btn" id="enterprise_add_btn">
+                            <i class="minicon addoperation_icon"></i><span>新增企业</span>
+                        </button>
+                    </if>
+                </if>
+                <if condition="is_jurisdiction('Enterprise/add') and is_jurisdiction('Enterprise/export_excel')">
+                    <span class="line">|</span>
+                </if>
+                <isshow url="Enterprise/export_excel">
+                    <button class="btn  export_button" data-url="Enterprise">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form method="get" name="excel" action="/index.php/Admin/Enterprise/index">
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="enterprise_code" style="min-width:80px;width:80px;" maxlength="6" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+                    </li>
+                    <input type="hidden" class="inputtext" name="type" value="table"/>
+                    <li>
+                        <input type="text" class="inputtext" name="enterprise_name" value="{$Think.get.enterprise_name}" style="min-width:130px;width:130px;" placeholder="企业名称"/>
+                    </li>
+                    <if condition="$is_top_proxy_admin eq true">
+                        <li>
+                            <input type="text" class="inputtext" name="top_proxy_code" value="{$Think.get.top_proxy_code}" style="min-width:90px;width:90px;"   placeholder="上级代理编号"/>
+                        </li>
+                        <li>
+                            <input type="text" class="inputtext" name="top_proxy_name" value="{$Think.get.top_proxy_name}" style="min-width:130px;width:130px;"  placeholder="上级代理名称"/>
+                        </li>
+                    </if>
+                    <!--
+                     <li>
+                      <input type="text" class="inputtext" name="user_name" value="{$Think.get.user_name}" placeholder="客户经理"/>
+                    </li>
+                  -->
+                    <if condition="$is_top_proxy_admin eq false">
+                        <li>
+                            <label class="inputlabel">审核状态：</label>
+                            <select class="select" name="approve_status" style="min-width:70px;">
+                                <option value="9">全部</option>
+                                <option value="0" <if condition='$Think.get.approve_status eq "0"'>selected</if> >待审核</option>
+                                <option value="1" <if condition='($Think.get.approve_status eq 1) or ($Think.get.approve_status eq "")'>selected</if>>审核通过</option>
+                                <option value="2" <if condition='$Think.get.approve_status eq "2"'>selected</if>>审核驳回</option>
+                            </select>
+                            <input type="hidden" value="1"/>
+                        </li>
+                    </if>
+
+                    <li>
+                        <label class="inputlabel">使用状态：</label>
+                        <select class="select" name="status" style="min-width:70px;">
+                            <option value="">全部</option>
+                            <option value="1" <if condition='$Think.get.status eq "1"'>selected</if> >正常</option>
+                            <option value="0" <if condition='$Think.get.status eq "0"'>selected</if>>已禁用</option>
+                        </select>
+                        <input type="hidden" value="1"/>
+                    </li>
+                   
+                    <if condition="$is_top_proxy_admin eq false">
+                        <li>
+                            <input type="text" class="inputtext" name="user_name" value="{$Think.get.user_name}" style="min-width:110px;width:110px;"    placeholder="客户经理"/>
+                        </li>
+                    </if>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="80" class="change">企业编号</th>
+                            <th width="150" class="change">企业名称</th>
+                            <th width="80" class="change">联系人</th>
+                            <th width="100" class="change">联系电话</th>
+                            <if condition="$is_top_proxy_admin eq false">
+                                <th width="150" class="change">客户经理</th>
+                                <else />
+                                <th width="90" class="change">上级代理编号</th>
+                                <th width="150" class="change">上级代理名称</th>
+                            </if>
+                            <if condition="$is_top_proxy_admin eq false">
+                                <th width="80" class="change">审核状态</th>
+                            </if>
+                            <th width="400">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="enterprise_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.enterprise_code}</td>
+                            <td class="name">{$vo.enterprise_name}</td>
+                            <td>{$vo.contact_name}</td>
+                            <td>{$vo.contact_tel}</td>
+                            <if condition="$is_top_proxy_admin eq false">
+                                <td><if condition="$vo.is_os eq true">{$vo.user_name}</if></td>
+                                <else />
+                                <td>{$vo.top_code}</td>
+                                <td>{$vo.top_name}</td>
+                            </if>
+
+                            <if condition="$is_top_proxy_admin eq false">
+                                <td><if condition="$vo.approve_status eq '0'">待审核<elseif condition="$vo.approve_status eq '1'" />审核通过<elseif condition="$vo.approve_status eq '2'" />审核驳回</if></td>
+                            </if>
+                            <td class="operation_td">
+                                <isshow url="enterprise/show">
+                                    <button class="operationbtn enterprise_show"  value="{$vo.enterprise_id}">
+                                        <span>查看</span>
+                                    </button>
+                                </isshow>
+                                <isshow url="enterprise/edit">
+                                    <button class="operationbtn enterprise_edit"  value="{$vo.enterprise_id}">
+                                        <span>编辑</span>
+                                    </button>
+                                </isshow>
+                                <isshow url="enterprise/credentials_edit">
+                                    <button class="operationbtn enterprise_credentials_edit" value="{$vo.enterprise_id}">
+                                        <span>证件管理</span>
+                                    </button>
+                                </isshow>
+
+                                <if condition="$is_top_proxy_admin eq false ">
+                                    <if condition="$vo.approve_status neq '1' ">
+                                        <isshow url="enterprise/approve_edit">
+                                            <button class="operationbtn enterprise_approve_edit"  value="{$vo.enterprise_id}">
+                                                <span>编辑</span>
+                                            </button>
+                                        </isshow>
+
+                                        <isshow url="enterprise/approve_credentials_edit">
+                                            <button class="operationbtn enterprise_approve_credentials_edit" value="{$vo.enterprise_id}">
+                                                <span>证件管理</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <if condition="$vo.approve_status eq '2' ">
+                                        <isshow url="enterprise/approve_again">
+                                            <button class="operationbtn enterprise_approve_again" value="{$vo.enterprise_id}">
+                                                <span>送审</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <!-- 只有被驳回的企业才能被删除 -->
+                                    <if condition="$vo.approve_status neq '1' ">
+                                        <isshow url="enterprise/approve_delete">
+                                            <button class="operationbtn enterprise_approve_delete" value="{$vo.enterprise_id}">
+                                                <span>删除</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+
+                                </if>
+
+                                <if condition="$vo.approve_status eq '1' ">
+                                    <!-- 审核通过才会有设置 客户经理|重置密码|启用禁用 -->
+                                    <if condition="$vo.is_os eq true">
+                                        <isshow url="enterprise/set_sale">
+                                            <button  class="operationbtn enterprise_set_sale"  value="{$vo.enterprise_id}" >
+                                                <span>设置客户经理</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <!-- 只有尚通端才有重置密码功能 -->
+                                    <if condition="$is_top_proxy_admin eq true">
+                                        <isshow url="enterprise/reset_password">
+                                            <button  class="operationbtn enterprise_reset_password"  value="{$vo.enterprise_id}" >
+                                                <span>重置密码</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <!-- 尚通端可以禁用所有 代理商端只能禁用下级 -->
+                                    <if condition="($is_top_proxy_admin eq true) or ($vo.is_os eq true)">
+                                        <isshow url="enterprise/toggle_status">
+                                            <button class="operationbtn enterprise_toggle_status" data="{$vo.status}" value="{$vo.enterprise_id}">
+                                                <span><if condition="$vo.status eq 1">禁用<else />启用</if></span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <isshow url="enterprise/set_refund_status">
+                                        <button class="operationbtn enterprise_set_refund_status" data="{$vo.refund_status}" value="{$vo.enterprise_id}">
+                                            <span><if condition="$vo.refund_status eq 1">禁用退款状态<else />启用退款状态</if></span>
+                                        </button>
+                                    </isshow>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

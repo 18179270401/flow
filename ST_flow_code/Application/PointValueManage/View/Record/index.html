@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>兑换记录</title>
+		<script src="__PUBLIC__/utils/js/mui.min.js?s={$version_number}"></script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/utils/css/loaders.css?s={$version_number}" />
+		<link href="__PUBLIC__/utils/css/mui.min.css" rel="stylesheet" />
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<div id='wx_logo' style='margin:0 auto;display:none;'>
+			<img src='{$role}images/Icon_Share.png' />
+		</div>
+
+		<link href="{$role}css/index.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			//		if ($('.loader').height() < parseInt(document.documentElement.clientHeight)) {
+			//		}
+		</script>
+	</head>
+
+	<body>
+		<div class="modelClass" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);position: absolute;z-index: 9999;display: none;">
+
+			<div class="loader" style="text-align: center;margin-left: auto;margin-right: auto;width: 100%;height:100%;">
+				<div class="loader-inner ball-spin-fade-loader" style="display: inline-block;">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+		<!--<header class="mui-bar mui-bar-nav" style="background-color: #c74844;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 class="mui-title" style="color: white;">流量充值</h1>
+		</header>-->
+		<div class="mui-content">
+			<!--<div class="title">
+				右侧无导航箭头 
+			</div>-->
+			<div class="spaceHeader" style="height: 1rem;"></div>
+			<ul class="mui-table-view">
+
+			</ul>
+			<!--<div class="title">
+				<h5 id="tipH5" style="padding-left: 15px;">全国可以用，立即生效，当月有效</h5>
+			</div>-->
+			<div style="text-align: center;">
+				<button class="leftButton" onclick="leftClick()" style="float: left;margin-left: 1rem; margin-top: 1rem;width: 4rem; font-size:0.8rem;">上一页</button>
+				<span style="width: 8.8rem;height: 4rem;line-height:4rem;margin-top: 1rem;text-align: center;"><label id="pageLabel" style="font-size: 1rem;text-align: center;">0/0</label></span>
+				<button class="rightButton" onclick="rightClick()" style="float: right;margin-right: 1rem;margin-top: 1rem;width: 4rem;font-size: 0.8rem;">下一页</button>
+			</div>
+	</body>
+
+	<script>
+		var list = {$list};
+		var openid = "{$openid}";
+		var usertype = "{$usertype}";
+		var userid = "{$userid}";
+		htmlFontSize();
+		window.onresize = function() {
+			htmlFontSize();
+		}
+
+		function htmlFontSize() {
+			var w = document.documentElement.clientWidth;
+			var h = parseInt(document.documentElement.clientHeight);
+			var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+			document.documentElement.style.fontSize = (i) * 40.0 + "px";
+			$('.loader-inner').css('margin-top', (h - $('.loader-inner').height()) / 2 + 'px');
+		}
+
+	</script>
+	<script src="{$role}js/index.js?s={$version_number}"></script>
+
+	<script src="{$role}js/main.js?s={$version_number}"></script>
+
+	<!--流量分享需求-->
+	<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+	<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+	<input type="hidden" name="signature" id="signature" value="{$signature}">
+	<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+	<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+	<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+	<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+	<input type="hidden" name="Link" id="Link" value="{$Link}">
+	<!--流量分享需求-->
+
+	<!--分享流量-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?s={$version_number}"></script>
+	<script type="text/javascript" src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+
+</html>

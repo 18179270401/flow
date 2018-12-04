@@ -1,0 +1,93 @@
+<include file="Common/header" />
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.zclip.min.js?s={$version_number}"></script>
+<input type="hidden" name="swfpath" id="swfpath" value="__PUBLIC__/Admin/js/ZeroClipboard.swf" />
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>营销场景</em>><em>企业收款设置</em></span>
+        </div>
+        <div class="operation_info">
+                <!--<button class="btn add_btn sceneactivity_add_btn">
+                    <i class="minicon addoperation_icon"></i><span>新增活动</span>
+                </button>-->
+        </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/CollectionSet/index">
+    <div class="search_nav">
+        <ul>
+            <li>
+                <input type="text" class="inputtext" name="enterprise_code" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+            </li>
+            <li>
+                <input type="text" class="inputtext" name="enterprise_name" value="{$Think.get.enterprise_name}" placeholder="企业名称"/>
+            </li>
+
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="130" class="change">企业编号</th>
+                    <th width="130" class="change">企业名称</th>
+                    <th width="210">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="cset_list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.enterprise_code}</td>
+                    <td>{$vo.enterprise_name}</td>
+                    <td class="operation_td">
+                       <!-- <button class="operationbtn scene_activity_show_btn" value="{$vo.enterprise_id}">
+                            &lt;!&ndash;<i class="minicon edit_icon"></i>&ndash;&gt;
+                            <span>查看</span>
+                        </button>-->
+                        <if condition="is_jurisdiction('CollectionSet/enterprise_role')">
+                        <button class="operationbtn enterprise_role_btn" value="{$vo.enterprise_id}">
+                            <!--<i class="minicon edit_icon"></i>-->
+                            <span>权限设置</span>
+                        </button>
+                        </if>
+                        <if condition="is_jurisdiction('CollectionSet/edit_collection')">
+                            <button class="operationbtn edit_collection_btn" value="{$vo.enterprise_id}">
+                                <!--<i class="minicon edit_icon"></i>-->
+                                <span>设置收款</span>
+                            </button>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+
+<include file="Common/footer" />

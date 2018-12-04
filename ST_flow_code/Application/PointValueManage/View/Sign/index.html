@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>每日签到</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/utils/css/loaders.css?s={$version_number}" />
+		<link rel="stylesheet" href="__PUBLIC__/utils/css/mui.min.css?s={$version_number}" />
+		<link rel="stylesheet" type="text/css" href="{$role}css/index.css" />
+	</head>
+
+	<body>
+		<div class="modelClass" style="position:fixed;width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);z-index: 9999;top:0%;display:none">
+			<div class="loader" style="position:fixed;text-align: center;margin-left: auto;margin-right: auto;width: 100%;height:100%;">
+				<div class="loader-inner ball-spin-fade-loader" style="display: inline-block;top:50%;postion:absolute;">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="middle_content">
+				<img src="{$role}images/sign_bg.png" />
+
+			</div>
+			<div class="txt">
+				<span class="sign_span_title">签到赠送积分</span>
+				<br />
+				<span class="sign_sum">{$daily_score}积分</span> &nbsp;
+				<span class="sign_sum">立即领取</span>
+			</div>
+			<div class="logo">
+				<img src="{$flowscore_basic_logo}" />
+			</div>
+
+			<div class="sign_btn">
+				<img src="{$role}images/sign_btn.png" onclick="dailySign()" />
+			</div>
+		</div>
+
+	</body>
+	<script src="__PUBLIC__/utils/js/mui.min.js?s={$version_number}"></script>
+	<script src="__PUBLIC__/utils/js/get_para.js?s={$version_number}"></script>
+
+	<script type="text/javascript">
+		var daily_score = "{$daily_score}";
+		var openid = "{$openid}";
+		var user_type = "{$user_type}";
+		var userid = "{$userid}";
+	</script>
+	<script type="text/javascript" src="{$role}js/sign.js?s={$version_number}"></script>
+	<script type="text/javascript">
+		var random = "{$randomNum}";
+		//		function onreload() {
+		//			setTimeout(onreload, 500);
+		//		
+		//			var cookie_random = getCookie('score' + random);
+		//			//		alert(random+" "+cookie_random);
+		//			if (cookie_random != null) {
+		//				$('.PointValue').html(cookie_random);
+		//
+		//			} else {
+		//				setCookie('score'+random, '{$score}');
+		//			}
+		//		}
+		//		onreload();
+
+		//mui初始化
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+
+		htmlFontSize();
+		window.onresize = function() {
+			htmlFontSize();
+		}
+
+		function htmlFontSize() {
+			var w = document.documentElement.clientWidth;
+			var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+			document.documentElement.style.fontSize = (i) * 40.0 + "px";
+		}
+	</script>
+
+	<script src="{$role}js/main.js"></script>
+
+	<!--流量分享需求-->
+	<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+	<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+	<input type="hidden" name="signature" id="signature" value="{$signature}">
+	<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+	<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+	<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+	<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+	<input type="hidden" name="Link" id="Link" value="{$Link}">
+	<!--流量分享需求-->
+
+	<!--分享流量-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?s={$version_number}"></script>
+	<script type="text/javascript" src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+
+</html>

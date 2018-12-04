@@ -1,0 +1,20 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th>用户类型：</th>
+            <td><if condition="$info.user_type eq '1'">代理商<else />企业</if></td>
+        </tr>
+        <tr>
+            <th>用户编号：</th>
+            <td><if condition="$info.user_type eq 1">{$proxy.proxy_code}<else/>{$enterprise.enterprise_code}</if></td>
+        </tr>
+        <tr>
+            <th >用户名称：</th>
+            <td><if condition="$info.user_type eq 1">{$proxy.proxy_name}<else/>{$enterprise.enterprise_name}</if></td>
+        </tr>
+        <tr>
+            <th >通道名称：</th>
+            <td>{$channel.channel_name}</td>
+        </tr>
+    </table>
+</div>

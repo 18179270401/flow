@@ -1,0 +1,54 @@
+<div id="role_set_box" class="character_box mCustomScrollbar_y" data-mcs-theme="dark">
+<form name="role_set_form">
+<volist name="arrmenu" id="vo1">
+  <div class="character_con">
+    <div class="character_tit">
+      <h2>{$vo1.menu_name}</h2>
+      <span style="display:none"><input type="checkbox" name="acmenu{$vo1.menu_id}" value="{$vo1.menu_id}" id="acmenu{$vo1.menu_id}" /></span>
+      <label class="checkbox role_check_all rca{$vo1.menu_id}" for="acmenu{$vo1.menu_id}" data-val="{$vo1.menu_id}"><em>全选</em></label>
+    </div>
+    <div class="character_content">
+        <volist name="vo1['son']" id="vo2">
+        <div class="add_list">	
+            <h5><span class="wildcard"></span>{$vo2.menu_name}：</h5>
+            <div class="add_value">
+                <volist name="vo2['son2']" id="vo3">
+                <span style="display:none"><input type="checkbox" name="function_ids[]" value="{$vo3.function_id}" id="fids{$vo3.function_id}" /></span>
+                <label class="checkbox funidlist acid{$vo1.menu_id}" data-acid="{$vo1.menu_id}" for="fids{$vo3.function_id}" data-fid="{$vo3.function_id}"><em>{$vo3.function_name}</em></label>
+                </volist>
+            </div>
+        </div>
+        </volist>
+    </div>
+  </div>
+  </volist>
+  
+  <!-- <div class="character_con">
+    <div class="character_tit">
+      <h2>开票信息</h2>
+      <label class="checkbox"><em>全选</em></label>
+    </div>
+    <div class="character_content">
+         <div class="add_list">	
+            <h5><span class="wildcard"></span>多选项：</h5>
+            <div class="add_value">
+                <label class="checkbox"><em>多选多选多选</em></label>
+                <label class="checkbox checked"><em>多选多选多选</em></label>
+                <label class="checkbox"><em>多选多选多选</em></label>
+                <label class="checkbox checked"><em>多选多选多选</em></label>
+            </div>
+        </div>
+        <div class="add_list">	
+            <h5><span class="wildcard"></span>多选项：</h5>
+            <div class="add_value">
+                <label class="checkbox"><em>多选多选多选</em></label>
+                <label class="checkbox checked"><em>多选多选多选</em></label>
+                <label class="checkbox"><em>多选多选多选</em></label>
+                <label class="checkbox checked"><em>多选多选多选</em></label>
+            </div>
+        </div>
+    </div>
+  </div> -->
+  
+</form>
+</div>

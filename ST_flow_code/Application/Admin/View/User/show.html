@@ -1,0 +1,34 @@
+<div id="user_show_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+         
+        <tr>
+            <th width="30%">用户姓名：</th>
+            <td width="70%">{$user.user_name}</td>
+        </tr>
+        <tr>
+            <th>登录名称：</th>
+            <td>{$user.login_name_full}</td>
+        </tr>
+        <tr>
+            <th >所属部门：</th>
+            <td >{$user.depart_name}</td>
+        </tr>
+        <tr>
+            <th >职务：</th>
+            <td >{$user.posts}</td>
+        </tr>
+        <tr>
+            <th >性别：</th>
+            <td><if condition="$user.sex eq '0' ">保密<elseif condition="$user.sex eq '1' " />男<else />女</if></td>
+        </tr>
+        <tr>
+            <th >联系电话：</th>
+            <td >{$user.mobile}</td>
+        </tr>
+        <tr>
+            <th >邮箱：</th>
+            <td colspan="3">{$user.email}</td>
+        </tr>
+    </table>
+
+</div>

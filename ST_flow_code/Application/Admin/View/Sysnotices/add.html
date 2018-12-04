@@ -1,0 +1,46 @@
+<!-- 添加公告 -->
+<div id="notice_add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="notice_add_form">
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>公告标题：</h5>
+            <div class="add_value"><input type="text" field="公告标题" class="inputtext" name="notice_title" /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>公告类型：</h5>
+            <div class="add_value">
+                <input type="radio" name="notice_type" id="notice_type1" value="1" style="display: none;" />
+                <label class="radio" for="notice_type1"><em>紧急公告</em></label>
+                <input type="radio" name="notice_type" id="notice_type2" value="2" checked="checked" style="display: none;" />
+                <label class="radio checked" for="notice_type2"><em>普通公告</em></label>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>发布范围：</h5>
+            <div class="add_value">
+                <input type="checkbox" checked id="1_scope" style="display:none" value="1" name="scope_list[]" >
+                <label for="1_scope" class="checkbox  checked "><em>尚通端</em></label>
+                <input type="checkbox" checked id="2_scope" style="display:none" value="2" name="scope_list[]" >
+                <label for="2_scope" class="checkbox  checked "><em>代理商端</em></label>
+                <input type="checkbox" checked id="3_scope" style="display:none" value="3" name="scope_list[]" >
+                <label for="3_scope" class="checkbox  checked "><em>企业端</em></label>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>公告有效期：</h5>
+            <div class="add_value">
+              <input type="text" class="inputtext start_datetime" field="公告有效期" name="valid_date_begin" placeholder="开始时间" value="" style="min-width:80px;width:100px;float:left;" onclick="WdatePicker()" readonly="">
+              <span style="margin-left:12px;margin-right:12px;float:left;">
+                    <em class="inputto" >至</em>
+              </span>
+              <input type="text" class="inputtext start_datetime" field="公告有效期" name="valid_date_end" placeholder="结束时间" value=""  style="min-width:80px;width:100px;float:left;" onclick="WdatePicker()" readonly="">
+
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>公告内容：</h5>
+            <div class="add_value">
+                <textarea class="textarea" field="公告内容" style="width:235px;height:80px;resize: none;"  name="notice_content" ></textarea>
+            </div>
+        </div>
+    </form>
+</div>

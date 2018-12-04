@@ -1,0 +1,131 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<link href="__PUBLIC__/utils/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="{$role}css/first_template.css" />
+		<style type="text/css">
+			body {
+				background-color: #f9f2ea;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<div class="zandiv" style="font-size: 0.7rem; border: 0.1rem solid #CCCCCC;display: inline; background-color: white; border-radius: 1rem; position:absolute;width:3rem;height:1.3rem;z-index:4;top: 0.8rem;right: 0.7rem; text-align: left;">
+			<img src="{$role}images/zan_hand.png" style="vertical-align: top; width: 0.8rem;height: 0.8rem; margin-top: 0.1rem;margin-left: 0.3rem;"> 888
+		</div>-->
+
+		<input type="hidden" name="aid" id="aid" value="{$activity_id}">
+		<div>
+			<div class="mui-slider-item" style="margin: 20px;">
+				<a href="#">
+					<img src="{$propagandat_img}" width="100%">
+				</a>
+			</div>
+			<div style="padding-bottom:1rem;background-color: #b31a1a;margin-left: 1rem;margin-right:1rem;">
+				<div class="mui-slider-item" style=" background: url({$background_img});
+    background-repeat:no-repeat; background-size: 100%,auto;">
+					<div id="avatar-imgdiv" style="text-align :center;">
+						<div style="text-align :center;margin-top: 1.1rem;display: inline-block;background-repeat:no-repeat;background-size: 100%,auto; ">
+							<img class="mui-icon-weixin" id="avatar-img" src="{$logo_img}" style="width: 3rem;border-radius: 5rem;padding: 0.1rem;">
+						</div>
+					</div>
+					<form action="{:U('IndependentIndex/active')}" method="post" id="form1">
+						<input type="hidden" name="active" id="active" value="{$active}">
+						<input type="hidden" name="activity_id" id="activity_id" value="{$activity_id}">
+						<input type="hidden" name="openid" id="openid" value="{$openid}">
+						<input type="hidden" name="mod" id="mod" value="{$mod}">
+						<input type="hidden" name="func" id="func" value="{$func}">
+						<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+						<input type="hidden" name="user_id" id="user_id" value="{$user_id}"> 
+						<input type="hidden" name="nickname" id="nickname" value="{$nickname}">
+						<input type="hidden" name="headimgurl" id="headimgurl" value="{$headimgurl}">
+						<!--地理信息是否开启-->
+						<input type="hidden" name="position" id="position" value="{$position}">
+
+						<input type="hidden" name="logo_img" id="logo_img" value="{$logo_img}">
+						<!--活动时间-->
+						<input type="hidden" name="activeTime" id="activeTime" value="{$activeTime}">
+
+    
+						<!--流量分享需求-->
+						<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+						<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+						<input type="hidden" name="signature" id="signature" value="{$signature}">
+						<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+						<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+						<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+						<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+						<input type="hidden" name="Link" id="Link" value="{$Link}">
+						<!--流量分享需求-->
+						<div class="input-phone" style="text-align: center;margin-top: 20px;height: 2.4rem;">
+							<input type="text" name="phoneNumber" id="phoneNumber" style="width: 65%;height: 2.4rem;" />
+							<button type="button" class="mui-btn mui-btn-warning" style="width: 25%;height: 2.4rem;font-size:1rem;" onclick="getRandomFlowAJAX()">
+							抢流量
+						</button>
+
+						</div>
+					</form>
+					<ul class="mui-table-view mui-table-view-chevron" id="mui-table-view" style="background: none;height: 12rem; overflow: hidden;pointer-events: none; ">
+
+					</ul>
+				</div>
+			</div>
+			<!--<div style="text-align: center;margin-top:0.5rem;margin-bottom:1rem;">
+				<a id="rule修改" style="margin-bottom:2rem;font-size:0.75rem;">活动规则</a>
+			</div>-->
+		</div>
+		<div style="text-align: center; margin-top: 1rem;">
+			<image src="{$role}images/rule.png" width=85%>
+				<p1 style="margin-bottom:0.6rem; margin-left:1.33rem; margin-right:1.33rem; float:left;text-align:left; color:#7b4a29;font-size:0.6rem; ">
+					<!-- 1.活动时间：2016-05-01 10:000 至 2016-08-01</br>
+					2.活动时间内得累计赠送200G流量，赠完为止。</br>
+					3.每个用户最高可获得200M，每天可以参与一次大抽奖。</br>
+					4.号码处于欠费停机状态均不能参加活动。请确保手机处于正常状态，否则运营商可能会充值失败。</br>
+					5.联通纯2G,3G用户，未实名认证用户以及单一流量规格包叠加超过5次会充值实效，符合此条件用户建议使用其他手机号参与活动。</br>
+					6.抢到的流量将在24小时内充值到手机号码中，请留意短信通知，当月有效，江西省内可用，且有限使用该赠送流量。</br>
+					7.本次活动移动，联通，电信，江西省内用户均可参与，若出现兑奖异常，请及时给客服留言寻求帮助。</br>
+					8.如果你喜欢本次活动，请在右上角为我们活动点赞。</br> -->
+					{$activity_rule}
+				</p1>
+		</div>
+		<!--<div class="bg"></div>
+		<div align="center" class="content">
+			<div align="center">{$activity_rule}</div>
+
+		</div>-->
+
+		<input type="hidden" name="code" id="code" value="<?php echo $_GET['code'];?>">
+	</body>
+
+<!--分享流量-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+	<script type="text/javascript" src="{$role}js/shareFlowRed.js"></script>
+	
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+	<script src="__PUBLIC__/utils/js/zepto.js"></script>
+	<script src="__PUBLIC__/utils/js/mui.min.js"></script>
+	<script src="__PUBLIC__/utils/js/get_para.js"></script>
+	<script type="text/javascript" charset="UTF-8">
+		mui.init();
+	</script>
+	<script type="text/javascript">
+		var award = $("#mui-table-view");
+		htmlFontSize();
+		window.onresize = function() {
+			htmlFontSize();
+		}
+
+		function htmlFontSize() {
+			var w = document.documentElement.clientWidth;
+			var i = parseInt(w) / 768;
+			document.documentElement.style.fontSize = (parseInt(w) / 768) * 40 + "px";
+		}
+	</script>
+	<script src="{$role}/js/IndependentfirstTemplate.js" type="text/javascript" charset="UTF-8"></script>
+
+</html>

@@ -1,0 +1,115 @@
+<div id="activity_detailed_box" class="add_box" data-mcs-theme="dark">
+          <form name="activity_detailed_form" id="form1" style="height:100%">
+              <input type="hidden" name="user_activity_id" value="{$list.user_activity_id}" />
+              <div class="graphicsset_left mCustomScrollbar_y">
+                  <div class="graphicssetleft_content">
+                      <div class="graphicsset_nav">
+                          <dl>
+                              <dt><h2>微信流量活动</h2></dt>
+                              <dd>
+                                  <h3>企业LOGO</h3>
+                                  <div class="graphicsset_img"><img src="{$list.logo_img}" id="upload_img2" alt="企业LOGO"/></div>
+                                  <div class="graphicsset_con">
+                                      <button class="btn add_btn"><span>上传</span></button>
+                                      <button type="button" class="btn export_btn" onclick="down_file('{:U('SceneActivity/img_download',array('download'=>'logo_img','user_activity_id'=>$list['user_activity_id']))}')">
+                                          <span>下载</span>
+                                      </button>
+                                      <input type="file" id="activity_upload2" name="logo_img" class="file"/>
+                                      <span class="description">图片尺寸大小（150x150）</span>
+                                  </div>
+                              </dd>
+                              <dd>
+                                  <h3>企业宣传图</h3>
+                                  <div class="graphicsset_img"><img src="{$list.propagandat_img}" id="upload_img1" alt="企业宣传图" /></div>
+                                  <div class="graphicsset_con">
+                                      <button class="btn add_btn"><span>上传</span></button>
+                                      <button type="button" class="btn export_btn" onclick="down_file('{:U('SceneActivity/img_download',array('download'=>'propagandat_img','user_activity_id'=>$list['user_activity_id']))}')">
+                                          <span>下载</span>
+                                      </button>
+                                      <input type="file" id="activity_upload1" name="propagandat_img" class="file"/>
+                                      <span class="description">图片尺寸大小（974x382）</span>
+                                  </div>
+                              </dd>
+                              <dd>
+                                  <h3>背景图</h3>
+                                  <div class="graphicsset_img">
+                                      <img src="{$list.background_img}" id="upload_img3" alt="背景图"/>
+                                  </div>
+                                  <div class="graphicsset_con">
+                                      <button class="btn add_btn"><span>上传</span></button>
+                                      <button type="button" class="btn export_btn" onclick="down_file('{:U('SceneActivity/img_download',array('download'=>'background_img','user_activity_id'=>$list['user_activity_id']))}')">
+                                          <span>下载</span>
+                                      </button>
+                                      <input type="file" class="file" id="activity_upload3" name="background_img" />
+                                      <span class="description"><!--图片尺寸大小（72*72）--></span>
+                                  </div>
+                              </dd>
+                          </dl>
+                      </div>
+                      <div class="graphicsset_nav">
+                          <dl>
+                              <dt><h2>分享内容设置</h2></dt>
+                              <dd>
+                                  <h3>分享标题</h3>
+                                  <span class="graphicsset_span"><input type="text" class="inputtext" name="share_title" empty="true" value="{$list.share_title}"/></span>
+                              </dd>
+                              <dd>
+                                  <h3>分享内容</h3>
+                                  <span class="graphicsset_span"><input type="text" class="inputtext" name="share_content" empty="true" value="{$list.share_content}"/></span>
+                              </dd>
+                              <dd>
+                                  <h3>分享链接</h3>
+                                  <span class="graphicsset_span"><input type="text" class="inputtext" name="share_url" empty="true" value="{$list.share_url}"/></span>
+                              </dd>
+                              <dd>
+                                  <h3>分享图标</h3>
+                                  <div class="graphicsset_img">
+                                      <img src="{$list.share_img}" id="upload_img4" alt="分享图"/>
+                                  </div>
+                                  <div class="graphicsset_con">
+                                      <button class="btn add_btn"><span>上传</span></button>
+                                      <button type="button" class="btn export_btn" onclick="down_file('{:U('SceneActivity/img_download',array('download'=>'share_img','user_activity_id'=>$list['user_activity_id']))}')">
+                                          <span>下载</span>
+                                      </button>
+                                      <input type="file" id="activity_upload4" name="share_img" class="file" empty="true"/>
+                                      <span class="description">图片尺寸大小（300x300）</span>
+                                  </div>
+                              </dd>
+                          </dl>
+                      </div>
+                  </div>
+              </div>
+              <div class="graphicsset_right mCustomScrollbar_y">
+                  <div class="graphicsset_tit">
+                      <h3>移动端展示图</h3>
+                  </div>
+                  <div class="exploded_view_con">
+                      <div class="phone_box">
+                          <div class="phone_header">
+                              <img src="__PUBLIC__/Admin/images/phone_header_01.jpg" alt="img"/>
+                          </div>
+                          <div class="phone_inner">
+                              <span class="company_logo"><img src="{$list.propagandat_img}" id="upload_phone_img1" /></span>
+                              <span class="company_icon"><img src="{$list.logo_img}" id="upload_phone_img2" /></span>
+                              <input type="hidden" name="background_img_phone" id="background_img_phone" value="{$list.background_img}" />
+                          </div>
+                      </div>
+                  </div>
+                  <!--微信分享开始-->
+                  <div class="share_box">
+                      <span class="head_img"><img src="__PUBLIC__/Admin/images/event_01.png"></span>
+                      <div class="share_con">
+                          <i class="triangle"></i>
+                          <div class="share_hd">
+                              <h3>流量活动</h3>
+                              <div class="article">
+                                  <img src="{$list.share_img}" id="upload_phone_img4">
+                                  <p>每天签到就可以拿流量！还有更多的游戏等待参与</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+</div>
+

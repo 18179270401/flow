@@ -1,0 +1,31 @@
+/* 重置样式 */
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;} 
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+*{ box-sizing:border-box;}
+
+/* 通用样式 */
+.wrap{ word-wrap:break-word; overflow:hidden;}
+.fb{font-weight:bold;}.tc{text-align:center;}
+.tl{text-align:left;}.tr{text-align:right;}
+.dis{display:block;}.undis{display:none;}
+.fl{float:left;display:inline;}.fr{float:right;display:inline;}
+.pointer{ cursor:pointer; }.hidden{ overflow:hidden;}.clear{ clear:both;}
+.clear0{ clear:both;line-height:0px;height:0px;font-size:0px;width:0px;}
+.hr-2,.hr-3,.hr-4,.hr-5,.hr-6,.hr-7,.hr-8,.hr-9,.hr-10,.hr-11,.hr-12,.hr-13,.hr-14,.hr-15,.hr-16,.hr-17,.hr-18,.hr-19,.hr-20,.hr-21,.hr-22,.hr-23,.hr-24,.hr-25,.hr-26,.hr-27,.hr-28,.hr-29,.hr-30,.hr-124{clear:both; overflow:hidden; font-size:0px; line-height:0px;}
+.hr-2{height:2px;}.hr-3{height:3px;}.hr-4{height:4px;}.hr-5{height:5px;}.hr-6{height:6px;}.hr-7{height:7px;}.hr-8{height:8px;}.hr-9{height:9px;}.hr-10{height:10px;}.hr-11{height:11px;}.hr-12{height:12px;}.hr-13{ height:13px;}.hr-14{ height:14px;}.hr-15{ height:15px;}.hr-16{ height:16px;}.hr-17{ height:17px;}.hr-18{ height:18px;}.hr-19{ height:19px;}.hr-20{ height:20px;}.hr-21{ height:21px;}.hr-22{ height:22px;}.hr-23{ height:23px;}.hr-24{ height:24px;}.hr-25{ height:25px;}.hr-26{ height:26px;}.hr-27{ height:27px;}.hr-28{ height:28px;}.hr-29{ height:29px;}.hr-30{ height:30px;}
+.relative{ position:relative;}.absolute{ position:absolute;}.fixed{ position:fixed;}
+
+.dis{ display:block;}.undis{ display:none;}
+
+body.white{ background-color:#FFF;}
+.layout{ width:1000px; margin:0px auto; clear:both;}

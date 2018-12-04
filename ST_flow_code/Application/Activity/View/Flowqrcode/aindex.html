@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>抢话费</title>
+    <meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="{$role}js/jquery-1.12.1.min.js?{$version_number}" ></script>
+		<script>
+			var scale = 1 / devicePixelRatio;
+			document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 75 + 'px';
+		</script>
+
+		<link rel="stylesheet" href="{$role}css/reset.css?{$version_number}" />
+		<link rel="stylesheet" href="{$role}css/global.css?1{$version_number}" />
+</head>
+<body>
+        <div style="width: 100%;height: 100%;background: url({$role}imgs/abg.png) no-repeat center;background-size: cover;position: relative;z-index: 99;">
+			<div class="ainput_txt">
+				<input type="text" id="phoneNumber" placeholder="请输入手机号" />
+				<button type="button" class="dole_btn">抢话费</button>
+			</div>
+			<div class="mask hide">
+				
+			</div>
+		</div>
+	
+	<script>
+            $(window).resize(function(){
+            var scale = 1 / devicePixelRatio;
+            document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+            document.documentElement.style.fontSize = document.documentElement.clientWidth / 75 + 'px';
+            });
+	</script>
+</body>
+</html>

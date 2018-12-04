@@ -1,0 +1,6 @@
+body,div,table,tbody,thead,tr,td,dl,dt,dd,a,b,p,i,span,ul,li,h1,h2,h3,h4,h5,h6{margin: 0;padding: 0;}
+*{box-sizing: border-box;}
+ul{list-style: none;}
+a{text-decoration: none;}
+b,i,em{font-style: normal;}
+.hide{display: none!important;}

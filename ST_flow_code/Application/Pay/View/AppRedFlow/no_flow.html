@@ -1,0 +1,99 @@
+<html>
+<head>
+	<meta http-equiv="x-ua-compatible" content="ie=8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta charset="utf-8">
+	<title>手慢了！红包已抢完</title>
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="apple-touch-fullscreen" content="YES">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="stylesheet" href="{$role}css/package.css" type="text/css" />
+	<link rel="stylesheet" href="{$role}css/bootstrap.min.css" type="text/css" />
+	
+		<script type="text/javascript">
+
+			htmlFontSize();
+
+			window.onresize = function() {
+				htmlFontSize();
+			}
+
+			function htmlFontSize() {
+				var w = document.documentElement.clientWidth;
+				var h = document.documentElement.clientHeight;
+				var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+				document.documentElement.style.fontSize = (i) * 40.0 + "px";
+				if ($('body').height() < parseInt(document.documentElement.clientHeight)) {
+					$('body').height(parseInt(document.documentElement.clientHeight) );
+					$('#share_bg').height(h);
+				}
+				else
+				{
+					$('#share_bg').height($('body').height());
+				}
+			}
+		</script>
+<!--<script type="text/javascript">
+	/**  
+	 浏览器版本信息
+	 * @type {Object} 
+	 * @return {Boolean}  返回布尔值     
+	 */
+	// function browser() {
+	// 	var u = navigator.userAgent.toLowerCase();
+	// 	var app = navigator.appVersion.toLowerCase();
+	// 	return {
+	// 		txt : u, // 浏览器版本信息
+	// 		version : (u.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1], // 版本号       
+	// 		msie : /msie/.test(u) && !/opera/.test(u), // IE内核
+	// 		mozilla : /mozilla/.test(u) && !/(compatible|webkit)/.test(u), // 火狐浏览器
+	// 		safari : /safari/.test(u) && !/chrome/.test(u), //是否为safair
+	// 		chrome : /chrome/.test(u), //是否为chrome
+	// 		opera : /opera/.test(u), //是否为oprea
+	// 		presto : u.indexOf('presto/') > -1, //opera内核
+	// 		webKit : u.indexOf('applewebkit/') > -1, //苹果、谷歌内核
+	// 		gecko : u.indexOf('gecko/') > -1 && u.indexOf('khtml') == -1, //火狐内核
+	// 		mobile : !!u.match(/applewebkit.*mobile.*/), //是否为移动终端
+	// 		ios : !!u.match(/\(i[^;]+;( u;)? cpu.+mac os x/), //ios终端
+	// 		android : u.indexOf('android') > -1, //android终端
+	// 		iPhone : u.indexOf('iphone') > -1, //是否为iPhone
+	// 		iPad : u.indexOf('ipad') > -1, //是否iPad
+	// 		webApp : !!u.match(/applewebkit.*mobile.*/)
+	// 				&& u.indexOf('safari/') == -1 //是否web应该程序，没有头部与底部
+	// 	};
+	// }
+
+</script>-->
+
+
+</head>
+<body>
+	<!--流量红包分享-->
+	<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+	<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+	<input type="hidden" name="signature" id="signature" value="{$signature}">
+	<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+	<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+	<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+	<input type="hidden" name="Link" id="Link" value="{$Link}">
+	<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+	<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+	<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+	<script src="{$role}js/shareFlowRed.js?1"></script>
+	<!--流量红包分享-->
+	<input type="hidden" name="url" id="url" value="{$url}">
+	<div class="flowAlert" id="flowAlert">
+		<div class="bg">
+			<div class="text">
+				<div class="a">
+					{$typevalue}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

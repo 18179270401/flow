@@ -1,0 +1,28 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="30%">通道名称：</th>
+            <td width="70%">{$info.channel_name}</td>
+        </tr>
+        <tr>
+            <th >运营商：</th>
+            <td >{$info.operator_name}</td>
+        </tr>
+        <tr>
+            <th >省份：</th>
+            <td>{$info.city_id|get_city_province_name=$info['province_id']}</td>
+        </tr>
+        <tr>
+            <th >市：</th>
+            <td>{$info.city_name|default='--'}</td>
+        </tr>
+        <tr>
+            <th>折扣数：</th>
+            <td>{$info.discount_number|show_discount_ten=###} 折</td>
+        </tr>
+        <tr>
+            <th>折扣数：</th>
+            <td>{$info.rebate_discoun|show_discount_ten=###} 折</td>
+        </tr>
+    </table>
+</div>

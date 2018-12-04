@@ -1,0 +1,222 @@
+<include file="Common/header" />
+
+<div class="main_con minwidth800">
+    <div class="operation_box">
+        <div class="operation_con ">
+            <div class="currenttit">
+                <i></i><span><em>代理商管理</em>><em>代理商信息</em></span>
+            </div>
+            <div class="operation_info">
+
+                <isshow url="Proxy/add">
+                    <button class="btn add_btn" id="proxy_add_btn">
+                        <i class="minicon addoperation_icon"></i><span>新增代理商</span>
+                    </button>
+                </isshow>
+                <if condition="is_jurisdiction('Proxy/add') and is_jurisdiction('Proxy/export_excel')">
+                    <span class="line">|</span>
+                </if>
+                <isshow url="Proxy/export_excel">
+                    <button class="btn  export_button" data-url="Proxy">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+    </div>
+    <div class="search_box ">
+        <form  method="get" name="excel" action="/index.php/Admin/Proxy/index">
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext " style="min-width:80px;width:80px;" maxlength="6" name="proxy_code"  value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+                    </li>
+                    <input type="radio" style="display:none;" name="type" checked value="table"/>
+                    <li>
+                        <input type="text" class="inputtext" name="proxy_name" value="{$Think.get.proxy_name}" placeholder="代理商名称"/>
+                    </li>
+                    <!--
+                     <li>
+                      <input type="text" class="inputtext" name="user_name" value="{$Think.get.user_name}" placeholder="客户经理"/>
+                    </li>-->
+                    <if condition="$user_type eq true">
+                        <li>
+                            <label class="inputlabel">审核状态：</label>
+                            <select class="select" name="approve_status" style="min-width:80px;">
+                                <option value="9" <if condition='$Think.get.approve_status eq 9 '>selected</if> >全部</option>
+                                <option value="0" <if condition='$Think.get.approve_status eq "0" '>selected</if> >待审核</option>
+                                <option value="1" <if condition='($Think.get.approve_status eq 1) or ($Think.get.approve_status eq "") '>selected</if>>审核通过</option>
+                                <option value="2" <if condition='$Think.get.approve_status eq 2'>selected</if>>审核驳回</option>
+                            </select>
+                            <input type="hidden" value="1"/>
+                        </li>
+                    </if>
+                    <li>
+                        <label class="inputlabel">使用状态：</label>
+                        <select class="select" name="status" style="min-width:80px;">
+                            <option value="9" selected>全部</option>
+                            <option value="1" <if condition='$Think.get.status eq "1"'>selected</if> >正常</option>
+                            <option value="0" <if condition='$Think.get.status eq "0"'>selected</if>>已禁用</option>
+                        </select>
+                        <input type="hidden" value="1"/>
+                    </li>
+                   
+                </ul>
+            </div>
+            <div class="search_btncon ">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+                <button type="button" class="btn export_btn reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH ">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="80" class="change">代理商编号</th>
+                            <th width="150" class="change">代理商名称</th>
+                            <!--
+                            <th width="130" class="change">公司电话</th>
+                            -->
+
+                            <th width="120" >联系人</th>
+                            <th width="100">联系人电话</th>
+                            <th width="80" class="change">客户经理</th>
+                            <th width="80" >审核状态</th>
+                            <!--<th width="80" >退款状态</th>-->
+                            <th width="550">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <table>
+                    <volist name="proxy_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.proxy_code}</td>
+                            <td class="name"> {$vo.proxy_name}</td>
+                            <!--<td>{$vo.tel}</td>-->
+                            <td>{$vo.contact_name}</td>
+                            <td>{$vo.contact_tel}</td>
+                            <td><if condition="$vo.is_os eq true">{$vo.user_name}</if></td>
+                            <td>
+                                <if condition="$vo.approve_status eq '0'">待审核<elseif condition="$vo.approve_status eq '1' " />审核通过<elseif condition="$vo.approve_status eq '2' " />审核驳回</if>
+                            </td>
+                            <!--
+                            <td>
+                                <if condition="$vo.refund_status eq '0'">禁止退款<elseif condition="$vo.refund_status eq '1' " />启用退款</if>
+                            </td>
+                            -->
+                            <td class="operation_td">
+                                <isshow url="proxy/show">
+                                    <button class="operationbtn proxy_show" value="{$vo.proxy_id}">
+                                        <span>查看</span>
+                                    </button>
+                                </isshow>
+                                <if condition="$vo.approve_status eq '2' ">
+                                    <!-- 被驳回的代理商才会有重新提交 -->
+                                    <isshow url="proxy/approve_again">
+                                        <button class="operationbtn proxy_approve_again" value="{$vo.proxy_id}">
+                                            <span>送审</span>
+                                        </button>
+                                    </isshow>
+                                </if>
+                                <if condition="$user_type eq '1' ">
+                                    <isshow url="proxy/edit">
+                                        <button class="operationbtn proxy_edit" value="{$vo.proxy_id}">
+                                            <span>编辑</span>
+                                        </button>
+                                    </isshow>
+                                    <isshow url="proxy/credentials_edit">
+                                        <button class="operationbtn proxy_credentials_edit" value="{$vo.proxy_id}">
+                                            <span>证件管理</span>
+                                        </button>
+                                    </isshow>
+                                    <if condition="$vo.approve_status neq '1' ">
+                                        <!-- 正常的代理商不允许删除 -->
+                                        <isshow url="proxy/delete">
+                                            <button class="operationbtn proxy_delete" value="{$vo.proxy_id}">
+                                                <!--<i class="minicon edit_icon"></i>-->
+                                                <span>删除</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                </if>
+                                <if condition="$vo.approve_status eq '1' ">
+                                    <!-- 正常代理商才会有这三个权限 设置客户经理|密码重置|启用禁用-->
+                                    <if condition="$vo.is_os eq true">
+                                        <isshow url="proxy/set_sale">
+                                            <button class="operationbtn proxy_set_sale" value="{$vo.proxy_id}">
+                                                <span>设置客户经理</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <if condition="$is_top_proxy_admin eq true">
+                                        <isshow url="proxy/reset_password">
+                                            <button class="operationbtn proxy_reset_password" value="{$vo.proxy_id}">
+                                                <span>重置密码</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <if condition="(($is_top_proxy_admin eq true) or ($vo.is_os eq true)) && ($vo.top_proxy_id neq '0' ) ">
+                                        <isshow url="proxy/toggle_status">
+                                            <button class="operationbtn proxy_toggle_status" data="{$vo.status}" value="{$vo.proxy_id}">
+                                                <!--<i class="minicon edit_icon"></i>-->
+                                                <span><if condition="$vo.status eq 1">禁用<else />启用</if></span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <if condition="$is_top_proxy_admin eq true">
+                                        <isshow url="proxy/set_refund_status">
+                                            <button class="operationbtn proxy_set_refund_status" data="{$vo.refund_status}" value="{$vo.proxy_id}">
+                                                <!--<i class="minicon edit_icon"></i>-->
+                                                <span><if condition="$vo.refund_status eq 1">禁用退款状态<else />启用退款状态</if></span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    
+                                </if>
+                                <if condition="$user_type eq '2' ">
+                                    <if condition="$vo.approve_status neq '1' ">
+                                        <isshow url="proxy/approve_edit">
+                                            <button class="operationbtn proxy_approve_edit" value="{$vo.proxy_id}">
+                                                <span>编辑</span>
+                                            </button>
+                                        </isshow>
+                                        <isshow url="proxy/approve_credentials_edit">
+                                            <button class="operationbtn proxy_approve_credentials_edit" value="{$vo.proxy_id}">
+                                                <span>证件管理</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <if condition="$vo.approve_status neq '1' ">
+                                        <isshow url="proxy/approve_delete">
+                                            <button class="operationbtn proxy_approve_delete" value="{$vo.proxy_id}">
+                                                <span>删除</span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+
+<include file="Common/footer" />

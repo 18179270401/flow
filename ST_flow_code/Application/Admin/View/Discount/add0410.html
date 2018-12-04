@@ -1,0 +1,101 @@
+<form name="discount_add_form">
+<div class="discountset_box" id="discount_add_box">
+  <div class="discountset_left">
+      <div class="discountset_list">
+          <div class="discountsetlist_con">
+            <div class="discountsetlist_search">
+              <input type="text" class="inputtext discount_add_pekw" name="discount_add_pekw"  />
+              <button class="btn add_btn discount_add_seape" type="button"><i class="minicon search_icon"></i></button>
+            </div>
+            <div class="discountsetlist_nav mCustomScrollbar_y" data-mcs-theme="dark">
+                <ul id="leftdiscountadd">
+                  <volist name="proxy_list" id="voc">
+                  <li class="discount_add_proxy">
+                    <a href="javascript:void(0);">{$voc.proxy_name}</a>
+                    <input type="checkbox" name="proxy_ids[]" value="{$voc.proxy_id}" class="undis" />
+                  </li>
+                  </volist>
+                  <volist name="enterprise_list" id="voe">
+                  <li class="discount_add_proxy">
+                    <a href="javascript:void(0);">{$voe.enterprise_name}</a>
+                    <input type="checkbox" name="enterprise_ids[]" value="{$voe.enterprise_id}" class="undis"/>
+                  </li>
+                  </volist>
+                </ul>
+            </div>
+          </div>
+          <div class="discountsetlist_mid">
+            <a href="javascript:void(0);" class="leftarrow"><i></i></a>
+            <a href="javascript:void(0);" class="rightarrow"><i></i></a>
+          </div>
+           <div class="discountsetlist_con">
+            <h5>代理商/企业：</h5>
+            <div class="discountsetlist_nav mCustomScrollbar_y" data-mcs-theme="dark">
+                <ul id="rightdiscountadd">
+                  <!-- <li>
+                    <a href="javascript:void(0);">企业名称企业名称</a>
+                    <input type="checkbox" value="" class="undis"/>
+                  </li> -->
+                </ul>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="discountset_right">
+  <div class="discountsetright_content mCustomScrollbar_y" data-mcs-theme="dark">
+    <div class="discountsetright_con">
+        <div class="discountset_tit">
+          <h2>中国移动</h2>
+        </div>
+        <div class="discountset_operator">
+          <ul id="dc_add_plist1">
+            <!-- <li>
+              <label class="label">全国国</label>
+              <input type="text" class="inputtext" name="discount_number1" value="" />
+              <span><i class="minicon delete_icon"></i></span>
+            </li> -->
+          </ul>
+          <button class="btn add_btn province_btn" onclick="showprovince(this,1)" type="button"><i class="minicon newagents_icon"></i></button>
+       </div>
+    </div>
+     <div class="discountsetright_con">
+        <div class="discountset_tit">
+          <h2>中国联通</h2>
+        </div>
+        <div class="discountset_operator">
+          <ul id="dc_add_plist2">
+            <!-- <li>
+              <label class="label">全国国</label>
+              <input type="text" class="inputtext"/>
+              <span><i class="minicon delete_icon"></i></span>
+            </li> -->
+          </ul>
+          <button class="btn add_btn province_btn" onclick="showprovince(this,2)" type="button"><i class="minicon newagents_icon"></i></button>
+       </div>
+    </div>
+    <div class="discountsetright_con">
+        <div class="discountset_tit">
+          <h2>中国电信</h2>
+        </div>
+        <div class="discountset_operator">
+          <ul id="dc_add_plist3">
+            <!-- <li>
+              <label class="label">全国国</label>
+              <input type="text" class="inputtext"/>
+              <span><i class="minicon delete_icon"></i></span>
+            </li> -->
+          </ul>
+          <button class="btn add_btn province_btn" onclick="showprovince(this,3)" type="button"><i class="minicon newagents_icon"></i></button>
+       </div>
+    </div>
+  </div>
+  <div class="discountset_tip">
+	<span>提示：所有选择的代理商和企业，都会按照新折扣值来设置，以前设的值会被更新！</span>
+  </div>
+  </div>
+
+</div>
+</form>
+
+
+

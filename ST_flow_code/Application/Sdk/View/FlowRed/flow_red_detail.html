@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>红包详情</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="__PUBLIC__/utils/css/mui.min.css?s={$version_number}">
+		<link rel="stylesheet" href="{$role}css/flowRedRecord.css?s={$version_number}">	
+		<style>
+			.mui-table h4,.mui-table h5,.mui-table .mui-h5,.mui-table .mui-h6,.mui-table p{
+		        margin-top: 0;
+		    }
+		    .mui-table h4{
+		        line-height: 21px;
+		        font-weight: 500;
+		    }
+		
+		    .mui-table .oa-icon{
+		        position: absolute;
+		        right:0;
+		        bottom: 0;
+		    }
+		    .mui-table .oa-icon-star-filled{
+		        color:#f14e41;
+		    }
+		</style>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+	<body>
+		<div class="share_bg" id="share_bg" style="display: none;" onclick="hidenShareBg()">
+			<img src="{$role}images/shareTips.png" pointer-events:none;/>
+		</div>
+		<div class="mui-content">
+		    <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="flow-red-record-detail">
+		    	<volist name="result" id="vo" key="k" empty=''>
+		    	<li class="mui-table-view-cell">
+					<div class="mui-table">
+						<div class="mui-table-cell mui-col-xs-4">
+							<h5 class="mui-ellipsis" style="color: #CD0000;">{$vo.info}</h5>
+							<p class="mui-h6 mui-ellipsis">{$vo.receive_date}</p>
+						</div>
+						<div class="mui-table-cell mui-col-xs-5 mui-text-right">
+							<h5 class="mui-ellipsis" style="color: #000000;">{$vo.product_name}</h5>
+						</div>
+					</div>
+		    	</li>
+		    	<php>
+		    		if(count($result)!=$k){
+		    			echo "<li class='mui-table-view-divider'></li>";
+		    		}
+		    	</php>
+		    	</volist>
+		    </ul>
+		</div>
+		
+		<div class="share-agin">
+			<button type="button" class="mui-btn mui-btn-danger" id="share-btn" onclick="showShareBg()" style="display:none">重新分享</button>
+		</div>
+		<script>
+
+			htmlFontSize();
+			window.onresize=function(){
+				htmlFontSize();
+			}
+			function htmlFontSize(){
+				var w=document.documentElement.clientWidth;
+				var h=document.documentElement.clientHeight;
+				var i=parseInt(w)/768;
+				document.documentElement.style.fontSize=(parseInt(w)/768)*40+"px";
+				if($('body').height() < h){
+					$('#share_bg').height(h);
+				}else{
+					$('#share_bg').height($('body').height());
+				}
+			}
+		</script>
+		<input type="hidden" name="hideShareBtn" id="hideShareBtn" value="{$hideShareBtn}" />
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		<!--流量分享需求-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<!--流量分享需求-->
+			
+	</body>
+	<script src="__PUBLIC__/utils/css/mui.min.js?s={$version_number}"></script>
+	<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+	<script src="{$role}js/flowRedDetail.js?s={$version_number}"></script>		
+	<!--流量分享需求-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?s={$version_number}"></script>  
+	<script type="text/javascript" src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+</html>

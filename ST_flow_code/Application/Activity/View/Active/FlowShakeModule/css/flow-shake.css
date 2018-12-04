@@ -1,0 +1,341 @@
+html,body{
+	background:#e84144;
+	font-size:40px;
+	font:12px/20px Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Arial;
+	padding:0px;
+	margin:0px;
+}
+#activity_page_main{
+	background:#e84144;
+	height:auto;
+	margin:auto;
+	position: relative;
+}
+#activity_shake{
+	width:100%;
+	height: 100%;
+}
+.coloured_ribbon{
+	width: 100%;
+	height: 19rem;
+	position:absolute;
+	z-index: 9999;
+}
+.coloured_ribbon img{
+	width: 100%;
+	height: 100%;
+}
+ #activity_shake .activity_top{
+	height: 4rem;
+}
+ #activity_shake .activity_midden{
+	width: 100%;
+	height: 11rem;
+}
+ #activity_shake .activity_midden .bg_div{
+	background:#321e32;
+	height:10rem;
+	width:100%;
+	position:absolute;
+	z-index:2;
+}
+#activity_shake .activity_midden .bg_div .bg_box{
+	height:100%;
+	margin:0 auto;
+	overflow:hidden;
+	width: 9.4rem;
+}
+#activity_shake .activity_midden .bg_div .bg_box .bg_img{
+	background:url(../images/shake_bg.png) no-repeat center center;
+	width:100%;
+	height:7.5rem;
+	background-size:cover;
+	margin-top:1rem;
+}
+#activity_shake .activity_midden .shake_div{
+	height: 11rem;
+	width:100%;
+	position: absolute;
+}
+#activity_shake .activity_midden .shake_div .shake_top{
+	width:100%;
+	height:65%;
+	background:#e84144;
+	z-index: 3;
+	position: absolute;
+}
+#activity_shake .activity_midden .shake_div .shake_top .el_top{
+	height:100%;
+	background: url(../images/shake.png) no-repeat;
+	margin:0 auto;
+	width: 9.4rem;
+	overflow:hidden;
+	background-size:cover;
+	position: relative;
+
+}
+#activity_shake .activity_midden .shake_div .shake_bottom{
+	width:100%;
+	height:35%;
+	background:#e84144;
+	z-index: 3;
+	position: absolute;
+	margin-top:7.15rem;
+	
+}
+#activity_shake .activity_midden .shake_div .shake_bottom .el_bottom{
+	height: 100%;
+	background: url(../images/shake.png) no-repeat;
+	background-size: cover;
+	width: 9.4rem;
+	background-position: 0rem -7.15rem;
+	margin: 0 auto;
+}
+/*#activity_shake .activity_midden .shake_div .el_top .activity-logo{
+	background-image: url(../images/logo.png);
+   	width: 1.75rem;
+    height: 1.75rem;
+    background-size: cover;
+    position: absolute;
+    left: 3.98rem;
+    top: 4.52rem;
+    z-index: 5;
+}*/
+
+/*摇一摇出错页面*/
+.shake_row {
+	padding: 0 0.5rem;
+	max-width: 32rem;
+	margin: 0 auto;
+}
+.error_bg {
+	margin-top: 1.25rem;
+	width: 15rem;
+	height: 8.75rem;
+	background: url(../images/shake_error.png) no-repeat;
+	background-size: cover;
+	margin: auto;
+}
+
+/*.ActivityRules .ActivityRuleslefthr
+{
+	float:left;
+    width:15%;
+    height:auto;
+    text-align:left;
+}
+.ActivityRules .ActivityRulescenter
+{
+    width:70%;
+    height:auto;
+    float:left;
+    margin-top: -0.3rem;
+}
+.ActivityRules .ActivityRulesrighthr
+{
+    width:15%;
+    height:auto;
+    float:right;
+}
+
+.ActivityRules
+{
+	width: 90%;
+	height: 20px;
+	margin-top: 11rem;	
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.barDiv
+{
+	position:relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1rem;
+	width: 12rem;
+	height: 1.375rem;
+	text-align: center;
+}
+
+.barDiv img
+{
+	width: 100%;
+	height:100%;
+}
+
+.phoneNumberContent{
+	position:absolute;
+	text-align: center;
+	width: 12rem;
+	line-height: 1.375rem;
+}
+
+.barDiv #phoneNumber
+{
+	margin-left: auto;
+	margin-right: auto;
+	font-size:1.5rem;
+}
+.activeTime
+{
+	text-align: center;
+	color: #FEE09B;
+	margin-top: 1rem;
+	font-size: 0.7rem;
+}*/
+
+.ActivityRules .ActivityRuleslefthr {
+	display: block;
+	float: left;
+	width: 2.7rem;
+	height: 0.7rem;
+	text-align: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules .ActivityRulescenter {
+	width: 12.6rem;
+	height: 0.7rem;
+	float: left;
+}
+
+.ActivityRules .ActivityRulesrighthr {
+	width: 2.7rem;
+	height: 0.7rem;
+	float: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules {
+	width: 18rem;
+	height: 2rem;
+	margin-top: 8.2rem;	
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.barDiv {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 18.48rem;
+	height: 2.1175rem;
+	text-align: center;
+}
+
+.barDiv img {
+	width: 100%;
+	height: 100%;
+}
+
+.phoneNumberContent {
+	position: absolute;
+	text-align: center;
+	width: 18.48rem;
+	line-height: 2.1175rem;
+}
+
+.barDiv #phoneNumber {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:1.5rem;
+}
+
+.activeTime {
+	text-align: center;
+	color: #FEE09B;
+	margin-top: 1.078rem;
+	font-size: 0.7rem;
+}
+
+span{
+	display: block;
+	text-align: center;
+	font-size: 0.65rem;
+	color: white;
+}
+
+hr{
+	border:0;
+	background-color:white;
+	height:1px;
+}
+
+.demoout{
+	-webkit-animation:1s ease-in forwards;
+	-moz-animation:1s ease-in forwards;
+	-ms-animation:1s ease-in forwards;
+	animation:1s ease-in forwards;
+
+
+	-webkit-animation-name:fadeoutT;
+	-moz-animation-name:fadeoutT;
+	-ms-animation-name:fadeoutT;
+	animation-name:fadeoutT;
+
+}
+
+
+
+/* 这段代码放最底下下 */
+/* animation start*/
+.el-fadeoutT, .a-bounce,.a-flip,.a-flash,.a-shake,.a-swing,.a-wobble,.a-ring{
+	-webkit-animation:1s ease;
+	-moz-animation:1s ease;
+	-ms-animation:1s ease;
+	animation:1s ease;
+}
+.el-fadeoutT, .a-fadein,.a-fadeinT,.a-fadeinR,.a-fadeinB,.a-fadeinL,.a-bouncein,.a-bounceinT,.a-bounceinR,.a-bounceinB,.a-bounceinL,.a-rotatein,.a-rotateinLT,.a-rotateinLB,.a-rotateinRT,.a-rotateinRB,.a-flipin,.a-flipinX,.a-flipinY{
+	-webkit-animation:1s ease-out backwards;
+	-moz-animation:1s ease-out backwards;
+	-ms-animation:1s ease-out backwards;
+	animation:1s ease-out backwards;
+}
+.el-fadeoutT,.a-fadeout,.a-fadeoutT,.a-fadeoutR,.a-fadeoutB,.a-fadeoutL,.a-bounceout,.a-bounceoutT,.a-bounceoutR,.a-bounceoutB,.a-bounceoutL,.a-rotateout,.a-rotateoutLT,.a-rotateoutLB,.a-rotateoutRT,.a-rotateoutRB,.a-flipout,.a-flipoutX,.a-flipoutY{
+	-webkit-animation:1s ease-in forwards;
+	-moz-animation:1s ease-in forwards;
+	-ms-animation:1s ease-in forwards;
+	animation:1s ease-in forwards;
+}
+
+/* 淡出-向上*/
+.active .a-fadeoutT{
+	-webkit-animation-name:fadeoutT;
+	-moz-animation-name:fadeoutT;
+	-ms-animation-name:fadeoutT;
+	animation-name:fadeoutT;
+}
+/* 淡出-向下*/
+.active .a-fadeoutB{
+	-webkit-animation-name:fadeoutB;
+	-moz-animation-name:fadeoutB;
+	-ms-animation-name:fadeoutB;
+	animation-name:fadeoutB;
+}
+/* 淡出-向下*/
+@-webkit-keyframes fadeoutB{
+    0%{opacity:1;-webkit-transform:translateY(0);}
+    40%{-webkit-transform:translateY(100%);}
+    70%{-webkit-transform:translateY(100%);}
+    100%{opacity:1;-webkit-transform:translateY(0);}
+}
+/* 淡出-向上*/
+@-webkit-keyframes fadeoutT{
+    0%{opacity:1;-webkit-transform:translateY(0);}
+    40%{-webkit-transform:translateY(-100%);}
+    70%{-webkit-transform:translateY(-100%);}
+    100%{opacity:1;-webkit-transform:translateY(0);}
+}
+/* 淡出-向上 */
+.el-fadeoutT{
+	-webkit-animation-name:elfadeoutT;
+	-moz-animation-name:elfadeoutT;
+	-ms-animation-name:elfadeoutT;
+	animation-name:elfadeoutT;
+}
+/* 淡出-向上 */
+@-webkit-keyframes elfadeoutT{
+    0%{opacity:1;-webkit-transform:translateY(0); height:100%;}
+    100%{opacity:0;-webkit-transform:translateY(-100px); height:0px;}
+}

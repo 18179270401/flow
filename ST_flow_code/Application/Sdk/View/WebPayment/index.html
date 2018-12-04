@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>流量充值</title>
+<link href="{$role}css/reset.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="layout">
+  <div class="prepaid_left">
+    <div class="tit white">
+      <h2><em>流量充值——流量任性用，流量折上充</em></h2>
+    </div>
+    <div class="mobilesearch_con">
+      <div class="mobilesearch_left">
+          <i class="midicon mobile_icon"></i>
+          <label class="label">手机号</label>
+          <input type="text" class="text" placeholder="请输入手机号码"/>
+          <label class="radio"><i></i><em>江西移动</em></label>
+      </div>
+      <div class="mobilesearch_right">
+        <p>全国可以用，立即生效，当月有效</p>
+      </div>
+    </div>
+    <div class="prepaid_nav">
+      <ul class= "table">
+
+      </ul>
+    </div>
+    <div class="hr-18"></div>
+    <div class="tit">
+       <h2><i class="midicon prepaid_icon"></i><em>充值说明</em></h2>
+    </div>
+    <div class="instructions_con">
+      <ul>
+         <li><p style="font-size:14px">{$explanation}</p></li>
+      </ul>
+    </div>
+  </div>
+  <div class="prepaid_right">
+    <div class="announce_box">
+       <div class="tit">
+         <h2><i class="midicon announce_icon"></i><em>公告</em></h2>
+       </div>
+       <div class="announce_con">
+         <p style="font-size:14px">{$pc_notice}</p>
+       </div>
+    </div>
+  </div>
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+</div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js" ></script>
+<script type="text/javascript" src="{$role}js/index.js?1" ></script>
+</html>

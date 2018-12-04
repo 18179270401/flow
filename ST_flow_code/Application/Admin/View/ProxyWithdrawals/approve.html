@@ -1,0 +1,93 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" id="proxywithdrawals_approve_box">
+    <div class="detail_box" style="padding:0 0;">  
+      <table width="100%">
+                <!--<thead>
+                    <th width="100%" colspan="4">代理商提现信息</th>
+                </thead>-->
+                <tbody>
+                <tr>
+                    <th width="25%">代理商名称：</th>
+                    <td width="25%">{$proxyw.proxy_name}</td>
+                    <th width="25%">代理商编号：</th>
+                    <td width="25%">{$proxyw.proxy_code}</td>
+                </tr>
+                <tr>
+                    <th>开户银行：</th>
+                    <td>{$proxyw.bank_account}</td>
+                    <th>开户省市：</th>
+                    <td>{$proxyw.account_opening}</td>
+                </tr>
+                <tr>
+                    <th>开户人姓名：</th>
+                    <td>{$proxyw.beneficiary_name}</td>
+                    <th>开户人电话：</th>
+                    <td>{$proxyw.mobile}</td>
+                <tr>
+                <tr>
+                    <th>银行卡号：</th>
+                    <td>{$proxyw.card_number}</td>
+                    <th>提现金额：</th>
+                    <td>{$proxyw.apply_money}元</td>
+                </tr>
+                <tr>
+                    <th>审核状态：</th>
+                    <td colspan="3">{$proxyw.approve_status|get_apply_status}</td>
+                </tr>
+                <tr>
+                    <th>备注：</th>
+                    <td colspan="3">{$proxyw.remark}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <form name="proxywithdrawals_approve_form">
+        <input type="hidden" name="apply_id" value="{$proxyw.apply_id}">
+        <div class="checkinfo_con">
+            <div class="add_list">
+                
+                <h5><span class="wildcard"></span><if condition="$display neq 'proxy_remittance'">审核：</if></h5>
+                <div class="add_value">
+                    <if condition="$display eq 'proxy_remittance'">
+                        <label class="radio  checked" value="1" onclick="$('#list_hide').show();"><em>打款成功</em></label>
+                        <label class="radio "  value="2" onclick="$('#list_hide').hide();"><em>打款驳回</em></label>
+                    <elseif condition="$display eq 'proxy_approve'" />
+                        <label class="radio  checked" value="1"><em>复审通过</em></label>
+                        <label class="radio "  value="2"><em>复审驳回</em></label>
+                    <else/>
+                        <label class="radio  checked" value="1"><em>初审通过</em></label>
+                        <label class="radio "  value="2"><em>初审驳回</em></label>
+                    </if>
+                    <input type="hidden" name="approve_status"  value="1" />
+                </div>
+            </div>
+            <if condition="$display eq 'proxy_remittance'">
+                <div id="list_hide">
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>打款银行：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="payment_bank" value="中国建设银行南昌南航支行" /></div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>打款账户：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="payment_account" value="36050153015400000017" /></div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>交易号：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="transaction_number" /></div>
+                    <div class="promptinfo"><span>（银行汇款交易流水号）</span></div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>打款金额：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="payment_money" value="{$proxyw.apply_money}" /></div>
+                    <div class="promptinfo"><span>元</span></div>
+                </div>
+                </div>
+            </if>
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核原因：</h5>
+                <div class="add_value">
+                    <textarea class="textarea" name="approve_remark" empty="true"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

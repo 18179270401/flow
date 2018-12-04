@@ -1,0 +1,175 @@
+<include file="Common/header" />
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>现金流水记录</em>><em>现金支出记录</em></span>
+            </div>
+            <div class="operation_info">
+                <isshow url="CashRecord/payout_excel">
+                    <button class="btn  export_button" data-url="CashRecord/payout_excel" data-type="url">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+</div>
+
+    <div class="search_box">
+        <form method="get" action="/index.php/Admin/CashRecord/payout" name="excel">
+            <div class="search_nav">
+                <ul>
+                    <if condition="$user_type eq 2">
+                    <!--
+                        <li>
+                        <label class="inputlabel">企业：</label>
+                        <select class="select" name="obj_enterprise_id">
+                            <option value="" selected>全部</option>
+                            <volist name="enterprise_list" id="vo">
+                                <option value="{$vo.enterprise_id}" <if condition='$Think.get.obj_enterprise_id eq $vo["enterprise_id"]'>selected</if>>{$vo.enterprise_name}</option>
+                            </volist>
+                        </select>
+                            <input type="hidden" value=""/>
+                    </li>
+                        <li>
+                            <label class="inputlabel">代理商：</label>
+                            <select class="select" name="obj_proxy_id">
+                                <option value="" selected>全部</option>
+                                <volist name="proxy_list" id="vo">
+                                    <option value="{$vo.proxy_id}" <if condition='$Think.get.obj_proxy_id eq $vo["proxy_id"]'>selected</if>>{$vo.proxy_name}</option>
+                                </volist>
+                            </select>
+                            <input type="hidden" value=""/>
+                        </li>
+                    -->
+
+                        <li>
+                            <input type="text" class="inputtext" name="obj_enterprise_name" value="{$Think.get.obj_enterprise_name}" placeholder="企业名称"/>
+                        </li>
+
+                        <li>
+                            <input type="text" class="inputtext" name="obj_proxy_name" value="{$Think.get.obj_proxy_name}" placeholder="代理商名称"/>
+                        </li>
+                    </if>
+                    <li>
+                        <label class="inputlabel">用途：</label>
+                        <select class="select" name="operate_type" style="min-width:100px">
+                            <option value="" selected>全部</option>
+                            <option value="1" <if condition='$Think.get.operate_type eq 1'>selected</if>>购买流量</option>
+                            <option value="3" <if condition='$Think.get.operate_type eq 3'>selected</if>>提现</option>
+                            <if condition="$user_type eq 2">
+                                <option value="4" <if condition='$Think.get.operate_type eq 4'>selected</if>>划拨</option>
+                            </if>
+                            <option value="9" <if condition='$Think.get.operate_type eq 9'>selected</if>>账户冻结</option>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">操作时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+          <!--  <div class="prepaidtip" >
+                <p>支出总额：【共：<span style="color:red;">{$sum_results|default=0.00}</span>元】</p>
+            </div>-->
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con" data-mcs-theme="dark">
+            <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+                <table>
+                    <tr>
+                        <th width="50">序号</th>
+                        <th width="90" class="change">接收者编号</th>
+                        <th width="130" class="change">接收者名称</th>
+                        <if condition="$user_type eq 2">
+                            <th width="90" class="change">接收者用户类型</th>
+                        </if>
+                        <th width="60" class="change">用途</th>
+                        <if condition="$user_type eq 2">
+                            <th width="70" class="change">操作人</th>
+                        </if>
+                        <th width="70" class="change">操作金额(元)</th>
+                        <!--<th width="70" class="change">操作前余额(元)</th>
+                        <th width="70" class="change">操作后余额(元)</th>-->
+                        <th width="120" class="change">操作时间</th>
+                        <if condition="$user_type eq 2">
+                        <th width="70" class="change">备注</th>
+                        </if>
+                        <th width="60">操作</th>
+                    </tr>
+                </table>
+            </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <table>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <if condition="($vo.operate_type eq 9) or ($vo.operate_type eq 10)" >
+                                <td>--</td>
+                                <td>--</td>
+                                <else/>
+                                <if condition="$vo.obj_user_type eq 1">
+                                    <td>{$vo.obj_proxy_id|obj_data=1,'code'}</td>
+                                    <td>{$vo.obj_proxy_id|obj_data=1,'name'}</td>
+                                    <elseif condition="$vo.obj_user_type eq 2" />
+                                    <td>{$vo.obj_enterprise_id|obj_data=2,'code'}</td>
+                                    <td>{$vo.obj_enterprise_id|obj_data=2,'name'}</td>
+                                </if>
+                            </if>
+                            <if condition="$user_type eq 2">
+                                <td> <if condition="($vo.operate_type eq 9) or ($vo.operate_type eq 10)" >
+                                    --
+                                    <else/>
+                                    <if condition="$vo.obj_user_type eq 1">代理商 <elseif condition="$vo.obj_user_type eq 2" />企业</if>
+                                </if>
+                                </td>
+                            </if>
+                            <td>{$vo.operate_type|get_operate_type}</td>
+                            <if condition="$user_type eq 2">
+                                <td>{$vo.user_id|get_user_name}</td>
+                            </if>
+                            <td  class="money_style">{$vo.operater_price}</td>
+                            <!--<td class="money_style">{$vo.operater_before_balance}</td>
+                            <td class="money_style">{$vo.operater_after_balance}</td>-->
+                            <td>{$vo.operation_date}</td>
+                            <if condition="$user_type eq 2">
+                            <td>{$vo.remark}</td>
+                            </if>
+                            <td class="operation_td">
+
+                                    <button class="operationbtn cashRecord_detailed_function" value="{$vo.record_id}"   data-record="payout" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                                    <!-- <i class="minicon detailed_icon"></i>-->
+                                        <span>查看</span>
+                                    </button>
+
+                            </td>
+
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+
+<include file="Common/footer" />

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    	<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="{$role}/css/reset.css" />
+		<link rel="stylesheet" href="{$role}/css/main.css" />
+		<script type="text/javascript" src="{$role}/js/mobileSide.js" ></script>
+		<title>充值记录</title>
+	</head>
+	<body>
+		<div class="container">
+            <div class="no_data <?php echo count($data) == 0?:undis?>">
+				<img src="{$role}/images/no_data_03.png" alt="" />
+				<span>抱歉,暂无充值记录</span>
+			</div>
+            <?php for($i = 0;$i < count($data);$i++)
+            {
+                $item = $data[$i];
+                ?>
+			<div class="order_item">
+				<div class="order_info">
+					<i class="logo"></i>
+					<div class="order_txt">
+						<h5>流量充值</h5>
+						<p><span><em class="bold_txt">手机号</em>:<?php echo ($item['mobile']);?></span><span class="pack_type"><em class="bold_txt">地区包型</em>:<?php echo ($item[province_id]==1? '全国':省内);?><?php echo ($item['product_name']);?>流量</span></p>
+						<p><span>订单号:<?php echo ($item['pay_order_code']);?></span></p>
+					</div>
+				</div>
+				<div class="order_table">
+				<div class="order_border">
+					<table border="0" cellspacing="0" cellpadding="0" width="100%">
+					<tr align="center">
+						<td>
+							<span class="bold_txt">价格</span>
+							<em>￥<?php echo ($item['discount_price']);?></em>
+						</td>
+						<td>
+							<span class="bold_txt">购买时间</span>
+							<em><?php echo ($item['pay_date']);?></em>
+						</td>
+						<!--<td>
+							<span>状态</span>
+							<em class="pink_txt">已到账</em>
+						</td>-->
+					</tr>
+				</table>
+				</div>
+			</div>
+			</div>
+            <?php }?>
+			<div class="contact_us">
+						<a href="tel:{$consumer_phone}" >客服电话</a>
+						<em>|</em>
+						<a href="javascript:void(0);"  onclick="tipClick()">常见问题</a>
+                </div>
+		</div>
+	</body>
+    <script>
+        function tipClick() {
+                window.location.href = "/index.php/Sdk/WxFlowPayment/showTip?user_type={$user_type}&user_id={$user_id}";
+        }
+    </script>
+</html>

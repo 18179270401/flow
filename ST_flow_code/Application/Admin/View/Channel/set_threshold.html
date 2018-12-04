@@ -1,0 +1,27 @@
+<!-- 添加通道 -->
+<div id="channel_set_threshold_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="channel_set_threshold_form">
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>通道属性：</h5>
+            <div class="add_value"><span>{$list.attribute_id|get_attribute_lists}</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>通道名称：</h5>
+            <div class="add_value"><span style="padding-right: 20px;">{$list.channel_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>通道编码：</h5>
+            <div class="add_value"><span style="padding-right: 20px;">{$list.channel_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>失败率阈值：</h5>
+            <div class="add_value"><input type="text" class="inputtext"empty="true" maxlength="30" name="fail_threshold" field="失败率阈值" <if condition='$list.fail_threshold gt 0'> value="{$list['fail_threshold']*100}" </if> /></div><div class="promptinfo"><span>%</span></div>
+        </div>
+        <div class="add_list">
+            <h5>卡单阈值：</h5>
+            <div class="add_value"><input type="text" class="inputtext" name="block_card_num"empty="true" maxlength="20" field="卡单阈值" value="{$list.block_card_num}" /></div>
+        </div>
+        <input type="hidden" name="channel_id" value="{$list.channel_id}">
+    </form>
+</div>
+

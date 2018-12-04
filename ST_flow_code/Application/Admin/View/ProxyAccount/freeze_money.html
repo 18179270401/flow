@@ -1,0 +1,42 @@
+<div id="return_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxyAccount_freeze_form" >
+     <input type="hidden"  name="account_id" value="{$account_id}" />
+     <input type="hidden"  name="proxy_id" value="{$proxy_id}" />
+     <input type="hidden"  name="proxy_name" value="{$proxy_name}" />
+        <div class="add_list">
+            <h5>代理商名称：</h5>
+            <div class="add_value"><span>{$proxy_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>代理商编号：</h5>
+            <div class='add_value'><span>{$proxy_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>账户余额：</h5>
+            <div class="add_value"><span>{$account_balance|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>冻结金额：</h5>
+            <div class="add_value"><span>{$freeze_money|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>操作类型：</h5>
+            <div class="add_value">
+                <select name="freeze" class="select" style="width:160px;">
+                    <option value="1" selected>转入冻结</option>
+                    <option value="2">转出冻结</option>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>金额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="金额" style="width:160px" vtype='money' maxlength="8" name="apply_money" /></div><div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true" style="width:200px;"></textarea>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,185 @@
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;}
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+/**{ box-sizing:border-box;}*/
+
+body{
+	background-color: #DF2935;
+	text-align: center;
+}
+
+#tigerRoundTitle{margin:1rem auto 0; text-align: center;}
+#tigerRoundTitle img{width: 75%;}
+#lottery{display:inline-block; width:15rem;height:15rem; margin:1rem auto 0; padding: 0.25rem; background:#bd0f08; border-radius: 0.3rem;}
+/*#tigerRoundBg{width: 100%; height: 100%;}
+#tigerRoundBg img{width: 100%; height: 100%;}*/
+#lottery table{width: 100%; height: 100%;}
+#lottery table td{width:25%;height:25%; padding: 0.05rem; text-align:center;vertical-align:middle;font-size:18px;color:#333;font-index:-999}
+/*#lottery table td img{width: 100%;}*/
+.flowProduct{width: 100%;}
+#btnStartId {width: 100%;}
+/*#lottery table td div { width: 100%; height: 100%;}*/
+.basicLottery {width: 100%; height: 100%;}
+/*.flowSizeInfo{height: 50%;}*/
+.sizeValue{font-size: 0.8rem; color: #DF2935; font-weight: bold; display: inline-block;}
+.sizeUnit{font-size: 0.5rem; color: #530001; display: inline-block; font-weight: bold;}
+#lottery table td a{display:block;text-decoration:none; text-align: center;}
+#lottery table td div.active{background-color:#ffd700 !important;}
+
+/*background: blue;*/
+/*.ActivityRules .ActivityRuleslefthr
+{
+	display: block;
+	float:left;
+    width:15%;
+    height:auto;
+    text-align:left;
+
+}*/
+/*.ActivityRules .ActivityRulescenter
+{
+    width:70%;
+    height:auto;
+    	float:left;
+    	margin-top: -0.3rem;
+}*/
+/*.ActivityRules .ActivityRulesrighthr
+{
+    width:15%;
+    height:auto;
+    float:left;
+}*/
+
+/*.ActivityRules
+{
+	width: 90%;
+	height: 20px;
+	margin-top: 1.5rem;
+	margin-left: auto;
+	margin-right: auto;
+}*/
+
+/*.barDiv
+{
+	position:relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1rem;
+	width: 12rem;
+	height: 1.375rem;
+	text-align: center;
+}*/
+
+/*.barDiv img
+{
+	width: 100%;
+	height:100%;
+	background-repeat: no-repeat;
+}*/
+
+/*.phoneNumberContent{
+	position:absolute;
+	text-align: center;
+	width: 12rem;
+	line-height: 1.375rem;
+}*/
+
+/*.barDiv #phoneNumber
+{
+	margin-left: auto;
+	margin-right: auto;
+}*/
+/*.activeTime
+{
+	text-align: center;
+	color: #FEE09B;
+	font-size: 0.7rem;
+	margin-top: 1rem;
+}*/
+
+.ActivityRules .ActivityRuleslefthr {
+	/*background: blue;*/
+	display: block;
+	float: left;
+	width: 2.7rem;
+	height: 0.7rem;
+	text-align: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules .ActivityRulescenter {
+	width: 12.6rem;
+	height: 0.7rem;
+	float: left;
+}
+
+.ActivityRules .ActivityRulesrighthr {
+	width: 2.7rem;
+	height: 0.7rem;
+	float: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules {
+	width: 18rem;
+	height: 2rem;
+	margin-top: 0.77rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.barDiv {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 18.48rem;
+	height: 2.1175rem;
+	text-align: center;
+}
+
+.barDiv img {
+	width: 100%;
+	height: 100%;
+}
+
+.phoneNumberContent {
+	position: absolute;
+	text-align: center;
+	width: 18.48rem;
+	line-height: 2.1175rem;
+}
+
+.barDiv #phoneNumber {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:1.5rem;
+}
+
+.activeTime {
+	text-align: center;
+	color: #FEE09B;
+	margin-top: 1.078rem;
+	font-size: 0.7rem;
+}
+
+span{
+	display: block;
+	text-align: center;
+	font-size: 0.75rem;
+	color: white;
+}
+
+hr{
+	border:0;
+	background-color:white;
+	height:0.1rem;
+}

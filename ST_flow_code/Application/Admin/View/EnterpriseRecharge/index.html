@@ -1,0 +1,318 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+            <if condition="$usr_type eq 3">
+             <i></i><span><em>现金中心</em>><em>账户充值申请</em></span>
+                <else/>
+                <i></i><span><em>资金管理</em>><em>企业充值管理</em></span>
+            </if>
+        </div>
+
+              <div class="operation_info">
+                  <if condition="$usr_type eq 3">
+                   <isshow url="EnterpriseRecharge/voucher">
+                    <button class="btn add_btn enterpriseRecharge_add_btn">
+                      <i class="minicon addoperation_icon"></i><span>充值申请</span>
+                    </button>
+                  </isshow>
+                </if>
+                  <if condition="$usr_type eq 2">
+                      <isshow url="EnterpriseRecharge/voucher_proxy">
+                          <button class="btn add_btn enterpriseRecharge_new_add_btn">
+                              <i class="minicon addoperation_icon"></i><span>新增充值申请</span>
+                          </button>
+                      </isshow>
+                  </if>
+                  <if condition="( is_jurisdiction('EnterpriseRecharge/voucher') or is_jurisdiction('EnterpriseRecharge/voucher_proxy'))and is_jurisdiction('EnterpriseRecharge/export_excel')">
+                      <span class="line">|</span>
+                  </if>
+                  <isshow url="EnterpriseRecharge/export_excel">
+                      <button class="btn  export_button" data-url="EnterpriseRecharge">
+                          <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                      </button>
+                  </isshow>
+              </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get"  name="excel" action="/index.php/Admin/EnterpriseRecharge/index">
+    <div class="search_nav <if condition='$usr_type neq 3'>minheight60</if>">
+      <ul>
+             <if condition="$usr_type neq 3">
+                  <li>
+                      <input type="text" class="inputtext" name="enterprise_code" maxlength="20" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+                  </li>
+                  <li>
+                      <input type="text" class="inputtext" name="enterprise_name" maxlength="20" value="{$Think.get.enterprise_name}" placeholder="企业名称"/>
+                  </li>
+             </if>
+          <if condition="$usr_type eq 1">
+              <li>
+                  <input type="text" class="inputtext" name="proxy_code" maxlength="20" value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+              </li>
+              <li>
+                  <input type="text" class="inputtext" name="proxy_name" maxlength="20" value="{$Think.get.proxy_name}" placeholder="代理商名称"/>
+              </li>
+          </if>
+              <li>
+                <input type="text" class="inputtext" name="apply_code" maxlength="20" value="{$Think.get.apply_code}" placeholder="申请编号"/>
+              </li>
+              <li>
+              <label class="inputlabel">审核状态：</label>
+              <select class="select" name="approve_status" style='min-width:80px'>
+              <option value="9" selected >全部</option>
+              <if condition="$usr_type eq 3">
+                <option value="1" <if condition='$Think.get.approve_status eq 1'>selected</if> >草稿</option>
+              </if>
+              <option value="2" <if condition='$Think.get.approve_status eq 2'>selected</if> >待审核</option>
+              <option value="3" <if condition='$Think.get.approve_status eq 3'>selected</if> >初审通过</option>
+              <option value="4" <if condition='$Think.get.approve_status eq 4'>selected</if> >初审驳回</option>
+              <option value="5" <if condition='$Think.get.approve_status eq 5'>selected</if> >复审通过</option>
+              <option value="6" <if condition='$Think.get.approve_status eq 6'>selected</if> >复审驳回</option>
+          </select>
+                  <input type="hidden" value="9"/>
+        </li>
+        <!--  <li>
+              <input type="text" class="inputtext" name="transaction_number" value="{$Think.get.transaction_number}" placeholder="交易号"/>
+          </li>-->
+          <li>
+              <label class="inputlabel">充值类型：</label>
+              <select class="select" name="apply_type" style='min-width:80px'>
+                  <option value="0" selected>全部</option>
+                  <option value="1" <if condition='$Think.get.apply_type eq 1'>selected</if>>正常充值</option>
+                  <option value="2" <if condition='$Think.get.apply_type eq 2'>selected</if>>测试款</option>
+              </select>
+              <input type="hidden" value="0"/>
+          </li>
+          <if condition='$proxy_type eq 1'>
+              <li>
+                  <label class="inputlabel">付款方式：</label>
+                  <select name="source"  class="select"  style='min-width:80px'>
+                      <option value="" selected>请选择</option>
+                      <volist name="source_name" id="sourcename">
+                          <option value="{$key}" <if condition='$Think.get.source eq $key'>selected</if> >{$sourcename}</option>
+                      </volist>
+                  </select>
+                  <input type="hidden" value=""/>
+              </li>
+              <elseif condition='$proxy_type eq 2'/>
+              <li>
+                  <label class="inputlabel">付款方式：</label>
+                      <select name="source"  class="select" style='min-width:80px'>
+                          <option value="" selected>请选择</option>
+                          <option value="1" <if condition='$Think.get.source eq 1'>selected</if>>汇款</option>
+                          <option value="2" <if condition='$Think.get.source eq 2'>selected</if>>微信支付</option>
+                          <option value="3" <if condition='$Think.get.source eq 3'>selected</if>>支付宝支付</option>
+                      </select>
+                  <input type="hidden" value=""/>
+              </li>
+          </if>
+          <li>
+              <label class="inputlabel">申请时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>
+
+        <li>
+<!--          <label class="inputlabel">来源：</label>
+          <select class="select" name="source">
+            <option value="" selected>全部</option>
+            <option value="1" <if condition='$Think.get.source eq 1'>selected</if>>汇款</option>
+            <option value="2" <if condition='$Think.get.source eq 2'>selected</if>>微信支付</option>
+              <option value="3" <if condition='$Think.get.source eq 3'>selected</if>>支付宝支付</option>
+          </select>
+        </li>
+        <li>
+          <label class="inputlabel">操作方式：</label>
+          <select class="select" name="apply_type">
+            <option value="" selected>全部</option>
+              <option value="1" <if condition='$Think.get.apply_type eq 1'>selected</if>>充值</option>
+              <option value="2" <if condition='$Think.get.apply_type eq 2'>selected</if>>提现</option>
+          </select>
+        </li>-->
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+        <if condition="$usr_type neq 3">
+            <div class="prepaidtip" >
+                <p> 付款金额合计：【<span style="color:#5cb95c;">{$sum_results.sum_money_one|default="0.000"}</span>元】</p>
+            </div>
+        </if>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <if condition="$usr_type neq 3">
+                    <th width="100" class="change">企业编号</th>
+                    <th width="160" class="change">企业名称</th>
+                    </if>
+                    <if condition="$usr_type eq 1">
+                        <th width="100" class="change">代理商编号</th>
+                        <th width="160" class="change">代理商名称</th>
+                    </if>
+                    <th width="150" class="change">申请编号</th>
+                    <th width="100" class="change">付款金额(元)</th>
+                    <th width="80" class="change">付款方式</th>
+                    <if condition="$usr_type eq 2">
+                    <th width="120" class="change">交易号/户名</th>
+                    </if>
+                    <th width="70" class="change">充值类型</th>
+                    <th width="100" class="change">付款日期</th>
+                    <if condition="$usr_type neq 3">
+                    <th width="80" class="change">复审人</th>
+                    </if>
+                    <th width="80" class="change">审核状态</th>
+                    <th width="120" class="change">申请时间</th>
+                    <if condition="$usr_type neq 1">
+                        <th width=" <if condition='($vo.approve_status eq 1) or  ($vo.approve_status eq 4)  or  ($vo.approve_status eq 6) ' >40 <else/> 150 </if>">操作</th>
+                        <else/>
+                        <th width="60" >操作</th>
+                    </if>
+
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <if condition="$usr_type neq 3">
+                    <td>{$vo.enterprise_code}</td>
+                    <td>{$vo.enterprise_name}</td>
+                    </if>
+                    <if condition="$usr_type eq 1">
+                        <td>{$vo.proxy_code}</td>
+                        <td>{$vo.proxy_name}</td>
+                    </if>
+                    <td>{$vo.apply_code}</td>
+                    <td class="money_style">{$vo.apply_money}</td>
+                    <td>
+                        <if condition="$vo.source eq 0">
+                        <elseif condition="$vo.proxy_type eq 1"/>
+                            {$vo.source|get_source_name}
+                            <else/>
+                            <if condition="$vo.source eq 1">
+                                汇款
+                                <elseif  condition="$vo.source eq 2"/>
+                                微信支付
+                                <else/>
+                                支付宝支付
+                            </if>
+                        </if>
+                    </td>
+                    <if condition="$usr_type eq 2">
+                        <td>{$vo.transaction_number|default="--"}</td>
+                    </if>
+                    <td><if condition='$vo.apply_type eq 1'>正常充值<elseif condition='$vo.apply_type eq 2' />测试款<else />--</if></td>
+                    <td>{$vo.transaction_date|default="--"}</td>
+                    <if condition="$usr_type neq 3">
+                    <td>{$vo.apply_id|get_approve_people=2}</td>
+                    </if>
+                    <td>{$vo.approve_status|get_apply_status}</td>
+                    <td>{$vo.create_date}</td>
+                    <td class="operation_td">
+                      <!--<button class="operationbtn enterpriseRecharge_detailed_function" value="{$vo.apply_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" data-original-title="查看">
+                        <i class="minicon detailed_icon"></i>-->
+                            <button class="operationbtn  enterpriseRecharge_detailed_function" value="{$vo.apply_id}">
+                              <span>查看</span>
+                            </button>
+                        <if condition="$usr_type eq 3">
+                        <if condition="($vo.approve_status eq 1) or  ($vo.approve_status eq 4)  or  ($vo.approve_status eq 6)" >
+                            <isshow url="EnterpriseRecharge/edit">
+                              <button class="operationbtn enterpriseRecharge_edit_function"  value="{$vo.apply_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                               <!-- <i class="minicon edit_icon"></i>-->
+                                <span>编辑</span>
+                              </button>
+                            </isshow>
+                        <if condition="($vo.approve_status eq 1)" >
+                          <isshow url="EnterpriseRecharge/edit">
+                            <button class="operationbtn enterpriseRecharge_send_function"  value="{$vo.apply_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                               <!-- <i class="minicon reviewpass_icon"></i>-->
+                                <span>送审</span>
+                            </button>
+                          </isshow>
+                        </if>
+                      
+                            <isshow url="EnterpriseRecharge/edit">
+                              <button class="operationbtn enterpriseRecharge_delete_function"  data-deletemsg="{$vo.apply_code}" value="{$vo.apply_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                                <!--<i class="minicon delete_icon"></i>-->
+                                <span>删除</span>
+                              </button>
+                            </isshow>
+                        </if>
+                      </if>
+                      <if condition="$usr_type neq 3" >
+                          <if condition="(($vo.approve_status eq 4)  or  ($vo.approve_status eq 6))  and ($vo.create_user_id eq $user_id)" >
+                              <isshow url="EnterpriseRecharge/edit_proxy">
+                                  <button class="operationbtn enterpriseRecharge_edit_proxy_function"  value="{$vo.apply_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                                      <!-- <i class="minicon edit_icon"></i>-->
+                                      <span>编辑</span>
+                                  </button>
+                              </isshow>
+                          </if>
+                        <if condition="$vo.approve_status eq 3">
+                            <if condition="is_jurisdiction('EnterpriseRecharge/approve_t')">
+                            <!--<button class="operationbtn enterprisewithdrawals_approve_t_btn"  value="{$vo.apply_code}" data-toggle="tooltip" data-placement="<if condition='$i eq count($enterprise_list)'>top<else />bottom</if>" data-original-title="审核">
+                                <i class="minicon check_icon"></i>
+                            </button>-->
+                            <isshow url="EnterpriseRecharge/approve_t">
+                              <button class="operationbtn  enterpriseRecharge_approve_t_function" value="{$vo.apply_id}">
+                              <!--<i class="minicon edit_icon"></i>-->
+                              <span>复审</span>
+                              </button>
+                            </isshow> 
+                          </if>
+                        </if>
+                        <if condition="$vo.approve_status eq 2">
+                          <isshow url="EnterpriseRecharge/approve_c">
+                           <button class="operationbtn  enterpriseRecharge_approve_function" value="{$vo.apply_id}">
+                            <!--<i class="minicon edit_icon"></i>-->
+                            <span>初审</span>
+                            </button>
+                          </isshow> 
+                      </if>
+
+                          <if condition="(($vo.approve_status eq 4)  or  ($vo.approve_status eq 6))  and ($vo.create_user_id eq $user_id)" >
+
+                              <isshow url="EnterpriseRecharge/proxy_delete">
+                                  <button class="operationbtn enterpriseRecharge_delete_proxy_function"  value="{$vo.apply_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                                      <!-- <i class="minicon edit_icon"></i>-->
+                                      <span>删除</span>
+                                  </button>
+                              </isshow>
+                          </if>
+                      </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

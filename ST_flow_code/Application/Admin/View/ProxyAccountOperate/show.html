@@ -1,0 +1,123 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <tr>
+            <th width="17%">代理商名称：</th>
+            <td width="25%">{$proxy_name}</td>
+            <th width="20%">代理商编号：</th>
+            <td width="33%">{$proxy_code}</td>
+        </tr>
+        <tr>
+            <th>申请金额：</th>
+            <td>{$apply_money|default="0.000"}元</td>
+            <th>冻结申请时间：</th>
+            <td>{$apply_date}</td>
+        </tr>
+        <tr>
+            <th>账户余额：</th>
+            <td>{$account_balance|default="0.000"}元</td>
+            <th>冻结金额：</th>
+            <td>{$freeze_money}元</td>
+        </tr>
+        <tr>
+            <th>冻结时间：</th>
+            <td>{$frozen_date}</td>
+            <th>冻结审核状态：</th>
+            <td>{$frozen_approve_status|get_frozen_approve_status}</td>
+        </tr>
+
+        <tr>
+            <th>冻结送审人：</th>
+            <td >{$create_user_id|get_user_name}</td>
+            <th>解冻送审人：</th>
+            <td >{$thaw_create_user_id|get_user_name}</td>
+        </tr>
+        <tr>
+            <th>冻结说明：</th>
+            <td colspan="3">{$frozen_remark}</td>
+        </tr>
+        <if condition="$opr_type eq 2" >
+            <tr>
+                <th>解冻申请时间：</th>
+                <td>{$thaw_create_date}</td>
+                <th>解冻时间：</th>
+                <td>{$thaw_date}</td>
+            </tr>
+            <tr>
+                <th>解冻审核状态：</th>
+                <td colspan="3">{$thaw_approve_status|get_thaw_approve_status}</td>
+            </tr>
+            <tr>
+                <th>解冻说明：</th>
+                <td colspan="3">{$thaw_remark}</td>
+            </tr>
+        </if>
+    </tbody>
+    </table>
+    <volist name="frozen" id="vo" empty="">
+        <table width="100%">
+            <thead>
+             <tr>
+                <th width="100%" colspan="4">账户冻结{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                    <else />
+                        {$vo.approve_status|get_apply_status2=3}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+               
+            </tr> 
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+               
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+    <volist name="thaw" id="vo" empty="">
+        <table width="100%">
+            <thead>
+            <tr>
+                <th width="100%" colspan="4">账户解冻{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                        <else />
+                        {$vo.approve_status|get_apply_status2=3}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+
+            </tr>
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+</div>

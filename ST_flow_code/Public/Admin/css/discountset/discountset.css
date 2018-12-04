@@ -1,0 +1,73 @@
+.mar{
+    padding-left: 7px; padding-right: 7px;  padding-bottom: 5px;
+}
+
+.areacss{
+    padding-left: 0px;
+    padding-right: 5px;
+    margin-top: 5px;
+}
+
+
+
+.areacss span{
+    color: white;
+}
+
+.areacss input{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.areaadd{
+    padding-left: 0px;
+    padding-right: 5px;
+    margin-top: 5px;
+}
+
+
+
+.areaadd span{
+    color: white;
+}
+
+.areaadd input{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.icheck-icon {
+    margin-right: 10px;
+    margin-left: -25px;
+
+}
+
+.user_box{
+    margin-bottom: 10px;
+    padding: 5%;
+    width: 140px;
+    height: 110px;
+    border: solid 1px #15a5fb;
+    background-color: #15a5fb;
+    color: white;
+    text-align: center;
+}
+
+.btn-box-tool {
+    padding: 0;
+    color: white;
+}
+
+.dropdown-menu>li>a {
+    display: inline-block;
+}
+
+.chan_btn.focus, .chan_btn:focus, .chan_btn:hover{
+    color: #000000;
+
+}
+
+.dropdown-menu span{
+    color:#777;
+}
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body style="margin: 0; background: #fffbc8;">
+		<div style="position:absolute; top:45%;width: 100%; text-align: center;">
+			<img style="width: 40%; height: 40%;" src="{$qrurl}">
+		
+			<div style="margin-top: 10%;">
+				<img src="{$role}img/copy.png" width="70%" />
+			</div>
+		</div>
+		<div style=" margin:0 auto; overflow:hidden;">
+			<img style="width: 100%; height: 100%;" src="{$role}img/integral_exchange_rate_bg.png">
+		</div>
+	</body>
+	<script>
+	    htmlFontSize();
+	    window.onresize = function() {
+	        htmlFontSize();
+	    }
+	    function htmlFontSize() {
+	        var w = document.documentElement.clientWidth;
+	        var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+	        document.documentElement.style.fontSize = (i) * 40.0 + "px";
+	    }
+	</script>
+</html>

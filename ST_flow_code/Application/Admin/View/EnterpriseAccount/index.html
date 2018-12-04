@@ -1,0 +1,165 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <if condition="$user_type eq 1">
+            <i></i><span><em>资金管理</em>><em>企业账户管理</em></span>
+          <else/>
+            <i></i><span><em>现金中心</em>><em>账户管理</em></span>  
+          </if>
+        </div>
+          <if condition="$user_type eq 1">
+              <div class="operation_info">
+                  <isshow url="EnterpriseAccount/export_excel">
+                      <button class="btn  export_button" data-url="EnterpriseAccount">
+                          <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                      </button>
+                  </isshow>
+              </div>
+          </if>
+      </div>
+  </div>
+
+  <div class="search_box">
+      <if condition="$user_type neq 3" >
+        <form method="get" name="excel" action="/index.php/Admin/EnterpriseAccount/index">
+        <div class="search_nav <if condition='$user_type eq 1'>minheight60</if>">
+              <ul>
+                  <li>
+                      <input type="text" class="inputtext" style='min-width:80px' maxlength="6" name="enterprise_code" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+                  </li>
+                <li>
+                  <input type="text" class="inputtext" name="enterprise_name" value="{$Think.get.enterprise_name}" placeholder="企业名称"/>
+                </li>
+                <if condition="$user_type eq 1">
+                  <li>
+                      <input type="text" class="inputtext" style='min-width:80px' maxlength="6" name="top_proxy_code" value="{$Think.get.top_proxy_code}" placeholder="上级代理编号" />
+                  </li>
+                  <li>
+                      <input type="text" class="inputtext" name="top_proxy_name" value="{$Think.get.top_proxy_name}" placeholder="上级代理名称" />
+                  </li>
+                </if>
+              </ul>
+        </div>
+        <div class="search_btncon">
+          <button class="btn add_btn">
+            <i class="minicon search_icon"></i><span>查询</span>
+          </button>
+
+            <button type="button" class="btn export_btn  reset_button">
+                <i class="minicon reload_icon"></i><span>重置</span>
+            </button>
+        </div>
+            <if condition="$user_type eq 1">
+                <div class="prepaidtip" >
+                    <p> 账户余额合计：【<span style="color:#5cb95c;">{$sum_results.sum_money_one|default="0.000"}</span>元】，冻结金额合计：【<span class="red">{$sum_results.sum_money_tow|default="0.000"}</span>元】</p>
+                </div>
+            </if>
+        </form>
+      </if>
+  </div>
+  <div class="tablelist_box tablelistboxH"  <if condition="$user_type eq 3" >style="margin-top: -11px;"</if> >
+    <div class="tablelist_con" data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="100" class="change">企业编号</th>
+                    <th width="160" class="change">企业名称</th>
+                    <if condition="$user_type eq 1">
+                      <th width="100" class="change">上级代理编号</th>
+                      <th width="160" class="change">上级代理名称</th>
+                    </if>
+                    <th width="100" class="change">账户余额(元)</th>
+                    <th width="100" class="change">冻结金额(元)</th>
+                    <!--
+                    <if condition="$user_type eq 1">
+                        <th width="100">提醒额度(元)</th>
+                    </if>
+                    -->
+                    <if condition="$user_type eq 3">
+                      <th width="60">操作</th>
+                      <else />
+                        <th width="280">操作</th>
+                    </if>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.enterprise_code}</td>
+                    <td>{$vo.enterprise_name} </td>
+                    <if condition="$user_type eq 1">
+                      <td>{$vo.proxy_code}</td>
+                      <td>{$vo.proxy_name}</td>
+                    </if>
+                    <td class="money_style">{$vo.account_balance|default="0.000"}</td>
+                    <td class="money_style">{$vo.freeze_money|default="0.000"}</td>
+                    <!--
+                    <if condition="$user_type eq 1">
+                        <td class="money_style">{$vo.new_quota_remind|default="--"}</td>
+                    </if>
+                    -->
+                      <td class="operation_td">
+                          <!--<button class="operationbtn enterpriseaccount_eninfo_btn" value="{$vo.enterprise_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" data-original-title="查看">
+                          <i class="minicon detailed_icon"></i>
+                          </button>-->
+                        <button class="operationbtn enterpriseaccount_eninfo_btn" value="{$vo.enterprise_id}">
+                            <span>查看</span>
+                         </button>
+                        <if condition="$user_type eq 1">
+                          <!--<button class="operationbtn enterprise_transfer_but" value="{$vo.enterprise_id}"  data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" data-original-title="划拨">
+                                <i class="minicon recharge_icon"></i>
+                          </button>-->
+
+                            <!--<<isshow url="EnterpriseAccount/recharg_money">
+                              <button class="operationbtn enterprise_transfer_but" value="{$vo.enterprise_id}">
+                              <!--<i class="minicon edit_icon"></i>-->
+                            <!--< <span>充值</span>
+                             </button>
+                           </isshow>
+                           <!--<button class="operationbtn enterprise_back_but" value="{$vo.enterprise_id}"  data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" data-original-title="收回">
+                                 <i class="minicon recharge_icon"></i>
+                           </button>-->
+                            <!--<<isshow url="EnterpriseAccount/return_money">
+                              <button class="operationbtn enterprise_back_but" value="{$vo.enterprise_id}">
+                              <!--<i class="minicon edit_icon"></i>-->
+                            <!--<<span>收回</span>
+                            </button>
+                          </isshow>
+
+                          <isshow url="EnterpriseAccount/freeze_money">
+                            <button class="operationbtn enterprise_freeze_but" value="{$vo.enterprise_id}">
+                            <!--<i class="minicon edit_icon"></i>-->
+                            <!--<<span>冻结</span>
+                            </button>
+                          </isshow>-->
+                            <!--
+                        <isshow url="EnterpriseAccount/set_quota_remind">
+                            <button class="operationbtn set_e_quota_remind_function"  value="{$vo.enterprise_id}" >
+                                <span>提醒额度</span>
+                            </button>
+                        </isshow>
+                        -->
+                      </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

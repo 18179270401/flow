@@ -1,0 +1,177 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+                <i></i><span><em>营销场景</em>><em>积分兑换记录</em></span>
+        </div>
+         <div class="operation_info">
+         <!-- <if condition="is_jurisdiction('PayOrderRecord/export_excel')">
+            <button class="btn  export_button" data-url="PayOrderRecord">
+              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+            </button>
+          </if>-->
+        </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" action="" name="excel" action="/index.php/Admin/PayOrderRecord/index">
+    <div class="search_nav"> 
+      <ul>
+          <if condition="$use neq 3">
+              <li>
+                  <input type="text" class="inputtext" name="user_name" value="{$Think.get.user_name}" placeholder="用户名称"/>
+              </li>
+          </if>
+          <li>
+            <label class="inputlabel">运营商：</label>
+            <select class="select" name="operator_id" style="min-width:80px">
+                <option value="9" <if condition='($Think.get.operator_id eq 9) or ($Think.get.operator_id eq null)'>selected</if>>全部</option>
+                <option value="1" <if condition='$Think.get.operator_id eq 1'>selected</if>>移动</option>
+                <option value="2" <if condition='$Think.get.operator_id eq 2'>selected</if>>联通</option>
+                <option value="3" <if condition='$Think.get.operator_id eq 3'>selected</if>>电信</option>
+            </select>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="mobile" value="{$Think.get.mobile}" placeholder="手机号"/>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="product_name" value="{$Think.get.product_name}" placeholder="流量包名称"/>
+          </li>
+          <li>
+              <label class="inputlabel">充值状态：</label>
+              <select class="select" name="status" style="min-width:80px">
+                  <option value="9" <if condition='($Think.get.status eq 9) or ($Think.get.status eq null)'>selected</if>>全部</option>
+                  <option value="1" <if condition='$Think.get.status eq 1'>selected</if>>正在送充</option>
+                  <option value="2" <if condition='$Think.get.status eq 2'>selected</if>>充值成功</option>
+                  <option value="3" <if condition='$Think.get.status eq 3'>selected</if>>充值失败</option>
+              </select>
+              <input type="hidden" value=""/>
+          </li>
+          <li>
+              <label class="inputlabel">退积分状态：</label>
+              <select class="select" name="refund_status" style="min-width:80px">
+                  <option value="9" <if condition='($Think.get.refund_status eq 9) or ($Think.get.refund_status eq null)'>selected</if>>全部</option>
+                  <option value="1" <if condition='$Think.get.refund_status eq 1'>selected</if>>已退积分</option>
+                  <option value="2" <if condition='$Think.get.refund_status eq 2'>selected</if>>未退积分</option>
+              </select>
+              <input type="hidden" value=""/>
+          </li>
+          <li>
+              <label class="inputlabel">兑换时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime" placeholder="开始时间" value="<if condition='$Think.get.start_datetime eq null '> {$default_start}<else />{$Think.get.start_datetime}</if>" style='min-width:80px'onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime" placeholder="结束时间" value="<if condition='$Think.get.end_datetime eq null '> {$default_end}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+        <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con" data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+        <div class="tablelist_thead">
+          <table>
+            <tr>
+                <th width="50">序号</th>
+                <th width="230" class="change">流量订单号</th>
+                <th width="100" class="change">手机号</th>
+                <th width="80" class="change">运营商</th>
+                <th width="60" class="change">流量包</th>
+                <th width="100" class="change">兑换积分</th>
+                <if condition="$use neq 3">
+                    <th width="120" class="change">用户名称</th>
+                    <th width="70" class="change">用户类型</th>
+                </if>
+                <th width="150" class="change">兑换时间</th>
+                <th width="80" class="change">充值状态</th>
+                <th width="80" class="change">退积分状态</th>
+                <th width="130">操作</th>
+            </tr>
+          </table>
+        </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.order_code}</td>
+                    <td>{$vo.mobile}</td>
+                    <td>
+                        <if condition="$vo.operator_id eq 1">
+                            中国移动
+                        </if>
+                        <if condition="$vo.operator_id eq 2">
+                            中国联通
+                        </if>
+                        <if condition="$vo.operator_id eq 3">
+                            中国电信
+                        </if>
+                    </td>
+                    <td>{$vo.product_name}</td>
+                    <td>{$vo.exchange_score}</td>
+                    <if condition="$use neq 3">
+                        <td><if condition="$vo['user_type'] eq 1">{$vo.proxy_name}<else/>{$vo.enterprise_name}</if></td>
+                        <td><if condition="$vo['user_type'] eq 1">代理商<else/>企业</if></td>
+                    </if>
+
+                    <td>{$vo.exchage_time}</td>
+                    <td>
+                        <if condition="$vo.order_code eq null"><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                        <elseif condition="$vo.order_status eq '6'"/><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                        <elseif condition="$vo.order_status eq '2'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                        <elseif condition="$vo.order_status eq '5'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                        <else /><span class="recharge_statue recharge_send"><em>正在送充</em></span></elseif></if>
+                    </td>
+                    <td align="center">
+                        <if condition='($vo.order_code eq null) or ($vo.order_status eq 6)'>
+                            <if condition="$vo.refund_status eq 2">
+                                已退积分
+                            <else/>
+                                未退积分
+                            </if>
+                        <else/>
+                            --
+                        </if>
+                    </td>
+                    <td class="operation_td">
+                        <button class="operationbtn exchange_show_btn" value="{$vo.exchange_score_id}" data-type="{$use}">
+                                <!--<i class="minicon edit_icon"></i>-->
+                            <span>查看</span>
+                        </button>
+                        <if condition='($vo.order_code eq null) or ($vo.order_status eq 6)'>
+                            <if condition="$vo.refund_status lt 2">
+                                <isshow url="ExchangeRecord/refund_score">
+                                    <button class="operationbtn exchange_refund_btn" value="{$vo.exchange_score_id}" data-type="{$use}">
+                                        <!--<i class="minicon edit_icon"></i>-->
+                                        <span>退积分</span>
+                                    </button>
+                                </isshow>
+                            </if>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+
+<include file="Common/footer" />

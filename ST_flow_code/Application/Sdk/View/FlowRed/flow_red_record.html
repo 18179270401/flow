@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>红包记录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="__PUBLIC__/utils/css/mui.min.css?s={$version_number}">
+		<link rel="stylesheet" href="{$role}css/flowRedRecord.css?s={$version_number}">	
+		<style>
+			.mui-table h4,.mui-table h5,.mui-table .mui-h5,.mui-table .mui-h6,.mui-table p{
+		        margin-top: 0;
+		    }
+		    .mui-table h4{
+		        line-height: 21px;
+		        font-weight: 500;
+		    }
+		
+		    .mui-table .oa-icon{
+		        position: absolute;
+		        right:0;
+		        bottom: 0;
+		    }
+		    
+		    .mui-table .oa-icon-star-filled{
+		        color:#f14e41;
+		    }
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+		    <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="flow-red-record-list">
+		    	<volist name="order" id="vo" key="k" empty=''>
+		    	<li class="mui-table-view-cell" onclick="getFlowRedDetail({$vo.red_order_id})">
+					<div class="mui-table">
+						<div class="mui-table-cell mui-col-xs-5">
+							<h5 class="mui-ellipsis" style="color: #000000;">订单编号：{$vo.red_order_code}</h5>
+							<p class="mui-h6 mui-ellipsis">{$vo.order_date}</p>
+						</div>				
+						<div class="mui-table-cell mui-col-xs-2 mui-text-right">
+							<h5 class="mui-ellipsis" style="color: #000000;">¥{$vo.pay_price}</h5>
+							<p class="mui-h6 mui-ellipsis">{$vo.out_num}/{$vo.all_num}个</p>
+						</div>
+					</div>
+		    	</li>
+		    	<php>
+		    		if(count($order)!=$k){
+		    			echo "<li class='mui-table-view-divider'></li>";
+		    		}
+		    	</php>
+		    	</volist>
+		    </ul>
+		</div>
+		<!--<input type="hidden" name="orderList" id="orderList" value="{$order}" />-->
+		<script>
+
+			htmlFontSize();
+			window.onresize=function(){
+				htmlFontSize();
+			}
+			function htmlFontSize(){
+				var w=document.documentElement.clientWidth;
+				var i=parseInt(w)/768;
+				document.documentElement.style.fontSize=(parseInt(w)/768)*40+"px";
+			}
+		</script>
+
+	</body>
+	<script src="__PUBLIC__/utils/css/mui.min.js?s={$version_number}"></script>
+	<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+	<script src="{$role}js/flowRedRecord.js?s={$version_number}"></script>
+</html>

@@ -1,0 +1,12 @@
+*{box-sizing: border-box;}
+body{font-family: "微软雅黑";}
+body,div,p,a,span,ul,li,input,i,button,h1,h2,h3,h4,h5,h6{margin: 0;padding: 0;}
+h1,h2,h3,h4,h5,h6{font-weight: normal;}
+input{border: none;outline: none;}
+button{border: none;outline: none;}
+i{font-style: normal;}
+ul{list-style: none;}
+.hide{display: none;}
+.fl{float: left;}
+.fr{float: right;}
+.clearfix:after{content: "";display: block;clear: both;}

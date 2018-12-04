@@ -1,0 +1,51 @@
+<div id="return_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxyAccount_return_form" >
+     <input type="hidden"  name="account_id" value="{$account_id}" />
+     <input type="hidden"  name="proxy_id" value="{$proxy_id}" />
+     <input type="hidden"  name="proxy_name" value="{$proxy_name}" />
+    <if condition="$proxy.proxy_id neq 1">
+     <div class="add_list">
+            <h5>上级代理商名称：</h5>
+            <div class="add_value"><span>{$proxy.proxy_name}</span></div>
+        </div>
+     <div class="add_list">
+            <h5>上级代理商编号：</h5>
+            <div class='add_value'><span>{$proxy.proxy_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>上级账户余额：</h5>
+            <div class="add_value"><span>{$proxy.account_balance|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>上级冻结金额：</h5>
+            <div class="add_value"><span>{$proxy.freeze_money|default='0.000'}元</span></div>
+        </div>
+        </if>
+        <div class="add_list">
+            <h5>代理商名称：</h5>
+            <div class="add_value"><span>{$proxy_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>代理商编号：</h5>
+            <div class='add_value'><span>{$proxy_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>账户余额：</h5>
+            <div class="add_value"><span>{$account_balance|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>冻结金额：</h5>
+            <div class="add_value"><span>{$freeze_money|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>收回金额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="收回金额" style="width:160px" vtype='money' maxlength="7" name="apply_money" /></div><div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true" style="width:200px;"></textarea>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,39 @@
+<!-- 添加通道 -->
+<div id="channel_user_add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="channel_user_add_box">
+
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>用户类型：</h5>
+        <div class="add_value">
+            <select name="user_type" id="user_type" class="select usertype_id" msg="请选择用户类型">
+                <option value="">请选择</option>
+                <option value="1">代理商</option>
+                <option value="2">企业</option>
+            </select>
+        </div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>用户名称：</h5>
+        <div class="add_value">
+            <input type="text" class="inputtext usertype_id" name="delegate_name" id="inputusername" data-nameall="all"  field="用户名称" data-usertype="user_types">
+            <input type='hidden' name='id' id='user_type_ids' value=''>
+        </div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道名称：</h5>
+       <!-- <div class="add_value">
+            <select name="channel_id" id="channel_id" class="select" msg="请选择通道名称">
+                <option value="">请选择</option>
+                <volist name="channel" id="vo2">
+                    <option value="{$vo2.channel_id}">{$vo2.channel_name}</option>
+                </volist>
+            </select>
+        </div>-->
+        <div class="add_value">
+            <input type="text" class="inputtext" name="delegate_name" id="inputchannel"  field="通道名称" have-discount="1" >
+            <input type='hidden' name='channel_id' id='channel_ids' value=''>
+        </div>
+    </div>
+  </form>
+</div>
+

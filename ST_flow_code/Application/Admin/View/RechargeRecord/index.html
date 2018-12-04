@@ -1,0 +1,357 @@
+<include file="Common/header" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>已完成充值记录</em></span>
+            </div>
+            <div class="operation_info">
+                <isshow url="RechargeRecord/orders_match">
+                    <button class="btn add_btn" onclick="up_excel();">
+                        <i class="minicon exportoperation_icon"></i><span>对账匹配</span>
+                    </button>
+                </isshow>
+
+                <if condition="$user_type eq 1">
+                    <isshow url="RechargeRecord/export_excel">
+                        <button class="btn add_btn recharge_record_selected_excel_btn" data-url="RechargeRecord">
+                            <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                        </button>
+                    </isshow>
+                    <isshow url="RechargeRecord/export_txt">
+                        <button class="btn add_btn recharge_record_selected_txt_btn" data-url="RechargeRecord">
+                            <i class="minicon exportoperation_icon"></i><span>导出TXT</span>
+                        </button>
+                    </isshow>
+
+                <else />
+                    <isshow url="RechargeRecord/export_excel">
+                        <button class="btn  export_button" data-url="RechargeRecord">
+                            <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                        </button>
+                    </isshow>
+                    <isshow url="RechargeRecord/export_txt">
+                        <button class="btn  export_button" data-url="RechargeRecord/export_txt" data-type="url">
+                            <i class="minicon exportoperation_icon"></i><span>导出TXT</span>
+                        </button>
+                    </isshow>
+                 </if>
+
+
+                <span style="display:none;">
+                     <form name="orders_match_form">
+                        <input type="file" name="file" id="open_file" value=""/>
+                     </form>
+                 </span>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form method="get" name="excel" action="/index.php/Admin/RechargeRecord/index">
+            <div class="search_nav minheight60" style="min-height:110px;">
+                <ul>
+                    <if condition="$upper_role neq 1">
+                        <li>
+                            <input type="text" class="inputtext" name="proxy_name" value="{$Think.get.proxy_name}" placeholder="用户名称" style="min-width:80px;max-width: 100px;" />
+                        </li>
+                    </if>
+                    <li>
+                        <input type="text" class="inputtext" name="mobile" value="{$Think.get.mobile}" placeholder="手机号" style="min-width:80px;max-width: 100px;"/>
+                    </li>
+                    <if condition="$user_type eq 1">
+                        <li>
+                            <input type="text" class="inputtext" name="sale_name" maxlength="20" value="{$Think.get.sale_name}" placeholder="客户经理姓名" style="min-width:80px;max-width: 100px;"/>
+                        </li>
+                        <li>
+                            <input type="text" class="inputtext" name="product_name" value="{$Think.get.product_name}" placeholder="流量包名称" style="min-width:80px;max-width: 100px;"/>
+                        </li>
+
+                        <if condition="$upper_role neq 1">
+                            <!--//联想的方式展现****************-->
+                            <if condition="$user_type eq '1'">
+                                <li>
+                                    <input type="text" class="inputtext shui_channel_name" name="channel_name" value="{$Think.get.channel_name}" placeholder="主充值通道" style="min-width:80px;max-width: 90px;" data-id-name="channel_id" autocomplete="off" is-role="{$is_rolea}" is-status="show">
+                                    <input type='hidden' class="inputtext" name='channel_id' id='channel_id' value='{$Think.get.channel_id}'>
+                                </li>
+
+                                <li>
+                                    <input type="text" class="inputtext shui_channel_name" name="bc_channel_name" value="{$Think.get.bc_channel_name}" placeholder="备充值通道" style="min-width:80px;max-width: 90px;" data-id-name="bc_channel_id" autocomplete="off" is-role="{$is_rolea}" is-status="show">
+                                    <input type='hidden' class="inputtext" name='bc_channel_id' id='bc_channel_id' value='{$Think.get.bc_channel_id}'>
+                                </li>
+                            </if>
+
+                        </if>
+
+
+                    </if>
+
+                    <li>
+                        <label class="inputlabel">运营商：</label>
+                        <select class="select" name="operator_id" style="min-width:130px;width:130px;">
+                            <option value="">请选择</option>
+                            <volist name="operator" id="voo">
+                                <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">归属地省份：</label>
+                        <select class="select" name="province_id" style="min-width:130px;width:130px;">
+                            <option value="">请选择</option>
+                            <volist name="province" id="voo2">
+                                <option value="{$voo2.province_id}" <if condition='$Think.get.province_id eq $voo2["province_id"]'>selected</if> >{$voo2.province_name}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <!--
+                    <if condition="$user_type eq '1'">
+                        <if condition="$upper_role neq 1">
+                            <li>
+                                <label class="inputlabel">主充值通道：</label>
+                                <select class="select" name="channel_id" style="min-width:130px;width:130px;">
+                                    <option value="">请选择</option>
+                                    <volist name="channel" id="voc">
+                                        <option value="{$voc.channel_id}" <if condition='$Think.get.channel_id eq $voc["channel_id"]'>selected</if> >{$voc.channel_code}</option>
+                                    </volist>
+                                </select>
+                                <input type="hidden" value=""/>
+                            </li>
+                            <li>
+                                <label class="inputlabel">备充值通道：</label>
+                                <select class="select" name="bc_channel_id" style="min-width:130px;width:130px;">
+                                    <option value="">请选择</option>
+                                    <volist name="channel" id="voc">
+                                        <option value="{$voc.channel_id}" <if condition='$Think.get.bc_channel_id eq $voc["channel_id"]'>selected</if> >{$voc.channel_code}</option>
+                                    </volist>
+                                </select>
+                                <input type="hidden" value=""/>
+                            </li>
+                        </if>
+                    </if>
+                    -->
+                    <li>
+                        <label class="inputlabel">订单状态：</label>
+                        <select class="select" name="order_status" style="min-width:130px;width:130px;">
+                            <option value="">请选择</option>
+                            <volist name="order_status_list['items']" id="vos">
+                                <option value="{$vos.order_status}" <if condition='$Think.get.order_status eq $vos["order_status"]'>selected</if> >{$vos.text}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+
+                    <li>
+                        <label class="inputlabel">充值时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$default_start}<else />{$Think.get.start_datetime}</if>"  onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$default_end}<else />{$Think.get.end_datetime}</if>"  onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+            <div class="prepaidtip" style="right: 0;text-align: right;">
+                <!--
+                成功金额<span class="blue">{$success_money|floatval}</span>元，
+                充值成功<span class="blue">{$success_data}</span>条，
+                充值失败<span class="red">{$fail_data}</span>条
+                -->
+                <!--  等待提交:【<span class="blue">{$info.wait_data}</span>条,共<span class="blue">{$info.wait_money}</span>元】,-->
+                <p> 充值成功：【<span style="color:#5cb95c;">{$counts.@p_success_count|default=0}</span>条，原价共<span style="color:#5cb95c;">{$counts.@p_success_price|default='0.000'}</span>元，折后价共<span style="color:#5cb95c;">{$counts.@p_success_amount|default='0.000'}</span>元】</p>
+                <p>充值失败：【<span class="red">{$counts.@p_faile_count|default=0}</span>条，原价共<span class="red">{$counts.@p_faile_price|default='0.000'}</span>元，折后价共<span class="red">{$counts.@p_faile_amount|default='0.000'}</span>元】</p>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="95" class="change">订单状态</th>
+                            <th width="120" class="change">手机号</th>
+                            <th width="110" class="change">提交时间</th>
+                            <th width="110" class="change">完成时间</th>
+                            <th width="70" class="change">运营商</th>
+                            <th width="100" claas="change">归属地</th>
+                            <th width="100" class="change" title="流量包名称">流量包名称</th>
+                            <th width="90" class="change" class="money_style" title="原价(元)">原价(元)</th>
+                            <th width="110" class="change" class="money_style" title="折后价格(元)">折后价格(元)</th>
+                            <if condition="($is_role eq 'true')and($user_type eq '1')">
+                                <th width="110" class="change" class="money_style" title="成本价格(元)">成本价格(元)</th>
+                                <th width="100" class="change">折扣数(折)</th>
+                            </if>
+                            <if condition="$upper_role neq 1">
+                                <if condition="$user_type eq '1'"> <th width="90" class="change">通道编码</th></if>
+                                <th width="130" class="change">用户名称</th>
+                                <if condition="$user_type eq 1">
+                                    <th width="130" class="change">顶级代理</th>
+                                </if>
+                            </if>
+                            <th width="150" class="change">操作</th>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <table>
+                    <volist name="order_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <if condition="$user_type eq '1'">
+                                <td><if condition="$vo.order_status eq '0'"><span class="recharge_statue recharge_send"><em>等待提交</em></span>
+                                    <elseif condition="$vo.order_status eq '1'"/><span class="recharge_statue recharge_send"><em>提交成功</em></span>
+                                    <elseif condition="$vo.order_status eq '2'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                                    <elseif condition="$vo.order_status eq '3'"/><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                                    <elseif condition="$vo.order_status eq '4'"/><span class="recharge_statue recharge_send"><em>提交成功(备)</em></span>
+                                    <elseif condition="$vo.order_status eq '5'"/><span class="recharge_statue recharge_success"><em>充值成功(备)</em></span>
+                                    <else /><span class="recharge_statue recharge_failed"><em>充值失败(备)</em></span></if></td>
+                                <else/>
+                                <td><if condition="$vo.order_status eq '0'"><span class="recharge_statue recharge_send"><em>正在送充</em></span>
+                                    <elseif condition="$vo.order_status eq '1'"/><span class="recharge_statue recharge_send"><em>正在送充</em></span>
+                                    <elseif condition="$vo.order_status eq '2'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                                    <elseif condition="$vo.order_status eq '3'"/><span class="recharge_statue recharge_send"><em>正在送充</em></span>
+                                    <elseif condition="$vo.order_status eq '4'"/><span class="recharge_statue recharge_send"><em>正在送充</em></span>
+                                    <elseif condition="$vo.order_status eq '5'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                                    <else /><span class="recharge_statue recharge_failed"><em>充值失败</em></span></if></td>
+                            </if>
+
+                            <!--   <td>{$vo.order_code}</td>-->
+                            <td><span title="{$vo.mobile}">{$vo.mobile}</span></td>
+                            <td title="{$vo.order_date|strtotime|date='m-d H:i:s',###}">{$vo.order_date|strtotime|date="m-d H:i:s",###}</td>
+                            <td><if condition="$vo.complete_time eq '0000-00-00 00:00:00'"><else />{$vo.complete_time|strtotime|date="m-d H:i:s",###}</if></td>
+                            <td title="{$vo.operator_name}">{$vo.operator_name}</td>
+                            <td title="{$vo.city_name}">{$vo.province_name}{$vo.city_name}</td>
+                            <td><if condition="$vo.province_id eq '1'">全国<else />省内</if>{$vo.product_name}</td>
+                            <!--       <td>{$vo.price}</td> -->
+                            <td title="{$vo.discount_price}">{$vo.price}</td>
+                            <td title="{$vo.discount_price}">{$vo.discount_price}</td>
+                            <if condition="($is_role eq 'true')and($user_type eq '1')">
+                                <td>{$vo.price|cost_price=$vo['top_discount'],$vo['top_rebate_discount']}</td>
+                                <td>{$vo.price|float_operate=$vo['discount_price']}</td>
+                            </if>
+                            <if condition="$upper_role neq 1">
+                                <if condition="$user_type eq 1">
+                                    <if condition="($vo.order_status eq 4) or ($vo.order_status eq 5) or ($vo.order_status eq 6)">
+                                        <td title="{$vo.bc_channel_code}">{$vo.bc_channel_code}</td>
+                                        <else />
+                                        <td title="{$vo.channel_code}">{$vo.channel_code}</td>
+                                    </if>
+                                </if>
+                                <td title="{$vo.proxy_name}">{$vo.proxy_name}</td>
+                                <if condition="$user_type eq 1">
+                                    <td title="{$vo.top_proxy_name}">{$vo.top_proxy_name}</td>
+                                </if>
+                            </if>
+                            <td class="operation_td">
+                                <isshow url="RechargeRecord/detailed">
+                                    <button class="operationbtn order_view_btn" value="{$vo.order_id}">
+                                        <span>查看</span>
+                                    </button>
+                                </isshow>
+                                <isshow url="RechargeRecord/callback">
+                                    <button class="operationbtn order_callback_btn" value="{$vo.order_id}">
+                                        <span>推送回调</span>
+                                    </button>
+                                </isshow>
+
+                                <if condition="($user_type eq 1) AND (($vo.refund_id eq '0') or ($vo.refund_id eq '')) AND (($vo.order_status eq '2') OR ($vo.order_status eq '5'))" >
+                                    <isshow url="RechargeRecord/orderrefund">
+                                        <button class="operationbtn order_orderrefund_btn" value="{$vo.order_id}">
+                                            <span>退款 </span>
+                                        </button>
+                                    </isshow>
+                                    <elseif  condition="(($vo.refund_id eq '0') or ($vo.refund_id eq '')) AND (($vo.order_status eq '2') OR ($vo.order_status eq '5')) and ((in_array2($vo['proxy_id'],$proxy_chd)) or (in_array2($vo['enterprise_id'],$enterprise_chd)))"/>
+                                    <if condition="$vo.refund_status eq '1'">
+                                        <isshow url="RechargeRecord/orderrefund">
+                                            <button class="operationbtn order_orderrefund_btn" value="{$vo.order_id}">
+                                                <span>退款 </span>
+                                            </button>
+                                        </isshow>
+                                    </if>
+                                    <else />
+                                </if>
+
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+    parent.layer.closeAll();
+
+    //模拟点击选择文件按钮
+    function up_excel(t){
+        $("#open_file").click();
+        upfile_post();
+    }
+    //文件选择完成自行上传
+    function upfile_post(){
+        if($("#open_file").val()!=""){
+            post_upfile();
+        }else{
+            setTimeout("upfile_post()",1000);
+        }
+    }
+    //上传excel手机号码
+    function post_upfile(){
+        var formData = new FormData($("form[name='orders_match_form']")[0]);
+        $.ajax({
+            url: '/index.php/Admin/RechargeRecord/orders_match' ,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                //进行下载
+                if(data){
+                    var form = $("<form>");
+                    form.attr("style","display:none");
+                    form.attr("target","");
+                    form.attr("method","post");
+                    form.attr("action","/index.php/Admin/RechargeRecord/orders_match");
+                    var input1 = $("<input>");
+                    input1.attr("type","hidden");
+                    input1.attr("name","filename");
+                    input1.attr("value",data);
+                    var input2 = $("<input>");
+                    input2.attr("type","hidden");
+                    input2.attr("name","download");
+                    input2.attr("value",1);
+                    $("body").append(form);
+                    form.append(input1);
+                    form.append(input2);
+                    form.submit();
+                    form.remove();
+                }
+
+                $("#open_file").after($("#open_file").clone().val(""));
+                $("#open_file").remove();
+            }
+        });
+    }
+</script>
+</body>
+</html>

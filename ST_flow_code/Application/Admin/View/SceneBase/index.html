@@ -1,0 +1,94 @@
+<include file="Common/header" xmlns="http://www.w3.org/1999/html"/>
+
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.zclip.min.js?s={$version_number}"></script>
+<input type="hidden" name="swfpath" id="swfpath" value="__PUBLIC__/Admin/js/ZeroClipboard.swf" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>营销场景</em>><em>微信设置</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="public_number_box">
+        <form name="scenebase_add_form" id="form1" style="height:100%">
+            <input type="hidden" name="info_id" value="{$list.info_id}" />
+            <input type="hidden" name="account_id" value="{$ulist.account_id}" />
+        <div class="public_number_hd">
+            <div class="receivingset_choice">
+                <input type="hidden" name="payment_type_default" value="{$list['payment_type']}" />
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>公众号类型：</h5>
+                    <div class="add_value">
+                        <input type="hidden" name="wx_type" id="wx_type" value="{$list['active_wx_type']}" />
+                        <label data-value="1" id="wxtype" onclick="wxtype(1)"  <if condition="$list['active_wx_type'] eq 1">class="radio checked wx_type"<else/>class="radio wx_type"</if>><em>服务号</em></label>
+                        <label data-value="2" id="wxtype" onclick="wxtype(2)"  <if condition="$list['active_wx_type'] eq 2">class="radio checked wx_type"<else/>class="radio wx_type"</if>><em>订阅号</em></label>
+                    </div>
+                </div>
+            </div>
+            <div class="public_number_tit">
+                <h3>微信公众号设置</h3>
+            </div>
+            <div class="public_number_item">
+                <ul>
+                    <li>
+                        <span class="public_number_img"><img src="__PUBLIC__/Admin/images/wx_img1.jpg"></span>
+                        <div class="public_number_explain">
+                        		<div class="public_number_con">
+                            	<h3 class="name">公众号Appid</h3>
+                            	<div><input type="text" class="inputtext" name="active_appid" value="{$list.active_appid}"/></div>
+                            	<p class="text">登录微信公众号平台：http://mp.weixin.qq.com，进入《基础设置》页面，将获取到公众号AppId，填写在此处, AppId又称为应用ID,为微信公众号唯一标志.营销场景中。用于获取参加流量活动的用户信息。方便企业汇聚用户信息。查看用户分布。查找用户习性。</p>
+                            	</div>
+
+                        </div>
+                    </li>
+                    <li>
+                        <span class="public_number_img"><img src="__PUBLIC__/Admin/images/wx_img1.jpg"></span>
+                        <div class="public_number_explain">
+                        	<div class="public_number_con">
+                            <h3 class="name">公众号AppSecret</h3>
+                            <div><input type="text" class="inputtext" name="active_appsecret" value="{$list.active_appsecret}"/></div>
+                            <p class="text">登录微信公众号平台：http://mp.weixin.qq.com，进入《基础设置》页面，将获取到公众号AppSecret，填写在此处, AppSecret又称为应用密钥。为匹配AppId所用，微信提供安全性验证。</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="public_number_img"><img src="__PUBLIC__/Admin/images/wx_img2.jpg"></span>
+                        <div class="public_number_explain">
+                        	<div class="public_number_con">
+                            <h3 class="name">微信号</h3>
+                            <div><input type="text" class="inputtext" name="active_wx_name" value="{$list.active_wx_name}"/></div>
+                            <p class="text">登录微信公众号平台：http://mp.weixin.qq.com，进入《公众号设置》页面，将获取到公众号微信号，填写在此处，营销场景中。可以根据微信号。给用户提供微信公众号二维码。从而让用户达到关注的目的。</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="savecon bordertop"><button class="btn add_btn" onclick="alladd()"><span>保存</span></button></div>
+    <script type="text/javascript">
+    function alladd() {
+        var formData = new FormData($("form[name='scenebase_add_form']")[0]);
+    $.ajax({
+    url :"/index.php/Admin/SceneBase/index/type/operation",
+    type : 'post',
+    data : formData,
+    async: false,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (data) {
+    if(data.status == 'success') {
+    alertbox(data);
+    //location.reload();
+    } else {
+    alertbox(data);
+    }
+    },
+    error: function (data) {
+    alertbox(data);
+    }
+    });
+    }
+    </script>
+    <include file="Common/footer" />

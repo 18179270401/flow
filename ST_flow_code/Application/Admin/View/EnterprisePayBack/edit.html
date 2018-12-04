@@ -1,0 +1,85 @@
+
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="enterprisePayBack_voucher_form" >
+        <input type="hidden" name="loan_id" value="{$loan_id}"/>
+        <input type="hidden" name="repaymen_id" value="{$repaymen_id}"/>
+        <div class="add_list">
+            <h5>企业名称：</h5>
+            <div class="add_value"><span>{$enterprise_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>企业编号：</h5>
+            <div class="add_value"><span>{$enterprise_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>借款金额：</h5>
+            <div class="add_value"><span>{$loan_money|default="0.00"}</span></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>未还款金额：</h5>
+            <div class="add_value"><span>{$loan_id|last_money}</span></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="recharge_type_div" >
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>还款方式：</h5>
+            <div class="add_value">
+                    <select name="source" id="source"  empty="true" class="select" msg="请选择付款方式" onchange="payment_name()">
+                        <option value="" selected>请选择</option>
+                        <option value="1" <if condition='$source eq 1'>selected</if>>汇款</option>
+                        <option value="2" <if condition='$source eq 2'>selected</if>>微信支付</option>
+                        <option value="3" <if condition='$source eq 3'>selected</if>>支付宝支付</option>
+                    </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em><span id="source_name">
+                <if condition="$source eq 1">
+                    打款户名
+                <elseif  condition="$source eq 2"/>
+                    支付订单号
+                <else/>
+                    交易号
+                </if>
+            </span>：</h5>
+            <div class="add_value"><input type="text" class="inputtext"  empty="true" id="source_input" field="<if condition='$source eq 1'>打款户名<elseif  condition='$source eq 2'/>支付订单号<else/>交易号</if>"  name="transaction_number" value="{$transaction_number}" /></div>
+        </div>
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>还款时间：</h5>
+                <div class="add_value">
+                    <input type="text" class="inputtext repayment_date" onClick="WdatePicker()"  value="{$repayment_date}" readonly field="还款时间" name="repayment_date"   />
+                </div>
+            </div>
+    </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>还款金额：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="repayment_money"  maxlength="6" field="还款金额"  value="{$repayment_money}" vtype="money" />
+            </div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="recharge_type_div" >
+        <div class="add_list">
+            <h5>附件凭证：</h5>
+            <div class="add_value">
+                <input type="file" class="fileinput maxwidth156" empty="true" name="file"/><br/>
+                <if condition="$credential_one neq '' ">
+                    <img src="{$credential_one}" class="imginput"><span><php> echo basename($credential_one);</php></span>
+                    <button type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('EnterprisePayBack/show',array('repaymen_id'=>$repaymen_id,'download'=>1))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                    <else />
+                    <span>没有可用附件</span>
+                </if>
+            </div>
+        </div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true" >{$remark}</textarea>
+            </div>
+        </div>
+    </form>
+</div>

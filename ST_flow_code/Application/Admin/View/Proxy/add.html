@@ -1,0 +1,122 @@
+<script type="text/javascript">
+  $(function(){
+      //点击效果
+      $("select[name='province_id']",top.document).change(function(){
+        //获取值
+        var val = $(this).val();
+        //取消市区的选择
+        $("select[name='city_id'] option",top.document).removeAttr("selected");
+            $("select[name='city_id'] option",top.document).remove();
+            var title = '<option value="">请选择市</option>';
+            $("select[name='city_id']",top.document).append(title) ;
+            //当选择了请选择省
+            if(val != ''){
+                var html = '';
+                $("div.dis option[data = '"+val+"']",top.document).each(function(){
+                    var value = $(this).attr('value');
+                    var text = $(this).html();
+                    html += '<option value="'+value+'">'+text+'</option>';
+                })
+                $("select[name='city_id']",top.document).append(html) ;
+            }
+      });
+  })
+
+</script>
+<div id="proxy_add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+  <form name="proxy_add_form">
+    <div class="add_list">
+      <h5><em class="wildcard">*</em>代理商名称：</h5>
+      <div class="add_value">
+        <span><input type="text" class="inputtext proxy_name_input" name="proxy_name"
+          field="代理商名称"
+          maxlength="30"
+         /></span>
+      </div>
+    </div>
+     <div class="add_list">
+        <h5><em class="wildcard">*</em>联系人：</h5>
+        <div class="add_value"><input type="text" class="inputtext" 
+          field="联系人"
+          maxlength="20"
+          name="contact_name"/></div>
+    </div>
+     <div class="add_list">
+        <h5><em class="wildcard">*</em>联系人电话：</h5>
+        <div class="add_value"><input type="text" class="inputtext"
+          field="联系电话"
+          maxlength="20"
+          vtype="tel"
+          name="contact_tel"/></div>
+
+    </div>
+    <div class="add_list">
+        <h5>邮箱：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="email"
+          empty="true"
+          field="邮箱"
+          vtype="email"
+          maxlength="50"
+          /></div>
+    </div>
+    <div class="add_list">
+        <h5>省市：</h5>
+        <div class="add_value">
+          <select class="select" name="province_id" style="min-width:80px;width:117px;" empty="true">
+            <option value="">请选择省</option>
+            <volist name="province_list" id="vo">
+                <option value="{$vo.province_id}">{$vo.province_name}</option>
+            </volist>
+          </select>
+          <select class="select" name="city_id" style="min-width:80px;width:117px;" empty="true">
+            <option value="">请选择市</option>
+          </select>
+          <div class="dis" style="display:none;">
+            <volist name="city_list" id="vo">
+                <option data="{$vo.province_id}" value="{$vo.city_id}">{$vo.city_name}</option>
+            </volist>
+          </div>
+        </div>
+    </div>
+      <div class="add_list">
+          <h5>公司电话：</h5>
+          <div class="add_value">
+            <span>
+              <input type="text" class="inputtext"
+                     vtype="tel"
+                     field="公司电话"
+                     maxlength="20"
+                     name="tel"
+                     empty="true"
+              />
+
+           </span>
+          </div>
+      </div>
+    <div class="add_list">
+        <h5>地址：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="address"
+          empty="true"
+          field="地址"
+          maxlength="100"
+          /></div>
+    </div>
+    <div class="add_list">  
+      <h5><em class="wildcard">*</em>支持运营商：</h5>
+      <div class="add_value">
+          <volist name="operator_list" id="vo">
+              <input type="checkbox" checked  name="operator_list[]" value="{$vo.operator_id}" style="display:none" id="{$vo.operator_id}_operator">
+            <label class="checkbox  checked " for="{$vo.operator_id}_operator" ><em>{$vo.operator_name}</em></label>
+          </volist>
+      </div>
+    </div>
+    </form>
+    <script type="text/javascript">
+       /* setFocus_val=function(id){
+            var t=$(id).val();
+            $(id).val("").focus().val(t);
+        };
+            setFocus_val('.proxy_name_input');*/
+
+    </script>
+</div>

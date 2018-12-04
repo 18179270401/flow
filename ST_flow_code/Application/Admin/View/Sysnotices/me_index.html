@@ -1,0 +1,84 @@
+<include file="Common/header" />
+<div class="main_con">
+    <div class="operation_con">
+        <div class="currenttit">
+            <i></i><span><em>公告管理</em>><em>我的公告</em></span>
+        </div>
+    </div>
+    <div class="search_box">
+        <form name="excel" method="get" action="/index.php/Admin/Sysnotices/me_index" >
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="notice_title" value="{$Think.get.notice_title}" placeholder="公告标题"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">状态：</label>
+                        <select class="select" name="status" style="min-width:80px;">
+                            <option value="" selected>未读</option>
+                            <option value="1" <if condition="$Think.get.status eq 1">selected</if> >已读</option>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                           <!-- <th width="80" class="change">公告类型</th>-->
+                            <th width="100" class="change">标题</th>
+                            <th width="280" class="change">内容</th>
+                            <th width="90" class="change">发布时间</th>
+                            <th width="100">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="notice_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                           <!-- <td><if condition="$vo['notice_type'] eq 1">紧急公告<else />普通公告</if></td>-->
+                            <td>{$vo.notice_title}</td>
+                            <td>{$vo.notice_content}</td>
+                            <td>{$vo.create_date}</td>
+                            <td class="operation_td">
+                                <if condition="in_array2($vo['notice_id'],$read_id)">
+                                    <button class="operationbtn sysnotices_read_btn" value="{$vo.notice_id}" vtype="2">
+                                        <span>查看</span>
+                                    </button>
+                                    <else />
+                                    <button class="operationbtn sysnotices_read_btn" value="{$vo.notice_id}" vtype="1">
+                                        <span>阅读</span>
+                                    </button>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

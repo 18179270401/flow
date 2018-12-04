@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="{$role}css/reset.css" />
+		<link rel="stylesheet" href="{$role}css/base.css" />
+		<script type="text/javascript" src="{$role}js/setFontSize.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/WxHome/js/jquery-1.8.3.min.js"></script>
+		<title>智能家人定位</title>
+	</head>
+	<body id="main" class="main">
+		<button type="button" id="down_btn" class="down_btn">
+			<span><em></em>立即下载APP</span>
+		</button>
+	
+		<div class="copy">
+			<p>&copy;2015-2016恒韬软件</p>
+		</div>
+		
+		<!--<div class="share_bg" id="share_bg" style="display: none;">
+			<img src="{$role}images/shareTips.png" pointer-events:none;/>
+		</div>-->
+	</body>
+	
+		<script type="text/javascript">
+			// window.onresize=function(){
+			// 	htmlFontSize();
+			// }
+			// function htmlFontSize(){
+			// 	var w=document.documentElement.clientWidth;
+			// 	var h=document.documentElement.clientHeight;
+			// 	var i=parseInt(w)/768;
+			// 	document.documentElement.style.fontSize=(parseInt(w)/768)*40+"px";
+			// 	if($('body').height() < h){
+			// 		$('#share_bg').height(h);
+			// 	}else{
+			// 		$('#share_bg').height($('body').height());
+			// 	}
+			// }
+
+
+		function isWeiXin(){
+			var ua = window.navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		jQuery(document).ready(function() {
+			$(document).on("click", "#down_btn", function(event) {
+				var u = navigator.userAgent;
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+				var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+				if(isAndroid == true)
+				{
+					if(isWeiXin())
+					{
+						$("#main").css("background","url({$role}images/shareTips.png) no-repeat top center");
+						$("#main").css("background-size","cover");
+						$('#down_btn').hide();
+					}
+					else
+					{
+						var url = "http://www.liuliang.net.cn/ST_FLOW_android.apk";
+						location.href = url;
+					}
+				}
+				else if(isiOS == true)
+				{	
+					if(isWeiXin())
+					{
+						$("#main").css("background","url({$role}images/shareTips.png) no-repeat top center");
+						$("#main").css("background-size","cover");
+						$('#down_btn').hide();
+					}
+					else
+					{
+						var url = "https://itunes.apple.com/us/app/shang-tong-liu-liang/id1147017202?l=zh&ls=1&mt=8";
+						location.href = url;
+					} 
+				}
+			});
+		});
+</script>
+</html>
+

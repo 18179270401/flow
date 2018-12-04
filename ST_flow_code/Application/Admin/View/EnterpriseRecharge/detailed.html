@@ -1,0 +1,123 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <!--<thead>
+            <tr>
+                <th width="100%" colspan="4">企业充值信息</th>
+            </tr>
+        </thead>-->
+        <tbody>
+        <tr>
+            <th width="17%">企业名称：</th>
+            <td width="25%">{$enterprise_name}</td>
+            <th width="20%">企业编号：</th>
+            <td width="33%">{$enterprise_code}</td>
+        </tr>
+        <if condition="$usr_type eq 1">
+            <tr>
+                <th >代理商名称：</th>
+                <td >{$proxy_name}</td>
+                <th >代理商编号：</th>
+                <td >{$proxy_code}</td>
+            </tr>
+        </if>
+        <tr>
+            <th>充值类型：</th>
+            <td>
+                <if condition="$apply_type eq 1">
+                    正常充值
+                <else/>
+                    测试款
+                </if>
+                </td>
+            <th>付款方式：</th>
+            <td>
+                <if condition="$source eq 0">
+                <elseif condition="$proxy_type eq 1"/>
+                    {$source|get_source_name}
+                    <else/>
+                    <if condition="$source eq 1">
+                         汇款
+                        <elseif  condition="$source eq 2"/>
+                        微信支付
+                        <else/>
+                        支付宝支付
+                    </if>
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th><if condition="$source eq 1">
+                打款户名：
+                <elseif  condition="$source eq 2"/>
+                支付订单号：
+                <else/>
+                交易号：
+                </if></th>
+            <td colspan="3" title="{$transaction_number}">{$transaction_number}</td>
+        </tr>
+        <tr>
+            <th >付款金额：</th>
+            <td >{$apply_money|default="0.000"}元</td>
+            <th>付款日期：</th>
+            <td>{$transaction_date}</td>
+        </tr>
+        <tr>
+            <th>附件凭证：</th>
+            <td colspan="3">
+                <if condition="$credential_one neq '' ">
+                    <img src="{$credential_one}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;"><span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($credential_one);</php></span>
+                    <button style="margin-top:3px;" type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('EnterpriseRecharge/voucher',array('apply_id'=>$apply_id,'download'=>1))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                    <else />
+                    <span>没有可用附件</span>
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th>审核状态：</th>
+            <td>{$approve_status|get_apply_status}<if condition="$approve_status eq 5">【已充值】</if></td>
+            <th>送审人：</th>
+            <td >{$create_user_id|get_user_name}</td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+    </tbody>
+    </table>
+    <volist name="process" id="vo" empty="">
+        <table width="100%">
+            <thead>
+             <tr>
+                <th width="100%" colspan="4">{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                    <else />
+                        {$vo.approve_status|get_apply_status2=3}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+               
+            </tr> 
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+               
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+
+</div>

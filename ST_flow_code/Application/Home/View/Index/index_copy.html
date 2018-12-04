@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta charset="utf-8">
+  <meta name="Generator" content="EditPlus">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.12.1.min.js"></script>
+ </head>
+
+ <body>
+  <table width=100% border=1>
+    <tr>
+        <td width=10%>ID</td>
+        <td width=20%>名称</td>
+        <!--<td width=30%>地址</td>-->
+        <td width=10%>排序号</td>
+    </tr>
+    <form id="form1">
+    <volist name="list" id="vo">
+        <tr>
+            <td colspan=4>{$vo.menu_name}【{$vo.sys_type|get_sys_type}】</td>
+        </tr>
+        <volist name="vo.function" id="function">
+            <tr>
+                <td><input type="text" name="id[]" style="width:90%;" value="{$function.function_id}" /></td>
+                <td><input type="text" name="name[]" style="width:90%;" value="{$function.function_name}" /></td>
+                <!--<td><input type="text" name="action_url[]" style="width:90%;" value="{$function.action_url}" /></td>-->
+                <td><input type="text" name="order_num[]" style="width:90%;" value="<?php echo $key+1;?>" /></td>
+            </tr>
+        </volist>
+        
+    </volist>
+    </form>
+    <a href="JavaScript:edit();">提交</a>
+  </table>
+  
+  <script type="text/javascript">
+    function edit(){
+        $.ajax({
+			url :"/index.php/Home/Index/edit",
+			type : 'post',
+			data :$("#form1").serialize(),
+			dataType :'json',
+			success : function(data) {
+				alert(data.msg);
+			}
+		});
+    }
+  </script>
+ </body>
+</html>

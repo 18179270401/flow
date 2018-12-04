@@ -1,0 +1,95 @@
+body{
+	background-image: url(../images/scratch_bg.png);
+}
+.scratch-logo{
+	text-align: center;
+	margin-top: 4rem;
+	margin-bottom: 3rem;
+}
+
+.scratch-div-content{
+	text-align: center;
+	width:295px;
+	height:101px;
+	margin:0 auto;
+}
+
+span {
+	display: block;
+	text-align: center;
+	font-size: 0.9rem;
+	color: white;
+}
+
+hr {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: white;
+	height: 0.1rem;
+}
+
+.ActivityRules .ActivityRuleslefthr {
+	/*background: blue;*/
+	display: block;
+	float: left;
+	width: 2.7rem;
+	height: 0.7rem;
+	text-align: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules .ActivityRulescenter {
+	width: 12.6rem;
+	height: 0.7rem;
+	float: left;
+}
+
+.ActivityRules .ActivityRulesrighthr {
+	width: 2.7rem;
+	height: 0.7rem;
+	float: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules {
+	width: 18rem;
+	height: 2rem;
+	margin-top: 0.77rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.barDiv {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 18.48rem;
+	height: 2.1175rem;
+	text-align: center;
+}
+
+.barDiv img {
+	width: 100%;
+	height: 100%;
+}
+
+.phoneNumberContent {
+	position: absolute;
+	text-align: center;
+	width: 18.48rem;
+	line-height: 2.1175rem;
+}
+
+.barDiv #phoneNumber {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:1.5rem;
+}
+
+.activeTime {
+	text-align: center;
+	color: #FEE09B;
+	margin-top: 1.078rem;
+	font-size: 0.7rem;
+}

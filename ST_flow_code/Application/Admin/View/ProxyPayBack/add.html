@@ -1,0 +1,69 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxyPayBack_add_form" >
+        <input type="hidden" name="loan_id" value="{$loan_id}"/>
+        <input type="hidden" name="proxy_id" value="{$proxy_id}"/>
+        <div class="add_list">
+            <h5>代理商名称：</h5>
+            <div class="add_value"><span>{$proxy_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>代理商编号：</h5>
+            <div class="add_value"><span>{$proxy_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>借款金额：</h5>
+            <div class="add_value"><span>{$loan_money|default="0.00"}</span></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>未还款金额：</h5>
+            <div class="add_value"><span>{$loan_id|last_money=1}</span></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="recharge_type_div">
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>还款方式：</h5>
+                <div class="add_value">
+                        <select name="source" id="source" class="select"  msg="请选择还款方式" onchange="payment_name()">
+                            <option value="" selected>请选择</option>
+                            <option value="1">汇款</option>
+                            <option value="2">微信支付</option>
+                            <option value="3">支付宝支付</option>
+                        </select>
+                </div>
+            </div>
+            <div class="add_list">
+                <h5><em class="wildcard">*</em><span id="source_name">交易号</span>：</h5>
+                <div class="add_value">
+                    <input type="text" class="inputtext"  id="transaction_number" field="交易号" name="transaction_number" />
+                </div>
+            </div>
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>还款时间：</h5>
+                <div class="add_value">
+                    <input type="text" class="inputtext repayment_date" onClick="WdatePicker()" readonly field="还款时间" name="repayment_date"   />
+                </div>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>还款金额：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="repayment_money" maxlength="7" field="还款金额"  vtype="money" />
+            </div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="recharge_type_div">
+        <div class="add_list">
+            <h5>附件凭证：</h5>
+            <div class="add_value"><input type="file" name="file" empty="true"/></div>
+        </div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+

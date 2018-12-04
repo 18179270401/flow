@@ -1,0 +1,188 @@
+<include file="Common/header" />
+
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.zclip.min.js?s={$version_number}"></script>
+<input type="hidden" name="swfpath" id="swfpath" value="__PUBLIC__/Admin/js/ZeroClipboard.swf" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>营销场景</em>><em>签到积分设置</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="graphicsset_box">
+        <form name="flowbase_add_form" id="form1" style="height:100%">
+            <input type="hidden" name="flowscore_basic_id" value="{$list.flowscore_basic_id}" />
+        <div class="graphicsset_left">
+            <div class="graphicssetleft_content" style="height:calc(100% - 48px);">
+                <div class="graphicsset_nav">
+                    <dl>
+                        <dd>
+                            <h3 style="  padding-top: 0px;">积分兑换比</h3>
+                            <span class="graphicsset_span"><input type="text" class="inputtext"  name="flowscore_exchange_rate" maxlength="8" style="min-width:70px;" value="{$list.flowscore_exchange_rate}"/>&nbsp;&nbsp;积分</span><span class="graphicsset_span" style="  padding-top: 13px;">(备注：?积分=1MB)</span>
+                        </dd>
+                        <dd>
+                            <h3 style="  padding-top: 0px;">每日签到积分</h3>
+                            <span class="graphicsset_span"><input type="text"  class="inputtext" name="daily_score" maxlength="8" style="min-width: 70px;" value="{$list.daily_score}"/>&nbsp;&nbsp;积分</span>
+                        </dd>
+                        <dd>
+                            <h3 style="  padding-top: 0px;">每日签到时间</h3>
+                            <span class="graphicsset_span">
+                                <input type="text" class="inputtext " field="活动结束时间" name="start_time" placeholder="开始时间" value="{$list.start_time}" style='min-width:70px' onclick="WdatePicker({startDate:'00:00:00',dateFmt:'HH:mm:ss'})" readonly="" /><span style="margin-left:2px;margin-right: 1px;font-size:10px;">—</span>
+                                <input type="text" class="inputtext " field="活动结束时间" name="end_time" placeholder="结束时间" value="{$list.end_time}" style='min-width:70px'  onclick="WdatePicker({startDate:'23:59:59',dateFmt:'HH:mm:ss'})" readonly="" />
+                            </span>
+                        </dd>
+                        <dd>
+                            <h3 style="  padding-top: 0px;">活动时间</h3>
+                            <span class="graphicsset_span">
+                                <input type="text" class="inputtext" field="活动开始时间" name="start_date" placeholder="开始时间" value="{$list.start_date}" style="min-width:70px;" onclick="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd'})" readonly="" /><span style="margin-left:2px;margin-right: 1px;font-size:10px;">—</span>
+                                <input type="text" class="inputtext " field="活动结束时间" name="end_date" placeholder="结束时间" value="{$list.end_date}" style="min-width:70px;" onclick="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd'})" readonly="" />
+                            </span>
+
+                        </dd>
+                        <dd>
+                            <h3>企业LOGO</h3>
+                            <div class="graphicsset_img">
+                                <img src="{$list.flowscore_basic_logo}" id="upload_img2" alt="企业LOGO"/>
+                            </div>
+                            <div class="graphicsset_con">
+                                <button class="btn add_btn"><span>上传</span></button>
+                                <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowscoreBase/img_download',array('download'=>'flowscore_basic_logo'))}')">
+                                    <span>下载</span>
+                                </button>
+                                <input type="file" id="upload2" name="logo_img" class="file"/>
+                                <span class="description">图片尺寸大小（255x255）</span>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3 style="padding-top: 0px;">签到活动地址</h3>
+                             <span class="graphicsset_span" style="padding-top: 15px;">{$list.flow_address}</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="savecon">
+                <button class="btn add_btn" onclick="alladd()"><span>保存</span></button>
+            </div>
+        </div>
+        <div class="graphicsset_right">
+            <div class="graphicsset_tit">
+                <h3>移动端展示图</h3>
+            </div>
+            <div class="exploded_view_con">
+                <div class="phone_box">
+                    <div class="phone_header">
+                        <img src="__PUBLIC__/Admin/images/flow_mobile_head.jpg" alt="img"/>
+                    </div>
+                    <div class="phone_inner">
+                        <span class="company_logo" style="display:none;"><img src="{$list.flowscore_basic_logo}" id="upload_phone_img1" /></span>
+                        <span style="width:58px; margin:135px auto 0; display:block;"><img src="{$list.flowscore_basic_logo}" id="upload_phone_img2" style="width:100%; height:auto; max-height:58px;" /></span>
+                        <input type="hidden" name="background_img_phone" value="{$list.flowscore_basic_background}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var background_img_phone = $("input[name='background_img_phone']").val();
+        $('.phone_inner').css("background-image", "url("+background_img_phone+")");
+
+        //图片上传预览
+        $("#upload1").on("change", function(e){ //宣传图
+            var file = e.target.files[0];
+            preview(file,"upload_img1","upload_phone_img1");
+            set_add("upload1");
+        });
+        $("#upload2").on("change", function(e){ //logo
+            var file = e.target.files[0];
+            preview(file,"upload_img2","upload_phone_img2");
+            set_add("upload2");
+        });
+        $("#upload3").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"upload_img3","phone_inner");
+            set_add("upload3");
+        });
+        $("#upload4").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"upload_img4","upload_phone_img3");
+            set_add("upload4");
+        });
+
+        $(".btn_copy").zclip({
+            path:$("#swfpath").val(), //记得把ZeroClipboard.swf引入到项目中
+            copy:function(){
+                return $(this).attr("data-addr");
+            }
+        });
+    });
+
+    //显示上传图片
+    function preview(file, idadd, bg_idadd) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+idadd).attr("src", e.target.result);
+            if(bg_idadd == "phone_inner"){
+                $('.'+bg_idadd).css("background-image", "url("+e.target.result+")");
+            } else {
+                $('#'+bg_idadd).attr("src", e.target.result);
+            }
+        }
+        reader.readAsDataURL(file);
+    }
+
+    //提交信息
+    function set_add(sid) {
+        var formData = new FormData($("form[name='flowbase_add_form']")[0]);
+        $.ajax({
+            url :"/index.php/Admin/FlowscoreBase/index/type/operation",
+            type : 'post',
+            data : formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.status == 'success') {
+                    //alertbox(data);
+                    $("#"+sid).val("");
+                } else {
+                    alertbox(data);
+                    location.reload();
+                }
+            },
+            error: function (data) {
+                alertbox(data);
+            }
+        });
+    }
+
+    function alladd() {
+        var formData = new FormData($("form[name='flowbase_add_form']")[0]);
+        $.ajax({
+            url :"/index.php/Admin/FlowscoreBase/index/type/operation",
+            type : 'post',
+            data : formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.status == 'success') {
+                    alertbox(data);
+                    //location.reload();
+                } else {
+                    alertbox(data);
+                }
+            },
+            error: function (data) {
+                alertbox(data);
+            }
+        });
+    }
+
+</script>
+<include file="Common/footer" />

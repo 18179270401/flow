@@ -1,0 +1,98 @@
+<div id="order_view_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <if condition="$upper_role eq 2">
+        <tr>
+            <th width="18%">用户名称：</th>
+            <td width="32%"><if condition="$proxy_name eq ''">{$enterprise_name}<else />{$proxy_name}</if></td>
+            <th width="18%">用户编号：</th>
+            <td width="32%"><if condition="$proxy_code eq ''">{$enterprise_code}<else />{$proxy_code}</if></td>
+        </tr>
+        </if>
+        <if condition="($user_type eq 1) and ($upper_role eq 2)">
+            <tr>
+                <th>顶级代理：</th>
+                <td>{$one_proxy_name}</td>
+                <th>运营商：</th>
+                <td >{$operator_name}</td>
+            </tr>
+            <else/>
+            <tr>
+                <th>运营商：</th>
+                <td colspan="3">{$operator_name}</td>
+            </tr>
+        </if>
+        <tr>
+            <th>手机号：</th>
+            <td>{$mobile}</td>
+            <th>充值方式：</th>
+            <td><if condition="$source_type eq '1'">接口<elseif condition="$source_type eq '2'"/>平台<else />网站</if></td>
+        </tr>
+        <tr>
+            <th >归属地：</th>
+            <td >{$province_name}{$city_name}</td>
+            <th >流量包名称：</th>
+            <td><if condition="$product_province_id eq '1'">全国<else />省内</if>{$product_name}</td>
+        </tr>
+        <tr>
+            <th>价格：</th>
+            <td >{$price|default="0.000"}元</td>
+            <th >折后价格：</th>
+            <td>{$discount_price|default="0.000"}元</td>
+        </tr>
+
+        <tr>
+            <if condition="($user_type eq 1) and ($upper_role eq 2)">
+                <th >通道编码：</th>
+                <td >
+                    <if condition="($order_status eq 4) or ($order_status eq 5) or ($order_status eq 6)">
+                        {$bc_channel_code}
+                        <else />
+                        {$channel_code}
+                    </if>
+                </td>
+                <th>订单状态：</th>
+                <td >
+                    <if condition="($order_status eq 1) or ($order_status eq 4)">
+                        <span class="recharge_statue recharge_send"><em>提交成功</em></span>
+                        <else />
+                        <span class="recharge_statue recharge_send"><em>等待提交</em></span>
+                    </if>
+                </td>
+                <else/>
+                <th>订单状态：</th>
+                <td colspan="3">
+                    <if condition="($order_status eq 1) or ($order_status eq 4)">
+                        <span class="recharge_statue recharge_send"><em>提交成功</em></span>
+                        <else />
+                        <span class="recharge_statue recharge_send"><em>正在送充</em></span>
+                    </if>
+                </td>
+            </if>
+        </tr>
+        <tr>
+            <th>订单编号：</th>
+            <td colspan="3">{$order_code}</td>
+        </tr>
+
+        <if condition="($user_type eq 1) and ($upper_role eq 2)">
+            <tr>
+                <th>通道订单号：</th>
+                <td colspan="3">{$channel_order_code}</td>
+            </tr>
+            <tr>
+                <th>订单信息：</th>
+                <td colspan="3">{$back_content}</td>
+            </tr>
+        </if>
+        <tr>
+            <th>状态反馈：</th>
+            <td colspan="3">{$back_fail_desc}</td>
+        </tr>
+
+        <tr>
+            <th>提交时间：</th>
+            <td colspan="3">{$order_date|explode_time}</td>
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,268 @@
+<include file="Common/header" />
+
+<style type="text/css">
+    .dhide{
+        display: none;
+    }
+</style>
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>营销场景</em>><em>开发者设置</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="receivingset_box white">
+        <form name="sceneaccount_add_form1">
+            <input type="hidden" name="account_id" value="{$list.account_id}">
+        <div class="receivingset_choice">
+                <input type="hidden" name="payment_type_default" value="{$list['payment_type']}" />
+                <input class="inputtext" type="hidden" value="{$list.third_app_key}" name="third_app_key"  >
+                <input class="inputtext" type="hidden" value="{$list.third_app_code}" name="third_app_code">
+            <div class="receivingset_choice">
+                <div class="developer_id">
+                    <h5><strong>开发者ID</strong></h5>
+                    <p><span class="developer_id_lable">AppId：</span>{$list.third_app_key}</p>
+                    <p><span class="developer_id_lable">KeyCode：</span>{$list.third_app_code}</p>
+                </div>
+            </div>
+        </div>
+        <div class="receivingset_hd tab_hd ">
+            <h3 class="active">微信开发者设置</h3>
+            <h3>支付宝开发者设置</h3>
+        </div>
+            <div class="receivingset_bd tab_bd">
+                <div class="receivingset_nav bordertop">
+                <ul class="show_enterprise">
+                    <li class="show_enterprise ">
+                        <div class="add_list">
+                            <h5>开发者APPID：</h5>
+                            <div class="add_value show_wx_appid">
+                                <input type="text" class="inputtext" style="display: block;" name="app_appid" value="{$list.app_appid}">
+                            </div>
+                            <!--<a href="#" class="operation_a" data-inputname="wx_appid" id="operation_wx_appid" data-toggle="tooltip" data-placement="bottom"  data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span>APPID：绑定开发者APPID</span></div>
+                        </div>
+                    </li>
+                    <li class="show_enterprise">
+                    <div class="add_list">
+                        <h5>开发者SECERT：</h5>
+                        <div class="add_value show_wx_appsecret">
+                            <input type="text" class="inputtext" style="display: block;" name="app_appsecret" value="{$list.app_appsecret}">
+                        </div>
+                        <!--<a href="#" class="operation_a" data-inputname="wx_appsecret" id="operation_wx_appsecret" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>开发者secert( 登录微信开放平台，进入开发者中心可设置)</span></div>
+                    </div>
+                </li>
+                    <li class="show_enterprise ">
+                        <div class="add_list">
+                            <h5>商户号：</h5>
+                            <div class="add_value show_wx_mchid">
+                                <input type="text" class="inputtext" style="display: block;" name="app_mchid" value="{$list.app_mchid}">
+                            </div>
+                            <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_mchid" data-inputname="wx_mchid" data-inputvalue="{$list.wx_mchid}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span>商户号（必须配置，开户邮件中可查看）</span></div>
+                        </div>
+                    </li>
+                    <li class="show_enterprise">
+                        <div class="add_list">
+                            <h5>商户密钥：</h5>
+                            <div class="add_value show_wx_key">
+                                <input type="text" class="inputtext" style="display: block;" name="app_key" value="{$list.app_key}">
+                            </div>
+                           <!-- <a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_key" data-inputname="wx_key" data-inputvalue="{$list.wx_key}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a> -->
+                            <div class="promptinfo"><span>商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置）</span></div>
+                        </div>
+                    </li>
+                    <li class="show_enterprise">
+                        <div class="add_list">
+                            <h5>微信PEM1：</h5>
+                            <div class="add_value">
+                                <span id="xs_app_pem_file_one" style="display: block;"> <if condition="$list.app_pem_file_one neq '' "><php> echo basename($list['app_pem_file_one']);</php></if></span>
+                               <!-- <if condition="$list.wx_pem_file_one neq '' ">
+                                <span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($list['wx_pem_file_one']);</php></span>
+                                <button type="button" style="margin-top:6px;" class="btn export_btn filedown_btn" onclick="location.href='{:U('SceneAccount/index',array('download'=>'wx_pem_file_one','type'=>'download'))}'">
+                                    <i class="minicon export_icon"></i><span>下载</span>
+                                </button>
+                            </if>
+                                <input type="file" name="wx_pem_file_one" style="margin-top:5px;" class="fileinput maxwidth156">-->
+                            </div>
+                            <a href="#" class="operation_a " data-filename="app_pem_file_one"><i class="minicon upload_icon"></i></a>
+                            <input type="file" class="file file_sence"  name="app_pem_file_one" id="app_pem_file_one" data-toggle="tooltip" data-placement="bottom" data-original-title="上传"/>
+                            <div class="promptinfo"><span>PEM文件(名称为apiclient_cert)，用于认证退款</span></div>
+                        </div>
+                    </li>
+                    <li class="show_enterprise">
+                        <div class="add_list">
+                            <h5>微信PEM2：</h5>
+                            <div class="add_value">
+                                <span id="xs_app_pem_file_two" style="display: block;"> <if condition="$list.app_pem_file_two neq '' "><php> echo basename($list['app_pem_file_two']);</php></if></span>
+                                 <!--<if condition="$list.wx_pem_file_two neq '' ">
+                                <span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($list['wx_pem_file_two']);</php></span>
+                                <button type="button" style="margin-top:6px;" class="btn export_btn filedown_btn" onclick="location.href='{:U('SceneAccount/index',array('download'=>'wx_pem_file_two','type'=>'download'))}'">
+                                    <i class="minicon export_icon"></i><span>下载</span>
+                                </button>
+                            </if>
+                                <input type="file" name="wx_pem_file_two" style="margin-top:5px;" class="fileinput maxwidth156">-->
+                            </div>
+                            <a href="#" class="operation_a"><i class="minicon upload_icon"></i></a>
+                            <input type="file" class="file file_sence" name="app_pem_file_two" id="app_pem_file_two" data-toggle="tooltip" data-placement="bottom" data-original-title="上传"/>
+                            <div class="promptinfo"><span>PEM文件(名称为apiclient_key)，用于认证退款</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="receivingset_bd tab_bd dhide">
+                <div class="receivingset_nav bordertop">
+                <ul class="show_enterprise">
+                    <li>
+                        <div class="add_list">
+                            <h5>支付宝账号：</h5>
+                            <div class="add_value show_alipay_partner">
+                                <input type="text" class="inputtext" style="display: block;" name="alipay_partner" value="{$list.alipay_partner}">
+                            </div>
+                            <!--<a href="#" class="operation_a" data-inputname="alipay_partner" id="operation_alipay_partner" data-inputvalue="{$list.alipay_partner}" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span>支付宝唯一账号，用于收款</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="add_list">
+                            <h5>支付宝商户号：</h5>
+                            <div class="add_value show_alipay_key">
+                                <input type="text" class="inputtext" style="display: block;" name="alipay_key" value="{$list.alipay_key}">
+                            </div>
+                            <!--<a href="#" class="operation_a" data-inputname="alipay_key" id="operation_alipay_key" data-inputvalue="{$list.alipay_key}" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span>商户商户号，用于收款认证</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="add_list">
+                            <h5>支付宝密钥：</h5>
+                            <div class="add_value show_alipay_key">
+                                <input type="text" class="inputtext" style="display: block;" name="paykey" value="{$list.paykey}">
+                            </div>
+                            <!--<a href="#" class="operation_a" data-inputname="alipay_key" id="operation_alipay_key" data-inputvalue="{$list.alipay_key}" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span>支付宝密钥，用于退款</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="add_list">
+                            <h5>支付宝公钥：</h5>
+                            <div class="add_value">
+                                <span id="xs_alipay_pem_file">  <if condition="$list.alipay_pem_file neq '' "><php> echo basename($list['alipay_pem_file']);</php> </if></span>
+                                <!--<button type="button" style="margin-top:6px;" class="btn export_btn filedown_btn" onclick="location.href='{:U('SceneAccount/index',array('download'=>'alipay_pem_file','type'=>'download'))}'">
+                                <i class="minicon export_icon"></i><span>下载</span>
+                            </button>
+                                <input type="file" name="alipay_pem_file"  style="margin-top:5px;" class="fileinput maxwidth156">-->
+                            </div>
+                            <a href="#" class="operation_a"><i class="minicon upload_icon"></i></a>
+                            <input type="file" class="file file_sence" data-toggle="tooltip" name="alipay_pem_file" id="alipay_pem_file" data-placement="bottom" data-original-title="上传"/>
+                            <div class="promptinfo"><span>PEM文件(名称为rsa_public_key)</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="add_list">
+                            <h5>支付宝私钥：</h5>
+                            <div class="add_value">
+                                <span id="xs_alipay_pem_file_two">  <if condition="$list.alipay_pem_file_two neq '' "><php> echo basename($list['alipay_pem_file_two']);</php> </if></span>
+                               <!-- <button type="button" style="margin-top:6px;" class="btn export_btn filedown_btn" onclick="location.href='{:U('SceneAccount/index',array('download'=>'alipay_pem_file','type'=>'download'))}'">
+                                <i class="minicon export_icon"></i><span>下载</span>
+                            </button>
+                                 <input type="file" name="alipay_pem_file"  style="margin-top:5px;" class="fileinput maxwidth156">-->
+                            </div>
+                            <a href="#" class="operation_a"><i class="minicon upload_icon"></i></a>
+                            <input type="file" class="file file_sence" data-toggle="tooltip" name="alipay_pem_file_two" id="alipay_pem_file_two" data-placement="bottom" data-original-title="上传"/>
+                            <div class="promptinfo"><span>PEM文件(名称为rsa_private_key)</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="graphicsset_bottom">
+        <button class="btn add_btn fr" onclick="set_add2()"><span>保存</span></button>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    var payment_type_default = $("input[name='payment_type_default']").val();
+    if(payment_type_default == 1) {
+        $(".show_st").show();
+    } else {
+        $(".show_enterprise").show();
+    }
+
+    $(".file_sence").change(function(){
+           var id =$(this).attr("id");
+          set_add1(id);
+    });
+});
+
+function change_ptype(ptype) {
+    //$("input[name='payment_type1']").val(ptype); //无效？？
+    $("input[name='payment_type_default']").val(ptype);
+    if(1 == ptype) { //运营方收款 show_enterprise show_st
+        $(".show_enterprise").hide();
+        $(".show_st").show();
+    } else if(2 == ptype) { //企业收款
+        $(".show_st").hide();
+        $(".show_enterprise").show();
+    }
+}
+
+function set_add1(id){
+    var formData = new FormData($("form[name='sceneaccount_add_form1']")[0]);
+    $.ajax({
+        url :"/index.php/Admin/SceneDeveloper/index/type/operation",
+        type : 'post',
+        data : formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if(data.status == 'success') {
+                //alertbox(data);
+                $("#"+id).val("");
+                var da=data.data;
+                for(var key in da){
+                    $("#xs_"+key).html(da[key]);
+                }
+            } else {
+                alertbox(data);
+            }
+        },
+        error: function (data) {
+            alertbox(data);
+        }
+    });
+}
+
+function set_add2() {
+    var formData = new FormData($("form[name='sceneaccount_add_form1']")[0]);
+    $.ajax({
+        url :"/index.php/Admin/SceneDeveloper/index/type/operation",
+        type : 'post',
+        data : formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if(data.status == 'success') {
+                alertbox(data);
+            } else {
+                alertbox(data);
+            }
+        },
+        error: function (data) {
+            alertbox(data);
+        }
+    });
+}
+</script>
+<include file="Common/footer" />

@@ -1,0 +1,86 @@
+<!-- 修改流量包 -->
+<div id="flow_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="flow_edit_form">
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>运营商：</h5>
+            <div class="add_value">
+                <select name="operator_id" id="operator_id" class="select" onchange="product_list()" msg="请选择运营商">
+                    <option value="" >请选择</option>
+                    <volist name="operator" id="voo">
+                        <option value="{$voo.operator_id}" <if condition='$info["operator_id"] eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>省份：</h5>
+            <div class="add_value">
+                <select name="province_id" id="province_id" class="select" onchange="product_list()" msg="请选择省份">
+                    <option value="" >请选择</option>
+                    <volist name="province" id="vop">
+                        <option value="{$vop.province_id}" <if condition='$info["province_id"] eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>流量包名称：</h5>
+            <div class="add_value">
+                <select name="product_name" id="product_name" class="select" onchange="channel_list()" msg="请选择流量包名称">
+                    <option value="" >请选择</option>
+                    <volist name="list" id="vo1">
+                        <option value="{$vo1.product_name}" <if condition='$info["product_name"] eq $vo1["product_name"]'>selected</if> >{$vo1.product_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>流量包大小：</h5>
+            <div class="add_value"><input type="text" class="inputtext" maxlength="20px" onkeyup="value=value.replace(/[^0-9]/g,'')" name="size" field="流量包大小" value="{$info.size}" /></div>
+            <div class="promptinfo"><span>M&nbsp;（填整数格式，如1G填1024）</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>标准价格：</h5>
+            <div class="add_value"><input type="text" class="inputtext" name="base_price" value="{$info.base_price}" field="标准价格" vtype="money" /></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+
+        <!--
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>主通道：</h5>
+            <div class="add_value">
+                <select name="channel_id" id="channel_id" class="select" empty="true" msg="请选择主通道">
+                    <option value="">请选择</option>
+                    <volist name="list2" id="vo2">
+                        <option value="{$vo2.channel_id}" <if condition='$info["channel_id"] eq $vo2["channel_id"]'>selected</if> >{$vo2.channel_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5>备用通道：</h5>
+            <div class="add_value">
+                <select name="back_channel_id" id="back_channel_id" class="select" empty="true">
+                    <option value="">请选择</option>
+                    <volist name="list2" id="vo3">
+                        <option value="{$vo3.channel_id}" <if condition='$info["back_channel_id"] eq $vo3["channel_id"]'>selected</if> >{$vo3.channel_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        -->
+        <!--
+        <div class="add_list">
+            <h5>产品状态：</h5>
+            <div class="add_value">
+                <label class="radio <if condition='$info.status eq 1'>checked</if>" value="1"><em>启用</em></label>
+                <label class="radio <if condition='$info.status eq 0'>checked</if>" value="0"><em>禁用</em></label>
+                <input type="hidden" name="status" value="{$info.status}">
+            </div>
+        </div>
+        -->
+        <input type="hidden" name="product_id" value="{$info.product_id}" />
+    </form>
+</div>
+

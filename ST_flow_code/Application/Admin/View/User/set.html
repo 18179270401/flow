@@ -1,0 +1,64 @@
+<div id="user_set_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+  <form name="user_set_form">
+
+    <div class="add_list">
+          <h5><em class="wildcard">*</em>用户姓名：</h5>
+          <div class="add_value">
+            <span>
+              <input
+               type="text" 
+               class="inputtext"
+               name="user_name" 
+               value="{$user.user_name}"
+               field='用户姓名'
+               maxlength="20"
+              />
+            </span>
+          </div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>登录名称：</h5>
+        <div class="add_value"><span><input type="text" class="inputtext"
+          field='登录名称'
+          maxlength="20"
+         name="login_name" value="{$user.login_name}" style="width:190px;" /><em style="color:#8d98b3;">@{$user.code}</em></span></div>
+    </div>
+     <div class="add_list">
+        <h5>性别：</h5>
+        <div class="add_value">
+          <input type="radio"  <if condition=" $user.sex eq '1' ">checked</if>  class="undis" id="sex_1" name="sex" value="1">
+          <label class="radio  <if condition=" $user.sex eq '1' ">checked</if> " for="sex_1" ><em>男</em></label>
+
+          <input type="radio"  <if condition=" $user.sex eq '2' ">checked</if>  class="undis" id="sex_2" name="sex" value="2">
+          <label class="radio   <if condition=" $user.sex eq '2' ">checked</if> " for="sex_2" ><em>女</em></label>
+        </div>
+    </div>
+
+      <div class="add_list">
+          <h5>所属部门：</h5>
+          <div class="add_value"><span>{$user.depart_name}</span></div>
+      </div>
+      <div class="add_list">
+          <h5>职务：</h5>
+          <div class="add_value"><span>{$user.posts}</span></div>
+      </div>
+  
+     <div class="add_list">
+        <h5><em class="wildcard">*</em>联系电话：</h5>
+        <div class="add_value"><input type="text" class="inputtext"
+          field='联系电话'
+          vtype="tel"
+          maxlength="20"
+          name="mobile" value="{$user.mobile}"/></div>
+    </div>
+     <div class="add_list">
+        <h5>邮箱：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="email"
+           field="邮箱"
+         empty="true"
+         maxlength="50"
+         value="{$user.email}" /></div>
+    </div>
+    
+    </form>
+</div>

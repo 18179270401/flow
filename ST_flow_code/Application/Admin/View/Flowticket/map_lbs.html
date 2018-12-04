@@ -1,0 +1,143 @@
+<script src='http://api.map.baidu.com/api?v=2.0&ak=Xfk7auq7udA0q5KzTtbdamhLBXSo0zco'>
+</script>
+<include file="Common/header" />
+<style>
+    .map{height: calc(100% - 254px);margin-left: auto;margin-right: auto;margin:20px;border: 1px solid #cfd9db;}
+</style>
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <span><em>LBS定位</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form name="sceneactivity_lbs_form" style="height:100%;">
+            <div class="graphicssetleft_content">
+                <input type="hidden" name="user_activity_id" value="{$info.user_activity_id}"/>
+                <input id="result_" name="point" type="hidden" value="{$info.point}" empty="true"/>
+                <div style="margin-top:10px;margin-left:30px;">
+                    是否开启：
+                    <input type="hidden" name="lbs_status" id="wx_type" value="{$info.lbs_status}" />
+                    <label data-value="1" id="wxtype"  <if condition="$info.lbs_status eq 1">class="radio checked wx_type"<else/>class="radio wx_type"</if>><em>开启 &nbsp;&nbsp;&nbsp;&nbsp;</em></label>
+                    <label data-value="2" id="wxtype"   <if condition="$info.lbs_status eq 2">class="radio checked wx_type"<else/>class="radio wx_type"</if>><em>关闭</em></label>
+                </div>
+                <div style="margin-top:20px;margin-left:30px; overflow: hidden;">
+                    <span style="display:block; float: left;">活动地址：<input class="inputtext" id="text_" type="text" value="" style="margin-right:30px;"/></span>
+                    <a class="btn add_btn" style="margin-top:0; float:left;" onclick="searchByStationName();return false;">
+                       <span>查询</span>
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="line-height: 30px;">(注：此活动地址为活动的大概地址，具体地址以地图上红点标注为准！）</span>
+                </div>
+                <div style="margin-top:10px;margin-bottom: 10px;margin-left:30px;">
+                    活动范围：<input class="inputtext" type="text" name="accuracy" id="accuracy" maxlength="10" value="{$info.accuracy}" style="margin-right:5px;"><span>公里</span>
+                </div>
+                <div id="container" class="map" align="center"></div>
+                <div class="savecon">
+                    <a class="btn add_btn" onclick="alladd()"><span>保存</span></a>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $p=$("#result_").val();
+                var arr=$p.split(",");
+                var map = new BMap.Map("container");          // 创建地图实例
+                var opts = {type: BMAP_NAVIGATION_CONTROL_SMALL };
+                map.addControl(new BMap.NavigationControl(opts));
+                map.addControl(new BMap.OverviewMapControl());
+                map.enableScrollWheelZoom();//启动鼠标滚轮缩放地图
+                map.enableKeyboard();//启动键盘操作地图
+                var localSearch = new BMap.LocalSearch(map);
+                localSearch.enableAutoViewport(); //允许自动调节窗体大小
+                var myGeo = new BMap.Geocoder();
+                if(arr.length>1){
+                    var point = new BMap.Point(arr[0],arr[1]);  // 创建点坐标
+                    var marker=new BMap.Marker(point);
+                    marker.enableDragging();    //可拖拽
+                    map.addOverlay(marker);
+                    map.centerAndZoom(point, 17);
+                    myGeo.getLocation(new BMap.Point(arr[0],arr[1]), function(result){
+                        if (result){
+                            $("#text_").val(result.address);
+                        }
+                    });
+                }else{
+                    map.centerAndZoom("北京",11);
+                }
+                map.addEventListener("click",function(e){
+                    map.clearOverlays();//清空原来的标注
+                    var point=new BMap.Point(e.point.lng, e.point.lat);
+                    var marker = new BMap.Marker(point);  // 创建标注，为要查询的地方对应的经纬度
+                    map.addOverlay(marker);
+                    document.getElementById("result_").value = e.point.lng + "," + e.point.lat;
+                    myGeo.getLocation(new BMap.Point( e.point.lng,e.point.lat), function(result){
+                        if (result){
+                            $("#text_").val(result.address);
+                        }
+                    });
+                });
+                function searchByStationName() {
+                    map.clearOverlays();//清空原来的标注
+                    var keyword =$("#text_").val();
+                    localSearch.setSearchCompleteCallback(function (searchResult) {
+                        var poi = searchResult.getPoi(0);
+                        if(poi==null || poi=="" || poi==undefined){
+                            $p=$("#result_").val();
+                            var arr=$p.split(",");
+                            var po=new Array();
+                            po['lng']=arr[0];
+                            po['lat']=arr[1];
+                            poi=new Array();
+                            poi['point']=po;
+                        }
+                        document.getElementById("result_").value = poi.point.lng + "," + poi.point.lat;
+                        map.centerAndZoom(poi.point, 17);
+                        var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度
+                        map.addOverlay(marker);
+                        var content = document.getElementById("text_").value + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+                        var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
+                        marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
+                        //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                    });
+                    localSearch.search(keyword);
+                }
+            </script>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var status=1;
+    function alladd() {
+        if(status==1) {
+            status = 2;
+            var formData = new FormData($("form[name='sceneactivity_lbs_form']")[0]);
+            $.ajax({
+                url: "/index.php/Admin/Flowticket/map_lbs/type/update",
+                type: 'post',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status == 'success') {
+                        alertbox(data);
+                        setTimeout(function(){
+                            status=1;
+                        },1000);
+                    } else {
+                        alertbox(data);
+                        setTimeout(function(){
+                            status=1;
+                        },1000);
+                    }
+                },
+                error: function (data) {
+                    alertbox(data);
+                }
+            });
+        }
+    }
+</script>
+<include file="Common/footer" />

@@ -1,0 +1,158 @@
+<include file="Common/header" />
+<script type="text/javascript" src="__PUBLIC__/Admin/js/echarts.min.js"></script>
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span></span>
+        </div>
+      </div>
+  </div>
+  <div class="thepublic_box">
+    <div class="thepublic_mess">
+      <i class="photoimg"><img src="{$headimg}" alt="img"/></i><span>公众号：</span><em>{$nickname}</em><span>公众号类型：</span><em>{$service_type}</em><span>微信支付功能：</span><em>{$businesspay}</em><span>公众微信号：</span><em>{$wxname}</em>
+    </div>
+    <div class="thepublic_tit">
+      <h2>昨日关键指标</h2>
+    </div>
+    <div class="indicators_con">
+      <ul>
+        <li>
+          <h3>新增关注人数</h3>
+          <h5>{$yesterday_new}</h5>
+          <p>日<span><i class="{$day_new_arrow}"></i>{$day_new}%</span></p>
+          <p>周<span><i class="{$week_new_arrow}"></i>{$week_new}%</span></p>
+          <p>月<span><i class="{$month_new_arrow}"></i>{$month_new}%</span></p>
+        </li>
+        <li>
+          <h3>取消关注人数</h3>
+          <h5>{$yesterday_cancel}</h5>
+          <p>日<span><i class="{$day_cancel_arrow}"></i>{$day_cancel}%</span></p>
+          <p>周<span><i class="{$week_cancel_arrow}"></i>{$week_cancel}%</span></p>
+          <p>月<span><i class="{$month_cancel_arrow}"></i>{$month_cancel}%</span></p>
+        </li>
+        <li>
+          <h3>净增关注人数</h3>
+          <h5>{$yesterday_grow}</h5>
+          <p>日<span><i class="{$day_grow_arrow}"></i>{$day_grow}%</span></p>
+          <p>周<span><i class="{$week_grow_arrow}"></i>{$week_grow}%</span></p>
+          <p>月<span><i class="{$month_grow_arrow}"></i>{$month_grow}%</span></p>
+        </li>
+        <li>
+          <h3>累计关注人数</h3>
+          <h5>{$yesterday_total}</h5>
+          <p>日<span><i class="{$day_total_arrow}"></i>{$day_total}%</span></p>
+          <p>周<span><i class="{$week_total_arrow}"></i>{$week_total}%</span></p>
+          <p>月<span><i class="{$month_total_arrow}"></i>{$month_total}%</span></p>
+        </li>
+      </ul>
+    </div>
+    <div class="trendchart_nav">
+        <h3 id='chart0' class="active">新增关注人数</h3>
+        <h3 id='chart1'>取消关注人数</h3>
+        <h3 id='chart2'>净增关注人数</h3>
+        <h3 id='chart3'>累计关注人数</h3>
+    </div>
+    <div class="trendchart_content">
+      <div class="trendchart_con dis" id="chart_view"></div>
+
+    </div>
+      <iframe frameborder="0" scrolling="no" border="0" src="{:U('Authorize/wx_source_local')}" style="width:100%;height:420px;">
+      </iframe>
+  </div>
+</div>
+<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+<input type="hidden" name="proxy_id" id="proxy_id" value="{$proxy_id}">
+<input type="hidden" name="enterprise_id" id="enterprise_id" value="{$enterprise_id}">
+<script type="text/javascript">
+  var user_type=$("#user_type").val();
+  var proxy_id=$("#proxy_id").val();
+  var enterprise_id=$("#enterprise_id").val();
+  $.ajax({
+        type: "GET",
+        url: "/index.php/Admin/Authorize/wx_source_chart_ajax?enterprise_id="+enterprise_id+"&user_type="+user_type+"&proxy_id="+proxy_id,
+        dataType: 'json',
+        contentType: "application/x-www-form-urlencoded",
+        success: function(repData) {
+          var attention_new = new Array();
+          var attention_cancel = new Array();
+          var attention_grow = new Array();
+          var attention_total = new Array();
+          var create_date = new Array();
+          $.each(repData.data, function(index, element) {
+            attention_new.push(element.attention_new)
+            attention_cancel.push(element.attention_cancel)
+            attention_grow.push(element.attention_grow)
+            attention_total.push(element.attention_total)
+            create_date.push(element.create_date.substring(0,10))
+          });
+          var myChart = echarts.init(document.getElementById('chart_view'));
+          // 指定图表的配置项和数据
+          option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data:[]
+            },
+            color:['#e4ae76'],
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: create_date
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    type:'line',
+                    stack: '总量',
+                    data: attention_new
+                }
+            ]
+          };
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(option);
+          $("#chart0").click(function(){
+              $("#chart0").attr('class','active');
+              $("#chart1").removeClass('active');
+              $("#chart2").removeClass('active');
+              $("#chart3").removeClass('active');
+              option.series[0].data= attention_new;
+              myChart.setOption(option);
+          });
+          $("#chart1").click(function(){
+              $("#chart1").attr('class','active');
+              $("#chart0").removeClass('active');
+              $("#chart2").removeClass('active');
+              $("#chart3").removeClass('active');
+              option.series[0].data= attention_cancel;
+              myChart.setOption(option);
+          });
+          $("#chart2").click(function(){
+              $("#chart2").attr('class','active');
+              $("#chart0").removeClass('active');
+              $("#chart1").removeClass('active');
+              $("#chart3").removeClass('active');
+              option.series[0].data= attention_grow;
+              myChart.setOption(option);
+          });
+          $("#chart3").click(function(){
+              $("#chart3").attr('class','active');
+              $("#chart0").removeClass('active');
+              $("#chart1").removeClass('active');
+              $("#chart2").removeClass('active');
+              option.series[0].data= attention_total;
+              myChart.setOption(option);
+          });
+        },
+    });
+</script>
+<include file="Common/footer" />

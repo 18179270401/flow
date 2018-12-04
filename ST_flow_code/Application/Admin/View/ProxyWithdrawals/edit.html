@@ -1,0 +1,37 @@
+<div id="proxywithdrawals_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxywithdrawals_edit_form" >
+    <input type="hidden" name="apply_id" value="{$proxyapply.apply_id}" />
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>提现金额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="提现金额" maxlength="8" vtype="money" name="apply_money" value="{$proxyapply.apply_money}" /></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>开户银行：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="开户行" name="bank_account" value="{$proxyapply.bank_account}" /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>开户省市：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="开户省市" name="account_opening" value="{$proxyapply.account_opening}" /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>银行卡号：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="银行卡号" name="card_number" value="{$proxyapply.card_number}" /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>开户人姓名：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="开户人姓名" name="beneficiary_name" value="{$proxyapply.beneficiary_name}" /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>开户人电话：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="开户人电话" vtype="tel" name="mobile" value="{$proxyapply.mobile}" /></div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true">{$proxyapply.remark}</textarea>
+            </div>
+        </div>
+    </form>
+</div>

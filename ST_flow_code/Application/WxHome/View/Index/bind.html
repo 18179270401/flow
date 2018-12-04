@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<title>绑定您的企业</title>
+<style>
+.header_bg{
+	background-image: url(__PUBLIC__/webapp/images/Login_Registration_Bg.png);
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	width: 100%;
+	height: 48%;
+	text-align: center;
+}
+</style>
+
+</head>
+<script type="text/javascript">
+	if (window.localStorage) {
+	} else {
+		alert('当前浏览器不支持，请使用微信或者手机浏览器来使用我们软件');
+	}
+	jQuery(document).ready(function() {
+		$(document).on("click", "#submit", function(event) {
+			if (valid()) {
+				var postData = {
+					"openid" : $.trim($("#openid").val()),
+					"password" : $.trim($("#password").val()),
+					"username" : $("#username").val()
+				};
+				// $.showLoading();
+				// setTimeout(function() {
+				// 	$.hideLoading();
+				// }, 3000);
+				$.ajax({
+					type : "POST",
+					url :  "/index.php/WxHome/Index/bindapi",
+					data : postData,
+					success : function(msg) {
+						alert(msg.msg);
+						alert(msg.status);
+						//$.hideLoading();
+					}
+				});
+			}
+		});
+
+	});
+
+	//输入信息验证
+	function valid() {
+		if ($("#username").val() == '' || $("#password").val() == '') {
+			alert("用户名和密码不能用空");
+			return false;
+		}
+		return true;
+	};
+</script>
+<body>
+
+		<input type="hidden" name="openid" id="openid" value="{$openid}">
+
+
+
+	 <div class="header_bg">
+	 </div>
+	<div class="bd">
+		<!--<div class="weui_cells_title">请输入用户名：</div>-->
+		<div class="weui_cells weui_cells_form">
+			<div class="weui_cell">
+						<div class="weui-cell__hd"><img src="__PUBLIC__/webapp/images/Login_Accounts.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+				<div class="weui_cell_hd"></div>
+				<div class="weui_cell_bd weui_cell_primary">
+					<input class="weui_input" type="text" name="username" id="username"
+						value="" placeholder="请填写您的账号" />
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--<div class="weui_cells_title">请输入密码：</div>-->
+		<div class="weui_cells weui_cells_form">
+			<div class="weui_cell">
+						<div class="weui-cell__hd"><img src="__PUBLIC__/webapp/images/Login_Initialize_Lock.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+				<div class="weui_cell_hd"></div>
+				<div class="weui_cell_bd weui_cell_primary">
+					<input class="weui_input" type="password" name="password"
+						id="password" value="" placeholder="请输入密码" />
+				</div>
+			</div>
+		</div>
+
+		<div class="weui_btn_area">
+			<br> 
+			<a href="javascript:;" class="weui_btn weui_btn_primary" id="submit">登录</a>
+			<br> 
+		</div>
+	</div>
+</body>
+</html>
+

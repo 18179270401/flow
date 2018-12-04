@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>领取流量券失败</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="{$role}css/reset.css?s={$version_number}">
+    <style>
+    body{background-color:#fe4a2a;}.rootView img{width:100%;height:100%;}
+    </style>
+</head>
+<body>
+<div class="rootView">
+    <img src="{$role}imgs/{$bgimage}" />
+</div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+<script>
+$(window).resize(function(){
+var scale = 1 / devicePixelRatio;
+document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+document.documentElement.style.fontSize = document.documentElement.clientWidth / 75 + 'px';
+});
+</script>
+</html>

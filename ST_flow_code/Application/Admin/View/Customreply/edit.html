@@ -1,0 +1,210 @@
+<!-- 添加自定义回复 -->
+<div id="customreply_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="customreply_edit_form">
+        <input type="hidden" name="reply_id" value="{$info.reply_id}">
+        <input type="hidden" name="reply_type" value="{$info.reply_type}">
+        <input type="hidden" name="id" value="{$info.reply_keywordid}">
+        <div class="add_list">
+            <h5>关注回复：</h5>
+            <div class="add_value" >
+                <label <if condition="$info.reply_concern eq 1">class="radio enterprise_type checked"<else/>class="radio enterprise_type"</if> data-value="1"><em>是</em></label>
+                <label <if condition="$info.reply_concern neq 1">class="radio enterprise_type checked"<else/>class="radio enterprise_type"</if>  data-value="2"><em>否</em></label>
+                <input type="hidden" id="enterprise_type" name="reply_concern"  value="{$info.reply_concern}" />
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>回复类型：</h5>
+            <div class="add_value">
+                   <span>{$info.reply_type|get_reply_type}</span>
+            </div>
+        </div>
+        <!-- 文字活动开始 -->
+        <if condition="$info.reply_type eq 1">
+            <div class="add_list" >
+                <h5><em class="wildcard">*</em>回复内容：</h5>
+                <div class="add_value" style="margin-bottom: 10px;"><textarea field="内容" maxlength="100"  style="height:100px;" class="textarea" name="replytext_contact" id="replytext_contact" empty="true">{$info.replytext_contact}</textarea></div>
+            </div>
+        </if>
+        <!-- 文字活动结束 -->
+
+        <!-- 单图文活动开始 -->
+        <if condition="$info.reply_type eq 2">
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>回复标题：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replyimg_title" empty="true" id="replyimg_title" file="标题" maxlength="20" value="{$info.replyimg_title}"> </div>
+            </div>
+            <div class="add_list" >
+                <h5><em class="wildcard">*</em>回复内容：</h5>
+                <div class="add_value" style="margin-bottom: 10px;"><textarea field="内容" maxlength="100"  style="height:100px;" class="textarea" name="replyimg_description" id="replyimg_description" empty="true">{$info.replyimg_description}</textarea></div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接：</h5>
+                <div class="add_value"><input type="text" class="inputtext" maxlength="50" name="replyimg_url" id="replyimg_url" file="链接" empty="true" value="{$info.replyimg_url}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片：</h5>
+                <div class="add_value">
+                    <input type="file" class="fileinput maxwidth156" empty="true" name="replyimg_img"/><br/>
+                    <if condition="$info.replyimg_img neq '' ">
+                        <img src="{$info.replyimg_img}" class="imginput"><span><php> echo basename($info['replyimg_img']);</php></span>
+                        <a type="button" href="javascript:void(0);" class="btn export_btn filedown_btn" onclick="down_file('{:U('Customreply/edit',array('reply_id'=>$info['reply_id'],'name'=>'replyimg_img','download'=>'1'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </a>
+                    </if>
+                </div>
+            </div>
+        </if>
+       <!-- 单图文回复结束-->
+
+        <!-- 多图文回复开始 -->
+        <if condition="$info.reply_type eq 3">
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>回复标题1：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title1" id="replymoreimg_title" file="标题" empty="true" maxlength="20" value="{$info.replymoreimg_title1}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接1：</h5>
+                <div class="add_value"><input type="text" class="inputtext" maxlength="50" name="replymoreimg_url1" id="replymoreimg_url" file="链接" empty="true" value="{$ info.replymoreimg_url1}" > </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片1：</h5>
+               <div class="add_value">
+                    <input type="file" class="fileinput maxwidth156" empty="true" name="replymoreimg_img1"/><br/>
+                    <if condition="$info.replymoreimg_img1 neq '' ">
+                        <img src="{$info.replymoreimg_img1}" class="imginput"><span><php> echo basename($info['replymoreimg_img1']);</php></span>
+                        <a type="button" href="javascript:void(0);" class="btn export_btn filedown_btn" onclick="down_file('{:U('Customreply/edit',array('reply_id'=>$info['reply_id'],'name'=>'replymoreimg_img1','download'=>'1'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </a>
+                    </if>
+                </div>
+            </div>
+            <div class="add_list">
+                <h5>回复标题2：</h5>
+                <div class="add_value"><input type="text"  class="inputtext" name="replymoreimg_title2" id="replymoreimg_title2" file="标题" empty="true" maxlength="20" value="{$info.replymoreimg_title2}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接2：</h5>
+                <div class="add_value"><input type="text" class="inputtext" maxlength="50" name="replymoreimg_url2" id="replymoreimg_url2" file="链接" empty="true" value="{$info.replymoreimg_url2}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片2：</h5>
+                <div class="add_value">
+                    <input type="file" class="fileinput maxwidth156" empty="true" name="replymoreimg_img2"/><br/>
+                    <if condition="$info.replymoreimg_img2 neq '' ">
+                        <img src="{$info.replymoreimg_img2}" class="imginput"><span><php> echo basename($info['replymoreimg_img2']);</php></span>
+                        <a type="button" href="javascript:void(0);" class="btn export_btn filedown_btn" onclick="down_file('{:U('Customreply/edit',array('reply_id'=>$info['reply_id'],'name'=>'replymoreimg_img2','download'=>'1'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </a>
+                    </if>
+                </div>
+            </div>
+            
+            <div class="add_list">
+                <h5>回复标题3：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title3" id="replymoreimg_title3" file="标题" empty="true" maxlength="20" value="{$info.replymoreimg_title3}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接3：</h5>
+                <div class="add_value"><input type="text" maxlength="50" class="inputtext" name="replymoreimg_url3" id="replymoreimg_url3" file="链接" empty="true" value="{$info.replymoreimg_url3}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片3：</h5>
+                <div class="add_value">
+                    <input type="file" class="fileinput maxwidth156" empty="true" name="replymoreimg_img3"/><br/>
+                    <if condition="$info.replymoreimg_img3 neq '' ">
+                        <img src="{$info.replymoreimg_img3}" class="imginput"><span><php> echo basename($info['replymoreimg_img3']);</php></span>
+                        <a type="button" href="javascript:void(0);" class="btn export_btn filedown_btn" onclick="down_file('{:U('Customreply/edit',array('reply_id'=>$info['reply_id'],'name'=>'replymoreimg_img3','download'=>'1'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </a>
+                    </if>
+                </div>
+            </div>
+
+            <div class="add_list">
+                <h5>回复标题4：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title4" id="replymoreimg_title3" file="标题" empty="true" maxlength="20" value="{$info.replymoreimg_title4}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接4：</h5>
+                <div class="add_value"><input type="text" maxlength="50" class="inputtext" name="replymoreimg_url4" id="replymoreimg_url3" file="链接" empty="true" value="{$info.replymoreimg_url4}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片4：</h5>
+                <div class="add_value">
+                    <input type="file" class="fileinput maxwidth156" empty="true" name="replymoreimg_img4"/><br/>
+                    <if condition="$info.replymoreimg_img4 neq '' ">
+                        <img src="{$info.replymoreimg_img4}" class="imginput"><span><php> echo basename($info['replymoreimg_img4']);</php></span>
+                        <a type="button" href="javascript:void(0);" class="btn export_btn filedown_btn" onclick="down_file('{:U('Customreply/edit',array('reply_id'=>$info['reply_id'],'name'=>'replymoreimg_img4','download'=>'1'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </a>
+                    </if>
+                </div>
+            </div>
+            <!--<div class="add_list">
+                <h5>回复标题3：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title3" id="replymoreimg_title3" file="标题" empty="true" value="{$info.replymoreimg_title2}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接3：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_url3" id="replymoreimg_url3" file="链接" empty="true" value="{info.replymoreimg_url2}"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片3：</h5>
+                <div class="add_value"><input type="file" name="replymoreimg_img3" empty="true" value="{$info.replymoreimg_img2}"/></div>
+            </div>-->
+        </if>
+        <!-- 多图文回复结束 -->
+
+        <!-- 活动回复开始-->
+        <if condition="$info.reply_type eq 4">
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>活动名称：</h5>
+                <div class="add_value">
+                    <select name="user_activity_id" id="user_activity_id" class="select" msg="请选择活动" empty="true">
+                        <option value="">请选择</option>
+                        <volist name="activity" id="v">
+                            <option value="{$v.user_activity_id}" <if condition="$info.user_activity_id eq $v['user_activity_id']">selected</if> >
+                            <if condition="$v.user_activity_type eq 2">
+                                券：
+                            </if>
+                            <if condition="$v.user_activity_name neq null">
+                                {$v.user_activity_name}
+                            <else/>
+                                {$v.activity_name}
+                            </if>
+                            </option>
+                        </volist>
+                        <option value="-1" <if condition="$info.user_activity_id eq -1">selected</if> >每日签到</option>
+                    </select>
+                </div>
+            </div>
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>回复标题：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replyactivity_title" id="replyactivity_title" file="标题" empty="true" maxlength="20" value="{$info.replyactivity_title}"> </div>
+            </div>
+            <div class="add_list" >
+                <h5>回复详细内容：</h5>
+                <div class="add_value" style="margin-bottom: 10px;"><textarea field="回复详细内容" maxlength="100"  style="height:100px;" class="textarea" name="replyactivity_description" id="replyactivity_description" empty="true">{$info.replyactivity_description}</textarea></div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片：</h5>
+                <div class="add_value">
+                    <input type="file" class="fileinput maxwidth156" empty="true" name="replyactivity_img"/><br/>
+                    <if condition="$info.replyactivity_img neq '' ">
+                        <img src="{$info.replyactivity_img}" class="imginput"><span><php> echo basename($info['replyactivity_img']);</php></span>
+                        <a type="button" href="javascript:void(0);" class="btn export_btn filedown_btn" onclick="down_file('{:U('Customreply/edit',array('reply_id'=>$info['reply_id'],'name'=>'replyactivity_img','download'=>'1'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </a>
+                    </if>
+                </div>
+            </div>
+        </if>
+        <!-- 活动回复结束 -->
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>关键字：</h5>
+            <div class="add_value"><input type="text" placeholder='用户输入关键字可回复相应信息' maxlength="20" class="inputtext" name="reply_keyword" id="reply_keyword" file="关键字" empty="true" value="{$info.reply_keyword}"><span></span></div>
+        </div>
+  </form>
+</div>
+

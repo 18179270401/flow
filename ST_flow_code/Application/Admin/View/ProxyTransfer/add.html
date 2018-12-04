@@ -1,0 +1,46 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxy_transfer_apply_add_form" >
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>支出代理商名称：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext inputusernameall" data-id-name="user_type_ida" data-functionname="get_proxy_account" data-functionextra="{'diva':'pay_proxy_info','divb':'pay_proxy_account'}" name="delegate_name" field="支出代理商名称" data-usertype="proxy">
+                <input type='hidden' name='pay_proxy_id' id='user_type_ida' value=''>
+            </div>
+        </div>        
+        <div class="add_list" id="pay_proxy_info" style="display: none;">
+            <h5>支出代理商余额：</h5>
+            <div class="add_value">
+                <span  id="pay_proxy_account" ></span>
+            </div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>接收代理商名称：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext inputusernameall" data-id-name="user_type_idb" data-functionname="get_proxy_account" data-functionextra="{'diva':'receive_proxy_info','divb':'receive_proxy_account'}" name="delegate_name" field="接收代理商名称" data-usertype="proxy">
+                <input type='hidden' name='receive_proxy_id' id='user_type_idb' value=''>
+            </div>
+        </div>
+        <div class="add_list" id="receive_proxy_info" style="display: none;">
+            <h5>接收代理商余额：</h5>
+            <div class="add_value">
+                <span  id="receive_proxy_account" ></span>
+            </div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>操作金额：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="apply_money" maxlength="7" field="操作金额" />
+            </div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+

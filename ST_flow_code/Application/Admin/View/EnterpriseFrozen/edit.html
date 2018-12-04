@@ -1,0 +1,23 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="enterprise_frozen_edit_form" >
+        <input type="hidden" name="apply_id" value="{$apply_id}" />
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>企业名称：</h5>
+            <div class="add_value">
+            <input type="text" class="inputtext" name="delegate_name" id="inputusername" field="企业名称" data-usertype="enterprise" value="{$enterprise_id|obj_data=2,'name'}">
+            <input type='hidden' name='enterprise_id' id='user_type_ids' value='{$enterprise_id}'>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>申请金额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" maxlength="7"  field="申请金额" name="apply_money"  value='{$apply_money}'/></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list hidden">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="frozen_remark" empty="true">{$frozen_remark}</textarea>
+            </div>
+        </div>
+    </form>
+</div>

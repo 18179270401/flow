@@ -1,0 +1,73 @@
+<div id="order_refund_box_2" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="order_refund2_form">
+        <input type="hidden" name="order_id" value="{$order_id}" />
+        <div class="add_list">
+            <h5>用户编号：</h5>
+            <div class="add_value">
+        <span>
+      <if condition="$proxy_code eq ''">{$enterprise_code}
+          <input type="hidden" name="enterprise_id" value="{$enterprise_id}" />
+          <else />{$proxy_code}
+          <input type="hidden" name="proxy_id" value="{$proxy_id}" />
+      </if>    </span>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5>用户名称：</h5>
+            <div class="add_value">
+        <span>
+      <if condition="$proxy_name eq ''">{$enterprise_name}<else />{$proxy_name}</if>
+        </span>
+            </div>
+        </div>
+
+        <div class="add_list">
+            <h5>退款金额：</h5>
+            <div class="add_value">
+                <input type="hidden" name="discount_price" value="{$discount_price}" />
+             <span>{$discount_price}元</span>
+            </div>
+        </div>
+
+        <div class="add_list">
+            <h5>退款手机号：</h5>
+            <div class="add_value">
+                <input type="hidden" name="mobile" value="{$mobile}" />
+                <span>{$mobile}</span>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5>退款订单号：</h5>
+            <div class="add_value">
+                <input type="hidden" name="order_code" value="{$order_code}" />
+                <span>{$order_code}</span>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>退款原因：</h5>
+            <div class="add_value">
+                <select name="refund_cause" class="select" msg="请选择退款原因">
+                    <option value="">请选择</option>
+                    <volist name="refund_cause_list" id="rc"  key="k">
+                        <option value="{$k}">{$rc}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>附件凭证：</h5>
+
+            <div class="add_value"><input type="file"  name="file"  empty="附件凭证" />
+            </div>
+        </div>
+
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>退款理由：</h5>
+            <div class="add_value">
+                <textarea class="textarea"  style="width: 226px; height: 67px;"  name="remark" field="退款理由"></textarea>
+            </div>
+        </div>
+    </form>
+</div>

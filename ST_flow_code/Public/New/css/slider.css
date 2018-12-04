@@ -1,0 +1,71 @@
+.slider_box{ width: 120px; margin-right:10px;}
+.slider_value{margin-right:20px;}
+.slider_value .inputtext{margin-right:5px;}
+.slider { width: auto; position: relative; margin-top:4px;}
+.slider .marker { height: 16px; width:16px; cursor: pointer;  position: absolute; top: 50%; margin-top: 2px; left: -5px; 
+background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear background-image;
+  -moz-transition: 0.1s linear background-image;
+  -ms-transition: 0.1s linear background-image;
+  -o-transition: 0.1s linear background-image;
+  transition: 0.1s linear background-image;
+border-radius:50%; z-index: 2;}
+.slider .marker:focus,
+.slider .marker:active,
+.slider .markerhover { border: 2px #0199ff solid;}
+.slider .slider-backside,.slider .complete { height: 10px; background: #ddd; width: 100%; line-height: 10px; top: 50%; margin-top: 5px; position: absolute;}
+.slider .slider-backside{border-radius: 5px; }
+.slider .complete { width: auto; background-color: #0099ff; z-index: 2; transition: background .3s ease; left: 0; border-bottom-left-radius: 5px; border-top-left-radius: 5px;}
+.slider .buffer { height: 4px; width: auto; background-color: #ffffff; z-index: 1; transition: background .3s ease; position: absolute; top: 50%; margin-top: -2px; left: 0;}
+.slider .slider-hint { min-width: 1.8rem;
+  width: auto; height: auto; position: absolute; z-index: 3; border: 1px #ccc solid; padding: .25rem; top: -1.2rem; text-align: center;
+  font-size: .625rem; display: none; background: #fffcc0;}
+.slider .slider-hint:before { border: 1px #ccc solid;  border-left: 0;
+  border-top: 0;
+  content: "";
+  width: .25rem;
+  height: .25rem;
+  display: block;
+  position: absolute;
+  background-color: inherit;
+  margin-top: -0.125rem;
+  margin-left: -0.15625rem;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.slider.hint-bottom .slider-hint { top: 100%; margin-top: -0.125rem;}
+.slider.hint-bottom .slider-hint:before { top: -0.0625rem; -webkit-transform: rotate(-135deg); transform: rotate(-135deg);}
+.slider.permanent-hint > .slider-hint { display: block;}
+.slider:hover .complete { background-color: #0199ff;}
+.slider:active .complete,
+.slider:active + .marker:active .complete { background-color: #0199ff;}
+.slider.place-left { margin-right: 20px;}
+.slider.place-right {  margin-left: 20px;}
+.slider.ani .complete { -webkit-animation: ani-bg-stripes 2s linear infinite; animation: ani-bg-stripes 2s linear infinite;}
+.slider.vertical { min-height: 100px; width: 2.125rem; display: inline-block;}
+.slider.vertical .slider-backside,
+.slider.vertical .complete { position: absolute; height: 100%; width: .5rem; bottom: 0; left: 50%; margin-left: -0.25rem; top: auto;}
+.slider.vertical .marker { left: 50%; top: auto;  margin-left: -0.5rem;}
+.slider.vertical .buffer { position: absolute; height: auto; width: 6px ; bottom: 0; left: 50%; margin-left: -3px; top: auto;}
+.slider.vertical .slider-hint { left: 100%; margin-top: 0;}
+.slider.vertical .slider-hint:before { height: .25rem; width: .25rem; -webkit-transform: rotate(135deg); transform: rotate(135deg);
+  left: -1px; top: 50%;  margin-top: -0.125rem; margin-left: -0.135rem;}
+.slider.vertical.hint-left .slider-hint { left: -100%; margin-left: .25rem;}
+.slider.vertical.hint-left .slider-hint:before { left: 100%; -webkit-transform: rotate(-45deg); transform: rotate(-45deg);}
+.slider.cycle-marker .marker { border-radius: 50%;}
+.tile-area { min-width: 100%; height: 100%; position: relative; padding: 120px 80px 0 0; overflow: hidden;}

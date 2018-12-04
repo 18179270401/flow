@@ -1,0 +1,123 @@
+<include file="Common/header" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+        <div class="currenttit">
+            <i></i><span><em>系统管理</em>><em>公告管理</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="Sysnotices/add">
+                <button class="btn add_btn notice_add_btn">
+                    <i class="minicon addoperation_icon"></i><span>新增公告</span>
+                </button>
+            </isshow>
+            <if condition="is_jurisdiction('Sysnotices/add') and is_jurisdiction('Sysnotices/export_excel')">
+                <span class="line">|</span>
+            </if>
+
+            <if condition="is_jurisdiction('Sysnotices/export_excel')">
+                <button class="btn  export_button" data-url="Sysnotices">
+                  <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </if>
+        </div>
+    </div>
+    </div>
+    <div class="search_box">
+        <form name="excel" method="get" action="/index.php/Admin/Sysnotices/index">
+        <div class="search_nav">
+            <ul>
+                <li>
+                    <input type="text" class="inputtext" name="notice_title" value="{$Think.get.notice_title}" placeholder="公告标题"/>
+                </li>
+              <li>
+                    <input type="text" class="inputtext" value="{$Think.get.user_name}" name="user_name" placeholder="发布者"/>
+              </li>
+              <li>
+                  <label class="inputlabel">状态：</label>
+                  <select class="select" name="status" style="min-width:80px;">
+                       <option value="9" <if condition='$status eq "9"'>selected</if> >全部</option>
+                       <option value="1" <if condition='$status eq "1"'>selected</if>>正常</option>
+                       <option value="0" <if condition='$status eq "0"'>selected</if> >已禁用</option>
+                  </select>
+                  <input type="hidden" value="1"/>
+            </li>
+            </ul>
+        </div>
+        <div class="search_btncon">
+            <button class="btn add_btn">
+                <i class="minicon search_icon"></i><span>查询</span>
+            </button>
+
+            <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+            </button>
+        </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="130" class="change">公告类型</th>
+                            <th width="130" class="change">标题</th>
+                            <th width="130" class="change">发布范围</th>
+                            <th width="130" class="change">发布者</th>
+                            <th width="130" class="change">开始时间</th>
+                            <th width="130" class="change">结束时间</th>
+                            <th width="140">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="notice_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td><if condition="$vo['notice_type'] eq 1">紧急公告<else />普通公告</if></td>
+                            <td>{$vo.notice_title}</td>
+                            <td><if condition="$vo['scope'] eq '1,2,3'" >全部<elseif condition="$vo['scope'] eq '1,2'" />尚通端、代理商端<elseif condition="$vo['scope'] eq '1,3'" />尚通端、企业端<elseif condition="$vo['scope'] eq '2,3'" />代理商端、企业端<elseif condition="$vo['scope'] eq 1" />尚通端<elseif condition="$vo['scope'] eq 2" />代理商端<else />企业端</if></td>
+                            <td>{$vo.user_name}</td>
+                            <td>{$vo.valid_date_begin|substr=###,0,10}</td>
+                            <td>{$vo.valid_date_end|substr=###,0,10}</td>
+                            <td class="operation_td">
+                                <isshow url="Sysnotices/show">
+                                    <button class="operationbtn sysnotices_show_btn" value="{$vo.notice_id}" vtype="2">
+                                      <span>查看</span>
+                                    </button>
+                                </isshow>
+                                <isshow url="Sysnotices/edit">
+                                    <button class="operationbtn sysnotices_edit_btn" value="{$vo.notice_id}">
+                                      <span>编辑</span>
+                                    </button>
+                                </isshow>
+                                <isshow url="Sysnotices/toggle_status">
+                                    <button class="operationbtn notice_toggle_status_btn" value="{$vo.notice_id}" data-original-title='<if condition="$vo.status eq 0">启用<elseif condition="$vo.status eq 1" />禁用</if>' >
+                                      <span><if condition="$vo['status'] eq 0">启用<elseif condition="$vo['status'] eq 1" />禁用</if></span>
+                                    </button>
+                                </isshow>
+                                <if condition="is_jurisdiction('Sysnotices/delete')">
+                                    <button class="operationbtn sysnotices_delete_btn" value="{$vo.notice_id}" show-name="{$vo.notice_title}">
+                                        <!--<i class="minicon edit_icon"></i>-->
+                                        <span>删除</span>
+                                    </button>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+
+</div>
+<include file="Common/footer" />

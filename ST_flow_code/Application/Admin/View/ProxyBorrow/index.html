@@ -1,0 +1,189 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+            <i></i><span><em>资金管理</em>><em>代理商借款管理</em></span>
+        </div>
+
+              <div class="operation_info">
+
+                  <if condition="(is_jurisdiction('ProxyBorrow/approve') or is_jurisdiction('ProxyBorrow/approve_t')) and ($is_admin eq 'false')"><else/>
+                        <isshow url="ProxyBorrow/add">
+                            <button class="btn add_btn proxyBorrow_add_btn">
+                                <i class="minicon addoperation_icon"></i><span>新增授信申请单</span>
+                            </button>
+                        </isshow>
+
+                   </if>
+                  <if condition="is_jurisdiction('ProxyBorrow/add') and is_jurisdiction('ProxyBorrow/export_excel')">
+                      <span class="line">|</span>
+                  </if>
+                  <isshow url="ProxyBorrow/export_excel">
+                          <button class="btn  export_button" data-url="ProxyBorrow">
+                              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                          </button>
+                  </isshow>
+              </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get"  name="excel" action="/index.php/Admin/ProxyBorrow/index">
+    <div class="search_nav minheight60">
+      <ul>
+          <li>
+              <input type="text" class="inputtext" name="loan_code" maxlength="20" value="{$Think.get.loan_code}" placeholder="授信编号"/>
+          </li>
+          <li>
+              <input type="text" class="inputtext" name="proxy_code" maxlength="20" value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+          </li>
+          <li>
+              <input type="text" class="inputtext" name="proxy_name"  value="{$Think.get.proxy_name}" placeholder="代理商名称"/>
+          </li>
+              <li>
+                  <label class="inputlabel">审核状态：</label>
+                  <select class="select" name="approve_status" style='min-width:80px'>
+                  <option value="" selected >全部</option>
+                 <option value="1" <if condition='$Think.get.approve_status eq 1'>selected</if> >草稿</option>
+                  <option value="2" <if condition='$Think.get.approve_status eq 2'>selected</if> >待审核</option>
+                  <option value="3" <if condition='$Think.get.approve_status eq 3'>selected</if> >初审通过</option>
+                  <option value="4" <if condition='$Think.get.approve_status eq 4'>selected</if> >初审驳回</option>
+                  <option value="5" <if condition='$Think.get.approve_status eq 5'>selected</if> >复审通过</option>
+                  <option value="6" <if condition='$Think.get.approve_status eq 6'>selected</if> >复审驳回</option>
+                  </select>
+                  <input type="hidden" value=""/>
+              </li>
+          <li>
+              <label class="inputlabel">是否还清：</label>
+              <select class="select" name="is_pay_off" style="min-width:80px;">
+                  <option value="9" <if condition='$Think.get.is_pay_off eq "9" '>selected</if> >全部</option>
+                  <option value="1" <if condition='$Think.get.is_pay_off eq "1" '>selected</if>>是</option>
+                  <option value="0" <if condition='$Think.get.is_pay_off eq "0" '>selected</if> >否</option>
+              </select>
+              <input type="hidden" value="9"/>
+          </li>
+          <li>
+              <label class="inputlabel">授信时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime" placeholder="结束时间" value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+          </li>
+
+        <li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+
+        <div class="prepaidtip" >
+            <p> 授信金额合计：【<span style="color:#5cb95c;">{$sum_results.sum_money_one|default="0.000"}</span>元】</p>
+        </div>
+
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="80" class="change">代理商编号</th>
+                    <th width="130" class="change">代理商名称</th>
+                    <th width="150" class="change">授信编号</th>
+                    <th width="90" class="change">授信金额(元)</th>
+                    <th width="80" class="change">审核状态</th>
+                    <th width="130" class="change">授信时间</th>
+                    <th width="90" class="change">未还款金额(元)</th>
+                    <th width="70" class="change">是否还清</th>
+                    <th width="100" class="change">预计还款时间</th>
+                    <th width="180" class="change">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.proxy_code}</td>
+                    <td>{$vo.proxy_name}</td>
+                    <td>{$vo.loan_code}</td>
+                    <td class="money_style">{$vo.loan_money}</td>
+                    <td>{$vo.approve_status|get_contract_status}</td>
+                    <td>{$vo.loan_date|default="--"}</td>
+                    <td class="money_style">{$vo.loan_id|last_money=1}</td>
+                    <td> <if condition="$vo.is_pay_off eq 1 " >是<else/>否</if></td>
+                    <td>{$vo.repayment_date|msubstr=0,10,'utf-8',false}</td>
+                    <td class="operation_td">
+                            <button class="operationbtn  proxyBorrow_detailed_function" value="{$vo.loan_id}">
+                              <span>查看</span>
+                            </button>
+                        <isshow url="ProxyBorrow/edit">
+                        <if condition='(($vo.approve_status eq 1) or ($vo.approve_status eq 4) or ($vo.approve_status eq 6)) and ($vo.create_user_id eq $user_id)'>
+                            <button class="operationbtn proxyBorrow_edit_function"  value="{$vo.loan_id}"  >
+                                <span>编辑</span>
+                              </button>
+                        </if>
+                        </isshow>
+                        <isshow url="ProxyBorrow/send_approve">
+                            <if condition='($vo.approve_status eq 1) and ($vo.create_user_id eq $user_id) '>
+                               <button class="operationbtn proxyBorrow_send_function"  value="{$vo.loan_id}"    >
+                                    <span>送审</span>
+                                </button>
+                            </if>
+                        </isshow>
+                        <isshow url="ProxyBorrow/delete">
+                            <if condition='(($vo.approve_status eq 1) or ($vo.approve_status eq 4) or ($vo.approve_status eq 6)) and ($vo.create_user_id eq $user_id) '>
+                                <button class="operationbtn proxyBorrow_delete_function"  value="{$vo.loan_id}"  >
+                                    <span>删除</span>
+                                </button>
+                        </if>
+                        </isshow>
+                        <if condition="$is_proxy eq $vo['top_proxy_id']">
+                        <if condition="$vo.approve_status eq 2 " >
+                            <isshow url="ProxyBorrow/approve">
+                                <button class="operationbtn  proxyBorrow_approve_function" value="{$vo.loan_id}" data-approve="approve" >
+                                    <span>初审</span>
+                                </button>
+                            </isshow>
+                        </if>
+                        <if condition="$vo.approve_status eq 3 " >
+                            <isshow url="ProxyBorrow/approve_t">
+                                <button class="operationbtn  proxyBorrow_approve_function"  value="{$vo.loan_id}"  data-approve="approve_t" >
+                                    <span>复审</span>
+                                </button>
+                            </isshow>
+                        </if>
+                        </if>
+                        <isshow url="ProxyPayBack/add">
+                        <if condition='($vo.approve_status eq 5) and ($vo.is_pay_off eq 0) and (($vo.create_user_id eq $user_id) or ($role eq 1 and $vo.top_proxy_id eq $is_proxy)) '>
+                            <button class="operationbtn proxyBorrow_payBack_function"  value="{$vo.loan_id}"  >
+                                <span>还款</span>
+                            </button>
+                        </if>
+                        </isshow>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

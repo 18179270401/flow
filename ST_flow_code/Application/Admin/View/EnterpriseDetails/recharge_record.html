@@ -1,0 +1,115 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>统计报表</em>><em>企业充值明细表</em></span>
+        </div>
+          <div class="operation_info">
+              <isshow url="EnterpriseDetails/export_excel">
+                <button class="btn  export_button" data-url="EnterpriseDetails">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+              </isshow>
+          </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/EnterpriseDetails/recharge_record">
+    <div class="search_nav minheight60" >
+      <ul>
+          <li>
+              <input type="text" class="inputtext" name="enterprise_code" maxlength="6" style='min-width:80px' value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+          </li>
+        <li>
+          <input type="text" class="inputtext" name="enterprise_name" value="{$Think.get.enterprise_name}" placeholder="企业名称"/>
+        </li>
+          <li>
+              <input type="text" class="inputtext" name="obj_proxy_code" style='min-width:80px' value="{$Think.get.obj_proxy_code}" placeholder="上级代理编号"/>
+          </li>
+          <li>
+              <input type="text" class="inputtext" name="obj_proxy_name" value="{$Think.get.obj_proxy_name}" placeholder="上级代理名称"/>
+          </li>
+         <!-- <li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext" name="end_datetime" placeholder="结束时间" value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly />
+          </li>-->
+          <li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+        <div class="prepaidtip" >
+                <p> 充值总额：【共：<span style="color:#5cb95c;">{$sum_results|default='0.000'}</span>元】</p>
+        </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con" data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+        <div class="tablelist_thead">
+          <table>
+            <tr>
+                <th width="50">序号</th>
+                <th width="70" class="change">企业编号</th>
+                <th width="130" class="change">企业名称</th>
+                <th width="80" class="change">上级代理编号</th>
+                <th width="130" class="change">上级代理名称</th>
+                <th width="70" class="change">操作金额(元)</th>
+                <!--<th width="80" class="change">操作前余额(元)</th>
+                <th width="80" class="change">操作后余额(元)</th>-->
+                <th width="120" class="change">操作时间</th>
+                <!--<th width="80">操作</th>-->
+            </tr>
+          </table>
+        </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.enterprise_code}</td>
+                    <td>{$vo.enterprise_name} </td>
+                    <td>{$vo.top_proxy_code}</td>
+                    <td>{$vo.obj_proxy_name} </td>
+                    <td class="money_style">{$vo.operater_price}</td>
+                    <!--<td class="money_style">{$vo.operater_before_balance}</td>
+                    <td class="money_style">{$vo.operater_after_balance}</td>-->
+                    <td>{$vo.record_date}</td>
+                    <!--<td>-->
+                      <!--<isshow url="EnterpriseDetails/detailed">
+                        <button class="operationbtn enterprisedetailed_btn" value="{$vo.record_id}" data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                            <span>查看</span>
+                        </button>
+                      </isshow>-->
+                    <!--</td>-->
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

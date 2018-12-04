@@ -1,0 +1,62 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <if condition="$user_type eq 2">
+                <th width="20%">代理商编号：</th>
+                <td width="30%">{$proxy_id|obj_data=1,'code'}</td>
+                <th width="20%">代理商名称：</th>
+                <td width="30%">{$proxy_id|obj_data=1,'name'}</td>
+                <elseif condition="$user_type eq 3" />
+                <th width="20%">企业编号：</th>
+                <td width="30%">{$enterprise_id|obj_data=2,'code'}</td>
+                <th width="20%">企业名称：</th>
+                <td width="30%">{$enterprise_id|obj_data=2,'name'}</td>
+
+            </if>
+        </tr>
+
+        <tr>
+                <if condition="$obj_user_type eq 1">
+                    <th><if condition="$balance_type eq 1">操作者编号：<else/>接收者编号：</if></th>
+                    <td>{$obj_proxy_id|obj_data=1,'code'}</td>
+                    <th><if condition="$balance_type eq 1">操作者名称：<else/>接收者名称：</if></th>
+                    <td>{$obj_proxy_id|obj_data=1,'name'}</td>
+                    <elseif condition="$obj_user_type eq 2" />
+                    <th>接收者编号：</th>
+                    <td>{$obj_enterprise_id|obj_data=2,'code'}</td>
+                    <th>接收者名称：</th>
+                    <td>{$obj_enterprise_id|obj_data=2,'name'}</td>
+                </if>
+        </tr>
+        <if condition="$user_type eq 2">
+            <tr>
+                <th>用途：</th>
+                <td>{$operate_type|get_operate_type=1}</td>
+                <th class="money_style">操作人：</th>
+                 <td>{$user_id|get_user_name}</td>
+            </tr>
+            <else/>
+            <tr>
+                <th>用途：</th>
+                <td colspan="3">{$operate_type|get_operate_type}</td>
+            </tr>
+         </if>
+
+        <tr>
+            <th>操作金额：</th>
+            <td class="money_style">{$operater_price|default="0.000"}元</td>
+            <!--<th class="money_style">操作前余额：</th>
+            <td class="money_style">{$operater_before_balance|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>操作后余额：</th>
+            <td class="money_style">{$operater_after_balance|default="0.000"}元</td>-->
+            <th>操作时间：</th>
+            <td>{$operation_date}</td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+    </table>
+</div>

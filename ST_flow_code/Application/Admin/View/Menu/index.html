@@ -1,0 +1,147 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <!--<div class="operation_con">
+    <button class="btn add_btn menu_add_btn">
+      <i class="minicon newagents_icon"></i><span>新增菜单</span>
+    </button>
+  </div>-->
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>系统管理</em>><em>菜单管理</em></span>
+        </div>
+        <div class="operation_info">
+          <isshow url="Menu/add">
+            <button class="btn add_btn menu_add_btn">
+              <i class="minicon addoperation_icon"></i><span>新增菜单</span>
+            </button>
+          </isshow>
+            <if condition="is_jurisdiction('Menu/add') and is_jurisdiction('Menu/export_excel')">
+                <span class="line">|</span>
+            </if>
+            <isshow url="Menu/export_excel">
+                    <button class="btn  export_button" data-url="Menu">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+            </isshow>
+        </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/Menu/index">
+    <div class="search_nav">
+      <ul>
+        <li>
+          <input type="text" class="inputtext" name="menu_name" value="{$Think.get.menu_name}" placeholder="菜单名称"/>
+        </li>
+        <li>
+          <label class="inputlabel">菜单类型：</label>
+          <select class="select" name="menu_type" style="min-width:80px">
+            <option value="" selected>全部</option>
+            <option value="1" <if condition='$Think.get.menu_type eq 1'>selected</if>>分级菜单</option>
+            <option value="2" <if condition='$Think.get.menu_type eq 2'>selected</if>>功能菜单</option>
+          </select>
+            <input type="hidden" value=""/>
+        </li>
+        <li>
+          <label class="inputlabel">所属平台：</label>
+          <select class="select" name="sys_type" style="min-width:80px">
+            <option value="" selected>全部</option>
+            <volist name="systype" id="vo">
+                <option value="{$key}" <if condition='$Think.get.sys_type eq $key'>selected</if>>{$vo}</option>
+            </volist>
+          </select>
+            <input type="hidden" value=""/>
+        </li>
+        <li>
+          <label class="inputlabel">使用状态：</label>
+          <select class="select" style='min-width:80px' name="status">
+            <option value="9" >全部</option>
+            <option value="1" <if condition='($Think.get.status eq 1) or ($Think.get.status eq null)'>selected</if>>正常</option>
+            <option value="0" <if condition='$Think.get.status eq "0"'>selected</if>>已禁用</option>
+          </select>
+            <input type="hidden" value="1"/>
+        </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="130" class="change">菜单名称</th>
+                    <th width="130" class="change">分组名称</th>
+                    <th width="130" class="change">上级菜单</th>
+                    <th width="100" class="change">菜单类型</th>
+                    <th width="70" class="change">所属平台</th>
+                    <!--<th width="70" class="change">状态</th>-->
+                    <th width="180">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="menu_list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.menu_name}</td>
+                    <td>{$vo.group_name|default="--"}</td>
+                    <td>{$vo.bmenu_name|default="顶级菜单"}</td>
+                    <td><if condition="$vo.menu_type eq 1">分级菜单<else />功能菜单</if></td>
+                    <td>{$vo.sys_type|get_sys_type}</td>
+                    <!--<td><if condition="$vo.status eq 1">正常<else />已禁用</if></td>-->
+                    <td class="operation_td">
+                        <button class="operationbtn menu_show_btn" value="{$vo.menu_id}">
+                            <!--<i class="minicon edit_icon"></i>-->
+                            <span>查看<span>
+                        </button>
+                      <isshow url="menu/edit">
+                        <button class="operationbtn menu_edit_btn" value="{$vo.menu_id}">
+                          <!--<i class="minicon edit_icon"></i>-->
+                          <span>编辑</span>
+                        </button>
+                      </isshow>
+                      <if condition='$vo.menu_type eq 2'>
+                        <isshow url="Right/add">
+                          <button class="operationbtn menu_add_function" value="{$vo.menu_id}">
+                              <!--<i class="minicon add_icon"></i>-->
+                              <span>添加功能</span>
+                          </button>
+                        </isshow>
+                      </if>
+                      <isshow url="Right/toggle_status">
+                        <button class="operationbtn menu_toggle_status_btn" value="{$vo.menu_id}" data-value="{$vo.menu_name}" data-original-title="<if condition='$vo.status eq 1'>禁用<else />启用</if>">
+                          <!--<i <if condition="$vo['status'] eq 0">class="minicon reviewpass_icon"<elseif condition="$vo['status'] eq 1" />class="minicon reviewdis_icon"</if> ></i>-->
+                          <span><if condition="$vo['status'] eq 0">启用<elseif condition="$vo['status'] eq 1" />禁用</if></span>
+                        </button>
+                      </isshow>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+
+<include file="Common/footer" />

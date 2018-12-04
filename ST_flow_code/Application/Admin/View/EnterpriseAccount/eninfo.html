@@ -1,0 +1,52 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+        <!--<div class="add_list">
+            <h5>企业名称：</h5>
+            <div class="add_value"><span>{$list.enterprise_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>企业编号：</h5>
+            <div class='add_value'><span>{$list.enterprise_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>上级代理商名称：</h5>
+            <div class="add_value"><span>{$list.proxy_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>上级代理商编号：</h5>
+            <div class="add_value"><span>{$list.proxy_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>账号余额：</h5>
+            <div class="add_value"><span>{$list.account_balance|default="0.00"}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>冻结余额：</h5>
+            <div class='add_value'><span>{$list.freeze_money|default="0.00"}元</span></div>
+        </div>-->
+    <table width="100%">
+        <tr>
+            <th width="40%">企业名称：</th>
+            <td width="60%">{$list.enterprise_name}</td>
+        </tr>
+        <tr>
+            <th >企业编号：</th>
+            <td>{$list.enterprise_code}</td>
+        </tr>
+        <tr>
+            <th >上级代理名称：</th>
+            <td >{$list.proxy_name}</td>
+        </tr>
+        <tr>
+            <th>上级代理编号：</th>
+            <td>{$list.proxy_code}</td>
+        </tr>
+        <tr>
+            <th>账户余额：</th>
+            <td>{$list.account_balance|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>冻结金额：</th>
+            <td>{$list.freeze_money|default="0.000"}元</td>
+        </tr>
+    </table>
+</div>

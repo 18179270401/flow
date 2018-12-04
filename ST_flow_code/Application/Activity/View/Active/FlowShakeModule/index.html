@@ -1,0 +1,155 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    	<title>摇一摇得流量</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<link href="{$role}css/flow-shake.css" rel="stylesheet">
+<!--分享流量-->
+<style>
+    #activity_shake .activity_midden .shake_div .el_top .activity-logo{
+		/*background-image: url({$logo_img});*/
+		background-image: url({$role}images/logo.png);
+	   	width: 1.75rem;
+	    height: 1.75rem;
+	    background-size: cover;
+	    position: absolute;
+	    left: 3.99rem;
+	    top: 4.51rem;
+	    z-index: 5;
+	}
+</style>
+</head>
+<body class="container">
+<div class="coloured_ribbon" id="coloured_ribbon">
+	<img src="{$role}images/coloured_ribbon.png" pointer-events:none;/>
+</div>
+<div class="shake" style="display:none;"></div>
+<div class="daying"></div>
+<div id="activity_page_main" isjoin="1">
+    <section id="activity_shake">
+        <div class="activity_top"></div>
+        <div class="activity_midden">
+            <div class="bg_div">
+                <div id="bg_box" class="bg_box">
+                    <div class="bg_img"></div>
+                </div>
+            </div>
+            <div class="shake_div" id="shake_div">
+                <div class="shake_top a-fadeoutT">
+                    <div class="el_top">
+                		<div class="activity-logo"></div>
+                    </div> 
+                </div>
+                <div class="shake_bottom a-fadeoutB">
+                    <div class="el_bottom">
+                	</div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="ActivityRules">
+			<div class="ActivityRuleslefthr">
+				<hr >
+			</div>
+			<div class="ActivityRulescenter">
+				<span>您当前参与活动的手机号码</span>
+			</div>
+			<div class="ActivityRulesrighthr">
+				<hr>
+			</div>
+		</div>
+	
+		<div class="barDiv">
+			<div class="phoneNumberContent">
+			<span id="phoneNumber">158 1132 5272<span>
+			</div> 
+			<img src="{$role}images/bar.png" id = "barImg">
+		</div>
+		<div class="activeTime">
+			{$activeTime}
+	<!--		活动时间:2016-04-22 00:00:00 至2016-06-06:00:00:00-->
+		</div>
+    </section>
+    <div id="music"><audio  id="shakeMusic" style=" display:none;height:0px;" preload="auto" controls="controls" src="{$role}audio/shake.mp3"  /></div>
+	</div>
+
+	<if condition="$type eq 1">
+		<form action="{:U('FlowValue/foot')}" method="get" id='form1'> 
+	<else/>
+		<form action="{:U('Index/foot')}" method="post" id='form1'> 
+	</if>
+		<input type="hidden" name='active' id="active" value="{$active}">
+		<input type="hidden" name='phone' id="phone" value="{$phone}">
+		<input type="hidden" name="activity_id" id="activity_id" value="{$activity_id}">
+		<input type="hidden" name="user_activity_id" id="user_activity_id" value="{$user_activity_id}">
+		<input type="hidden" name="openid" id="openid" value="{$openid}">
+		<input type="hidden" name="nickname" id="nickname" value="{$nickname}">
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}"> 
+		<input type="hidden" name="headimgurl" id="headimgurl" value="{$headimgurl}"><input type="hidden" name="flowSize" id="flowSize" value="">
+		<input type="hidden" name="orderid" id="orderid" value="">  			
+	</form>
+		<!--流量分享需求-->
+		<input type="hidden" name="mod" id="mod" value="{$mod}">
+		<input type="hidden" name="func" id="func" value="{$func}">
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<!--流量分享需求-->
+	<div id="mod_shake" style="width: 100%;height:100%;display:none;margin-top: 4rem;">
+	    <div class="shake_row">
+	        <div class="error_bg"></div>
+	        <div class="ActivityRules">
+				<div class="ActivityRuleslefthr">
+					<hr >
+				</div>
+				<div class="ActivityRulescenter">
+					<span>您当前参与活动的手机号码</span>
+				</div>
+				<div class="ActivityRulesrighthr">
+					<hr>
+				</div>
+			</div>
+	
+			<div class="barDiv">
+				<div class="phoneNumberContent">
+					<span id="phoneNumber">158 1132 5272<span>
+				</div> 
+				<img src="{$role}images/bar.png" id = "barImg">
+			</div>
+			<div class="activeTime">
+					{$activeTime}
+			</div>
+	  </div>        
+	</div>
+
+<script src="__PUBLIC__/utils/js/zepto.js"></script>
+<script src="__PUBLIC__/utils/js/get_para.js"></script>
+<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+<script type="text/javascript" src="{$role}js/flow-shake.js"></script>
+<script>
+
+	htmlFontSize();
+	window.onresize=function(){
+		htmlFontSize();
+	}
+	function htmlFontSize(){
+		var w=document.documentElement.clientWidth;
+		var i=parseInt(w)/768;
+		document.documentElement.style.fontSize=(parseInt(w)/768)*40+"px";
+	}
+</script>
+
+</body>
+</html>

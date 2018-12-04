@@ -1,0 +1,91 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark"  style="display:none;" id="enterprisewithdrawals_approve_box">
+    <div class="detail_box" style="padding:0 0;">  
+      <table width="100%">
+                <thead>
+                    <th width="100%" colspan="4">企业提现信息</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <th width="25%">企业编号：</th>
+                    <td width="25%">{$list.enterprise_code}</td>
+                    <th width="25%">企业名称：</th>
+                    <td width="25%">{$list.enterprise_name}</td>
+                </tr>
+                <tr>
+                    <th>开户行：</th>
+                    <td>{$list.bank_account}</td>
+                    <th>银行卡号：</th>
+                    <td>{$list.card_number}</td>
+                </tr>
+                <tr>
+                    <th>开户人姓名：</th>
+                    <td>{$list.beneficiary_name}</td>
+                    <th>开户人电话：</th>
+                    <td>{$list.mobile}</td>
+                <tr>
+                <tr>
+                    <th>提现金额：</th>
+                    <td colspan="3">{$list.apply_money|default="0.000"}元</td>
+                </tr>
+                <tr>
+                    <th>备注：</th>
+                    <td colspan="3">{$list.remark}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <form name="enterprisewithdrawals_approve_form">
+        <input type="hidden" name="apply_id" value="{$list.apply_id}">
+        <input type="hidden"  name="apply_code" value="{$list.apply_code}" />
+        <input type="hidden"  name="enterprise_id" value="{$list.enterprise_id}" />
+        <input type="hidden"  name="type" value="{$type}"/>
+        <div class="checkinfo_con">      
+            <div class="add_list">
+                <h5><span class="wildcard"></span>提现审核：</h5>
+                <div class="add_value">
+                <empty name="type">
+                    <label class="radio  checked" value="1" onclick="$('#list_hide').show();"><em>打款成功</em></label>
+                    <label class="radio "  value="2" onclick="$('#list_hide').hide();"><em>打款驳回</em></label>
+                <else/>
+                    <if condition="$type eq 1">
+                        <label class="radio  checked" value="1"><em>初审通过</em></label>
+                        <label class="radio "  value="2"><em>初审驳回</em></label>
+                    <else/>
+                        <label class="radio  checked" value="1"><em>复审通过</em></label>
+                        <label class="radio "  value="2"><em>复审驳回</em></label>
+                    </if>
+                </empty>
+                    <input type="hidden" name="approve_status"  value="1" />
+                </div>
+            </div>
+        <empty name="type">
+            <div id="list_hide">
+            <div class="add_list">
+                    <h5><span class="wildcard">*</span>交易号：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="transaction_number" /></div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>打款银行：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="payment_bank" /></div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>打款账户：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="payment_account" /></div>
+                </div>
+                <div class="add_list">
+                    <h5><span class="wildcard">*</span>打款金额(元)：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" empty="true" name="payment_money" value="{$list.apply_money}" /></div>
+                    <div class="promptinfo"><span>元</span></div>
+                </div>
+            </div>
+        </empty>
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核原因：</h5>
+                <div class="add_value">
+                    <textarea class="textarea" name="approve_remark" empty="true"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+</div>

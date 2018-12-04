@@ -1,0 +1,33 @@
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, input, th, td
+{margin: 0; padding: 0; border: 0; outline: none;}
+body{
+	background-color: #ff6054;
+}
+.endBg{
+	margin-top: 5rem;
+	background: url(../image/end_bg.png);
+	background-size: 100% 100%;
+	width: 20rem;
+	height: 20rem;
+  position: absolute;
+  z-index: -1;
+}
+
+.endWord{
+	background: url(../image/end_word.png);
+	background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+	width: 15rem;
+	height: 5rem;
+  margin-top: 2rem;
+}
+
+.endCharater{
+	background: url(../image/charater_bg.png);
+	background-size: 100% 100%;
+	width: 18rem;
+	height: 18rem;
+  margin: 0 auto;
+}

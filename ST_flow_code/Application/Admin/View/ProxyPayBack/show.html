@@ -1,0 +1,86 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <tr>
+            <th width="17%">代理商名称：</th>
+            <td width="25%">{$proxy_name}</td>
+            <th width="20%">代理商编号：</th>
+            <td width="33%">{$proxy_code}</td>
+        </tr>
+        <tr>
+            <th>借款金额：</th>
+            <td>{$loan_money|default="0.000"}元</td>
+            <th>借款编号：</th>
+            <td>{$loan_code}</td>
+        </tr>
+        <tr>
+            <th>还款金额：</th>
+            <td>{$repayment_money|default="0.000"}元</td>
+            <th>未还款金额：</th>
+            <td>{$loan_id|last_money=1}元</td>
+        </tr>
+        <tr>
+            <th>借款时间：</th>
+            <td>{$loan_date}</td>
+            <th>预计还款时间：</th>
+            <td>{$pl_repayment_date|msubstr=0,10,"utf-8",false}</td>
+        </tr>
+
+        <tr>
+            <th>付款方式：</th>
+            <td>
+                <if condition="$source eq 1">
+                    汇款
+                    <elseif  condition="$source eq 2"/>
+                    微信支付
+                    <else/>
+                    支付宝支付
+                </if>
+            </td>
+            <th>
+                <if condition="$source eq 1">
+                    打款户名：
+                    <elseif  condition="$source eq 2"/>
+                    支付订单号：
+                    <else/>
+                    交易号：
+                </if>
+            </th>
+            <td>{$transaction_number}</td>
+        </tr>
+        <tr>
+            <th>还款时间：</th>
+            <td >{$repayment_date|msubstr=0,10,"utf-8",false}</td>
+            <th>送审人：</th>
+            <td >{$create_user_id|get_user_name}</td>
+        </tr>
+        <tr>
+            <th>审核人：</th>
+            <td>{$approve_user_id|get_user_name}</td>
+            <th>审核状态：</th>
+            <td>{$approve_status|get_pay_status}<if condition="$is_pay_off eq 3">【已还清】</if></td>
+        </tr>
+        <tr>
+            <th>审核时间：</th>
+            <td colspan="3">{$approve_date}</td>
+        </tr>
+        <tr>
+            <th>附件：</th>
+            <td colspan="3">
+                <if condition="$credential_one neq '' ">
+                    <img src="{$credential_one}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;"><span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($credential_one);</php></span>
+                    <button style="margin-top:3px;" type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('ProxyPayBack/show',array('repaymen_id'=>$repaymen_id,'download'=>1))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                    <else />
+                    <span>没有可用附件</span>
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

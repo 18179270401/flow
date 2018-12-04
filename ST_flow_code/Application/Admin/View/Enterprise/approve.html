@@ -1,0 +1,108 @@
+<div id="enterprise_approve_box" class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <div class="detail_box" style="padding:0 0;"> 
+          <table width="100%">
+        <thead>
+            <tr>
+                <th width="100%" colspan="4">基本信息</th>
+            </tr>
+        </thead>
+
+        <tr>
+            <th >企业名称：</th>
+            <td>{$enterprise.enterprise_name}</td>
+            <th >企业编号：</th>
+            <td >{$enterprise.enterprise_code}</td>
+            
+        </tr>
+         <tr>
+            <th width="15%">公司电话：</th>
+            <td width="35%">{$enterprise.tel}</td>
+            <th width="15%">邮箱：</th>
+            <td width="35%">{$enterprise.email}</td>
+        </tr>
+         <tr>
+           
+            <th >联系人：</th>
+            <td >{$enterprise.contact_name}</td>
+             <th >联系人电话：</th>
+            <td >{$enterprise.contact_tel}</td>
+        </tr>
+        <tr>
+             <th >营业执照编号：</th>
+            <td >{$enterprise.icense_img_num}</td>
+             <th >营业执照附件：</th>
+            <td >
+                <if condition="$enterprise.icense_img neq '' ">
+                     <img src="{$enterprise.icense_img}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;"><span  style="margin-top:5px;float:left;margin-left:8px;" ><php> echo basename($enterprise['icense_img']); </php></span>
+                        <!--
+                        <button type="button" class="btn export_btn filelook_btn">
+                            <i class="minicon export_icon"></i><span>预览</span>
+                        </button>
+                        -->
+                    <button type="button" style="margin-top:5px;" class="btn export_btn filedown_btn" onclick="down_file('{:U('Enterprise/approve_show',array('enterprise_id'=>$enterprise['enterprise_id'],'download'=>'icense_img'))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                <else />
+                    没有可用附件
+                </if> 
+            </td>
+        </tr>
+         <tr>
+
+            <th >身份证号码：</th>
+            <td >{$enterprise.identity_img_num}</td>
+             <th>送审人：</th>
+             <td>{$enterprise.create_user_id|get_user_name}</td>
+         </tr>
+          <tr>
+            <th >身份证附件：</th>
+            <td  colspan="3" >
+                <if condition="$enterprise.identity_img neq '' ">
+                     <img src="{$enterprise.identity_img}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;">
+                     <span  style="margin-top:5px;float:left;margin-left:8px;" >
+                        <php> echo basename($enterprise['identity_img']); </php>
+                     </span>
+                    <button type="button" style="margin-top:5px;" class="btn export_btn filedown_btn" onclick="down_file('{:U('Enterprise/approve_show',array('enterprise_id'=>$enterprise['enterprise_id'],'download'=>'identity_img'))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                <else />
+                    没有可用附件
+                </if> 
+            </td>
+        </tr>
+        <tr>
+            
+        </tr>
+        <tr>
+
+        </tr>
+
+        <tr>
+             <th >支持运营商：</th>
+            <td colspan="3" >{$enterprise.operator}</td>
+        </tr>
+         <tr>
+            <th >地址：</th>
+            <td colspan="3">{$enterprise.province_name}{$enterprise.city_name}{$enterprise.address}</td>
+        </tr>
+    </table>
+
+    </div>
+  <form name="enterprise_approve_form">
+    <input type="hidden" name="enterprise_id" value="{$enterprise.enterprise_id}">
+    <div class="checkinfo_con">
+      <div class="add_list">
+          <h5>审核状态：</h5>
+          <div class="add_value">
+            <label class="radio  checked " value="1" ><em>审核通过</em></label>
+            <label class="radio  " value="2" ><em>审核驳回</em></label>
+            <input type="hidden" name="approve_status" value="1">
+          </div>
+      </div>
+      <div class="add_list">
+          <h5>审核说明：</h5>
+          <div class="add_value"><textarea style="resize: none;height:80px;" class="textarea" name="approve_remark"></textarea></div>
+      </div>
+    </div>
+    </form>
+</div>

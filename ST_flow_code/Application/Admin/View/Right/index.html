@@ -1,0 +1,120 @@
+<include file="Common/header" />
+
+<div class="main_con">
+    <div class="operation_box">
+    <div class="operation_con">
+      <div class="currenttit">
+        <i></i><span><em>系统管理</em>><em>功能管理</em></span>
+      </div>
+        <div class="operation_info">
+            <isshow url="Right/export_excel">
+                <button class="btn  export_button" data-url="Right">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+    </div>
+  </div>
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/Right/index">
+    <div class="search_nav">
+      <ul>
+        <li>
+          <input type="text" class="inputtext" name="menu_name" value="{$Think.get.menu_name}" placeholder="所属菜单"/>
+        </li>
+        <li>
+          <label class="inputlabel">所属平台：</label>
+          <select class="select" name="sys_type" style="min-width:80px">
+            <option value="" selected>全部</option>
+            <volist name="systype" id="vo">
+                <option value="{$key}" <if condition='$Think.get.sys_type eq $key'>selected</if>>{$vo}</option>
+            </volist>
+          </select>
+            <input type="hidden" value=""/>
+        </li>
+        <li>
+          <label class="inputlabel">状态：</label>
+          <select class="select" style='min-width:80px' name="status" >
+            <option value="9"  >全部</option>
+            <option value="1" <if condition='($Think.get.status eq 1) or ($Think.get.status eq null)'>selected</if>>正常</option>
+            <option value="0" <if condition='$Think.get.status eq "0"'>selected</if>>已禁用</option>
+          </select>
+           <input type="hidden" value="1"/>
+        </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+  </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width='50'>序号</th>
+                    <th width="110" class="change">功能名称</th>
+                    <th width="250" claas="change">功能地址</th>
+                    <th width="120" class="change">所属菜单</th>
+                    <th width="90" class="change">所属平台</th>
+                    <!--<th width="100px" class="change">最后编辑时间</th>-->
+                    <th width="150">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="function_list" id="vo">
+            <tr>
+                <td>{$vo.sort_no}</td>
+                <td>{$vo.function_name}</td>
+                <td>{$vo.action_url}</td>
+                <td>{$vo.menu_name}</td>
+                <td>{$vo.sys_type|get_sys_type}</td>
+                <!--<td>{$vo.modify_date}</td>-->
+                <td class="operation_td">
+                    <button class="operationbtn right_show_btn" value="{$vo.function_id}">
+                        <!--<i class="minicon edit_icon"></i>-->
+                        <span>查看</span>
+                    </button>
+                  <!--<button class="operationbtn right_edit_btn"data-toggle="tooltip" data-placement="<if condition='$i eq count($function_list)'>top<else />bottom</if>" data-original-title="编辑" value="{$vo.function_id}">
+                  <i class="minicon edit_icon"></i>
+                  </button>-->
+                  <isshow url="Right/edit">
+                    <button class="operationbtn right_edit_btn" value="{$vo.function_id}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>编辑</span>
+                    </button>
+                  </isshow>
+                  <!--<button class="operationbtn right_toggle_status_btn" data-toggle="tooltip" data-placement="<if condition='$i eq count($function_list)'>top<else/>bottom</if>" data-original-title="<if condition="$vo.status eq 1">禁用<else/>启用</if>" value="{$vo.function_id}">
+                  <!--<i <if condition="$vo['status'] eq 0">class="minicon reviewpass_icon"<elseif condition="$vo['status'] eq 1" />class="minicon reviewdis_icon"</if>></i>-->
+                  <isshow url="Right/toggle_status">
+                    <button class="operationbtn right_toggle_status_btn" value="{$vo.function_id}" data-value="{$vo.function_name}"
+                    data-original-title="<if condition='$vo.status eq 1'>禁用<else/>启用</if>
+                    ">
+                    <span><if condition="$vo['status'] eq 0">启用<elseif condition="$vo['status'] eq 1" />禁用</if></span>    
+                    </button>
+                  </isshow>
+                </td>
+            </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

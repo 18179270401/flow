@@ -1,0 +1,38 @@
+/* CSS Document */
+.login_header{ height:62px; background-color:#ffff;}
+.login_header .logo a{ float:left; padding-top:15px;}
+.login_header .logo span{ float:left; height:62px; background:url(../images/login_header_line_03.png) no-repeat left center; margin-left:10px; padding-top:20px; padding-left:11px; font-family:"方正正中黑简体"; font-size:22px; color:#6b6a6a;}
+
+.login_body{ width:100%; min-width:1000px; height:510px; background:url(../images/login_body_bg_05.png) repeat-x; border-top:1px solid #a1c1dd; border-bottom:1px solid #edeeee;}
+.login_wrap{ width:1000px; height:100%; margin:0 auto; background:url(../images/login_body_05.png) no-repeat;}
+.login_box{ float:right; width:315px; margin-top:60px;}
+.login_tit{ height:47px; padding-top:12px; background-color:#FFF; border-bottom:2px solid #eee; border-top-left-radius:3px; border-top-right-radius:3px;}
+.login_tit i{ display:inline-block; width:26px; height:26px; background:url(../images/login_tit_icon_11.png) no-repeat; vertical-align:top; margin-left:16px;}
+.login_tit span{ padding-left:8px; font-size:18px; color:#989898;}
+.login_content{ width:100%; background-color:#FFF; padding:8px 29px 0px; position:relative; overflow:hidden;}
+.login_content .error{ position:absolute; top:0; left:29px; right:32px; height:32px; line-height:29px;}
+.login_content .error span{ display:block; color:#ff1111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.login_con{ width:256px; height:41px; border:1px solid #b3b3b3; border-radius:3px; margin-top:24px;}
+.login_con span{ display:inline-block; width:39px; height:39px; background-color:#b3b3b3; text-align:center;}
+.login_con i{ display:inline-block; width:15px; height:15px; background:url(../images/login_icon_11.png) no-repeat; margin-top:14px; vertical-align:top;}
+.login_con i.user_icon{ background-position:0px 0px;}
+.login_con i.password_icon{ background-position:0px -65px;}
+.login_con .text{ width:206px; height:38px; line-height:28px; padding:5px 8px; border:0px none; vertical-align:top; outline:none;font-family:"微软雅黑"; font-size:14px;}
+.login_con.focus{ border:1px solid #2593e2;}
+.login_con.focus span{ background-color:#2593e2;}
+.yzm_con{ padding-top:20px; font-size:0;}
+.yzm_con .text{ width:96px; height:39px; line-height:28px; padding:5px 8px; border:1px solid #c4c4c4; border-radius:3px; vertical-align:top; outline:none;font-family:"微软雅黑"; font-size:14px;}
+.yzm_con img{ margin-left:9px;}
+.yzm_con.focus .text{ border:1px solid #2593e2;}
+.yzm_con a{ display:inline-block; padding-top:10px; padding-left:9px; font-size:14px; color:#6d6d6d; vertical-align:top;}
+.yzm_con a:hover{ color:#2593e2; text-decoration:underline;}
+.forget_con{ padding:23px 0px; overflow:hidden;}
+.forget_con a{ float:left; font-size:14px; color:#666;}
+.forget_con a:hover{ color:#2593e2; text-decoration:underline;}
+.forget_con .checked{ background-position:0px -28px;}
+.login_btncon{ height:82px; padding-top:23px; background-color:#f5f5f5; text-align:center; font-family:"微软雅黑"; font-size:14px;}
+.login_btncon .submit{ width:256px; height:38px; border:0px none; border-radius:3px; background-color:#2593e2; font-size:18px; color:#FFF; cursor:pointer;}
+.login_btncon .submit:hover{ background-color:#006ebd;}
+
+.login_footer{ padding-top:17px; text-align:center;}
+.login_footer p{ font-size:12px; color:#8e8f8f;}

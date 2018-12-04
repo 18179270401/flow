@@ -1,0 +1,88 @@
+.modalDialog {
+    position: fixed;
+    font-family: "微软雅黑","-apple-system","Helvetica Neue","PingFang SC","Hiragino Sans GB",sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+ /*   pointer-events: none;*/
+}
+/*.modalDialog:target {
+    opacity:1;
+    pointer-events: auto;
+}*/
+.modalDialog > div {
+    width: 70%;
+    position: relative;
+    margin: 40% auto;
+    padding: 4px;
+    border-radius: 4px;
+    background: #fffdf3;
+    text-align: center;
+}
+.modalDialog > div > div{
+    margin-top: 0.8rem;
+}
+.modalDialog > div > img{
+    display: block;
+    width: 30%;
+    margin: 0.4rem auto;
+}
+.modalDialog > div > div > hr{
+    width: 32%;
+    display: inline-block;
+    vertical-align: bottom;
+    border: 0 none;
+    height: 1px;
+}
+.modalDialog > div > div > p{
+    font-size: 1rem;
+    color:#fead69;
+    display: inline-block;
+}
+.modalDialog > div > p{
+    font-size: 0.8rem;
+    color:#fa4f39;
+    margin: 0.4rem 0;
+}
+.modalDialog > div > button{
+    display: inline-block;
+    border: 1px solid #fead69;
+    color: #fead69;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    background-color: #fffdf3;
+    height: 1.4rem;
+    width: 40%;
+    margin: 0.4rem 0.6rem;
+}
+.modalDialog > div > button:active{
+    border: 1px solid #fa4f39;
+    color: #fa4f39;
+}
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #fead69;
+}

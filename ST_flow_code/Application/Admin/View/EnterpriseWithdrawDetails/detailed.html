@@ -1,0 +1,32 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="20%">企业编号：</th>
+            <td width="30%">{$list.enterprise_code}</td>
+            <th width="20%">企业名称：</th>
+            <td width="30%">{$list.enterprise_name}</td>
+        </tr>
+        <tr>
+            <th>上级代理编号：</th>
+            <td>{$list.top_proxy_code}</td>
+            <th>上级代理名称：</th>
+            <td>{$list.obj_proxy_name}</td>
+        </tr>
+        <tr>
+            <th>操作金额：</th>
+            <td class="money_style">{$list.operater_price|default="0.000"}</td>
+            <th class="money_style">操作前余额：</th>
+            <td class="money_style">{$list.operater_before_balance|default="0.000"}</td>
+        </tr>
+        <tr>
+            <th>操作后余额：</th>
+            <td class="money_style" colspan="3">{$list.operater_after_balance|default="0.000"}</td>
+        </tr>
+        <tr>
+            <th>操作人：</th>
+            <td>{$list.user_id|get_user_name}</td>
+            <th>操作时间：</th>
+            <td>{$list.operation_date}</td>
+        </tr>
+    </table>
+</div>

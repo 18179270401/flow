@@ -1,0 +1,42 @@
+.home,.user1,.packet1,.channelpacket1,.discount1,.webconfig1,.cashrecharge1,.charge1,.refund1,.cashlog1,.role1,.node1{ display:inline-block; width:16px; height:16px; background:url(../../../../images/menu_icon_52.png) no-repeat; margin-top:3px; margin-right:10px; vertical-align:top;}
+.home{ background-position:0px 0px;}
+.user1{ background-position:0px -42px;}
+.packet1{ background-position:0px -87px;}
+.channelpacket1{ background-position:0px -127px;}
+.discount1{ background-position:0px -169px;}
+.webconfig1{ background-position:0px -211px;}
+.cashrecharge1{ background-position:0px -254px;}
+.charge1{ background-position:0px -294px;}
+.refund1{ background-position:0px -336px;}
+.cashlog1{ background-position:0px -377px;}
+.role1{ background-position:0px -418px;}
+.node1{ background-position:0px -459px;}
+.skin-blue .treeview-menu >li>a{ font-size:14px; color:#93a3ba;}
+.skin-blue .treeview-menu >li>a i.dote{ display:inline-block; width:5px; height:5px; background:url(../../../../images/dote_81.png) no-repeat; margin-left:17px; margin-right:15px;}
+.sidebar-menu li.active .home,.sidebar-menu li.active .user1,.sidebar-menu li.active .packet1,.sidebar-menu li.active .channelpacket1,.sidebar-menu li.active .discount1,.sidebar-menu li.active .webconfig1,.sidebar-menu li.active .cashrecharge1,.sidebar-menu li.active .charge1,.sidebar-menu li.active .refund1,.sidebar-menu li.active .cashlog1,.sidebar-menu li.active .role1,.sidebar-menu li.active .node1{ background-image:url(../../../../images/menu_hover_icon_52.png)}
+.skin-blue .sidebar-menu>li>a:hover,.skin-blue .sidebar-menu>li.active>a{ background-color:#2a3344;}
+.skin-blue .sidebar-menu>li.active>a span{ color:#00bfe8;}
+.skin-blue .sidebar-menu>li.active>a .fa-angle-left:before{ color:#00bfe8;}
+.user-panel>.info>p{ font-size: 14px; margin-bottom: 9px;}
+.user-panel>.info>p.lightblue{ font-size:12px; color:#b0bec5;}
+.alert .close{ font-size:28px; font-weight:normal;}
+.alert-dismissable .close, .alert-dismissible .close{ top:-6px;}
+.ion-ios-person-outline:before,.ion-ios-people-outline:before,.ion-person:before,.ion-ios-people:before{ font-size:60px; color:#fff;}
+.home_icon{ display:inline-block; width:39px; height:32px; background:url(../../../../images/home_icon_58.png) no-repeat; margin-top:48px;}
+.home_icon.CompanyToday{ background-position:0px 0px;}
+.home_icon.CompanySum{ background-position:-117px 0px;}
+.home_icon.AgencyToday{ background-position:-233px 0px;}
+.home_icon.AgencySum{ background-position:-350px 0px;}
+.small-box-footer>.arrow{ display:inline-block; width:33px; height:33px; background:url(../../../../images/home_arrow_03.png) no-repeat; margin-top:26px; margin-right:22px;}
+.smal_orange{ background-color:#ff8761;}
+.smal_blue{ background-color:#00bfe8;}
+.smal_purple{ background-color:#b198dc;}
+.smal_lightblue{ background-color:#6dc7be;}
+.small-box>.inner h3.orange{ color:#ff8761;}
+.small-box>.inner h3.blue{ color:#00bfe8;}
+.small-box>.inner h3.purple{ color:#b198dc;}
+.small-box>.inner h3.lightblue{ color:#6dc7be;}
+.chart_icon{ display:inline-block; width:16px; height:16px; background:url(../../../../images/chart_icon_80.png) no-repeat; vertical-align:top; margin-top:2px; margin-left:5px; margin-right:3px;}
+.scalemap_icon{ background-position:0px 0px;}
+.rechargesum_icon{ background-position:0px -47px;}
+.arearecharge_icon{ background-position:0px -90px;}

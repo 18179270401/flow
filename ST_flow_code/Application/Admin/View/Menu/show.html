@@ -1,0 +1,32 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="20%">菜单名称：</th>
+            <td width="30%">{$menu_name}</td>
+            <th width="20%">顶级菜单：</th>
+            <td width="30%">{$bmenu_name|default="顶级菜单"}</td>
+        </tr>
+        <tr>
+            <th>菜单类型：</th>
+            <td><if condition="$menu_type eq 1">分级菜单<else />功能菜单</if></td>
+            <th >所属平台：</th>
+            <td >{$sys_type|get_sys_type}</td>
+        </tr>
+        <tr>
+            <th>访问地址：</th>
+            <td>{$page_url}</td>
+            <th >图标：</th>
+            <td >{$icon_path}</td>
+        </tr>
+        <tr>
+            <th>排序号：</th>
+            <td>{$order_num}</td>
+            <th >菜单状态：</th>
+            <td ><if condition="$status eq '0'">已禁用<elseif  condition="$status eq '1'"/>正常 <else />已删除</if></td>
+        </tr>
+        <tr>
+            <th >备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+    </table>
+</div>

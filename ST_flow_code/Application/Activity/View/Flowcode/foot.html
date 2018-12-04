@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script type="text/javascript" src="{$role}js/jquery-1.12.1.min.js?{$version_number}" ></script>
+		<script>
+			var scale = 1 / devicePixelRatio;
+			document.querySelector('meta[name="viewport"]').setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 75 + 'px';
+
+
+			$(document).on("touchstart touchmove",function(event){
+			event.preventDefault();
+			});
+		</script>
+		<link rel="stylesheet" href="{$role}css/reset.css?{$version_number}" />
+		<link rel="stylesheet" href="{$role}css/global.css?{$version_number}" />
+		<script type="text/javascript" src="{$role}js/index.js?{$version_number}" ></script>
+
+		<title>恭喜</title>
+			<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}"> 
+	</head>
+	<body>
+		<div class="success_head">
+			<div class="user_pic">
+				<img src="{$wx_photo}"/>
+			</div>
+			<p>恭喜你成功兑换了{$product_name}流量</p>
+		</div>
+		<div class="warning">
+			<p>流量将直接充值到手机号码，请留意短信通知。</p>
+		</div>
+		<div class="success_body">
+			<div style="height: 12rem;background: url({$logo_img}) no-repeat center;background-size: contain;"></div>
+			<div class="user_list" id="user_list">
+				<ul>
+					<!--<li class="clearfix">
+						<img src="images/user_pic_03.png" />
+						<div class="fl">
+							<h3>edddo</h3>
+							<span>181...1331</span>
+						</div>
+						<div class="fr">
+							<h4>抢到100M流量</h4>
+							<span>06-10 18:18</span>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+	</body>
+	
+<script>
+
+	//加载页面列表数据
+	var jsonData={$list};
+	$.each(jsonData, function(index, element) {
+		createTableItem(element);
+	});
+	//电话号码模糊处理
+function formatPhone(phone) {
+    return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1····$2");
+}
+
+	//动态生成table_cell
+	function createTableItem(element) {
+
+		var wx_photo = element.wx_photo;
+		var wx_name = element.wx_name;
+		var code_phone = element.code_phone;
+		var product_name = element.product_name;
+		var order_time = element.order_time;
+
+
+		$('#user_list ul').append(
+				'<li class="clearfix">'+
+					'<img src="'+wx_photo+'"/>'+
+					'<div class="fl">'+
+						'<h3>'+wx_name+'</h3>'+
+						'<span>'+formatPhone(code_phone)+'</span>'+
+					'</div>'+
+					'<div class="fr">'+
+						'<h4>抢到'+product_name+'流量</h4>'+
+						'<span>'+order_time+'</span>'+
+					'</div>'+
+				'</li>'
+		);
+	}
+
+
+</script>
+</html>
+

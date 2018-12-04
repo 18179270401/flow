@@ -1,0 +1,114 @@
+<include file="Common/header" />
+<div class="main_con">
+    <div class="operation_box">
+    <div class="operation_con">
+        <div class="currenttit">
+            <i></i><span><em>日志查询</em>><em>操作日志</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="Syslog/export_excel">
+                <button class="btn  export_button" data-url="Syslog">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+    </div>
+    </div>
+    <div class="search_box">
+        <form  name="excel" method="get" action="/index.php/Admin/Syslog/index">
+        <div class="search_nav">
+            <ul>
+                <li>
+                    <input type="text" class="inputtext" name="user_name"  value="{$Think.get.user_name}"  placeholder="用户名称"/>
+                </li>
+                <if  condition="$self_user_type eq 1" >
+                <li>
+                    <label class="inputlabel">用户类型：</label>
+                    <select class="select" name="user_type" style="min-width:80px">
+                        <option value="9" selected>全部</option>
+                        <option value="1" <if condition='$Think.get.user_type eq 1'>selected</if>>尚通端</option>
+                        <option value="2" <if condition='$Think.get.user_type eq 2'>selected</if>>代理商端</option>
+                        <option value="3" <if condition='$Think.get.user_type eq 3'>selected</if>>企业端</option>
+                    </select>
+                    <input type="hidden" value="9"/>
+                </li>
+                 </if>
+                <li>
+                    <input type="text" class="inputtext" name="log_type" value="{$Think.get.log_type}"  placeholder="日志类型"/>
+                </li>
+                <li>
+                    <input type="text" class="inputtext" name="note" value="{$Think.get.note}"  placeholder="操作概述"/>
+                </li>
+                <li>
+                    <label class="inputlabel">操作时间：</label>
+                    <input type="text" class="inputtext" name="start_datetime"  placeholder="开始时间" value="{$start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+                    <em class="inputto">至</em>
+                    <input type="text" class="inputtext" name="end_datetime"  placeholder="结束时间" value="{$end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+                </li>
+            </ul>
+        </div>
+        <div class="search_btncon">
+            <button class="btn add_btn">
+                <i class="minicon search_icon"></i><span>查询</span>
+            </button>
+            <button type="button" class="btn export_btn  reset_button">
+                <i class="minicon reload_icon"></i><span>重置</span>
+            </button>
+        </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_thead">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="80"  class="change">用户名称</th>
+                            <if  condition="$self_user_type eq 1" >
+                            <th width="70"  class="change">用户类型</th>
+                            </if>
+                            <th width="100" class="change">日志类型</th>
+                            <th width="150" class="change">操作概述</th>
+                            <if  condition="$self_user_type eq 1" >
+                            <th width="100" class="change">操作地址</th>
+                            </if>
+                        <!--    <th width="90"  class="change">IP地址</th>-->
+                            <th width="100" class="change">操作时间</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.user_name}</td>
+                            <if  condition="$self_user_type eq 1" >
+                            <td>{$vo.user_type|get_sys_type}</td>
+                            </if>
+                            <td>{$vo.log_type}</td>
+                            <td>{$vo.note|get_substr}</td>
+                            <if  condition="$self_user_type eq 1" >
+                            <td>{$vo.method_url}</td>
+                            </if>
+                       <!--     <td>{$vo.ip_addr|long2ip}</td>-->
+                            <td>{$vo.create_date|default="--"}</td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+    parent.layer.closeAll();
+</script>
+</body>
+</html>

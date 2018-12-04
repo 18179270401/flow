@@ -1,0 +1,286 @@
+* {margin:0px;padding:0px;}
+body {
+	font: 12px Arial, "Hiragino Sans GB", "微软雅黑", "黑体-简", Helvetica, sans-serif;
+	color: #4c4d4d;
+	background: #ecf0f1;
+}
+
+body,
+div,
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+pre,
+form,
+tr,
+td,
+th,
+table {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+img,
+a img {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	font-size: 0px;
+	line-height: 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+ul,
+li,
+ol,
+dt,
+dl,
+dd {
+	list-style: none;
+}
+
+address,
+cite,
+code,
+em,
+th,
+i {
+	font-weight: normal;
+	font-style: normal;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+label,
+input,
+textarea,
+select,
+button {
+	font-family: Arial, "Hiragino Sans GB", "微软雅黑", "黑体-简";
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+	outline: none;
+}
+
+input,
+button,
+select,
+img {
+	line-height: normal;
+}
+
+a {
+	color: #4c4d4d;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover {
+	color: #e76f12;
+	text-decoration: none;
+}
+
+a:active {
+	outline: none;
+	star: expression(this.onFocus=this.blur());
+}
+
+* {
+	box-sizing: border-box;
+}
+
+span {
+	display: block;
+	text-align: center;
+	font-size: 0.9rem;
+	color: white;
+}
+
+hr {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: white;
+	height: 0.1rem;
+}
+
+body {
+	background-color: #DF2935;
+	margin-left: auto;
+	margin-right: auto;
+	width: 20rem;
+	margin: 0px;
+}
+
+.ly-plate {
+	background-color: #DF2935;
+	position: relative;
+	width: 20rem;
+	height: 20rem;
+	margin: 1rem auto 0 auto;
+	z-index: 888;
+}
+
+.rotate-bg {
+	background-color: #DF2935;
+	width: 18.48rem;
+	height: 18.48rem;
+	background-repeat: no-repeat;
+	background-image: url(../images/ly-plate.png);
+	background-size: 100%;
+	position: relative;
+	margin: 1rem auto 0 auto;
+}
+
+
+#rotate-bgId
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: inline-block;
+}
+
+
+div .ribbos {
+	width: 20.00rem;
+	height: 20.31rem;
+	position: absolute;
+	margin-top: -1.5rem;
+	margin-left: 0rem;
+	outline: none;
+	z-index: 999;
+	pointer-events: none;
+}
+
+div .ribbos #ribbosImg {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	position: absolute;
+	pointer-events: none;
+}
+
+.lottery-starBg {
+	position: absolute;
+	width: 6.3rem;
+	height: 6.3rem;
+	outline: none;
+	left: 50%;
+	top:10rem;
+	margin-top: -3.83rem;
+	margin-left: -3.07rem;
+}
+.lottery-starBg img{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+.ly-plate div.lottery-star {
+	width: 8.47rem;
+	height: 8.47rem;
+	position: absolute;
+	margin-top: -4.23rem;
+	margin-left: -4.158rem;
+	top: 9.3rem;
+	left: 50%;
+	outline: none
+}
+
+.ly-plate div.lottery-star #lotteryBtn {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	position: absolute;
+}
+
+
+.ActivityRules .ActivityRuleslefthr {
+	/*background: blue;*/
+	display: block;
+	float: left;
+	width: 2.7rem;
+	height: 0.7rem;
+	text-align: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules .ActivityRulescenter {
+	width: 12.6rem;
+	height: 0.7rem;
+	float: left;
+}
+
+.ActivityRules .ActivityRulesrighthr {
+	width: 2.7rem;
+	height: 0.7rem;
+	float: left;
+	margin-top: 0.4rem;
+}
+
+.ActivityRules {
+	width: 18rem;
+	height: 2rem;
+	margin-top: 0.77rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.barDiv {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 18.48rem;
+	height: 2.1175rem;
+	text-align: center;
+}
+
+.barDiv img {
+	width: 100%;
+	height: 100%;
+}
+
+.phoneNumberContent {
+	position: absolute;
+	text-align: center;
+	width: 18.48rem;
+	line-height: 2.1175rem;
+}
+
+.barDiv #phoneNumber {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:1.5rem;
+}
+
+.activeTime {
+	text-align: center;
+	color: #FEE09B;
+	margin-top: 1.078rem;
+	font-size: 0.7rem;
+}

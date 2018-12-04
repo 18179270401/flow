@@ -1,0 +1,62 @@
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;}
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+/**{ box-sizing:border-box;}*/
+
+/*.shareTips{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+	background-color: #000000;
+}*/
+
+.share_bg{
+	width: 100%;
+	height: 100%;
+	position:absolute;
+	z-index: 9999;
+	background-color: #000000;
+	opacity: 0.8;
+}
+.share_bg img{
+	width: 100%;
+}
+
+.shareBgBlock{
+	width: 20rem;
+	height: 30.59rem;
+	background: url(../images/icon_flowred_share_bg.png);
+	background-size: 100% 100%;
+	background-color: #FFFFFF;
+}
+
+/*.shareBlock{
+	margin-top: 9rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}*/
+
+.shareFlowRed{
+	border: none;
+	width: 90%;
+	padding-top: 0.8rem;
+	padding-bottom: 1rem;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 25rem;
+	background: url(../images/share_btn.png);
+	background-size: 100% 100%;
+	color: #d84e43;
+	font-size: 0.8rem;
+	text-align: center;
+}

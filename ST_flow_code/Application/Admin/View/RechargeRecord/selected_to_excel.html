@@ -1,0 +1,29 @@
+<!-- 选择倒进Excel的字段 -->
+<div id="recharge_record_selected_excel_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+
+    <div class="add_list">
+        <h5 align="left"><em class="wildcard">*</em>请选择字段：
+            <br/><label class="checkbox allcheck checked" data="fields_selected" style="line-height: 16px;" ><em>全选</em></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </h5>
+        <form name="recharge_record_selected_excel_form">
+            <div class="add_value explode_excel_add_selected">{$table_str}</div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    $(function(){
+        $('label.allcheck',parent.document).on('click',function(){
+            var ischeck = $(this).hasClass('checked');
+            var name = $(this).attr('data');
+            if(!ischeck){
+                $("table."+name+' label.checkbox',parent.document).addClass('checked');
+            }else{
+                $("table."+name+' label.checkbox',parent.document).removeClass('checked');
+            }
+        })
+    })
+
+</script>
+

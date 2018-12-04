@@ -1,0 +1,153 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>通道管理</em>><em>用户通道管理</em></span>
+        </div>
+        <div class="operation_info">
+            <if condition="is_jurisdiction('ChannelUser/set_user_info_channel')">
+                <button class="btn add_btn channel_user_set_channel_info_user_box"
+                        onclick="top.openMenu(10003,'批量设置用户','{:U('ChannelUser/set_user_info_channel')}');">
+                    <i class="minicon addoperation_icon"></i><span>批量设置用户</span>
+                </button>
+            </if>
+                <if condition="is_jurisdiction('ChannelUser/set_user_info_channel') or is_jurisdiction('ChannelUser/exchange_channel_batch')">
+                    <span class="line">|</span>
+                </if>
+            <if condition="is_jurisdiction('ChannelUser/exchange_channel_batch')">
+                <button class="btn add_btn channel_user_set_channel_info_user_box"
+                        onclick="top.openMenu(10001,'批量切换通道','{:U('ChannelUser/exchange_channel_batch')}');">
+                    <i class="minicon submitoperation_icon"></i><span>批量切换通道</span>
+                </button>
+                <if condition="is_jurisdiction('ChannelUser/exchange_channel_batch') or is_jurisdiction('ChannelUser/set_channel_info_user')">
+                    <span class="line">|</span>
+                </if>
+            </if>
+            <if condition="is_jurisdiction('ChannelUser/set_channel_info_user')">
+                <button class="btn add_btn channel_user_set_channel_info_user_box"
+                        onclick="top.openMenu(10000,'批量设置通道','{:U('ChannelUser/set_channel_info_user')}');">
+                    <i class="minicon addoperation_icon"></i><span>批量设置通道</span>
+                </button>
+                <if condition="is_jurisdiction('ChannelUser/add') or is_jurisdiction('ChannelUser/export_excel')">
+                    <span class="line">|</span>
+                </if>
+            </if>
+          <isshow url="ChannelUser/add">
+            <button class="btn add_btn channel_user_add_box">
+              <i class="minicon addoperation_icon"></i><span>新增用户通道</span>
+            </button>
+              <if condition="is_jurisdiction('ChannelUser/export_excel')">
+                  <span class="line">|</span>
+              </if>
+          </isshow>
+            <isshow url="ChannelUser/export_excel">
+                <button class="btn  export_button"  data-url="ChannelUser">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form  method="get"   name="excel" action="/index.php/Admin/ChannelUser/index">
+      <div class="search_nav">
+      
+        <ul>
+          <li>
+            <input type="text" class="inputtext" name="code" maxlength="15" style='min-width:80px' value="{$Think.get.code}" placeholder="用户编号"/>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="name" value="{$Think.get.name}" placeholder="用户名称"/>
+          </li>
+            <li>
+                <input type="text" class="inputtext" name="channel_code" value="{$Think.get.channel_code}" placeholder="通道编码"/>
+            </li>
+            <li>
+                <input type="text" class="inputtext" name="channel_name" value="{$Think.get.channel_name}" placeholder="通道名称"/>
+            </li>
+          <!--<li>
+              <label class="inputlabel">通道名称：</label>
+              <select class="select" name="channel_id" style='min-width:80px'>
+                <option value="" selected>全部</option>
+                <volist name="channel" id="vo2">
+                    <option value="{$vo2.channel_id}" <if condition="$vo2.channel_id eq $channel_id">selected</if>>{$vo2.channel_name}</option>
+                </volist>
+              </select>
+              <input type="hidden" value=""/>
+            </li>-->
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con " data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="80" class="change">用户编号</th>
+                    <th width="150" class="change">用户名称</th> 
+                    <th width="120" class="change">用户类型</th>
+                    <th width="100" class="change">通道编码</th>
+                    <th width="120" class="change">通道名称</th>
+                    <th width="120" class="change">操作人</th>
+                    <th width="180" class="change">操作时间</th>
+                    <th width="130">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="channel_user" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td><if condition="$vo.user_type eq 1">{$vo.proxy_code}<else />{$vo.enterprise_code}</if></td>
+                  <td><if condition="$vo.user_type eq 1">{$vo.proxy_name}<else />{$vo.enterprise_name}</if></td>  
+                  <td><if condition="$vo.user_type eq 1">代理商<else />企业</if></td>
+                  <td>{$vo.channel_code}</td>
+                  <td>{$vo.channel_name}</td>
+                  <td>{$vo.modify_user_id|get_user_name}</td>
+                  <td>{$vo.modify_date}</td>
+                  <td class="operation_td">
+                      <button class="operationbtn channel_user_show_btn" value="{$vo.channel_user_id}">
+                          <!--<i class="minicon edit_icon"></i>-->
+                          <span>查看</span>
+                      </button>
+                    <isshow url="ChannelUser/edit">
+                      <button class="operationbtn channeluser_edit_btn" value="{$vo.channel_user_id}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>编辑</span>
+                      </button>
+                      </isshow>
+                    <isshow url="ChannelUser/delete">
+                      <button class="operationbtn channeluser_delete_btn" value="{$vo.channel_user_id}" data-name="{$vo.name}" data-title="{$vo.channel_name}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>删除</span>
+                      </button>
+                    </isshow>
+                  </td>
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

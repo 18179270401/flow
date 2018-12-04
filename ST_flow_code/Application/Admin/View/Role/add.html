@@ -1,0 +1,27 @@
+<div id="role_add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="">
+<form name="role_add_form">
+
+    
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>角色名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" field="角色名称" name="role_name" /></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard"></em>部门：</h5>
+        <div class="add_value">
+             <select class="select" name="depart_id" empty="true">
+              <option value="">请选择部门</option>
+               <volist name="depart_list" id="vo">
+                <option value="{$vo.depart_id}">{$vo.depart_name}</option>
+               </volist>
+            </select>
+        </div>
+    </div>
+    <div class="add_list">	
+        <h5><span class="wildcard"></span>备注：</h5>
+        <div class="add_value">
+           <textarea class="textarea" name="remark" empty="true"></textarea>
+        </div>
+    </div>
+</form>
+</div>

@@ -1,0 +1,194 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    	<title>摇一摇得流量</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<link href="../css/flow-shake.css" rel="stylesheet">
+</head>
+<body class="container">
+<div class="coloured_ribbon" id="coloured_ribbon">
+	<img src="../images/coloured_ribbon.png" pointer-events:none;/>
+</div>
+<div class="shake" style="display:none;"></div>
+<div class="daying"></div>
+<div id="activity_page_main" isjoin="1">
+    <section id="activity_shake">
+        <div class="activity_top"></div>
+        <div class="activity_midden">
+            <div class="bg_div">
+                <div id="bg_box" class="bg_box">
+                    <div class="bg_img"></div>
+                </div>
+            </div>
+            <div class="shake_div" id="shake_div">
+                <div class="shake_top a-fadeoutT">
+                    <div class="el_top">
+                		<div class="draw-logo-96"></div>
+                    </div> 
+                </div>
+                <div class="shake_bottom a-fadeoutB">
+                    <div class="el_bottom">
+                	</div>
+                </div>
+                
+            </div>
+        </div>  
+        <div class="ActivityRules">
+			<div class="ActivityRuleslefthr">
+				<hr >
+			</div>
+			<div class="ActivityRulescenter">
+				<span>您当前参与活动的手机号码</span>
+			</div>
+			<div class="ActivityRulesrighthr">
+				<hr>
+			</div>
+		</div>
+	
+		<div class="barDiv">
+			<div class="phoneNumberContent">
+			<span id="phoneNumber">158 1132 5272<span>
+			</div> 
+			<img src="../images/bar.png" id = "barImg">
+		</div>
+		<div class="activeTime">
+			活动时间:2016-04-22 00:00:00 至2016-06-06:00:00:00
+		</div>
+    </section>
+    <div id="music"><audio  id="shakeMusic" style=" display:none;height:0px;" preload="auto" controls="controls" src="../audio/shake.mp3"  /></div>
+	</div>
+	<div id="mod_shake" style="width: 100%;height:100%;display:none;">
+	    <div class="shake_row">
+	        <div class="error_bg"></div>
+	        <div class="ActivityRules">
+				<div class="ActivityRuleslefthr">
+					<hr >
+				</div>
+				<div class="ActivityRulescenter">
+					<span>您当前参与活动的手机号码</span>
+				</div>
+				<div class="ActivityRulesrighthr">
+					<hr>
+				</div>
+			</div>
+	
+			<div class="barDiv">
+				<div class="phoneNumberContent">
+					<span id="phoneNumber">158 1132 5272<span>
+				</div> 
+				<img src="../images/bar.png" id = "barImg">
+			</div>
+			<div class="activeTime">
+					活动时间:2016-04-22 00:00:00 至2016-06-06:00:00:00
+			</div>
+	  </div>        
+	</div>
+
+<script src="../../../../utils/js/zepto.js"></script>
+<script src="../../../../utils/js/get_para.js"></script>
+<script>
+
+	htmlFontSize();
+	window.onresize=function(){
+		htmlFontSize();
+	}
+	function htmlFontSize(){
+		var w=document.documentElement.clientWidth;
+		var i=parseInt(w)/768;
+		document.documentElement.style.fontSize=(parseInt(w)/768)*40+"px";
+	}
+  
+    $(function(){
+        var SHAKE_THRESHOLD = 1500;
+        var last_update = 0;
+        var x = y = z = last_x = last_y = last_z = 0;
+        var isjoin = "1"; 
+        var ROCK = {
+            init:function(){
+                ROCK.activity_page_main();
+            },
+            //摇一摇脚本模块
+            activity_page_main :function(){
+                if (window.DeviceMotionEvent) {
+                    window.addEventListener('devicemotion', ROCK.deviceMotionHandler, false);
+                } else {
+                    alert('暂不支持');
+                }
+                $('.shake').on('click',function(){
+                    if(isjoin == '1') {
+                        ROCK.doResult();
+                        $('#activity_page_main').attr('isjoin','0');
+                        isjoin = false;
+                        $('#activity_page_main').attr('isjoin',isjoin);
+                    }                    
+                });
+            },
+            doResult:function(){
+                var media = document.getElementById("shakeMusic");
+                media.play();
+//              media.play();
+                isjoin = $('#activity_page_main').attr('isjoin');
+                //限定只能摇一次
+                document.getElementById("shake_div").className = "shake_div active";
+                setTimeout(function(){						
+                    document.getElementById("shake_div").className = "shake_div";
+                    $.getJSON("flow-shake.php",function(result){
+  							if(result.about == 0){
+								return false;
+							}else{
+  								if(result.msg == 1)
+  								{
+									if(confirm("恭喜，您中得"+result.prize+"!"+"是否领取？")){
+										var paddleft = result.prize.replace(/[^0-9]/ig, ""); 
+										var num=parseInt(paddleft);
+										//按确认后做什么
+										window.location.href = "../../../../module/trailer/trailerRedTraffic/html/flow_get_success.html?msg=" + escape(result.msg) + "&flowSize=" + escape(num);
+									}else{
+										alert("很遗憾,您没能中奖!");
+									}
+  								}else{
+  									$('#mod_shake').show();
+				                    $('#activity_page_main').addClass('el-fadeoutT');
+				                    $('#activity_page_main').hide();
+				                    $('#coloured_ribbon').hide();
+  								}
+							}
+  					});
+                }, 1300);
+            },
+            deviceMotionHandler:function(eventData){
+                var acceleration = eventData.accelerationIncludingGravity;
+                var curTime = new Date().getTime();
+                if ((curTime - last_update) > 100) {
+                    var diffTime = curTime - last_update;
+                    last_update = curTime;
+                    x = acceleration.x;
+                    y = acceleration.y;
+                    z = acceleration.z;
+                    var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                    var status = document.getElementById("status");
+                    if (speed > SHAKE_THRESHOLD) {
+                        $('.shake').trigger('click');
+                    }
+                    last_x = x;
+                    last_y = y;
+                    last_z = z;
+                }
+            }
+        }
+        ROCK.init();
+    });
+    
+    var phone = getUrlParam('phone');
+	var showPhone = phone.substr(0, 3)+' '+phone.substr(3, 4)+' '+phone.substr(7, 4);
+	$("#phoneNumber").text(showPhone);
+</script>
+
+</body>
+</html>

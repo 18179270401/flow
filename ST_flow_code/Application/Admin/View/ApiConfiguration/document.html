@@ -1,0 +1,99 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>开发者中心</em>><em>示例文档</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="apitabcon_box mCustomScrollbar_y" data-mcs-theme="dark">
+        <div class="apitabcon_flowchart">
+            <div class="flowchart_nav">
+                <ul>
+                    <a href="{:U('ApiConfiguration/index')}" />  <li  class="green"><p>开发者账号</p></li></a>
+                   <a href="{:U('ApiConfiguration/respcode')}" /> <li class="purple">
+                        <p>返回码参照</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/document')}" />    <li class="blue active">
+                        <p>示例文档</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/faq')}" />      <li class="orange">
+                        <p>FAQ</p>
+                    </li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="apitabcon_table">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="13%">开发语言</th>
+                    <th width="17%">标题</th>
+                    <th width="17%">文档下载</th>
+                    <th width="17%">版本</th>
+                    <th width="36%">说明</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>word</td>
+                    <td>接口文档</td>
+                    <td><a href="javascript:void(0);" onclick="location.href='{$apiword}'" />接口文档.docx</td>
+                    <td>V1.0</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>PHP</td>
+                    <td>接口示例文档</td>
+                    <td><a href="javascript:void(0);" onclick="location.href='{$phpdemo}'" />demo.php</td>
+                    <td>V1.0</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>JAVA</td>
+                    <td>接口示例文档</td>
+                    <td>JAVA.rar</td>
+                    <td>V1.0</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>C++</td>
+                    <td>接口示例文档</td>
+                    <td>C++.rar</td>
+                    <td>V1.0</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>接口示例文档</td>
+                    <td>C.rar</td>
+                    <td>V1.0</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>Python</td>
+                    <td>接口示例文档</td>
+                    <td>Python.rar</td>
+                    <td>V1.0</td>
+                    <td>无</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

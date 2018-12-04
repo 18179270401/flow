@@ -1,0 +1,183 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>现金流水记录</em>><em>
+            <if condition="$orderStatus eq 1">未支付订单<elseif condition="$orderStatus eq 2" /> 已完成订单<elseif condition="$orderStatus eq 3" />已取消订单</if>
+          </em></span>
+        </div>
+          <div class="operation_info">
+              <if condition='$orderStatus eq 1'>
+                  <isshow url="Orders/unpaid_excel">
+                      <button class="btn  export_button" data-url="{$url}" data-type="url">
+                          <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                      </button>
+                  </isshow>
+                  <elseif condition='$orderStatus eq 2' />
+                  <isshow url="Orders/completed_excel">
+                      <button class="btn  export_button" data-url="{$url}" data-type="url">
+                          <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                      </button>
+                  </isshow>
+                  <else/>
+                  <isshow url="Orders/canceled_excel">
+                      <button class="btn  export_button" data-url="{$url}" data-type="url">
+                          <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                      </button>
+                  </isshow>
+              </if>
+
+          </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/Orders/{$record}">
+      <input type="hidden" name="orderStatus" value="{$orderStatus}"/>
+      <div class="search_nav minheight60" style="min-height:70px;">
+        <ul>
+            <if condition="$orderStatus neq 1">
+                <li>
+                    <input type="text" class="inputtext" style="min-width:80px" maxlength="6" name="proxy_code" value="{$Think.get.proxy_code}" placeholder="代理商/企业编号"/>
+                </li>
+                <else/>
+                <li>
+
+                    <input type="text" class="inputtext" style="min-width:80px" maxlength="6" name="proxy_code" value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+                </li>
+                <li>
+                    <input type="text" class="inputtext" name="enterprise_code" style="min-width:80px" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+                </li>
+            </if>
+           <li>
+             <input type="text" class="inputtext" name="order_code" value="{$Think.get.order_code}" placeholder="订单编号"/>
+           </li>
+          <!--  <li>
+                <input type="text" class="inputtext" name="operator_name" value="{$Think.get.operator_name}" placeholder="运营商"/>
+            </li>-->
+           <!-- <li>
+                <input type="text" class="inputtext" name="channel_code" value="{$Think.get.channel_code}" placeholder="通道编码"/>
+            </li>-->
+        <!--    <li>
+                <input type="text" class="inputtext" name="province_name" value="{$Think.get.province_name}" placeholder="省份"/>
+            </li>
+            <li>
+                <input type="text" class="inputtext" name="product_name" value="{$Think.get.product_name}" placeholder="所属产品"/>
+            </li>-->
+            <li>
+                <input type="text" class="inputtext" name="mobile" value="{$Think.get.mobile}" placeholder="手机号"/>
+            </li>
+          <!--<li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext" name="end_datetime"  placeholder="结束时间" value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+          </li>-->
+            <li>
+                <label class="inputlabel">操作时间：</label>
+                <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                <em class="inputto">至</em>
+                <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+            </li>
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+        <div class="prepaidtip" style="right: 0;text-align: right;">
+            <if condition="$orderStatus eq 2">
+                <p> 【原价总计：<span style="color:#5cb95c;">{$counts.@p_success_price|default='0.000'}</span>元，折后价总计：<span style="color:#5cb95c;">{$counts.@p_success_amount|default='0.000'}</span>元】</p>
+                <else/>
+                <p>【原价总计：<span class="red">{$counts.@p_faile_price|default='0.000'}</span>元，折后价总计：<span class="red">{$counts.@p_faile_amount|default='0.000'}</span>元】</p>
+            </if>
+        </div>
+        <!--
+        <if condition="($orderStatus eq 2) or ($orderStatus eq 3)">
+            <div class="prepaidtip">
+                折后价格总额：【共<span style="color:#5cb95c;">{$discount_price_sum}</span>元】
+            </div>
+        </if>
+        -->
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="130" class="change">订单编号</th>
+                    <th width="80" class="change">代理商/企业编号</th>
+                    <th width="90" class="change">代理商/企业名称</th>
+                    <th width="60" class="change">来源</th>
+                <!--    <th width="60" class="change">省份</th>
+                    <th width="50" class="change">产品</th>-->
+                    <th width="70" class="change">手机号</th>
+                    <th width="70" class="change">价格(元)</th>
+                    <th width="70" class="change">折后价格(元)</th>
+                    <th width="70" class="change">支付方式</th>
+                    <th width="100" class="change">操作时间</th>
+                    <if condition="$orderStatus eq 2">
+                        <th width="100" class="change">完成时间</th>
+                    </if>
+                    <!--<th width="50">操作</th>-->
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+              <tr>
+                  <td >{$vo.sort_no}</td>
+                  <td >{$vo.order_code}</td>
+                  <td >
+                      <if condition="$vo.proxy_id eq 0">
+                          {$vo.enterprise_id|enterprise_code_list}
+                          <else/>
+                          {$vo.proxy_id|proxy_code_list}
+                      </if>
+
+                  </td>
+                  <td >{$vo.proxy_name}</td>
+                  <td >
+                      {$vo.source_type}
+                  </td>
+                 <!-- <td >{$vo.province_name}</td>
+                  <td >{$vo.product_name}</td>-->
+                  <td >{$vo.mobile}</td>
+                  <td >{$vo.price}</td>
+                  <td  class="money_style">{$vo.discount_price}</td>
+                  <td >{$vo.pay_type}</td>
+                  <td >{$vo.order_date|msubstr=0,19,"utf-8",false}</td>
+                  <if condition="$orderStatus eq 2">
+                      <td >{$vo.complete_time|msubstr=0,19,"utf-8",false}</td>
+                  </if>
+               <!--   <td class="operation_td">
+                    <isshow url="Orders/detailed">
+                      <button class="operationbtn orders_detailed_btn" value="{$vo.order_id}" data-record="{$record}"  data-toggle="tooltip" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                       &lt;!&ndash;<i class="minicon detailed_icon"></i>&ndash;&gt;
+                         <span>查看</span>
+                      </button>
+                    </isshow>
+                  </td>-->
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

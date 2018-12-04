@@ -1,0 +1,133 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+             <i></i><span><em>资金管理</em>><em>企业借款申请</em></span>
+        </div>
+          <!--<if condition="$usr_type neq 1 " >-->
+              <div class="operation_info">
+                  <isshow url="EnterpriseBorrowManagement/export_excel">
+                          <button class="btn  export_button" data-url="EnterpriseBorrowManagement">
+                              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                          </button>
+                  </isshow>
+              </div>
+        <!--  </if>-->
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" action="" name="excel">
+    <div class="search_nav">
+      <ul>
+          <li>
+              <input type="text" class="inputtext" name="loan_code" maxlength="20" value="{$Think.get.loan_code}" placeholder="借款编号"/>
+          </li>
+          <li>
+              <input type="text" class="inputtext" name="enterprise_code" maxlength="20" value="{$Think.get.enterprise_code}" placeholder="企业编号"/>
+          </li>
+          <li>
+              <input type="text" class="inputtext" name="enterprise_name"  value="{$Think.get.enterprise_name}" placeholder="企业名称"/>
+          </li>
+              <li>
+                  <label class="inputlabel">审核状态：</label>
+                  <select class="select" name="approve_status" style='min-width:80px'>
+                  <option value="" selected >全部</option>
+                  <option value="2" <if condition='$Think.get.approve_status eq 2'>selected</if> >待审核</option>
+                  <option value="3" <if condition='$Think.get.approve_status eq 3'>selected</if> >初审通过</option>
+                  <option value="4" <if condition='$Think.get.approve_status eq 4'>selected</if> >初审驳回</option>
+                  <option value="5" <if condition='$Think.get.approve_status eq 5'>selected</if> >复审通过</option>
+                  <option value="6" <if condition='$Think.get.approve_status eq 6'>selected</if> >复审驳回</option>
+                  </select>
+                  <input type="hidden" value=""/>
+              </li>
+          <li>
+              <label class="inputlabel">借款时间：</label>
+              <input type="text" class="inputtext" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext" name="end_datetime" placeholder="结束时间" value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+          </li>
+
+        <li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="100" class="change">企业编号</th>
+                    <th width="160" class="change">企业名称</th>
+                    <th width="150" class="change">借款编号</th>
+                    <th width="80" class="change">借款金额</th>
+                    <th width="80" class="change">审核状态</th>
+                    <th width="100" class="change">借款时间</th>
+                    <th width="90" class="change">未还款金额</th>
+                    <th width="70" class="change">是否还清</th>
+                    <th width="100" class="change">预计还款时间</th>
+                    <th width="100">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.enterprise_code}</td>
+                    <td>{$vo.enterprise_name}</td>
+                    <td>{$vo.loan_code}</td>
+                    <td class="money_style">{$vo.loan_money}</td>
+                    <td>{$vo.approve_status|get_contract_status}</td>
+                    <td>{$vo.loan_date|default="--"}</td>
+                    <td>{$vo.loan_id|last_money}</td>
+                    <td> <if condition="$vo.is_pay_off eq 1 " >是<else/>否</if></td>
+                    <td>{$vo.repayment_date||msubstr=0,10,'utf-8',false}</td>
+                    <td class="operation_td">
+                            <button class="operationbtn  enterpriseBorrowManagement_detailed_function" value="{$vo.loan_id}">
+                              <span>查看</span>
+                            </button>
+                        <if condition="$vo.approve_status eq 2 " >
+                            <isshow url="EnterpriseBorrowManagement/approve">
+                            <button class="operationbtn  enterpriseBorrowManagement_approve_function" data-value="proxy_approve" value="{$vo.loan_id}" >
+                                <span>初审</span>
+                            </button>
+                            </isshow>
+                        </if>
+                        <if condition="$vo.approve_status eq 3 " >
+                            <isshow url="EnterpriseBorrowManagement/approve_t">
+                            <button class="operationbtn  enterpriseBorrowManagement_approve_t_function" data-value="proxy_approve_t" value="{$vo.loan_id}" >
+                                <span>复审</span>
+                            </button>
+                            </isshow>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

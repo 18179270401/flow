@@ -1,0 +1,289 @@
+<include file="Common/header" />
+<script type="text/javascript">
+$(function(){
+	var all_parent_load="";//定义loading接收参数
+	//菜单
+	winGroup = new $.WindowGroup($('.main_body')[0], $('.tab_nav ul')[0]);
+	desktop = winGroup.createWindow({
+		id : 'win_0',
+		title : '',
+		close : false,
+		min : false,
+		fix : true,
+		url : '{:U("Index/main")}'
+	});
+    //刷新
+	  $(".tab_operation .reload").bind("click",function(){
+		  var $win = winGroup.windows;
+		  for(var i=0; i<$win.length; i++){
+			  if($win[i].windowGroup.getActiveWindow()==$win[i]){
+				  add_load();
+				  $win[i].reload();
+			  }
+		  }
+	  })
+	  
+	  //全部关闭
+	  $(".tab_operation .closeall").click(function(){
+		  layer.confirm('<i class="confirm_icon"></i>确定关闭所有菜单吗？',{
+		  	title:'提示信息',
+			btn: ['确定','取消'] //按钮
+		  }, function(){
+			  parent.layer.closeAll();
+			  var $win = winGroup.windows;
+			  var i=1;
+			  while($win.length>1){	
+				$win[i].taskButton.remove();
+				$win[i].windowGroup.taskBar.taskButtons.splice(i,1);
+				$win[i].remove();
+				$win[i].windowGroup.windows.splice(i,1);
+			  }
+			  $win[0].windowGroup.setActiveWindow($win[0]);
+			  $win[0].windowGroup.taskBar.hideOrShowMoreButton();
+		  },function(){
+			  return;
+		  });
+		
+	  })
+      //缩放窗口
+	  $(window).resize(function(){
+		  var $win = winGroup.windows;
+		  $win[0].windowGroup.resize();
+	  })
+})
+//点击菜单函数
+function openMenu(id, name, url) {
+	//调用刷新金额
+    update_account();
+	//调用loading层
+	var a=1;
+	for(var i=0; i<winGroup.windows.length; i++){
+		if(winGroup.windows[i].getId()=="win_"+id){
+			a=2;
+		}
+	}
+	//支付宝退款不弹 183_表示支付宝退款前缀
+	var str=id+"";
+	 if(str.substring(0,4)=="183_"){
+	 	a=2;
+	 }
+	if(a==1){
+		add_load();
+	}
+	winGroup.createWindow({
+		id : 'win_'+id,
+		title : name,
+		url : url
+	});
+}
+
+//点链刷新金额
+function update_account(){
+	//$.post("/index.php/Admin/Index/account_list",{},function(data){
+		//$("#account_balance").html(data.info.account_balance);
+		//$("#freeze_money").html(data.info.freeze_money);
+	//},"json");
+}
+//每15秒刷新一下金额
+function time_update_account(){
+	$.post("/index.php/Admin/Index/account_list",{},function(data){
+		$("#account_balance").html(data.info.account_balance);
+		$("#loan_money").html(data.info.loan_money);
+		$("#freeze_money").html(data.info.freeze_money);
+	},"json");
+	setTimeout("time_update_account()",15000);
+}
+//如果是运营端不加载金额刷新
+if('{$menu_user_type}'!=1){
+	parent.time_update_account();
+}
+
+
+//判断是否是初始密码
+<if condition="$initial_password eq true">
+	$(function(){
+		var title = '修改密码';
+		var area = ['420px', '240px'];
+		var view_name = 'user_set_password_box';
+		var form_name = 'user_set_password_form';
+		var view_url = '/index.php/Admin/User/set_password?initial_password=1';
+		var post_url = '/index.php/Admin/User/set_password';
+		view_form(title,area,view_name,form_name,view_url,post_url);
+	})
+
+
+</if>	
+
+</script>
+
+<!-- 头部 开始 -->
+<style type="text/css">
+	.logo img{
+		max-width: 212px;
+		max-height: 52px;
+	}
+</style>
+<div class="header">
+	<div class="logo"><img src="{$log_src}" alt="img"/></div>
+	<div class="menuslide" id="menuslide"><i></i></div>
+	<div class="company_name">
+        <if condition="$upper_role eq 2"><span>{$user['name']}({$user['code']})</span></if>
+    <!--
+        <if condition="$user['user_type'] neq 1">
+            <span>{$user['name']}({$user['code']})</span>
+        <else />
+            <span>{$user['name']}</span>
+        </if>
+    -->
+    </div>
+	<div class="balance">
+        <if condition="$user['user_type'] neq 1">
+            <span>当前余额：<em id="account_balance">{$user['account_balance']}</em>元</span>
+			<if condition="$user['user_type'] eq 2">
+				<span>授信金额：<em id="loan_money">{$user['loan_money']}</em>元</span>
+			</if>
+            <span>冻结余额：<em id="freeze_money">{$user['freeze_money']}</em>元</span>
+		</if>
+	</div>
+	<div class="mininav">
+		<dl>
+            <dd class="relative" id="announce">
+                <a href="javascript:" data-toggle="tooltip" data-placement="bottom" data-original-title="公告">
+					<i class="midicon announcetop_icon"></i>
+					<if condition="true">
+						<span class="tips_num show_notice_not_sum">{$notice_not_sum}</span>
+					</if>
+                </a>
+
+                <div class="tipcon announce_show" style="display:none;">
+					<if condition="$notice_not_sum gt 0">
+					<ul class="receive_list">
+						<li class="sysnotices_show_btnc">
+							<a href="javascript:void(0);" class="sysnotices_show_btn" value="{$notice_one.notice_id}" vtype="1" ud="1" >
+							<h5>
+								<i class="minicon sms_icon"></i>
+								<em class="show_notice_title_h5">{$notice_one.notice_title}</em>
+							</h5>
+							<p class="show_notice_content_span">{$notice_one.notice_content|msubstr=0,40,'utf-8'}</p>
+							</a>
+						</li>
+					</ul>
+					</if>
+					<div class="tipall">
+						<a href="javascript:open_menu('800','我的公告','{:U('sysnotices/me_index')}')" >查看所有>></a>
+						<if condition="$notice_not_sum gt 1">
+						<span class="ml10  show_notice_next"   value="{$notice_one.notice_id}" style="display: block;" >下一条</span>
+						<span class="show_notice_pre" value="{$notice_one.notice_id}" style="display: none;" >上一条</span>
+						</if>
+					</div>
+                </div>
+              </dd>
+
+			<dd class="relative" id="tips">
+                <a href="javascript:" data-toggle="tooltip" data-placement="bottom" data-original-title="提醒">
+	                    <i class="midicon tips_icon"></i>
+	                    <if condition="true">
+	                    <span class="tips_num receive_count">{$receive_count}</span>
+                		</if>
+                </a>
+	              <div class="tipcon" style="display:none;">
+		                  	<ul class="receive_list all_remind_list">
+		                  		<volist name="receive_list" id="vo" empty="">
+		                  			<li class="delete" ><a href="javascript:void(0);"onclick="objectremind_open(this);" url="{:U($vo['page_url'])}" menu_id="{$vo.menu_id}" menu_name="{$vo.menu_name}" htype="0" value="{$vo.receive_id}">{$vo.remind_content}</a><span>{$vo.create_date}</span></li>
+		                  		</volist>
+		                  	</ul>
+                            <div class="tipall">
+								<a href="javascript:open_menu('900','我的提醒','{:U('objectRemind/me_index')}')" >查看所有>></a>
+								<span class="all_read_remind">全部阅读</span>
+							</div>
+	                </div>
+              </dd>
+            <!--
+			<dd>
+				<a href="javascript:" data-toggle="tooltip" data-placement="bottom" data-original-title="帮助中心">
+					<i class="midicon help_icon"></i>
+				</a>
+			</dd>
+            -->
+			<dd class="relative">
+				<div class="admin_con">
+					<a href="javascript:" class="admin_toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="portrait"><img src="__PUBLIC__/Admin/images/admin_img_18.jpg" alt=""/></span> 
+						<span class="name">{$Think.session.Admin.user_name}</span>  
+						<span class="caret"></span>         
+					</a>
+					<ul class="admin_menu" aria-labelledby="dropdownMenu2">
+						<li><a href="javascript:void(0);" id="user_set"><i class="minicon minsetup_icon"></i>个人设置</a></li>
+						<li><a href="javascript:void(0);" id="set_password"><i class="minicon changepass_icon"></i>修改密码</a></li>
+						<if condition="$is_admin eq true ">
+							<if condition="$Think.session.Admin.user_type eq 3">
+								<li><a href="javascript:void(0);" id="set_enterprise"><i class="minicon enterprises_icon"></i>企业设置</a></li>
+							<else />
+								<li><a href="javascript:void(0);" id="set_proxy"><i class="minicon enterprises_icon"></i>企业设置</a></li>
+							</if>
+						
+						</if>
+					</ul>
+				</div>
+			</dd>
+			<dd>
+				<a href="javascript:void(0);" id="logout" data-toggle="tooltip" data-placement="bottom" data-original-title="退出">
+					<i class="midicon exit_icon"></i>
+				</a>
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- 头部 结束 -->
+
+<!-- 导航 开始 -->
+<include file="Common/menu" />
+<!-- 导航 结束 -->
+
+<div class="main_box">
+	<!-- 选显卡 开始 -->
+	<div class="tab_box">
+		<div class="tab_nav">
+			<ul></ul>
+		</div>
+		<div class="tab_operation">
+			<a href="javascript:;" class="closeall"><i class="minicon close_icon"></i><em>关闭</em></a>
+			<a href="javascript:;" class="reload"><i class="minicon reload_icon"></i><em>刷新</em></a>
+		</div>
+	</div>
+	<!-- 选项卡 结束 -->
+
+	<!-- 内容 开始 -->
+	<div class="main_body"> 
+		<!-- <iframe width="100%" height="100%" frameborder="0" src="main.html"></iframe> -->
+	</div>
+	<!-- 内容 结束 -->
+
+	<!-- 版权信息 开始
+	<div class="footer">
+		<p>Copyright © 2014-2015 广东尚通科技发展有限公司  粤ICP备15061300号-14. All rights reserved</p>
+	</div>
+	 -->
+	 
+	<!-- 版权信息 结束 -->
+
+	<!-- 公告信息 开始 -->
+	<if condition="count($sysnotice) gt 0">
+	<div class="alert announce_con index_noticelistdiv" role="alert">
+        <i class="midicon announce_icon"></i>
+        <div id="demo" class="announce_nav">
+            <ul class="index_noticelist">
+              <volist name="sysnotice" id="vo">
+              <li class="sysnotices_show_btnc{$vo.notice_id}"><a href="javascript:void(0);" class="sysnotices_show_btn" value="{$vo.notice_id}" vtype="1" >{$vo.notice_title}</a></li>
+              </volist>
+            </ul>
+        </div>
+        <a href="#" class="close" data-dismiss="alert"><i class="minicon announceclose_icon"></i></a>
+    </div>
+    </if>
+	<!-- 公告信息 结束 -->
+    <!-- 成功和失败提示信息 -->
+    <div id="prompt_msg"></div>
+    
+</div>
+<include file="Common/footer" />

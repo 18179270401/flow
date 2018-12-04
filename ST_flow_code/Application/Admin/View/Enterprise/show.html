@@ -1,0 +1,178 @@
+<div id="enterprise_show_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <thead>
+            <tr>
+                <th width="100%" colspan="4">基本信息</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th >企业名称：</th>
+                <td>{$enterprise.enterprise_name}</td>
+                <th >企业编号：</th>
+                <td >{$enterprise.enterprise_code}</td>
+                
+            </tr>
+             <tr>
+                <th width="15%">公司电话：</th>
+                <td width="35%">{$enterprise.tel}</td>
+                <th width="15%">邮箱：</th>
+                <td width="35%">{$enterprise.email}</td>
+
+            </tr>
+             <tr>
+                <th >联系人：</th>
+                <td>{$enterprise.contact_name}</td>
+                <th >联系人电话：</th>
+                <td >{$enterprise.contact_tel}</td>
+               
+            </tr>
+            <!--
+             <tr>
+                <th >上级代理编号：</th>
+                <td >{$enterprise.top_code}</td>
+                <th >上级代理名称：</th>
+                <td>{$enterprise.top_name}</td>
+            </tr>
+            -->
+            <tr>
+                <th >营业执照编号：</th>
+                <td >{$enterprise.icense_img_num}</td>
+                 <th >营业执照附件：</th>
+                <td >
+                    <if condition="$enterprise.icense_img neq '' ">
+                        <img src="{$enterprise.icense_img}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;">
+                        <span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($enterprise['icense_img']); </php></span>
+                        <button type="button" style="margin-top:5px;"  class="btn export_btn filedown_btn" onclick="down_file('{:U('Enterprise/show',array('enterprise_id'=>$enterprise['enterprise_id'],'download'=>'icense_img'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </button>
+                    <else />
+                        <span>没有可用附件</span>
+                    </if>
+                </td>
+            </tr>
+             <tr>
+                <th >身份证号码：</th>
+                <td >{$enterprise.identity_img_num}</td>
+                 <th >身份证附件：</th>
+                <td >
+                     <if condition="$enterprise.identity_img neq '' ">
+                        <img src="{$enterprise.identity_img}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;">
+                        <span  style="margin-top:5px;float:left;margin-left:8px;" >
+                            <php> echo basename($enterprise['identity_img']); </php>
+                        </span>
+                        <button type="button"  style="margin-top:5px;" class="btn export_btn filedown_btn" onclick="down_file('{:U('Enterprise/show',array('enterprise_id'=>$enterprise['enterprise_id'],'download'=>'identity_img'))}')">
+                            <i class="minicon export_icon"></i><span>下载</span>
+                        </button>
+                    <else />
+                        <span>没有可用附件</span>
+                    </if> 
+                </td>
+            </tr>
+            <tr>
+                 <th >支持运营商：</th>
+                <td colspan="3">{$enterprise.operator}</td>
+            </tr>
+             <tr>
+                <th>地址：</th>
+                <td colspan="3">{$enterprise.province_name}{$enterprise.city_name}{$enterprise.address}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--
+    <table width="100%">
+         <tr>
+            <th width="100%" colspan="4" style="text-align:center;font-size:14px;">企业管理人</th>
+        </tr>
+        <tr>
+            <th >姓名</th>
+            <td >{$enterprise.admin_name}</td>
+            <th >登录名称</th>
+            <td>{$enterprise.admin_login_name}</td>
+        </tr>
+         <tr>
+            <th width="13%">手机号码</th>
+            <td width="37%">{$enterprise.admin_mobile}</td>
+            <th width="13%">邮箱</th>
+            <td width="37%">{$enterprise.admin_email}</td>
+        </tr>
+    </table>
+
+
+
+    <table width="100%">
+         <tr>
+            <th width="100%" colspan="4" style="text-align:center;font-size:14px;">资金信息</th>
+        </tr>
+        <tr>
+            <th width="13%">账户余额</th>
+            <td class="money_style" width="37%"><span style="font-size:14px;">¥&nbsp;&nbsp;&nbsp;&nbsp;</span>{$enterprise.account_balance|default="0.00"}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;">元&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+            <th width="13%">冻结金额</th>
+            <td class="money_style" width="37%"><span style="font-size:14px;">¥&nbsp;&nbsp;&nbsp;&nbsp;</span>{$enterprise.freeze_money|default="0.00"}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:14px;">元&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+        </tr>
+    </table>
+
+    <table width="100%">
+         <tr>
+            <th width="100%" colspan="4" style="text-align:center;font-size:14px;">上级代理信息</th>
+        </tr>
+       
+         <tr>
+            <th width="15%">代理商电话</th>
+            <td width="35%">{$enterprise.top_tel}</td>
+            <th width="15%">代理商联系人</th>
+            <td width="35%">{$enterprise.top_contact_name}</td>
+        </tr>
+        <tr>
+            <th width="15%">代理商地址</th>
+            <td colspan="3">{$enterprise.top_address}</td>
+        </tr>
+    </table>
+    <table width="100%">
+         <tr>
+            <th width="100%" colspan="4" style="text-align:center;font-size:14px;">客户经理信息</th>
+        </tr>
+         <tr>
+            <th width="15%">客户经理名称：</th>
+            <td width="35%">{$enterprise.sale_name}</td>
+            <th width="15%">手机号码：</th>
+            <td width="35%">{$enterprise.sale_mobile}</td>
+        </tr>
+    </table>
+    
+    -->
+
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th width="100%" colspan="4" >审核信息</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th width="15%">审核状态：</th>
+                <td width="35%">
+                    <if condition="$enterprise.approve_status eq '0' "> 待审核
+                    <elseif condition="$enterprise.approve_status eq '1' "/>审核通过
+                    <elseif condition="$enterprise.approve_status eq '2'" />审核驳回
+                    </if> 
+                </td>
+                <th width="15%">审核人：</th>
+                <td width="35%">{$enterprise.approve_name}</td>
+            </tr> 
+            <tr>
+                <th >审核时间：</th>
+                <td colspan="3"><if condition="$enterprise.approve_date neq '0000-00-00 00:00:00' ">{$enterprise.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th>审核备注：</th>
+                <td colspan="3">{$enterprise.approve_remark}</td>
+               
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

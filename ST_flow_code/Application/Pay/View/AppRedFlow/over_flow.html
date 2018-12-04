@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="x-ua-compatible" content="ie=8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta name="format-detection" content="telephone=no">
+		<meta charset="utf-8">
+		<title>领取红包</title>
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+		<meta name="apple-touch-fullscreen" content="YES">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="stylesheet" href="{$role}css/package.css" type="text/css" />
+		<link rel="stylesheet" href="{$role}css/bootstrap.min.css" type="text/css" />
+		<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+		<script type="text/javascript">
+			/**  
+							 浏览器版本信息
+							 * @type {Object} 
+							 * @return {Boolean}  返回布尔值     
+							 */
+			function browser() {
+				var u = navigator.userAgent.toLowerCase();
+				var app = navigator.appVersion.toLowerCase();
+				return {
+					txt: u, // 浏览器版本信息
+					version: (u.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1], // 版本号       
+					msie: /msie/.test(u) && !/opera/.test(u), // IE内核
+					mozilla: /mozilla/.test(u) && !/(compatible|webkit)/.test(u), // 火狐浏览器
+					safari: /safari/.test(u) && !/chrome/.test(u), //是否为safair
+					chrome: /chrome/.test(u), //是否为chrome
+					opera: /opera/.test(u), //是否为oprea
+					presto: u.indexOf('presto/') > -1, //opera内核
+					webKit: u.indexOf('applewebkit/') > -1, //苹果、谷歌内核
+					gecko: u.indexOf('gecko/') > -1 && u.indexOf('khtml') == -1, //火狐内核
+					mobile: !!u.match(/applewebkit.*mobile.*/), //是否为移动终端
+					ios: !!u.match(/\(i[^;]+;( u;)? cpu.+mac os x/), //ios终端
+					android: u.indexOf('android') > -1, //android终端
+					iPhone: u.indexOf('iphone') > -1, //是否为iPhone
+					iPad: u.indexOf('ipad') > -1, //是否iPad
+					webApp: !!u.match(/applewebkit.*mobile.*/) && u.indexOf('safari/') == -1 //是否web应该程序，没有头部与底部
+				};
+			}
+		</script>
+
+	</head>
+
+	<body width="100%">
+		<div class="share_bg" id="share_bg" style="position:fixed;top:0; display: none;width:100%;height:100%;background-color: #000000;opacity: 0.8;text-align: center;" onclick="hidenShareBg()">
+			<img src="{$role}images/shareTips.png" pointer-events:none; style="width: 100%;" />
+		</div>
+			<!--流量红包分享-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+			<!--流量红包分享-->
+		<input type="hidden" name="url" id="url" value="{$url}">
+		<div class="flowAlert" id="flowAlert">
+			<div class="bg">
+				<div class="text">
+					<div class="a">
+						<p>恭喜您获得</p>
+						<p>&nbsp;</p>
+					</div>
+					<div class="d">
+						<p>
+							<if condition="$operator_id eq 1">
+								中国移动{$product_name}流量红包 当月生效
+							</if>
+							<if condition="$operator_id eq 2">
+								中国联通{$product_name}流量红包 当月生效
+							</if>
+							<if condition="$operator_id eq 3">
+								中国电信{$product_name}流量红包 当月生效
+							</if>
+						</p>
+					</div>
+					<div class="notice">
+						<p>我们将在24小时之内充值到您的手机号上</p>
+					</div>
+					<div class=texte>
+						<button id="fButton" type="button" onclick="onShareFlowRed()">分享给朋友</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+	<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+	<script src="{$role}js/shareFlowRed.js"></script>
+	<script>
+
+			htmlFontSize();
+
+			window.onresize = function() {
+				htmlFontSize();
+			}
+
+			function htmlFontSize() {
+				var w = document.documentElement.clientWidth;
+				var i = parseInt(w) / 768;
+				var h = document.documentElement.clientHeight;
+				document.documentElement.style.fontSize = (i) * 40.0 + "px";
+				if ($('body').height() < parseInt(document.documentElement.clientHeight)) {
+					$('body').height(parseInt(document.documentElement.clientHeight) );
+					$('#share_bg').height(h);
+				}
+				else
+				{
+					$('#share_bg').height($('body').height());
+				}
+			}
+		</script>
+</html>

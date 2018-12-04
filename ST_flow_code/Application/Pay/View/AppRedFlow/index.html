@@ -1,0 +1,177 @@
+<html>
+
+	<head>
+		<meta http-equiv="x-ua-compatible" content="ie=8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta name="format-detection" content="telephone=no">
+
+		<meta charset="utf-8">
+		<title>流量红包</title>
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+		<meta name="apple-touch-fullscreen" content="YES">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="stylesheet" href="{$role}css/package.css" type="text/css" />
+		<link rel="stylesheet" href="{$role}css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="__PUBLIC__/utils/css/mui.css" />
+		<script type="text/javascript" src="{$role}js/checktool.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/utils/js/mui.js"></script>
+		
+				<script type="text/javascript" charset="utf-8">
+			mui.init();
+			//		if ($('.loader').height() < parseInt(document.documentElement.clientHeight)) {
+			//		}
+		</script>
+		
+		<script type="text/javascript">
+			var t_mobile = {
+				134: 1,
+				135: 1,
+				136: 1,
+				137: 1,
+				138: 1,
+				139: 1,
+				147: 1,
+				150: 1,
+				151: 1,
+				152: 1,
+				158: 1,
+				159: 1,
+				157: 1,
+				178: 1,
+				182: 1,
+				183: 1,
+				184: 1,
+				187: 1,
+				188: 1
+			}; //移动:1
+			var t_unicom = {
+				130: 1,
+				131: 1,
+				132: 1,
+				145: 1,
+				155: 1,
+				156: 1,
+				176: 1,
+				185: 1,
+				186: 1
+			}; //联通:2
+			var t_telecom = {
+				133: 1,
+				153: 1,
+				177: 1,
+				180: 1,
+				181: 1,
+				189: 1
+			}; //电信:3
+			//验证手机号
+			function ismobile(mobile) {
+				mobile = mobile.toString();
+				var m = mobile.substr(0, 3);
+				var l = mobile.length;
+				if (mobile.substr(0, 1) == 0) {
+					return 4
+				} else if (typeof(t_mobile[m]) != 'undefined' && l == 11) {
+					return 1;
+				} else if (typeof(t_unicom[m]) != 'undefined' && l == 11) {
+					return 2;
+				} else if (typeof(t_telecom[m]) != 'undefined' && l == 11) {
+					return 3;
+				}
+				return 0;
+			}
+			//抽奖
+			var bturnover=true;
+			function turnover() {
+				if(bturnover) {
+					bturnover = false;
+					var phone = $("#phone").val(); //抽奖电话号
+					var flag = CheckTool.checkPhone(phone);
+					if (flag == false) {
+						bturnover = true;
+						alert("请输入正确的手机号！");
+						return false;
+					}else if (!phone) {
+						bturnover = true;
+						return false;
+					}
+					//				var isp = ismobile(phone); //运营商id
+
+					/*var red_order_code = $("#red_order_code").val(); //订单id
+					//alert("/index.php/Sdk/FlowRed/recode_red/red_order_code/"+red_order_code+"/openid/"+openid+"/phone/"+phone)
+					var url = window.location.host + "/index.php/Sdk/RedFlow/recode_red/phone/"+phone+"/red_order_code/"+red_order_code;
+
+					location.href = url;*/
+					$("#form1").submit();
+				}else{
+					alert('订单提交中,请稍等...');
+				}
+			}
+		</script>
+
+	</head>
+
+	<body style="background: #fffaf6;width:100%;height:100%;">
+		<div style="heigth:50%;">
+			<input type="hidden" id="orderId" value="1258">
+			<div class="head"></div>
+			<div class="icon"></div>
+		</div>
+
+		<div class="mmain">
+			<div class="main">
+				<div class="textb">{$remark}</div>
+				<form action="{:U('AppRedFlow/recode_red')}" method="post" id="form1">
+					<input type="hidden" name="red_order_code" id="red_order_code" value="{$red_order_code}">
+					<div class="textd">
+						<input type="tel" maxlength="11" min="11" name="phone" id="phone" ng-model="mobile" placeholder="请输入您的手机号">
+					</div>
+				</form>
+				<div class="texte">
+					<button id="qButton" type="button" onclick="turnover()">抢流量红包</button>
+					
+				</div>
+			</div>
+
+			<div style="background: #ce3a38;height:13rem;">
+				<div class="mui-slider-item" style="">
+								<ul class="mui-table-view mui-table-view-chevron" id="mui-table-view" style="background: none;height: 12rem; overflow: hidden;pointer-events: none; ">
+		</div>
+					</ul>
+			</div>
+
+		</div>
+			<!--流量红包分享-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+			<!--流量红包分享-->
+
+	</body>
+	<script src="{$role}js/index.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+	<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+	<script src="{$role}js/shareFlowRed.js"></script>
+
+	<script type="text/javascript">
+		htmlFontSize();
+		window.onresize = function() {
+			htmlFontSize();
+		}
+
+		function htmlFontSize() {
+			var w = document.documentElement.clientWidth;
+			var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+			document.documentElement.style.fontSize = (i) * 40.0 + "px";
+		}
+	</script>
+
+</html>

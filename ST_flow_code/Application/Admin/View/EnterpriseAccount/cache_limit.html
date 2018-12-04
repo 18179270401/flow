@@ -1,0 +1,32 @@
+<div id="cache_limit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="cache_limit_form" >
+        <input type="hidden"  name="account_id" value="{$list.account_id}" />
+        <input type="hidden"  name="enterprise_id" value="{$list.enterprise_id}" />
+        <div class="add_list">
+            <h5>企业名称：</h5>
+            <div class="add_value"><span>{$list.enterprise_name}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>企业编号：</h5>
+            <div class='add_value'><span>{$list.enterprise_code}</span></div>
+        </div>
+        <div class="add_list">
+            <h5>账户余额：</h5>
+            <div class="add_value"><span>{$list.account_balance|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>冻结金额：</h5>
+            <div class="add_value"><span>{$list.freeze_money|default='0.000'}元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>缓存额度：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="缓存额度" empty="true" style="width:160px" vtype="money" name="cache_credit" maxlength="8" value="{$list.cache_credit|default=''}" /></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5>通道缓存额度：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="通道缓存额度" empty="true" style="width:160px" vtype="money" name="channel_cache_credit" maxlength="8" value="{$list.channel_cache_credit|default=''}" /></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+    </form>
+</div>

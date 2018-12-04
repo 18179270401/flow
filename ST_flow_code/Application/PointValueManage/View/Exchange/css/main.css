@@ -1,0 +1,117 @@
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, input, th, td
+{margin: 0; padding: 0; border: 0; outline: none;font-family: "微软雅黑","-apple-system","Helvetica Neue","PingFang SC","Hiragino Sans GB",sans-serif;}
+
+body{
+	background-color: #5d0907;
+	background-image: url(../img/exchange_bg.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.form-all {
+	margin-top: 1.2rem;
+	margin-bottom: 1.2rem;
+}
+.form-content{
+    padding: 0 0.6rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    font-size: 1rem;
+}
+.form-inline {
+	background-color:rgba(255,255,255,0.3);
+	height: 1px;
+	
+	margin-left: 0.6rem;
+	margin-right: 0.6rem;
+}
+.socre-item,item-name,#package-size-text{
+    float: right;
+    font-size: 0.8rem;
+    color: #fff;
+}
+.item-name{
+    color: #fff;
+    font-size: 0.8rem;
+}
+#mobile{
+    width: 45%;
+    float: right;
+    text-align: right;
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+    color: #fff;
+    background-color: rgba(255,255,255,0);
+}
+.p-content{
+    margin-top: 1rem;
+}
+.p-content > li{
+    width: 24.7%;
+    display: inline-block;
+    /*border: 1px solid #0b78db;*/
+    /*border-radius:5px;*/
+    /*margin: 0.4rem;*/
+    margin-left: 0.6rem;
+    margin-top: 0.4rem;
+    margin-right: 0.2rem;
+    margin-bottom: 0.4rem;
+    padding: 0.4rem;
+    text-align: center;
+    background-image: url(../img/integral_bg.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color:#0b78db;
+    padding-bottom: 1rem;
+}
+.p-content li h1{
+    font-size: 1.5rem;
+    color: #cd0d10;
+}
+.p-content li h2{
+    font-size: 0.6rem;
+    color: #ffb621;
+    background-color: #f33002;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.p-content li img {
+	src: url(../img/integral.png);
+}
+#p-content-item-highlight{
+    width: 24.7%;
+    display: inline-block;
+    /*border: 1px solid #0b78db;*/
+    /*border-radius:5px;*/
+    /*margin: 0.4rem;*/
+    margin-left: 0.6rem;
+    margin-top: 0.4rem;
+    margin-right: 0.2rem;
+    margin-bottom: 0.4rem;
+    padding: 0.4rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    background-image: url(../img/integral_select_bg.png);
+    /*background-color: #0b78db;*/
+    color:#fff
+}
+.blue-btn{
+    border: none;
+    background: none;
+    color: #f42f02;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    background-image: url(../img/exchange_btn.png);
+    background-size: 100%;
+	background-repeat: no-repeat;
+    
+    height: 2.5rem;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.blue-btn:active{
+    background-color: #f33002;
+    color: #ffffff;
+}

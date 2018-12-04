@@ -1,0 +1,52 @@
+.loginheader{ height:57px; background-color:#FFF;}
+.loginheader .logo{ float:left; padding-top:10px;}
+.retrievepass_span{ display:inline-block; height:32px; line-height:32px; border-left:1px solid #d9dade; margin-top:16px; margin-left:14px; padding-left:13px; font-size:18px; color:#7a7a7a;}
+.loginbody{ height:503px; background:#1079f0 url(../images/login_img/loginbody_img_05.jpg) no-repeat top center;}
+.loginbox{ float:right; width:326px; height:370px; background-color:#FFF; border-radius:3px; margin-top:68px; overflow:hidden;}
+.logintit{ height:46px; line-height:46px; background-color:#eff2f8; border-bottom:1px solid #e0e3f2;}
+.logintit h2{ padding-left:26px; font-family:"微软雅黑"; font-size:18px; color:#000;}
+.logincon{ padding:0px 30px 0px;}
+.logincon .error{ height:32px; line-height:32px;}
+.logincon .error span{ font-size:12px; color:#F00;}
+.logintext{ width:267px; height:37px; border:1px solid #d3d3d3; border-radius:3px; margin-bottom:22px;}
+.logintext .minicon{ margin-top:11px; margin-left:13px;}
+.logintext .text{ width:232px; height:35px; padding:3px 8px; border:0px none; border-radius:3px; font-size:14px; color:#000; outline:none;}
+.codetext{ width:133px; position:relative;}
+.codetext .text{ width:131px;}
+.codetext .code_img{ position:absolute; top:-1px; left:151px; display:block; width:115px; height:37px; cursor:pointer;}
+.logintext.focus{ border-color:#15a5fb;}
+.logintext.focus .minicon{ background-image:url(../images/min_hover_icon.png);}
+.forgetpass .checkbox{ display:inline-block; height:16px; background:url(../images/login_img/checkbox_icon_12.png) no-repeat 0px 4px; cursor:pointer;}
+.forgetpass .checkbox em{ padding-left:17px; font-size:14px; color:#838383; vertical-align:top;}
+.forgetpass .checkbox.checked{ background-position:0px -16px;}
+.forgetpass{ padding-bottom:16px; overflow:hidden;}
+.forgetpass .checkbox{ float:left;}
+.forgetpass a{ float:right; font-size:14px; color:#0096ff;}
+.forgetpass a:hover{ color:#15a5fb; text-decoration:underline;}
+.loginbtn{ width:267px; height:41px; background:url(../images/login_img/submit_btn_03.png) repeat-x; border:1px solid #fe5f0c; border-radius:3px; box-shadow:0 0 6px 2px rgba(0, 0, 0, 0.1); font-size:16px; color:#fff; cursor:pointer;}
+.loginbtn:hover{ background-position:0 -59px;}
+.loginfooter{ height:41px; line-height:41px; text-align:center;}
+.loginfooter p{ font-size:12px; color:#a9a9a9;}
+
+.retrievepass_wrap{ height:calc(100% - 98px);}
+.retrievepass_box{ position:absolute; top:50%; left:50%; width:579px; height:355px; background-color:#FFF; margin-top:-177px; margin-left:-290px; padding:0 26px;}
+.retrievepass_tit{ height:36px; border-bottom:2px solid #dfdfdf;}
+.retrievepass_tit h2{ position:relative; bottom:-2px; float:left; height:34px; line-height:34px; padding:0 3px; border-bottom:2px solid #fd7e09; display:inline;}
+.retrievepass_tit h2 span{ font-size:14px; color:#666;}
+.retrievepass_tit h2 i{ vertical-align:top; margin-top:8px; margin-right:7px;}
+.retrievepass_nav li{ padding-bottom:19px;}
+.retrievepass_nav li .retrievepass_text{ width:220px; height:37px; padding:10px 8px; border:1px solid #d3d3d3; border-radius:5px; box-shadow:inset 0px 3px 2px #f2f2f2; font-size:14px;}
+.retrievepass_nav li .label{ float:left; width:181px; height:37px; line-height:37px; padding-right:14px; font-size:14px; color:#666; text-align:right;}
+.retrievepass_nav li .loginbtn{ width:220px; margin-left:181px;}
+.retrievepass_error{ height:40px; line-height:40px; text-align:center; margin-top:20px;}
+.retrievepass_error span{ font-size:12px; color:#ff0000;}
+.retrievepass_tip{ width:387px; height:43px; line-height:43px; border:1px solid #ffd3aa; margin:0 auto; text-align:center;}
+.retrievepass_tip span{ font-size:12px; color:#6d6d6d;}
+.retrievepass_tip i{ display:inline-block; width:23px; height:22px; background:url(../images/confirm_icon_03.png) no-repeat; vertical-align:top; margin-top:9px; margin-right:10px;}
+.retrievepass_success img{ display:block; margin:90px auto 0px;}
+.retrievepass_success p{ font-size:18px; color:#333; text-align:center; margin-top:24px;}
+.retrievepass_success p span{ display:block; padding-top:5px; font-size:14px; color:#666;}
+.retrievepass_success p span em{ padding-right:6px; color:#ff6e22;}
+.retrievepass_success p span a{ padding-left:5px; padding-right:5px; color:#15a5fb;}
+.retrievepass_success p span a:hover{ text-decoration:underline;}
+

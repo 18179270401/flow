@@ -1,0 +1,62 @@
+<include file="Common/header" />
+<div class="main_con">
+
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span></span>
+            </div>
+            <div class="operation_info">
+                <if condition="is_jurisdiction('UserDiscount/export_excel')">
+                    <button class="btn  export_button" data-url="UserDiscount/export_excel">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </if>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form name="excel" method="get" action="/index.php/Admin/UserDiscount/index">
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="80" class="change">产品名称</th>
+                            <th width="110" class="change">运营商</th>
+                            <th width="80" class="change">适用区域</th>
+                            <th width="80" class="change">产品大小</th>
+                            <th width="70" class="change">产品定价</th>
+                            <th width="200">产品结算价格</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td class="name">{$vo.product_name}</td>
+                            <td>{$vo.operator_name}</td>
+                            <td>{$vo.place}</td>
+                            <td>{$vo.product_size}</td>
+                            <td>{$vo.base_price}</td>
+                            <td>{$vo.discount_price}</td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

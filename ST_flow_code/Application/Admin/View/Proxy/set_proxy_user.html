@@ -1,0 +1,217 @@
+<include file="Common/header" />
+<script>
+
+  $(function(){
+
+      var is_all_proxy = '{$data.is_all_proxy}';
+
+      $('.set_proxy_user.add,.set_proxy_user.delete').show();
+      if(is_all_proxy == '1'){
+        $('.set_proxy_user.add').hide();
+        alertbox({$jsondata});
+      }else{
+        $('.set_proxy_user.delete').hide();
+      }
+
+
+      $(document).on('click',"label.checkbox",function(){
+        var val = $(this).attr('value');
+        if(val > 0){
+          var ischeck = $(this).hasClass('checked');
+          if(!ischeck){
+            $(this).addClass('checked');
+          }else{
+            $(this).removeClass('checked');
+          }
+        }
+      })
+
+      
+      $(document).on('click','tbody.have_list tr,tbody.no_list tr',function(){
+        var ischeck = $(this).children('td').eq(0).children('label').hasClass('checked');
+        if(!ischeck){
+          $(this).children('td').eq(0).children('label').addClass('checked');
+        }else{
+          $(this).children('td').eq(0).children('label').removeClass('checked');
+        }
+
+      })
+
+      $('label.checkbox.allcheck').on('click',function(){
+        var ischeck = $(this).hasClass('checked');
+        var name = $(this).attr('data');
+        if(!ischeck){
+          $("tbody."+name+' label.checkbox').addClass('checked');
+        }else{
+          $("tbody."+name+' label.checkbox').removeClass('checked');
+        }
+    })
+  })
+
+</script>
+<div class="main_con">
+  <div class="toallocate width20">
+      <div class="agentset_box">
+         <div class="agentset_con">
+           <div class="agentset_search">
+             <input type="text" class="inputtext"  name="seach_proxy_user" data="user_list" placeholder="用户名称"/>
+             <button class="btn add_btn seach_set_right"  data="seach_proxy_user" value="3">
+                <i class="minicon search_icon"></i><span>查询</span>
+             </button>
+             <!--这个界面放不下重置按钮  而且这个也不需要这个功能
+               <button class="btn export_btn  reset_button">
+                   <i class="minicon reload_icon"></i><span>重置</span>
+               </button>
+              -->
+             <!-- <button class="btn export_btn" data-toggle="tooltip" data-placement="bottom" data-original-title="筛选">
+                <i class="minicon filter_icon"></i>
+             </button> -->
+           </div>
+           <div class="agentset_thead">
+             <table width="100%">
+                 <thead>
+                   <tr>
+                       <th width="100%" colspan="4" style="text-align:center;font-weight:700;background:#fff;">部门员工列表</th>
+                     </tr>
+
+                 </thead>
+             </table>
+           </div>
+           <div class="agentset_tbody heightcalc_80 mCustomScrollbar_y" data-mcs-theme="dark">
+             <table width="100%">
+                <tr>
+                  <td width="40%"  style="background:#eff2f8;"></td>
+                  <td width="50%" style="background:#eff2f8;">序号</td>
+                  <td width="100%" style="background:#eff2f8;">部门名称</td>
+                   <td width="100%" style="background:#eff2f8;">员工姓名</td>
+                    
+                </tr>
+               
+               <tbody class="user_list">
+
+                <volist name="user_list" id="vo" empty='$volistempty'>
+
+                 <tr class="set_proxy_user" value="{$vo.user_id}" >
+                   <td><label class="radio <if condition="$user['user_id'] eq $vo['user_id']">checked</if>"  value="{$vo.user_id}"><em></em></label></td>
+                  <td >{$vo.sort_no}</td>
+                  <td>{$vo.depart_name}</td>
+                   <td>{$vo.user_name}</td>
+                   
+                 </tr>
+                </volist>
+               </tbody>
+             </table>
+           </div>
+         </div>
+      </div>
+  </div>
+  <div class="toallocate width40">
+      <div class="agentset_box">
+        <div class="agentset_con">
+           <div class="agentset_search">
+             <input type="text" class="inputtext" name="seach_proxy_have" data="have_list"  placeholder="代理商编号或名称"/>
+             <button class="btn add_btn seach_set_right2"  data="seach_proxy_have" value="2,3" >
+              <i class="minicon search_icon"></i><span>查询</span>
+            </button>
+            <!--这个界面放不下重置按钮  而且这个也不需要这个功能
+               <button class="btn export_btn  reset_button">
+                   <i class="minicon reload_icon"></i><span>重置</span>
+               </button>
+            -->
+           </div>
+           <div class="agentset_thead">
+             <table width="100%">
+                 <thead>
+                  
+                   <tr>
+                      <th width="100%" colspan="3" style="text-align:center;font-weight:700;background:#fff;">已分配</th>
+
+                     </tr>
+                 </thead>
+             </table>
+           </div>
+           <div class="agentset_tbody heightcalc_80 mCustomScrollbar_y" data-mcs-theme="dark">
+             <table width="100%">
+              <tr>
+                  <td width="40%" style="background:#eff2f8;">
+                    <label class="checkbox allcheck" data="have_list" ><em></em></label>
+                  </td>
+                  <td width="50%" style="background:#eff2f8;">序号</td>
+                   <td width="80%" style="background:#eff2f8;">代理商编号</td>
+                    <td  width="100%"  style="background:#eff2f8;">代理商名称</td>
+                </tr>
+               <tbody class="have_list">
+                  <volist name="data.have" id="vo" empty='$volistempty'>
+                    <tr>
+                      <td >
+                        <label class="checkbox" value="{$vo.proxy_id}"><em></em></label>
+                        </td>
+                      <td >{$vo.sort_no}</td>
+                       <td >{$vo.proxy_code}</td>
+                        <td >{$vo.proxy_name}</td>
+                    </tr>
+                  </volist>
+               </tbody>
+             </table>
+           </div>
+         </div>
+      </div>
+    </div>
+    <div class="discountsetlist_mid topmid">
+      <a class="leftarrow set_proxy_user" href="#"><i></i><i></i></a>
+      <a class="rightarrow set_proxy_user" href="#"><i></i><i></i></a>
+      <a class="delete set_proxy_user" style="display:none;" href="#">全部解除</a>
+      <a class="add set_proxy_user" style="display:none;" href="#">全部分配</a>
+    </div>
+    <div class="toallocate width40">
+      <div class="agentset_box">
+        <div class="agentset_con">
+           <div class="agentset_search">
+             <input type="text" class="inputtext" name="seach_proxy_no"  data="no_list"  placeholder="代理商编号或名称"/>
+             <button class="btn add_btn seach_set_right2" data="seach_proxy_no" value="2,3">
+              <i class="minicon search_icon"></i><span>查询</span>
+            </button>
+            <!--这个界面放不下重置按钮  而且这个也不需要这个功能
+               <button class="btn export_btn  reset_button">
+                   <i class="minicon reload_icon"></i><span>重置</span>
+               </button>
+            -->
+           </div>
+           <div class="agentset_thead">
+             <table width="100%">
+                 <thead>
+                   <tr>
+                       <th width="50%" colspan="3" style="text-align:center;font-weight:700;background:#fff;">未分配</th>
+                     </tr>
+                 </thead>
+             </table>
+           </div>
+           <div class="agentset_tbody heightcalc_80 mCustomScrollbar_y" data-mcs-theme="dark">
+             <table width="100%">
+              <tr>
+                  <td width="40%" style="background:#eff2f8;">
+                    <label class="checkbox allcheck" data="no_list" ><em></em></label>
+                  </td>
+                  <td width="50%" style="background:#eff2f8;">序号</td>
+                   <td width="80%" style="background:#eff2f8;">代理商编号</td>
+                    <td  width="100%" style="background:#eff2f8;">代理商名称</td>
+                </tr>
+               <tbody class="no_list">
+                  <volist name="data.no" id="vo" empty='$volistempty'>
+                     <tr>
+                      <td>
+                        <label class="checkbox" value="{$vo.proxy_id}"><em></em></label>
+                        </td>
+                      <td >{$vo.sort_no}</td>
+                       <td >{$vo.proxy_code}</td>
+                        <td >{$vo.proxy_name}</td>
+                    </tr>
+                  </volist>
+               </tbody>
+             </table>
+           </div>
+         </div>
+      </div>
+    </div>
+</div>
+<include file="Common/footer" />

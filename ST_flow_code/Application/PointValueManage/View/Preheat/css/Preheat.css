@@ -1,0 +1,88 @@
+body
+{
+    /*background:url(../images/bg.png) top center no-repeat;*/
+    /*background-repeat: no-repeat;
+    background-repeat: repeat; /* 默认值，在水平和垂直方向平铺 */
+    width: 20rem;
+    height: 35.57rem;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background-color: #faae36;
+}
+
+.line{
+    position: absolute;
+}
+
+.line img{
+    width: 10rem;
+    height: 23rem;
+    margin-left: 10rem;
+}
+
+.moon{
+    width: 6.66rem;
+    height: 6.66rem;
+}
+
+.moon img{
+    position: absolute;
+    width: 6.66rem;
+    height: 6.66rem;
+    margin-top: 4rem;
+}
+
+.stayTuned{
+    width: 20rem;
+    height: 8.89rem;
+}
+
+.stayTuned img{
+    position: absolute;
+    width: 16rem;
+    height: 7.947rem;
+    margin: 1rem 2rem;
+    z-index: 10;
+}
+
+#time{
+    position: absolute;
+    width: 8rem;
+    font-size: 1.1rem;
+    color: white;
+    margin: 9.6rem 7.99rem;
+    z-index: 11;
+}
+
+#data{
+   position: absolute;
+    width: 12rem;
+    font-size: 1rem;
+    color: white;
+    margin: 8.0rem 7.3rem;
+    z-index: 11;
+}
+
+
+.foot{
+    width: 20rem;
+    height: 10rem;
+    margin-top: 9rem;
+}
+
+.foot .red{
+    position: absolute;
+    width: 9rem;
+    height: 8rem;
+    margin:-2rem 10rem ;
+}
+
+.foot .cloud{
+    position: absolute;
+    width: 20rem;
+    height: 11rem;
+    margin:0rem;
+    padding: 0rem;
+
+}

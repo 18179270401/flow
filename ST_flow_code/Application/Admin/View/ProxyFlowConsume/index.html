@@ -1,0 +1,110 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+</script>
+
+<div class="main_con">
+    <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+                <i></i><span><em>统计报表</em>><em>代理商流量消费统计</em></span>
+        </div>
+          <div class="operation_info">
+                  <if condition="is_jurisdiction('ProxyFlowConsume/export_excel')">
+                  <button class="btn  export_button" data-url="ProxyFlowConsume">
+                      <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                  </button>
+                  </if>
+          </div>
+    </div>
+    </div>
+    <div class="search_box">
+        <form method="get"  name="excel" action="/index.php/Admin/ProxyFlowConsume/index">
+            <!--<div class="search_nav minheight60">-->
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="proxy_code" maxlength="20" value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+                    </li>
+                    <li>
+                        <input type="text" class="inputtext" name="proxy_name"  value="{$Think.get.proxy_name}" placeholder="代理商名称"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">操作时间：</label>
+                        <input type="text" class="inputtext" name="start_datetime" placeholder="{$default_start}" value="{$default_start}" style='min-width:80px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext" name="end_datetime" placeholder="{$default_end}" value="{$default_end}" style='min-width:80px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+         <!--   <div class="prepaidtip" >
+                <p> 收入总额：【共：<span style="color:#5cb95c;">{$all_income|default=0.00}</span>元】，支出总额：【共：<span style="color:red;">{$all_out|default=0.00}</span>元】</p>
+            </div>-->
+        </form>
+    </div>
+
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="90" class="change">代理商编号</th>
+                            <th width="180" class="change">代理商名称</th>
+                            <th width="190" claas="change money_style" >折后价(元)</th>
+                            <th width="100" class="change money_style" >退款金额(元)</th>
+                            <th width="100" class="change money_style" >代理商消费(元)</th>
+                            <!--<th width="140" class="change">操作</th>-->
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+             <div class="tablelist_tbody" data-mcs-theme="dark">
+                 <table>
+                     <volist name="list" id="vo">
+                         <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.proxy_code}</td>
+                            <td title="{$vo.proxy_name}">{$vo.proxy_name}</td>
+                            <td class="money_style">{$vo.stat_price}</td>
+                            <td class="money_style">{$vo.stat_refund_price}</td>
+                            <td class="money_style">{$vo.stat_price|get_consume_money=$vo['stat_refund_price']}</td>
+ 							<!--<td class="operation_td">
+                                <isshow url="RechargeRecord/detailed">
+                                <button class="operationbtn order_view_btn" value="{$vo.order_id}">
+                                    <span>查看</span>
+                                </button>
+                                </isshow>
+                            </td>-->
+                        </tr>
+                     </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+    parent.layer.closeAll();
+</script>
+</body>
+</html>

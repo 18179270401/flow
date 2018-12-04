@@ -1,0 +1,60 @@
+
+/* 重置样式 */
+body,html{ width:100%; height:100%;}
+body{ font:12px "微软雅黑","黑体-简",Helvetica,sans-serif; color:#333; background:#f1f1f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;} 
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+table{border-collapse:collapse;border-spacing:0;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+label,input,textarea,select,button{font-family:"微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;border: none;outline: none;}
+img{ vertical-align: middle;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none;  star:expression(this.onFocus=this.blur());}
+*{ box-sizing:border-box;}
+
+/* 浮动方式 */
+.fl{ float: left; display: inline;}.fr{ float: right; display: inline;}.clear{ clear:both;}
+
+/* 定位方式 */
+.relative{ position: relative;}.absolute{ position:absolute;}.fixed{ position:fixed;}
+
+/* 显示隐藏 */
+.dis{ display: block;}.undis{ display: none;}
+
+/* 字体对齐方式 */
+.tl{ text-align: left;}.tc{ text-align: center;}.tr{ text-align: right;}
+
+
+/*鼠标样式*/
+.cpointer{ cursor: pointer;}.ctext{ cursor: text;}.cdefault{ cursor: default;}
+
+/* 溢出方式 */
+.hidden{ overflow: hidden;}.visible{ overflow: visible;}.auto{ overflow: auto;}.scroll{ overflow: scroll;}
+
+/* 空白高度 */
+.hr-2,.hr-3,.hr-4,.hr-5,.hr-6,.hr-7,.hr-8,.hr-9,.hr-10,.hr-11,.hr-12,.hr-13,.hr-14,.hr-15,.hr-16,.hr-17,.hr-18,.hr-19,.hr-20,.hr-21,.hr-22,.hr-23,.hr-24,.hr-25,.hr-26,.hr-27,.hr-28,.hr-29,.hr-30,.hr-124{clear:both; overflow:hidden; font-size:0px; line-height:0px;}
+.hr-2{height:2px;}.hr-3{height:3px;}.hr-4{height:4px;}.hr-5{height:5px;}.hr-6{height:6px;}.hr-7{height:7px;}.hr-8{height:8px;}.hr-9{height:9px;}.hr-10{height:10px;}.hr-11{height:11px;}.hr-12{height:12px;}.hr-13{ height:13px;}.hr-14{ height:14px;}.hr-15{ height:15px;}.hr-16{ height:16px;}.hr-17{ height:17px;}.hr-18{ height:18px;}.hr-19{ height:19px;}.hr-20{ height:20px;}.hr-21{ height:21px;}.hr-22{ height:22px;}.hr-23{ height:23px;}.hr-24{ height:24px;}.hr-25{ height:25px;}.hr-26{ height:26px;}.hr-27{ height:27px;}.hr-28{ height:28px;}.hr-29{ height:29px;}.hr-30{ height:30px;}
+
+/* 外边距 */
+.ml5{ margin-left:5px;}.ml10{ margin-left:10px;}.ml15{ margin-left:15px;}.ml20{ margin-left:20px;}.ml25{ margin-left:25px;}.ml30{ margin-left:30px;}.ml35{ margin-left:35px;}.ml40{ margin-left:40px;}.ml45{margin-left:45px;}.ml50{margin-left:50px;}
+
+.mt5{ margin-top:5px;}.mt10{ margin-top:10px;}.mt15{ margin-top:15px;}.mt20{ margin-top:20px;}.mt25{ margin-top:25px;}.mt30{ margin-top:30px;}.mt35{ margin-top:35px;}.mt40{ margin-top:40px;}.mt45{margin-top:45px;}.mt50{margin-top:50px;}
+
+.mr5{ margin-right:5px;}.mr10{ margin-right:10px;}.mr15{ margin-right:15px;}.mr20{ margin-right:20px;}.mr25{ margin-right:25px;}.mr30{ margin-right:30px;}.mr35{ margin-right:35px;}.mr40{ margin-right:40px;}.mr45{margin-right:45px;}.mr50{margin-right:50px;}
+
+.mb5{ margin-bottom:5px;}.mb10{ margin-bottom:10px;}.mb15{ margin-bottom:15px;}.mb20{ margin-bottom:20px;}.mb25{ margin-bottom:25px;}.mb30{ margin-bottom:30px;}.mb35{ margin-bottom:35px;}.mb40{ margin-bottom:40px;}.mb45{margin-bottom:45px;}.mb50{margin-bottom:50px;}
+
+/* 内边距 */
+.pl5{ padding-left:5px;}.pl10{ padding-left:10px;}.pl15{ padding-left:15px;}.pl20{ padding-left:20px;}.pl25{ padding-left:25px;}.pl30{ padding-left:30px;}.pl35{ padding-left:35px;}.pl40{ padding-left:40px;}.pl45{padding-left:45px;}.pl50{padding-left:50px;}
+
+.pt5{ padding-top:5px;}.pt10{ padding-top:10px;}.pt15{ padding-top:15px;}.pt20{ padding-top:20px;}.pt25{ padding-top:25px;}.pt30{ padding-top:30px;}.pt35{ padding-top:35px;}.pt40{ padding-top:40px;}.pt45{padding-top:45px;}.pt50{padding-top:50px;}
+
+.pr5{ padding-right:5px;}.pr10{ padding-right:10px;}.pr15{ padding-right:15px;}.pr20{ padding-right:20px;}.pr25{ padding-right:25px;}.pr30{ padding-right:30px;}.pr35{ padding-right:35px;}.pr40{ padding-right:40px;}.pr45{padding-right:45px;}.pr50{padding-right:50px;}
+
+.pb5{ padding-bottom:5px;}.pb10{ padding-bottom:10px;}.pb15{ padding-bottom:15px;}.pb20{ padding-bottom:20px;}.pb25{ padding-bottom:25px;}.pb30{ padding-bottom:30px;}.pb35{ padding-bottom:35px;}.pb40{ padding-bottom:40px;}.pb45{padding-bottom:45px;}.pb50{padding-bottom:50px;}
+
+

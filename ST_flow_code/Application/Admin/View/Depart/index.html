@@ -1,0 +1,115 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+    <div class="operation_con">
+      <div class="currenttit">
+        <i></i><span><em>系统管理</em>><em>部门管理</em></span>
+      </div>
+      <div class="operation_info">
+        <isshow url="Depart/add">
+          <button class="btn add_btn depart_add_btn">
+          <i class="minicon addoperation_icon"></i><span>新增部门</span>
+          </button>
+          <if condition="is_jurisdiction('Depart/add') and is_jurisdiction('Depart/export_excel')">
+            <span class="line">|</span>
+          </if>
+        </isshow>
+		<if condition="is_jurisdiction('Depart/export_excel')">
+          <button class="btn  export_button" data-url="Depart">
+            <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+          </button>
+		</if>
+      </div>
+    </div>
+  </div>
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/Depart/index">
+    <div class="search_nav">
+      <ul>
+        <li>
+          <input type="text" class="inputtext" name="depart_name" value="{$Think.get.depart_name}" placeholder="部门名称"/>
+        </li>
+        <li>
+            <label class="inputlabel">上级部门：</label>
+            <select class="select" name="top_depart_id" style='min-width:80px'>
+              <option value="" selected>全部</option>
+              <option value="0" <if condition='($Think.get.top_depart_id eq 0) and ($Think.get.top_depart_id neq null)'>selected</if>>顶级部门</option>
+              <volist name="topdeparts" id="top">
+                <option value="{$top.depart_id}" <if condition='$Think.get.top_depart_id eq $top["depart_id"]'>selected</if> >{$top.depart_name}</option>
+              </volist>
+            </select>
+          <input type="hidden" value=""/>
+        </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+      <button type="button" class="btn export_btn  reset_button">
+        <i class="minicon reload_icon"></i><span>重置</span>
+      </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50px">序号</th>
+                    <th width="100px" class="change">部门名称</th>
+                    <th width="100px" class="change">部门负责人</th>
+                    <th width="100px" class="change">上级部门</th>
+                    <th width="150px">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="depart_list" id="vo">
+            <tr>
+                <td>{$vo.sort_no}</td>
+                <td>{$vo.depart_name}</td>
+                <td>{$vo.user_name}</td>
+                <td>{$vo.bdepart_name|default="顶级部门"}</td> 
+                <td class="operation_td">
+                  <button class="operationbtn depart_show_btn" value="{$vo.depart_id}">
+                    <!--<i class="minicon edit_icon"></i>-->
+                    <span>查看</span>
+                  </button>
+                  <!--<button class="operationbtn depart_edit_btn"data-toggle="tooltip" data-placement="<if condition='$i eq count($depart_list)'>top<else />bottom</if>" data-original-title="编辑" value="{$vo.depart_id}">
+                  <i class="minicon edit_icon"></i>
+                  </button>-->
+                  <isshow url="depart/edit">
+                    <button class="operationbtn depart_edit_btn" value="{$vo.depart_id}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>编辑</span>
+                    </button>
+                  </isshow>
+                  <!--<button class="operationbtn depart_delete_btn" data-toggle="tooltip" data-placement="<if condition='$i eq count($depart_list)'>top<else />bottom</if>" data-original-title="删除" value="{$vo.depart_id}">
+                    <i class="minicon delete_icon"></i> 
+                  </button>-->
+                  <isshow url="depart/delete">
+                    <button class="operationbtn depart_delete_btn" value="{$vo.depart_id}" data-value="{$vo.depart_name}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>删除</span>
+                    </button>
+                  </isshow>
+                </td>
+            </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

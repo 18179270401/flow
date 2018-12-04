@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="x-ua-compatible" content="ie=8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta charset="utf-8">
+		<title>恭喜</title>
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+		<meta name="apple-touch-fullscreen" content="YES">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="stylesheet" href="{$role}css/package.css?s={$version_number}" type="text/css" />
+		<link rel="stylesheet" href="{$role}css/bootstrap.min.css?s={$version_number}" type="text/css" />
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+
+	</head>
+
+	<body width="100%">
+		<div class="flowAlert" id="flowAlert">
+			<div class="bg">
+				<div class="text">
+					<div class="a">
+						<p style="line-height:50px;">恭喜您获得</p>
+					</div>
+					<div class="d">
+						<p>
+								{$title}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+
+			htmlFontSize();
+
+			window.onresize = function() {
+				htmlFontSize();
+			}
+
+			function htmlFontSize() {
+				var w = document.documentElement.clientWidth;
+				var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+				var h = document.documentElement.clientHeight;
+				document.documentElement.style.fontSize = (i) * 40.0 + "px";
+				if ($('body').height() < parseInt(document.documentElement.clientHeight)) {
+					$('body').height(parseInt(document.documentElement.clientHeight) );
+					$('#share_bg').height(h);
+				}
+				else
+				{
+					$('#share_bg').height($('body').height());
+				}
+			}
+		</script>
+</html>

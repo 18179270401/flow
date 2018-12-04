@@ -1,0 +1,65 @@
+<div id="scenerecord_show_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <if condition="$usr neq 3">
+            <tr>
+                <th>用户类型：</th>
+                <td width="50%"><if condition="$info['user_type'] eq 1">代理商<else/>企业</if></td>
+            </tr>
+            <tr>
+                <th >用户名称：</th>
+                <td ><if condition="$info['user_type'] eq 1">{$info.proxy_name}<else/>{$info.enterprise_name}</if></td>
+            </tr>
+        </if>
+        <tr>
+            <th width="30%">微信昵称：</th>
+            <td width="70%">{$info.wx_name}</td>
+        </tr>
+        <tr>
+            <th>手机号：</th>
+            <td>{$info.mobile}</td>
+        </tr>
+        <tr>
+            <th>参与活动：</th>
+            <td><if condition="$info.user_activity_name neq null">
+                    {$info.user_activity_name}
+                <else/>
+                    {$info.activity_name}
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th>流量包：</th>
+            <td>{$info.product_name}</td>
+        </tr>
+        <!--<tr>
+            <th>价格：</th>
+            <td>
+                <if condition="$info.discount_price neq null">
+                    {$info.discount_price}元
+                <else/>
+                    &#45;&#45;
+                </if>
+            </td>
+        </tr>-->
+        <tr>
+            <th>领取时间：</th>
+            <td>{$info.receive_date}</td>
+        </tr>
+        <tr>
+            <th>领取状态：</th>
+            <td>
+                <if condition="$info.order_id neq null">
+                    成功
+                <else/>
+                    失败
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th>订单ID：</th>
+            <td colspan="3">{$info.order_id}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

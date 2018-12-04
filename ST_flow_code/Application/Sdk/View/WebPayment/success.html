@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>爱讯充值</title>
+<link href="{$role}css/reset.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{$role}js/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+<div class="layout">
+	<div class="hr-18"></div>
+  <div class="pay_con success_con">
+  	<i class="success_ico"></i>
+  	<div class="success_text">
+    	<h2>支付成功！</h2>
+    	<p>订单正在处理中，收到您的付款后，我们将会在24小时内充值到账。</p>
+    </div>
+  </div>
+  <a href="#" id = "pay_btn" class="pay_btn">继续购买</a>
+</div>
+</body>
+  <script type="text/javascript">
+				$("#pay_btn").click(function(){
+					var url = "{$url}"
+					location.href = url;
+				});
+  </script>
+</html>

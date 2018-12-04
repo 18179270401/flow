@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>流量充值</title>
+    <script src="__PUBLIC__/utils/js/mui.min.js"></script>
+    <link href="__PUBLIC__/utils/css/mui.min.css" rel="stylesheet"/>
+	<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+	
+    <link href="{$role}css/index.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">   
+      	mui.init(); 
+   
+    </script>
+    <title>微信支付启动中...</title>
+	<script type="text/javascript">  
+    //调用微信JS api 支付
+    var jsApiParameters={$jsApiParameters};
+    var red_order_id={$red_order_id}+"";
+    function jsApiCall()
+    {   
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',jsApiParameters,
+       function(res){     
+           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                window.location="/index.php/Sdk/FlowRed/share_flow_red/red_order_id/"+red_order_id; 
+          	 }else{
+             // alert("支付失败");
+           //alert(res.err_code+res.err_desc+res.err_msg);
+            //window.location="wxform.html";
+           } 
+    		   }
+        );
+    }
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+         }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+         }
+    }else{
+         jsApiCall();
+    }
+    </script>
+</head>
+</head>
+</html>

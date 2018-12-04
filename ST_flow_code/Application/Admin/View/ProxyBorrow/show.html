@@ -1,0 +1,79 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <tr>
+            <th width="20%">代理商名称：</th>
+            <td width="30%">{$list.proxy_name}</td>
+            <th width="20%">代理商编号：</th>
+            <td width="30%">{$list.proxy_code}</td>
+        </tr>
+        <tr>
+            <th>授信编号：</th>
+            <td>{$list.loan_code}</td>
+            <th>授信金额：</th>
+            <td>{$list.loan_money|default="0.00"}元</td>
+        </tr>
+        <tr>
+            <th>授信时间：</th>
+            <td>{$list.loan_date}</td>
+            <th>预计还款时间：</th>
+            <td>{$list.repayment_date|msubstr=0,10,"utf-8",false}</td>
+        </tr>
+        <tr>
+            <th>是否还清：</th>
+            <td><if condition="$list.is_pay_off eq 1 " >是<else/>否</if></td>
+            <th>未还款金额：</th>
+            <td>{$list.loan_id|last_money=1}元</td>
+        </tr>
+        <tr>
+            <th>还款次数：</th>
+            <td>{$list.repayment_number} </td>
+            <th>还款时间：</th>
+            <td>{$list.last_repayment_date}</td>
+        </tr>
+        <tr>
+            <th>审核状态：</th>
+            <td >{$list.approve_status|get_contract_status}</td>
+            <th>送审人：</th>
+            <td >{$list.create_user_id|get_user_name}</td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$list.remark}</td>
+        </tr>
+    </tbody>
+    </table>
+    <volist name="process" id="vo" empty="">
+        <table width="100%">
+            <thead>
+             <tr>
+                <th width="100%" colspan="4">{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                    <else />
+                        {$vo.approve_status|get_apply_status2=3}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+               
+            </tr> 
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+
+</div>

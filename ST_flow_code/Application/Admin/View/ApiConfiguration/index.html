@@ -1,0 +1,92 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>开发者中心</em>><em>开发者账号</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="apitabcon_box mCustomScrollbar_y" data-mcs-theme="dark">
+        <div class="apitabcon_flowchart">
+            <div class="flowchart_nav">
+                <ul>
+                    <a href="{:U('ApiConfiguration/index')}" />  <li class="green active"><p>开发者账号</p></li></a>
+                   <a href="{:U('ApiConfiguration/respcode')}" /> <li class="purple">
+                        <p>返回码参照</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/document')}" />    <li class="blue">
+                        <p>示例文档</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/faq')}" />      <li class="orange">
+                        <p>FAQ</p>
+                    </li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="apiinstructions_box margin10">
+            <div class="apiinstructions_tit">
+                <h2>开发者账号</h2>
+            </div>
+            <div class="apitabcon_mess">
+                <ul>
+                    <li><label>账号名称(account)：</label><span>{$api_account}</span></li>
+                    <li><label>Key值(apikey)：</label><span>{$api_key}</span></li>
+                    <!--
+                    <li><label>下单接口地址：</label><span>http://121.41.8.25:8081/Submit.php</span></li>
+                    <li><label>查询接口地址：</label><span>http://121.41.8.25:8081/Query.php</span></li>
+                    <li><label>查询余额接口地址：</label><span>http://121.41.8.25:8081/Balance.php</span></li>
+                    -->
+                    <li><label>下单接口地址：</label><span>{:C("API_SUBMIT")}</span></li>
+                    <li><label>查询接口地址：</label><span>{:C("API_QUERY")}</span></li>
+                    <li><label>查询余额接口地址：</label><span>{:C("API_BALANCE")}</span></li>
+                    <li><label>请求方法：</label><span>POST</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="apiinstructions_box margin10">
+            <div class="apiinstructions_tit">
+                <h2>回调和IP鉴权</h2>
+            </div>
+            <div class="apiinstructions_con">
+                <form name="api_edit_form">
+                <div class="apiinstructions_nav">
+
+                    <input type="hidden" name="api_id"  value="{$api_id}" />
+                    <ul>
+                        <li>
+                            <label class="inputlabel">回调地址：</label>
+                            <input type="text" value="{$api_callback_address}" name="api_callback_address" class="inputtext"/>
+                        </li>
+                        <li>
+                            <label class="inputlabel">IP鉴权地址：</label>
+                            <input type="text" value="{$api_callback_ip}" name="api_callback_ip" class="inputtext"/>
+                        </li>
+                    </ul>
+                </form>
+                </div>
+            <isshow url="ApiConfiguration/update"> <div class="apiinstructions_btncon"><button class="btn add_btn"><span>提交</span></button></div>
+</isshow>
+            </div>
+        </div>
+
+        <div class="apitabcon_instructions">
+            <dl>
+                <dt>备注:</dt>
+                <dd>1.接口采用http进行交互，支持POST方式提交。</dd>
+                <dd>2.返回报文统一使用JSON，编码为UTF-8，报文中某个可选参数的值为空，则该标签可以不出现。</dd>
+                <dd>3.IP鉴权地址为空或者255.255.255.255表示不鉴权。</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

@@ -1,0 +1,87 @@
+body {
+    background-color:#fee2a9;
+}
+.rootView {
+    position:absolute;
+    width:20rem;
+    height:35.573rem;
+    margin-top:0rem;
+}
+.rootView img {
+    width:100%;
+    height:100%;
+}
+.AmongView {
+    position:relative;
+    width:10rem;
+    height:5rem;
+    left:5rem;
+    top:18rem;
+}
+.AmongView #mobile {
+    margin:0.8rem 0.5rem;
+    width:9rem;
+    height:1.8rem;
+    border-radius:0.3rem;
+    border:1px solid #fed639;
+    background:#fe4a2a;
+    font-size:0.8rem;
+    color:#fed639;
+}
+.AmongView .ReceivingButton {
+    margin:0.0rem 0.5rem;
+    width:9rem;
+    height:1.8rem;
+    border-radius:0.3rem;
+    border:1px solid #fed639;
+    background:#fed639;
+    font-size:0.8rem;
+    color:#fe4a2a;
+}
+.AmongView .ReceivingButton:active {
+    border:1px solid #FEE210;
+    background:#FEE210;
+    font-size:0.8rem;
+    color:#fe412b;
+}
+.footView {
+    position:relative;
+    width:12rem;
+    height:3rem;
+    left:4rem;
+    top:21.2rem;
+    text-align: center;
+}
+.footView img {
+    width:auto;
+    height:100%;
+}
+.activity-rule {
+    position: absolute;
+    text-align: center;
+    background:none;
+    width: 5rem;
+    top: 31.5rem;
+    left: 7.5rem;
+    height: 2rem;
+}
+.activity-rule button {
+    background:none;
+    width: 100%;
+    height: 100%;
+    border:none;
+}
+
+
+::-webkit-input-placeholder {
+    color:#fed639;
+}
+:-moz-placeholder {
+    color:#fed639;
+}
+:-moz-placeholder {
+    color:#fed639;
+}
+:-ms-input-placeholder {
+    color:#fed639;
+}

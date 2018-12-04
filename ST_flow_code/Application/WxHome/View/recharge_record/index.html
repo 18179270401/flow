@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="__PUBLIC__/WxHome/css/reset.css" />
+		<link rel="stylesheet" href="__PUBLIC__/WxHome/css/base.css" />
+		<script type="text/javascript" src="__PUBLIC__/WxHome/js/setFontSize.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/WxHome/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/WxHome/js/common.js"></script>
+		<title>充值查询</title>
+	</head>
+
+		<body>
+		<div class="recharge_con">
+			<div class="recharge_select">
+				<dl>
+					<dd>
+						<div class="myselect">
+							<p><span class="operator_label_select">请选择运营商</span><i class="xsj"></i></p>
+						</div>
+						<select class="select_1">
+			
+						</select>
+					</dd>
+					<dd>
+						<div class="myselect">
+							<p><span class="placeid_label_select">请选择给属地</span><i class="xsj"></i></p>
+						</div>
+
+						<select class="select_2">
+				
+						</select>
+					</dd>
+					<dd>
+						<span class="time_select">充值时间</span>
+					</dd>
+				</dl>
+			</div>
+			<div class="recharge_infor">
+				<p>运营商: <label class="operator_label">中国移动</label> <span>归属地: <label class="place_label">全部</label></span></p>
+				<p>充值时间: <label class="start_time_label"></label> 至 <label class="end_time_label"></label></p>
+			</div>
+			<div class="note_card">
+				<div class="card_top">
+					<div class="card_num">
+						<h3>充值成功（条）</h3>
+						<span class="blue_txt success_count">0</span>
+					</div>
+				</div>
+				<div class="card_bot">
+					<div class="card_price">
+						<div class="text_center">
+							<h3>原价（元）</h3>
+							<span class = "success_price">0.000</span>
+						</div>
+					</div>
+					<div class="card_price">
+						<div class="text_center">
+							<h3>折后价（元）</h3>
+							<span class = "success_amount">0.000</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="note_card">
+				<div class="card_top">
+					<div class="card_num">
+						<h3>充值失败（条）</h3>
+						<span class="red_txt faile_count">0</span>
+					</div>
+				</div>
+				<div class="card_bot">
+					<div class="card_price">
+						<div class="text_center">
+							<h3>原价（元）</h3>
+							<span class="faile_price">0.000</span>
+						</div>
+					</div>
+					<div class="card_price">
+						<div class="text_center">
+							<h3>折后价（元）</h3>
+							<span class="faile_amount">0.000</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="note_card">
+				<div class="card_top">
+					<div class="card_num">
+						<h3>提交成功（条）</h3>
+						<span class="orange_txt submit_success_count">0</span>
+					</div>
+				</div>
+				<div class="card_bot">
+					<div class="card_price">
+						<div class="text_center">
+							<h3>原价（元）</h3>
+							<span class="submit_success_amount">0.000</span>
+						</div>
+					</div>
+					<div class="card_price">
+						<div class="text_center">
+							<h3>折后价（元）</h3>
+							<span class="submit_success_price">0.000</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="note_card">
+				<div class="card_top">
+					<div class="card_num">
+						<h3>正在送充（条）</h3>
+						<span class="green_txt wait_count">0</span>
+					</div>
+				</div>
+				<div class="card_bot">
+					<div class="card_price">
+						<div class="text_center">
+							<h3>原价（元）</h3>
+							<span class="wait_amount">0.000</span>
+						</div>
+					</div>
+					<div class="card_price">
+						<div class="text_center">
+							<h3>折后价（元）</h3>
+							<span class="wait_price">0.000</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li>
+					<a href="../Home/index.html">
+						<i class="footericon home"></i>
+						<h3>首页</h3>
+					</a>
+				</li>
+				<li class="active">
+					<a href="javascript:;">
+						<i class="footericon rechart_search"></i>
+						<h3>充值查询</h3>
+					</a>
+				</li>
+				<li>
+					<a href="show_account_manage">
+						<i class="footericon myself"></i>
+						<h3>我</h3>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="mask">
+			<div class="date_con">
+				<div class="date_header">
+					<span class="close">&times;</span>
+				</div>
+				<div class="date_body">
+					 <div class="datebody_con">
+             <label class="label">开始时间：</label><input class='start_time' type="date" />
+           </div>  
+           <div class="datebody_con">
+					   <label class="label">结束时间：</label><input class="end_time" type="date" />
+           </div>  
+				</div>
+				<div class="date_footer">
+					<button class="make_sure_btn" type="submit" class="assign">确定</button>
+				</div>
+			</div>
+		</div>
+		<div class="warning">
+			<p>错误</p>
+		</div>
+
+		<script>
+		onLoad();
+		function onLoad()
+		{
+			var filterInfo = {$filterInfo};
+			var recordStat = {$recordStat};
+			if (filterInfo.ret!=0)
+			{
+				// alert(filterInfo.msg);
+				warningShow(filterInfo.msg);
+				return;
+			}
+
+
+			function setupOption(select,info)
+			{
+				$(select).empty();
+				$(select).append('<option value="-1">'+'请选择'+info.name+'</option>');
+				for (var i = 0;i < info.filters.length;i++)
+				{
+					var infoItem = info.filters[i];
+					$(select).append('<option value="'+infoItem.id+'">'+infoItem.name+'</option>');
+				}
+			}
+
+			for(var i = 0;i < filterInfo.info.filters.length;i++)
+			{
+				setupOption('.select_'+(i+1),filterInfo.info.filters[i]);
+			}
+			function refresh()
+			{
+				var sect_1val = $('.select_1').val();
+				var sect_2val = $('.select_2').val();
+				var start_timeval = $('.start_time').val() + ' 00:00:00';
+				var end_timeval = $('.end_time').val() + ' 23:59:59';
+				window.location.replace('http://'+window.location.host+'/WxHome/User/showrecharge_record?operator='+sect_1val+'&'+'placeid='+sect_2val+'&start_time='+start_timeval+'&end_time='+end_timeval);
+			}
+	    
+			function findFilterWithId(filter,id,isShowPlaceHold,filterName)
+			{
+				
+				var filterTemp = {};
+				if(isShowPlaceHold === true&&id==-1)
+				{
+					filterTemp.id = -1;
+					filterTemp.name = filterName;
+					return filterTemp;
+				}
+				if(id == -1)
+				{
+					id = 0;
+				}
+				for(var i = 0;i < filter.filters.length;i++)
+				{
+				
+					var aFilter = filter.filters[i];
+
+					if (aFilter.id == id)
+					{
+						return aFilter;
+					}
+				}
+				return null;
+			}
+
+		// SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			var _start_time='{$start_time}'.substr(0,10);
+			var _end_time='{$end_time}'.substr(0,10);
+
+			$('.select_1').val('{$operator}');
+			$('.select_2').val('{$placeid}');
+			$('.start_time').val(_start_time);
+			$('.end_time').val(_end_time);
+			$('.start_time_label').html('{$start_time}');
+			$('.end_time_label').html('{$end_time}');
+			$('.operator_label_select').html(findFilterWithId(filterInfo.info.filters[0],'{$operator}',true,'请选择运营商').name);
+			$('.placeid_label_select').html(findFilterWithId(filterInfo.info.filters[1],'{$placeid}',true,'请选择省份').name);
+		
+			$('.operator_label').html(findFilterWithId(filterInfo.info.filters[0],'{$operator}').name);
+			$('.place_label').html(findFilterWithId(filterInfo.info.filters[1],'{$placeid}').name);
+		
+			$('.select_1').change(function() {
+				refresh();
+			});
+
+			$('.select_2').change(function() {
+				refresh();
+			});
+			$('.make_sure_btn').click(function() {
+				refresh();
+   			});
+
+			if (recordStat.ret!=0)
+			{
+				// alert(recordStat.msg);
+				warningShow(recordStat.msg);
+				return;
+			}
+			$('.success_count').html(recordStat.info.success_count);
+			$('.success_price').html(recordStat.info.success_price);
+			$('.success_amount').html(recordStat.info.success_amount);
+			$('.faile_count').html(recordStat.info.faile_count);
+			$('.faile_price').html(recordStat.info.faile_price);
+			$('.faile_amount').html(recordStat.info.faile_amount);
+			$('.submit_success_count').html(recordStat.info.submit_success_count);
+			$('.submit_success_amount').html(recordStat.info.submit_success_amount);
+			$('.submit_success_price').html(recordStat.info.submit_success_price);
+			$('.wait_count').html(recordStat.info.wait_count);
+			$('.wait_amount').html(recordStat.info.wait_amount);
+			$('.wait_price').html(recordStat.info.wait_price);
+		}
+		</script>
+	</body>
+
+</html>

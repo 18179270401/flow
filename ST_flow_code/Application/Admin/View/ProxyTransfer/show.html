@@ -1,0 +1,72 @@
+<div id="proxy_transfer_apply_show_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <tr>
+            <th width="17%">支出方名称：</th>
+            <td width="25%">{$pay_proxy_name}</td>
+            <th width="20%">支出方编号：</th>
+            <td width="33%">{$pay_proxy_code}</td>
+        </tr>
+        <tr>
+            <th >接收方名称：</th>
+            <td >{$receive_proxy_name}</td>
+            <th >接收方编号：</th>
+            <td >{$receive_proxy_code}</td>
+        </tr>
+        <tr>
+            <th>申请编号：</th>
+            <td colspan="3">{$apply_code}</td>
+        </tr>
+        <tr>
+            <th>审核状态：</th>
+            <td>{$approve_status}</td>
+            <th>划拨金额：</th>
+            <td>{$apply_money|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>申请人：</th>
+            <td>{$apply_user_id|get_user_name}</td>
+            <th>申请时间：</th>
+            <td>{$apply_date|msubstr=0,10,"utf-8",false}</td>
+        </tr>
+        <tr>
+            <th>备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+    </tbody>
+    </table>
+    <volist name="process" id="vo" empty="">
+        <table width="100%">
+            <thead>
+             <tr>
+                <th width="100%" colspan="4">{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                    <else />
+                        {$vo.approve_status|get_apply_status2=3}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+               
+            </tr> 
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+               
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+
+</div>

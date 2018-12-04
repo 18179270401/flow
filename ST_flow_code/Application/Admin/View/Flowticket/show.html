@@ -1,0 +1,73 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th >活动名称：</th>
+            <td colspan="3">{$user_activity_name}</td>
+        </tr>
+        <tr>
+            <th width="20%">活动：</th>
+            <td width="30%">{$activity_name}</td>
+            <th width="20%">活动状态：</th>
+            <td width="30%"><if condition="$activity_status eq '1'">已启用<elseif condition="$activity_status eq '2'"/>已禁用</if></td>
+        </tr>
+        <tr>
+            <th>开始时间：</th>
+            <td>{$start_date}</td>
+            <th >结束时间：</th>
+            <td >{$end_date}</td>
+        </tr>
+        <tr>
+            <th>参与频率：</th>
+            <td colspan="3">活动期间仅限一次</td>
+        </tr>
+        <tr>
+            <th >券过期时间：</th>
+            <td colspan="3">{$ticket_effective_duration}</td>
+        </tr>
+		    <tr>
+            <th>活动地址：</th>
+            <td colspan="3">{$activity_address}</td>
+        </tr>
+        <tr>
+            <th>兑换地址：</th>
+            <td colspan="3">{$exchange_address}</td>
+        </tr>
+        <tr>
+            <th >营销链接：</th>
+            <td colspan="3">{$user_activity_guide_link}</td>
+        </tr>
+        <tr>
+            <th>流量配置包：</th>
+            <td colspan="3">
+                <ul class="config_flow">
+                    <if condition="$p_yd neq null">
+                        <li>
+                            <volist name="p_yd" id="yd">
+                                <span class="color_box blue_box"><em>{$yd.product_name}</em>中国移动</span>
+                            </volist>
+                        </li>
+                    </if>
+                    <if condition="$p_lt neq null">
+                        <li>
+                            <volist name="p_lt" id="lt">
+                                <span class="color_box orange_box"><em>{$lt.product_name}</em>中国联通</span>
+                            </volist>
+                        </li>
+                    </if>
+                    <if condition="$p_dx neq null">
+                        <li>
+                            <volist name="p_dx" id="dx">
+                                <span class="color_box green_box"><em>{$dx.product_name}</em>中国电信</span>
+                            </volist>
+                        </li>
+                    </if>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>活动规则：</th>
+            <td colspan="3">{$activity_rule}</td>
+        </tr>
+
+    </table>
+</div>

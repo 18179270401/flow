@@ -1,0 +1,41 @@
+<!-- 编辑菜单 -->
+<div id="menu_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="menu_edit_form">
+
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>菜单名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="menu_name" field="菜单名称" value="{$info.menu_name}" /></div>
+    </div>
+    <div class="add_list">
+        <h5>分组名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" field="分组名称" name="group_name" value="{$info.group_name}" empty="true" /></div>
+    </div>
+    <div class="add_list">
+        <h5>菜单地址：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="page_url" empty="true" value="{$info.page_url}"/></div>
+    </div>
+    <div class="add_list">
+        <h5>图标：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="icon_path" empty="true" value="{$info.icon_path}"/></div>
+    </div>
+    <div class="add_list">
+        <h5>排序号：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="order_num" empty="true" value="{$info.order_num}"/></div>
+    </div>
+    <!--
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>菜单状态：</h5>
+        <div class="add_value">
+            <label class="radio <if condition='$info.status eq 1'>checked</if>" value="1"><em>启用</em></label>
+            <label class="radio <if condition='$info.status eq 0'>checked</if>" value="0"><em>禁用</em></label>
+        </div>
+    </div>
+    -->
+    <div class="add_list">
+        <h5>备注：</h5>
+        <div class="add_value"><textarea class="textarea" name="remark" empty="true">{$info.remark}</textarea></div>
+    </div>
+    <input type="hidden" name="status" value="{$info.status}">
+    <input type="hidden" name="menu_id" value="{$info.menu_id}" />
+  </form>
+</div>

@@ -1,0 +1,70 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th  width="40%">通道名称：</th>
+            <td width="60%">{$channel_info.channel_name}</td>
+        </tr>
+        <tr>
+            <th>省份：</th>
+            <td>{$channel_info.province_name|default="--"}</td>
+        </tr>
+        <tr>
+            <th>市：</th>
+            <td>{$channel_info.city_name|default="--"}</td>
+        </tr>
+
+        <tr>
+            <th >移动折扣：</th>
+            <td>{$channel_info.yddiscount}</td>
+        </tr>
+        <tr>
+            <th >联通折扣：</th>
+            <td>{$channel_info.ltdiscount}</td>
+        </tr>
+        <tr>
+            <th >电信折扣：</th>
+            <td>{$channel_info.dxdiscount}</td>
+        </tr>
+        <tr>
+            <th>通道状态：</th>
+            <td><if condition="$channel_info.channel_status eq '0'">暂停<else />正常</if></td>
+        </tr>
+       <tr>
+            <th>使用状态：</th>
+            <td><if condition="$channel_info.use_status eq '0'">已停用<else />使用中</if></td>
+        </tr>
+        <tr>
+            <th>移动产品：</th>
+            <td>
+                <volist name="channel_info.ydproduct" id="vo">
+                    <span>{$vo}</span>
+                </volist>
+            </td>
+        </tr>
+
+        <tr>
+            <th>联通产品：</th>
+            <td>
+
+                <volist name="channel_info.ltproduct" id="vo">
+                    <span>{$vo}</span>
+                </volist>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>电信产品：</th>
+            <td>
+
+               <volist name="channel_info.dxproduct" id="vo">
+                    <span>{$vo}</span>
+                </volist>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<style>
+    td span{display:block;float:left;width:35px;}
+</style>

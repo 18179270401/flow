@@ -1,0 +1,121 @@
+<div id="pay_red_show_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <thead>
+            <tr><th width="100%" colspan="4">红包详情</th></tr>
+        </thead>
+        <tbody>
+        <if condition="$usr neq 3">
+            <tr>
+                <th>用户类型：</th>
+                <td width="50%"><if condition="$info['user_type'] eq 1">代理商<else/>企业</if></td>
+                <th >用户名称：</th>
+                <td ><if condition="$info['user_type'] eq 1">{$info.proxy_name}<else/>{$info.enterprise_name}</if></td>
+            </tr>
+        </if>
+        <tr>
+            <th>购买金额：</th>
+            <td>{$info.pay_price}元</td>
+            <th>收款方式：</th>
+            <td>
+                <if condition="$info.payment_type eq 1">
+                    运营方收款
+                    <elseif condition="$info.payment_type eq 3"/>
+                    代理商收款
+                    <else/>
+                    企业收款
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th>购买时间：</th>
+            <td>{$info.pay_date}</td>
+            <th>支付订单号：</th>
+            <td>{$info.red_order_code}</td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%">
+        <thead>
+        <tr><th width="100%" colspan="9">领取详情</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td width="80" align="center">序号</td>
+                <td width="100">运营商</td>
+                <td width="110">流量包大小</td>
+                <td width="110">领取号码</td>
+                <td width="220">充值订单号</td>
+                <td width="100">充值状态</td>
+                <td width="150">领取时间</td>
+                <td width="100">领取状态</td>
+                <td width="100">退款状态</td>
+            </tr>
+            <volist name="list" id="vo">
+                <tr>
+                    <td align="center">{$vo.sort_no}</td>
+                    <td>
+                        <if condition="$vo.operator_id eq 1">
+                            中国移动
+                        </if>
+                        <if condition="$vo.operator_id eq 2">
+                            中国联通
+                        </if>
+                        <if condition="$vo.operator_id eq 3">
+                            中国电信
+                        </if>
+                    </td>
+                    <td>{$vo.product_name}</td>
+                    <td>
+                        <if condition="$vo.info eq 2">
+                            {$vo.mobile}
+                        <else/>
+                            --
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.info eq 2">
+                            {$vo.order_id}
+                        <else/>
+                            --
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.info eq 2">
+                            <if condition="$vo.status eq '6'"><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                            <elseif condition="$vo.status eq '2'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                            <elseif condition="$vo.status eq '5'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                            <else /><span class="recharge_statue recharge_send"><em>正在送充</em></span></elseif></if>
+                        <else/>
+                        --
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.info eq 2">
+                            {$vo.receive_date}
+                            <else/>
+                            --
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.info eq 2">
+                            已领取
+                            <else/>
+                            未领取
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$vo.status eq 6">
+                            <if condition="$vo.refund_status eq 2">
+                                已退款
+                            <else/>
+                                未退款
+                            </if>
+                        <else/>
+                            --
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+        </tbody>
+    </table>
+</div>

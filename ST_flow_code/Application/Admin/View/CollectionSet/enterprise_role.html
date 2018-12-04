@@ -1,0 +1,36 @@
+
+<div id="enterprise_role_box" class="character_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="enterprise_role_form">
+        <input type="hidden" name="enterprise_id" id="enterprise_id" value="{$enterprise.enterprise_id}">
+        <div class="add_list" style="margin-top: 20px;">
+            <h5>企业类型：</h5>
+            <div class="add_value" >
+                <label <if condition="$enterprise.enterprise_type neq 2">class="radio enterprise_type checked"<else/>class="radio enterprise_type "</if>  data-value="1"><em>正常企业</em></label>
+                <label <if condition="$enterprise.enterprise_type eq 2">class="radio enterprise_type checked"<else/>class="radio enterprise_type"</if>  data-value="2"><em>活动企业</em></label>
+                <input type="hidden" id="enterprise_type" name="enterprise_type"  value="{$enterprise.enterprise_type}" />
+            </div>
+        </div>
+        <volist name="m_list" id="vo1">
+            <div class="character_con">
+                <div class="character_tit">
+                    <h2>{$vo1.menu_name}</h2>
+                    <span style="display:none"><input type="checkbox" name="acmenu{$vo1.menu_id}" value="{$vo1.menu_id}" id="acmenu{$vo1.menu_id}" /></span>
+                    <label class="checkbox role_check_all {$vo1.check} rca{$vo1.menu_id}" for="acmenu{$vo1.menu_id}" data-val="{$vo1.menu_id}"><em>全选</em></label>
+                </div>
+                <div class="character_content">
+                    <div class="add_list">
+                        <volist name="vo1['son']" id="vo2">
+                            <div class="add_value" style="width:140px;margin-left:25px;">
+                                <input id="role_{$vo2.menu_id}" type="hidden" name="role_{$vo2.menu_id}" <if condition="$vo2['available_menu_id'] neq null">value="1"<else/>value="2"</if>>
+                                <input type="hidden" name="name_{$vo2.menu_id}" value="{$vo2.menu_name}">
+                                <input type="hidden" name="url_{$vo2.menu_id}" value="{$vo2.page_url}">
+                                <label <if condition="$vo2['available_menu_id'] eq null">class="checkbox checked funidlist acid{$vo1.menu_id}"<else/>class="checkbox  funidlist acid{$vo1.menu_id}"</if> id="menu_checkbox" data-menuid="{$vo2.menu_id}"><em>{$vo2.menu_name}</em></label>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+        </volist>
+    </form>
+</div>
+

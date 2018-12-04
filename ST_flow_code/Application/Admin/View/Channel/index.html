@@ -1,0 +1,114 @@
+<include file="Common/header" />
+<div class="main_con">
+
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>通道管理</em>><em>通道配置</em></span>
+            </div>
+            <div class="operation_info">
+                <isshow url="Channel/add">
+                    <button class="btn add_btn channel_add_btn">
+                        <i class="minicon addoperation_icon"></i><span>新增通道</span>
+                    </button>
+                    <if condition="is_jurisdiction('Channel/add') and is_jurisdiction('Channel/export_excel')">
+                        <span class="line">|</span>
+                    </if>
+                </isshow>
+                <isshow url="Channel/export_excel">
+                    <button class="btn  export_button" data-url="Channel">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form method="get" name="excel" action="/index.php/Admin/Channel/index">
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="channel_code" style="min-width:60px;max-width:90px;" value="{$Think.get.channel_code}" placeholder="通道编码"/>
+                    </li>
+                    <li>
+                        <input type="text" class="inputtext" name="channel_name" style="min-width:90px;" value="{$Think.get.channel_name}" placeholder="通道名称"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">状态：</label>
+                        <select class="select" name="status" style='min-width:80px'>
+                            <option value="9" >全部</option>
+                            <option value="1" <if condition='($Think.get.status eq 1) or ($Think.get.status eq null)'>selected</if>>正常</option>
+                            <option value="0" <if condition='$Think.get.status eq "0"'>selected</if>>已禁用</option>
+                        </select>
+                        <input type="hidden" value="1"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con " data-mcs-theme="dark">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="120" class="change">通道编码</th>
+                            <th width="180" class="change">通道名称</th>
+                            <th width="100" class="change">通道文件名称</th>
+                            <th width="80" class="change">省份</th>
+                            <th width="80" class="change">市</th>
+                            <th width="200">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <table>
+                    <volist name="channel_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.channel_code}</td>
+                            <td>{$vo.channel_name}</td>
+                            <td>{$vo.channel_file_name}</td>
+                            <td>{$vo.city_id|get_city_province_name=$vo['province_id']}</td>
+                            <td>{$vo.city_name|default="--"}</td>
+                            <td class="operation_td">
+                                <button class="operationbtn channel_show_btn" value="{$vo.channel_id}">
+                                    <!--<i class="minicon edit_icon"></i>-->
+                                    <span>查看</span>
+                                </button>
+                                <isshow url="Channel/edit">
+                                    <button class="operationbtn channel_edit_btn" value="{$vo.channel_id}">
+                                        <!--<i class="minicon edit_icon"></i>-->
+                                        <span>编辑</span>
+                                    </button>
+                                </isshow>
+                                <isshow url="Channel/toggle_status">
+                                    <button class="operationbtn channel_toggle_status_btn" data-original-title="<if condition="$vo.status eq 1">禁用<else />启用</if>" value="{$vo.channel_id}" data-value="{$vo.channel_name}">
+                                    <!--<i <if condition="$vo['status'] eq 0">class="minicon reviewpass_icon"<elseif condition="$vo['status'] eq 1" />class="minicon reviewdis_icon"</if> ></i>-->
+                                    <span><if condition="$vo['status'] eq 0">启用<elseif condition="$vo['status'] eq 1" />禁用</if></span>
+                                    </button>
+                                </isshow>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

@@ -1,0 +1,188 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+          <div class="currenttit">
+                <i></i><span><em>营销场景</em>><em>自定义回复设置</em></span>
+          </div>
+          <div class="operation_info">
+              <isshow url="Customreply/add">
+                  <button class="btn add_btn customreply_add_btn">
+                      <i class="minicon addoperation_icon"></i><span>新增定义回复</span>
+                  </button>
+              </isshow>
+          </div>
+      </div>
+  </div>
+  <div class="thepublic_box">
+      <div class="indicatsearch_con">
+          <form method="get" action="">
+              <label class="inputlabel">关键词：</label>
+              <input type="text" class="inputtext" name="reply_keyword" value="{$Think.get.reply_keyword}">
+              <button class="btn add_btn">
+                  <i class="minicon search_icon"></i><span>查询</span>
+              </button>
+              <button class="btn export_btn reset_button">
+                  <i class="minicon reload_icon"></i><span>重置</span>
+              </button>
+          </form>
+      </div>
+      <volist name="list" id="v">
+          <if condition="$v.reply_type eq 1">
+              <div class="keywords_content">
+                  <div class="keywords_con">
+                      <div class="keywords_tit">
+                          <h2><em></em>文字回复</span>
+                              <span style="float: right;">
+                                  <if condition="is_jurisdiction('Customreply/edit')">
+                                      <a class="customreply_edit_btn keywords_tit_btn" href="javascript:void(0);" value="{$v.reply_id}">
+                                          <span>编辑</span>
+                                      </a>
+                                  </if>
+                                  <if condition="is_jurisdiction('Customreply/delete')">
+                                      <a class="operationbtn customreply_delete_btn keywords_tit_btn" href="javascript:void(0);"  value="{$v.reply_id}">
+                                          <!--<i class="minicon edit_icon"></i>-->
+                                          <span>删除</span>
+                                      </a>
+                                  </if>
+                              </span>
+                          </h2>
+                      </div>
+                      <div class="keywords_text">
+                          <h5>回复内容：</h5>
+                          <p>{$v.replytext_contact}</p>
+                      </div>
+                      <div class="keywords_tent">
+                          <p>
+                              <label class="inputlabel"> 关键词：</label><input type="text" class="inputtext" value="{$v.reply_keyword}" style="min-width: 140px;max-width: 140px;" readonly/>
+                              <if condition="$v.reply_concern eq 1">
+                                  <img  style="height:26px;width:95px;display: block;float:right;" src="__PUBLIC__/Admin/images/wx_gz.png" alt="img">
+                              </if>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </if>
+          <if condition="$v.reply_type eq 2">
+              <div class="keywords_box">
+                  <div class="keywords_content">
+                      <div class="keywords_con">
+                          <div class="keywords_tit">
+                              <h2><em></em>{$v.replyimg_title}
+                                  <span style="float: right;">
+                                  <if condition="is_jurisdiction('Customreply/edit')">
+                                      <a class="customreply_edit_btn keywords_tit_btn" href="javascript:void(0);" value="{$v.reply_id}">
+                                          <span>编辑</span>
+                                      </a>
+                                  </if>
+                                  <if condition="is_jurisdiction('Customreply/delete')">
+                                      <a class="operationbtn customreply_delete_btn keywords_tit_btn" href="javascript:void(0);"  value="{$v.reply_id}">
+                                          <!--<i class="minicon edit_icon"></i>-->
+                                          <span>删除</span>
+                                      </a>
+                                  </if>
+                              </span>
+                              </h2>
+                          </div>
+                          <div class="keywords_img height144">
+                              <img src="{$v.replyimg_img}" alt="img"/>
+                          </div>
+                          <div class="keywords_tent">
+                              <p><label class="inputlabel">活动链接：</label><span>{$v.replyimg_url}</span></p>
+                              <p><label class="inputlabel"> 关键词：</label><input type="text" class="inputtext" value="{$v.reply_keyword}" style="min-width: 140px;max-width: 140px;" readonly/>
+                                  <if condition="$v.reply_concern eq 1">
+                                      <img  style="height:26px;width:95px;display: block;float:right;" src="__PUBLIC__/Admin/images/wx_gz.png" alt="img">
+                                  </if>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </if>
+          <if condition="$v.reply_type eq 3">
+              <div class="keywords_content">
+                  <div class="keywords_con">
+                      <div class="keywords_tit">
+                          <h2><em></em>{$v.replymoreimg_title1}
+                              <span style="float: right;">
+                                  <if condition="is_jurisdiction('Customreply/edit')">
+                                      <a class="customreply_edit_btn keywords_tit_btn" href="javascript:void(0);" value="{$v.reply_id}">
+                                          <span>编辑</span>
+                                      </a>
+                                  </if>
+                                  <if condition="is_jurisdiction('Customreply/delete')">
+                                      <a class="operationbtn customreply_delete_btn keywords_tit_btn" href="javascript:void(0);"  value="{$v.reply_id}">
+                                          <!--<i class="minicon edit_icon"></i>-->
+                                          <span>删除</span>
+                                      </a>
+                                  </if>
+                              </span>
+                          </h2>
+                      </div>
+                      <div class="keywords_img height65">
+                          <img src="{$v.replymoreimg_img1}" alt="img"/>
+                      </div>
+                          <div class="keywords_tit">
+                              <h2><em></em>{$v.replymoreimg_title2}</h2>
+                          </div>
+                          <div class="keywords_img height65">
+                              <img src="{$v.replymoreimg_img2}" alt="img"/>
+                          </div>
+                      <!--<if condition="$v.replymoreimg_title3 neq null">
+                          <div class="keywords_tit">
+                              <h2><em></em>{$v.replymoreimg_title3}</h2>
+                          </div>
+                          <div class="keywords_img height65">
+                              <img src="{$v.replymoreimg_img3}" alt="img"/>
+                          </div>
+                      </if>-->
+                      <div class="keywords_tent">
+                          <p><label class="inputlabel"> 关键词：</label><input type="text" class="inputtext" value="{$v.reply_keyword}" style="min-width: 140px;max-width: 140px;" readonly/>
+                              <if condition="$v.reply_concern eq 1">
+                                  <img  style="height:26px;width:95px;display: block;float:right;" src="__PUBLIC__/Admin/images/wx_gz.png" alt="img">
+                              </if>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </if>
+          <if condition="$v.reply_type eq 4">
+              <div class="keywords_content">
+                  <div class="keywords_con">
+                      <div class="keywords_tit">
+                          <h2><em></em>{$v.replyactivity_title}
+                              <span style="float: right;">
+                                  <if condition="is_jurisdiction('Customreply/edit')">
+                                      <a class="customreply_edit_btn keywords_tit_btn" href="javascript:void(0);" value="{$v.reply_id}">
+                                          <span>编辑</span>
+                                      </a>
+                                  </if>
+                                  <if condition="is_jurisdiction('Customreply/delete')">
+                                      <a class="operationbtn customreply_delete_btn keywords_tit_btn" href="javascript:void(0);"  value="{$v.reply_id}">
+                                          <!--<i class="minicon edit_icon"></i>-->
+                                          <span>删除</span>
+                                      </a>
+                                  </if>
+                              </span>
+                          </h2>
+                      </div>
+                      <div class="keywords_img height144">
+                          <img src="{$v.replyactivity_img}" alt="img"/>
+                      </div>
+                      <div class="keywords_tent">
+                          <p><label class="inputlabel">活动类型：</label><span>{$v.user_activity_id|get_activity_name}</span></p>
+                          <p><label class="inputlabel"> 关键词：</label><input type="text" class="inputtext" value="{$v.reply_keyword}" style="min-width: 140px;max-width: 140px;   " readonly/>
+                              <if condition="$v.reply_concern eq 1">
+                                  <img  style="height:26px;width:95px;display: block;float:right;" src="__PUBLIC__/Admin/images/wx_gz.png" alt="img">
+                              </if>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </if>
+      </volist>
+  </div>
+</div>
+
+<include file="Common/footer" />

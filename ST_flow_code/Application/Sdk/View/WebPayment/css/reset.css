@@ -1,0 +1,104 @@
+/* 重置样式 */
+body{font:12px "微软雅黑"; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;} 
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+*{ box-sizing:border-box;}
+
+/* 通用样式 */
+.wrap{ word-wrap:break-word; overflow:hidden;}
+.fb{font-weight:bold;}.tc{text-align:center;}
+.tl{text-align:left;}.tr{text-align:right;}
+.dis{display:block;}.undis{display:none;}
+.fl{float:left;display:inline;}.fr{float:right;display:inline;}
+.pointer{ cursor:pointer; }.hidden{ overflow:hidden;}.clear{ clear:both;}
+.clear0{ clear:both;line-height:0px;height:0px;font-size:0px;width:0px;}
+.hr-2,.hr-3,.hr-4,.hr-5,.hr-6,.hr-7,.hr-8,.hr-9,.hr-10,.hr-11,.hr-12,.hr-13,.hr-14,.hr-15,.hr-16,.hr-17,.hr-18,.hr-19,.hr-20,.hr-21,.hr-22,.hr-23,.hr-24,.hr-25,.hr-26,.hr-27,.hr-28,.hr-29,.hr-30,.hr-124{clear:both; overflow:hidden; font-size:0px; line-height:0px;}
+.hr-2{height:2px;}.hr-3{height:3px;}.hr-4{height:4px;}.hr-5{height:5px;}.hr-6{height:6px;}.hr-7{height:7px;}.hr-8{height:8px;}.hr-9{height:9px;}.hr-10{height:10px;}.hr-11{height:11px;}.hr-12{height:12px;}.hr-13{ height:13px;}.hr-14{ height:14px;}.hr-15{ height:15px;}.hr-16{ height:16px;}.hr-17{ height:17px;}.hr-18{ height:18px;}.hr-19{ height:19px;}.hr-20{ height:20px;}.hr-21{ height:21px;}.hr-22{ height:22px;}.hr-23{ height:23px;}.hr-24{ height:24px;}.hr-25{ height:25px;}.hr-26{ height:26px;}.hr-27{ height:27px;}.hr-28{ height:28px;}.hr-29{ height:29px;}.hr-30{ height:30px;}
+.relative{ position:relative;}.absolute{ position:absolute;}.fixed{ position:fixed;}
+
+
+.layout{ width:1000px; margin:0px auto; clear:both;}
+
+.prepaid_left{ float:left; width:733px; padding-top:18px; display:inline;}
+.prepaid_right{ float:right; width:246px; padding-top:18px; display:inline;}
+.tit{ height:44px; line-height:42px; background-color:#fafafa; border:1px solid #dedede;}
+.tit h2{ padding-left:17px;}
+.tit h2 i{ margin-top:15px; margin-right:6px;}
+.tit h2 em{ font-size:14px; color:#333;}
+.tit.white{ background-color:#FFF;}
+.tit.white h2 em{ font-size:18px; color:#2f68c4;}
+.announce_con{ height:249px; background-color:#FFF; border:1px solid #dedede; border-top:0 none;}
+.announce_con p{ line-height:23px; padding:18px; font-size:12px; color:#666;}
+
+.mobilesearch_con{ height:44px; line-height:42px; background-color:#fafafa; border:1px solid #dedede; border-top:0 none;}
+.mobilesearch_left{ float:left; display:inline;}
+.mobilesearch_left .midicon{ margin-top:16px; margin-left:12px;}
+.mobilesearch_left .label{ padding-right:8px; font-size:14px; color:#666;}
+.mobilesearch_left .text{ width:244px; height:32px; padding:6px; border:1px solid #dedede; vertical-align:top; margin-top:6px; font-size:14px; color:#000;}
+.mobilesearch_left .radio{ margin-left:8px;}
+.mobilesearch_right{ float:right; display:inline;}
+.mobilesearch_right p{ padding-right:18px;}
+.prepaid_nav{ padding:9px; border:1px solid #dedede; border-top:0 none; background-color:#FFF; clear:both; overflow:hidden;}
+.prepaid_nav li{ float:left; width:217px; height:143px; padding:17px; background:url(../images/prepaidcad_img_19.png) no-repeat; margin:10px; position:relative;}
+.prepaid_nav li h3{ position:absolute; top:21px; left:17px; font-size:14px; color:#fff; text-shadow:1px 1px 1px rgba(0,0,0,0.3);}
+.prepaid_nav li span{ display:block; font-size:30px; color:#fff; text-align:right; text-shadow:2px 2px 2px rgba(0,0,0,0.5);}
+.prepaid_nav li p{ font-size:18px; color:#fff; text-shadow:2px 2px 2px rgba(0,0,0,0.5); text-align:right;}
+.prepaid_nav li .prepaid_btn{ float:right; width:90px; height:29px; line-height:29px; background:url(../images/prepaid_btn_03.png) no-repeat; margin-top:18px; text-align:center; font-size:14px; color:#FFF; text-shadow:1px 1px 1px rgba(0,0,0,0.3);}
+.prepaid_nav li .prepaid_btn:hover{ background-position:0 -38px;}
+.instructions_con{ padding:15px; border:1px solid #dedede; border-top:0 none; background-color:#FFF; clear:both; overflow:hidden;}
+.instructions_con li{ line-height:28px; clear:both;}
+.instructions_con li label,.instructions_con li span{ display:inline-block; vertical-align:top; font-size:14px; color:#666;}
+.prepaid_mess{ width:100%; padding:18px; border:1px solid #dedede; background-color:#fafafa; margin-top:18px; overflow:hidden;}
+.prepaid_mess  img{ float:left; width:98px; height:98px; margin-top:3px; display:inline;}
+.prepaid_mess .prepaidmess_con{ float:left; max-width:600px; padding-left:23px; display:inline;}
+.prepaid_mess .prepaidmess_con h5{ line-height:35px; font-size:18px; color:#666;}
+.prepaid_mess .prepaidmess_con p{ line-height:35px; padding-left:10px; font-size:14px; color:#666;}
+.prepaid_mess .money{ float:right; margin-top:50px; margin-right:18px; font-size:18px; color:#666;}
+.prepaid_mess .money em{ font-size:48px; color:#ff0101;}
+
+.pay_con{ border:1px solid #dedede; border-top:0 none; background-color:#FFF; padding:18px; overflow:hidden;}
+.pay_con p{ font-size:14px; color:#666;}
+.pay_con ul li{ float:left; width:215px; height:55px; border:1px solid #dedede; border-radius:5px; padding:0 17px; margin-top:18px; margin-right:47px; cursor:pointer;}
+.pay_con ul li .minradio{ display:inline-block; margin-top:20px;}
+.pay_con ul li .pay_logo{ float:right; width:160px; margin-top:12px; text-align:center;}
+.pay_btn{ float:right; width:192px; height:52px; line-height:52px; background:url(../images/paybtn_bg_03.gif) repeat-x; border-radius:5px; text-align:center; font-size:20px; color:#fff; margin-top:34px;}
+.pay_btn:hover{ background-position:0 -85px; color:#fff;}
+
+/*充值成功*/
+.success_con{ padding:40px 30px; border-top:1px solid #dedede; }
+.success_text{ float: left; display: inline; padding-left:20px;}
+.success_text h2{ font-size:30px; color:#333;}
+.success_text p{margin-top:5px; color: #555;}
+/* 图标 */
+.midicon{ display:inline-block; width:14px; height:14px; background:url(../images/icon_03.png) no-repeat; vertical-align:top;}
+.mobile_icon{ background-position:0 0;}
+.announce_icon{ background-position:0 -34px;}
+.prepaid_icon{ background-position:0 -69px;}
+
+.radio{ display:inline-block; height:20px; line-height:20px;}
+.radio i{ display:inline-block; width:20px; height:20px; background:url(../images/radio_icon_03.png) no-repeat; vertical-align:top;}
+.radio em{ padding-left:6px; font-size:14px; color:#666;}
+
+.minradio{ display:inline-block; height:15px; line-height:15px;}
+.minradio i{ display:inline-block; width:13px; height:13px; background:url(../images/minradio_07.png) no-repeat; vertical-align:top;}
+.minradio.checked i{ background-position:0 -20px;}
+
+.success_ico{ display: block; float:left; width:77px; height:77px; background:url(../images/succeed_ico.png) no-repeat;}
+
+/*弹窗样式*/
+.payment_box .wechat_con{padding:30px; text-align: center;}
+.payment_box .wechat_con img{ width: 100px;}
+.payment_box .wechat_con p{margin-top:10px; color:#2f68c4; font-size:16px;}
+.payfail_box .payfail_con p{ line-height:32px; font-size:16px; color:#e10000;}
+.payfail_box .payfail_con{ text-align: center; padding:40px 0;}
+.payfail_box .payfail_con .payfail_icon{ display: inline-block; width:32px; height:32px; margin-right:10px; background:url(../images/payfail_icon.png) no-repeat; vertical-align:top;}
+.payfail_box .layui-layer-btn .layui-layer-btn0{}

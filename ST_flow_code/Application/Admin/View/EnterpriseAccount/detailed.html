@@ -1,0 +1,20 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="30%">企业名称：</th>
+            <td width="70%">{$enterprise_name}</td>
+        </tr>
+        <tr>
+            <th >企业编号：</th>
+            <td >{$enterprise_code}</td>
+        </tr>
+        <tr>
+            <th >账户余额：</th>
+            <td class="money_style">{$account_balance|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>冻结金额：</th>
+            <td class="money_style">{$freeze_money|default="0.000"}元</td>
+        </tr>
+    </table>
+</div>

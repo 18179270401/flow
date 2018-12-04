@@ -1,0 +1,26 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="20%">用户编号：</th>
+            <td width="30%">{$proxy_code}{$enterprise_code}</td>
+            <th  width="20%">用户名称：</th>
+            <td width="30%">{$proxy_name}{$enterprise_name}</td>
+        </tr>
+        <tr>
+            <th >用户类型：</th>
+            <td><if condition="$user_type eq 1">代理商<else />企业</if></td>
+            <th>运营商：</th>
+            <td>{$operator_name}</td>
+        </tr>
+        <tr>
+            <th>省份：</th>
+            <td>{$city_id|get_city_province_name=$province_id}</td>
+           <th>市：</th>
+            <td>{$city_name|default="--"}</td>
+        </tr>
+        <tr>
+            <th >折扣数：</th>
+            <td>{$discount_number|show_discount_ten=###} 折</td>
+        </tr>
+    </table>
+</div>

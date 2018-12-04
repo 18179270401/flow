@@ -1,0 +1,335 @@
+<include file="Common/header" />
+
+<div class="main_con mCustomScrollbar_y" data-mcs-theme="dark">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>流量充值测试</em></span>
+            </div>
+        </div>
+    </div>
+   <div class="traffictopup_box width50" style="height: 250px;">
+     <div class="traffictopup_con">
+       <div class="enternum_tit">
+         <h2 style="color: #15a5fb;">号码输入栏</h2>
+         <p>请输入所有要充值的手机号码，用任意非数字字符隔开。<span style="color:red;">（每次提交号码不能超过5条）</span></p>
+       </div>
+       <div class="enternum_textarea" style="height:130px;">
+         <textarea class="textarea" id="mobile_content" placeholder="请输入所有要充值的手机号码，用任意非数字字符隔开。"></textarea>
+       </div>
+       <div class="enternum_btncon">
+
+         <span style="display:none;">
+             <form name="mobile_form">
+                <input type="file" name="file" id="openfile" value=""/>
+                <input type="text" name="op_type" value="upfile"/>
+             </form>
+         </span>
+         <button class="btn export_btn fr" onclick="check_mobile()"><i class="minicon check_icon"></i><span>校验</span></button>
+       </div>
+     </div>
+   </div>
+    <div class="traffictopup_box width50" style="height: 250px;">
+     <div class="traffictopup_con">
+       <div class="enternum_tit">
+         <h2 style="color: #15a5fb;">校验表</h2>
+         <p>输入号码后请点击“校验”，校验表会列出所有号码。</p>
+       </div>
+        <div class="agentset_thead">
+             <table width="100%">
+                 <thead>
+                   <tr>
+                       <th width="80px">行号</th>
+                       <th>手机号</th>
+                       <th>运营商</th>
+                       <th>地区</th>
+                       <th>市</th>
+                     </tr>
+                 </thead>
+             </table>
+           </div>
+           <div class="agentset_tbody heightcalc_91 mCustomScrollbar_y" data-mcs-theme="dark">
+             <table width="100%" id="mobile_table">
+                <!-- 显示手机号码 -->
+             </table>
+           </div>
+     </div>
+   </div>
+   <div class="effecttime_con">
+     <div class="effecttime_tit" style="height: 70px;">
+       <h2 style="padding-bottom: 3px;"><span style="color: red;">选择测试通道</span></h2>
+         <!--
+         <select class="select" name="channel_id" id="channel_id" style="min-width:80px">
+             <option value="">请选择</option>
+             <volist name="channel_list" id="cl">
+                 <option value="{$cl.channel_id}" <if condition='$Think.get.channel_id eq $cl["channel_id"]'>selected</if> >{$cl.channel_name}-{$cl.channel_code}</option>
+             </volist>
+         </select>
+         -->
+         <input type="text" class="inputtext" name="delegate_name" id="inputchannel"  field="通道名称" have-discount="0"  style='min-width:360px;max-width:400px;'>
+         <input type='hidden' name='channel_id' id='channel_ids' value=''>
+         <br>
+       <div class="effecttime_btncon">
+
+       <!--  <button class="btn export_btn activeall active" onclick="take_effect_time(1,this)"><i class="minicon effective_icon"></i><span>立即生效</span></button>
+         <button class="btn export_btn activeall" onclick="take_effect_time(2,this)"><i class="minicon nexteffective_icon"></i><span>次月生效</span></button>
+         --><input type="hidden" name="take_effect_time" id="take_effect_time" value="1" />
+       </div>
+     </div>
+   </div>
+   
+   <volist name="list" id="vo">
+   <div class="trafficpackage_box width33">
+     <div class="trafficpackage_con">
+         <div class="trafficpackage_tit">
+           <h2>{$vo.operator_name}</h2>
+         </div>
+         <div class="trafficpackage_content">
+            <div class="trafficpackage_hd">
+              <h3>请选择流量包生效地区</h3>
+            </div>
+            <div class="trafficpackage_region">
+              <button class="btn add_btn region_down"><i class="minicon region_icon"></i><span>{$vo.Province.0.province_name}</span></button>
+              <!-- <div class="region_box undis">
+                <div class="region_tit">
+                  <h5>地区</h5>
+                </div>
+                <div class="region_con">
+                  <ul>
+                    <volist name="vo.Province" id="vo1">
+                        <li><a href="javascript:change_region({$vo.operator_id},{$vo1.province_id});">{$vo1.province_name}</a></li>
+                        <li><a href="javascript:void(0);">{$vo1.province_name}</a></li>
+                    </volist>
+                  </ul>
+                </div>
+              </div> -->
+            </div>
+            <div class="trafficpackage_hd">
+              <h3>请选择流量包大小</h3>
+            </div>
+            <div class="trafficpackage_nav">
+              <ul class="prod{$vo.operator_id}">
+                <volist name="vo.product" id="vo2">
+                <if condition='$key eq 0'>
+                	<span style="display:none">
+                	<input type="button" class="initck" onclick="change_prod({$vo.operator_id},{$vo2.product_id},'{$vo2.product_name}',{$vo2.base_price|floatval},{$vo2.discount|floatval},{$vo2.province_id})" />
+                	</span>
+                </if>
+                    <li class="produ{$vo.operator_id} productid{$vo2.product_id} <if condition='$key eq 0'>current</if>">
+                    <a href="javascript:change_prod({$vo.operator_id},{$vo2.product_id},'{$vo2.product_name}',{$vo2.base_price|floatval},{$vo2.discount|floatval},{$vo2.province_id});">{$vo2.product_name}</a></li>
+                </volist>
+              </ul>
+            </div>
+            <input type="hidden" name="productco{$vo.operator_id}" value="{$vo.product.0.product_id}" />
+            <div class="trafficpackage_hd">
+              <h3>所选流量包的单价</h3>
+            </div>
+            <div class="trafficpackage_info">
+                <p class="blue">{$vo.operator_name}<em class="numm show_now_numm{$vo.operator_id}">{$vo.product.0.product_name}</em>流量包</p>
+                <p><span>市场价：<em class="linethroungh show_now_linethroungh{$vo.operator_id}">{$vo.product.0.base_price}</em></span>  
+                <span>折后价：<em class="blue show_now_blue{$vo.operator_id}">{$vo.product.0.base_price|discount_price=$vo['product'][0]['discount']}</em></span></p>
+            </div>
+         </div>
+         
+         <div class="disabled_con operator_id{$vo.operator_id}">
+           <div class="disabled_mask"></div>
+           <i class="lock turn"></i>
+         </div>
+     </div>
+   </div>
+   </volist>
+   
+   <div class="traffictopup_btncon">
+     <button class="btn topup_btn" onclick="javascript:nowcharge()"><span>立即充值</span></button>
+   </div>
+   
+</div>
+
+<script type="text/javascript">
+	var isclick = 0;
+	
+	$(function(){
+		
+		$(".initck").each(function(i,n){ //模拟点击第一个产品
+        	$(n).click();
+        });
+	});
+	
+    //模拟点击选择文件按钮
+    function upexcel(){
+        $("#openfile").click();
+        upfile_post();
+    }
+   
+    //验证手机号码
+    function check_mobile(){
+        var mobileall = $.trim($("#mobile_content").val());
+        var aphone = new Array;
+        aphone = mobileall.split(/\D+/);
+        mobileall = aphone.join(" ");
+        $(".operator_id1").addClass("disabled_con");
+        $(".operator_id2").addClass("disabled_con");
+        $(".operator_id3").addClass("disabled_con");
+        
+        if(mobileall != ''){
+            $.post("/index.php/Admin/FlowRecharge/operation",{op_type:'check_mobile',mobileall:mobileall},function(data){
+                if(data.status == 'success'){
+                	var operator = data.info[0].operator;
+                    var html="<tbody>";
+                    for(var i=1;i<data.info.length;i++){
+                        var ii = i;
+                        if(data.info[i].status == 'success'){
+                            html+='<tr>';
+                                html+='<td width="80px">'+ii+'</td>';
+                                html+='<td>'+data.info[i].mobile+'</td>';
+                                html+='<td>'+data.info[i].operator_name+'</td>';
+                                html+='<td>'+data.info[i].province_name+'</td>';
+                                html+='<td>'+data.info[i].city_name+'</td>';
+                            html+='</tr>';
+                            if(false !== strpos(operator,data.info[i].operator_id)) {
+                            	$(".operator_id"+data.info[i].operator_id).removeClass("disabled_con");
+                            }
+                        }else{
+                            /*html+='<tr>';
+                                html+='<td width="80px">'+ii+'</td>';
+                                html+='<td>'+data.info[i].mobile+'</td>';
+                                html+='<td>未知</td>';
+                                html+='<td>未知</td>';
+                            html+='</tr>';*/
+                        }
+                    }
+                    html+='</tbody>';
+                    $("#mobile_table").html(html);
+                }else{
+                    alertbox(data);
+                }
+            },"json");
+        }
+    }
+    //切换生效时间
+    function take_effect_time(s,job){
+        $("#take_effect_time").val(s);
+        $(".activeall").removeClass("active");
+        $(job).addClass("active");
+    }
+    
+    //选择流量包生效地区
+    /* function change_region(operator_id,province_id) {
+    	$.post("/index.php/Admin/FlowRecharge/get_op_product",{operator_id:operator_id,province_id:province_id},function(data){
+            if(data.status == 'success'){
+                var html='';
+                var ilen = data.info.length;
+                for(var i=0;i<ilen;i++){
+	                //html+='<li><a href="javascript:;">'+data.info[i].product_name+'</a></li>';
+	                html += '<li class="produ'+operator_id+' productid'+data.info[i].product_id;
+	                if(i==0) {
+	                	html += ' current ';
+	                }
+	                html += '"> <a href="javascript:change_prod('+operator_id+','+data.info[i].product_id+',\''+data.info[i].product_name+'\',';
+	                html += data.info[i].base_price+','+data.info[i].discount+','+province_id+');">'+data.info[i].product_name+'</a>';
+	                html += '</li>';
+                }
+                $(".prod"+operator_id).html(html);
+                
+                change_prod(operator_id, data.info[0].product_id, data.info[0].product_name, data.info[0].base_price, data.info[0].discount, province_id); //模拟点击了选择产品
+            }else{
+                alertbox(data);
+            }
+        },"json");
+    } */
+    
+    //选择产品
+    function change_prod(operator_id, product_id,product_name,base_price,discount,province_id) {
+    	
+    	$.post("/index.php/admin/FlowRecharge/get_p_discount",{operator_id:operator_id,province_id:province_id},function(data){
+    		if(data.status == 'success'){
+            	dc = data.info.dc;
+            } else {
+            	dc = 1;
+            }
+    		
+           	$(".produ"+operator_id).removeClass("current");
+           	$(".productid"+product_id).addClass("current");
+           	$("input[name='productco"+operator_id+"']").val(product_id);
+           	$(".show_now_numm"+operator_id).text(product_name);
+           	$(".show_now_linethroungh"+operator_id).text(base_price);
+           	$(".show_now_blue"+operator_id).text((base_price * dc).toFixed(3));
+        },"json");
+    	
+    }
+
+
+    //选择产品
+    function change_channel(operator_id, channel_id,channel_name,channel_code) {
+
+        $.post("/index.php/admin/FlowRechargetest/get_op_channel",{channel_id:channel_id,channel_name:channel_name,channel_code:channel_code},function(data){
+            if(data.status == 'success'){
+                dc = data.info.dc;
+            } else {
+                dc = 1;
+            }
+
+            $(".produ"+operator_id).removeClass("current");
+            $(".productid"+product_id).addClass("current");
+            $("input[name='productco"+operator_id+"']").val(product_id);
+            $(".show_now_numm"+operator_id).text(product_name);
+            $(".show_now_linethroungh"+operator_id).text(base_price);
+            $(".show_now_blue"+operator_id).text((base_price * dc).toFixed(3));
+        },"json");
+
+    }
+    
+    //立即充值
+    function nowcharge() {
+    	if(isclick == 0) {
+    		isclick = 1; //锁按钮
+    		var mobile_content = $.trim($("#mobile_content").val());
+        	var take_effect_time = $("#take_effect_time").val();
+            var channel_id = $.trim($("#channel_ids").val());
+        	var productco1 = $("input[name='productco1']").val();
+        	var productco2 = $("input[name='productco2']").val();
+        	var productco3 = $("input[name='productco3']").val();
+        	
+            var aphone = new Array;
+            aphone = mobile_content.split(/\D+/);
+            if(aphone.length > 5) {
+            	var dt = new Array();
+        		dt['status'] = 'error';
+        		dt['msg'] = '请一次不要提交超过5条手机号码！';
+        		alertbox(dt);
+        		$("#mobile_content").focus();
+        		isclick = 0;
+            } else {
+            	mobile_content = aphone.join(" ");
+            	
+            	if(mobile_content == '') {
+            		var dt = new Array();
+            		dt['status'] = 'error';
+            		dt['msg'] = '请填写欲充值的手机号码！';
+            		alertbox(dt);
+            		$("#mobile_content").focus();
+            		isclick = 0;
+            	} else {
+                    var  load = parent.layer.load(0, {shade: [0.3,'#000']});
+            		$.post("/index.php/admin/FlowRechargetest/commit_flow_recharge",{mobile_content:mobile_content,take_effect_time:take_effect_time,channel_id:channel_id,productco1:productco1,productco2:productco2,productco3:productco3},function(data){
+                        parent.layer.close(load);
+                        alertbox(data);
+                        if(data.status == 'success'){
+                        	parent.update_account();
+                        	location.reload();
+                        } else {
+                        	isclick = 0;
+                        }
+                    },"json");
+            	}
+            }
+    	} else {
+    		var dt = new Array();
+    		dt['status'] = 'error';
+    		dt['msg'] = '正在提交，请等待！';
+    		alertbox(dt);
+    	}
+    }
+</script>
+
+<include file="Common/footer" />

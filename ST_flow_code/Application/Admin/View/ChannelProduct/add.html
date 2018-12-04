@@ -1,0 +1,84 @@
+<!-- 添加通道产品 -->
+<div id="channelproduct_add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="channelproduct_add_form">
+
+    <div class="add_list">  
+        <h5><em class="wildcard">*</em>通道名称：</h5>
+        <!--<div class="add_value">
+            <select name="channel_id" class="select" msg="请选择通道名称">
+                <option value="">请选择</option>
+                <volist name="channel" id="voc">
+                    <option value="{$voc.channel_id}" >{$voc.channel_name}  ({$voc.channel_code})</option>
+                </volist>
+            </select>
+        </div>-->
+        <div class="add_value">
+            <input type="text" class="inputtext" name="delegate_name" id="inputchannel"  field="通道名称" >
+            <input type='hidden' name='channel_id' id='channel_ids' value=''>
+        </div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>产品名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" field="产品名称" name="product_name" /></div>
+        <div class="promptinfo"><span>（填包含单位格式，如1M流量填1M）</span></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>产品编号：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="number" field="产品编号" /></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>流量包大小：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="size" field="流量包大小"/></div>
+        <div class="promptinfo"><span>M&nbsp;（填整数格式，如1G填1024）</span></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>标准价格：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="price" field="产品售价" vtype="money" /></div>
+        <div class="promptinfo"><span>元</span></div>
+    </div>
+    <div class="add_list">  
+        <h5><em class="wildcard">*</em>运营商：</h5>
+        <div class="add_value">
+            <select name="operator_id" class="select">
+                <volist name="operator" id="voo">
+                    <option value="{$voo.operator_id}" >{$voo.operator_name}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    <div class="add_list">  
+        <h5>省份：</h5>
+        <div class="add_value">
+            <select name="province_id" id="province_id" class="select" msg="请选择省份" onchange="get_is_filter(1)" empty="true">
+                <option value="">请选择</option>
+                <volist name="province" id="vop">
+                    <option value="{$vop.province_id}" >{$vop.province_name}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    <div class="add_list" id="filter_city">
+      <h5>市：</h5>
+      <div class="add_value">
+          <select name="city_id" id="city_id" class="select" empty="true">
+              <option value="" >请选择</option>
+              <volist name="citys" id="v">
+                  <option value="{$v.city_id}" >{$v.city_name}</option>
+              </volist>
+          </select>
+      </div>
+  </div>
+      <input type="hidden" name="product_type" value="0">
+    <!--
+    <div class="add_list">
+        <h5>产品状态：</h5>
+        <div class="add_value">
+            <label class="radio checked" value="1"><em>启用</em></label>
+            <label class="radio" value="0"><em>禁用</em></label>
+            <input type="hidden" name="status" value="1">
+        </div>
+    </div>
+    -->
+  </form>
+</div>
+

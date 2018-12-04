@@ -1,0 +1,29 @@
+/* 重置样式 */
+body{font:12px "微软雅黑",tahoma,verdana,Arial; color:#4c4d4d; background-color:#fff;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;} 
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{margin:0px; padding:0px; vertical-align:middle;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none; cursor:pointer;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+
+/* 通用样式 */
+.hr-2,.hr-3,.hr-4,.hr-5,.hr-6,.hr-7,.hr-8,.hr-9,.hr-10,.hr-11,.hr-12,.hr-13,.hr-14,.hr-15,.hr-16,.hr-17,.hr-18,.hr-19,.hr-20,.hr-30,.hr-24{clear:both; overflow:hidden; font-size:0px; line-height:0px;}
+.hr-2{height:2px;}.hr-3{height:3px;}.hr-4{height:4px;}.hr-5{height:5px;}.hr-6{height:6px;}.hr-7{height:7px;}.hr-8{height:8px;}.hr-9{height:9px;}.hr-10{height:10px;}.hr-11{height:11px;}.hr-12{height:12px;}.hr-13{ height:13px;}.hr-14{ height:14px;}.hr-15{ height:15px;}.hr-16{ height:16px;}.hr-17{ height:17px;}.hr-18{ height:18px;}.hr-19{ height:19px;}.hr-20{ height:20px;}.hr-21{ height:21px;}.hr-22{ height:22px;}.hr-23{ height:23px;}.hr-24{ height:24px;}.hr-30{ height:30px;}.hr-31{ height:31px;}
+.fl{float:left;display:inline;}.fr{float:right;display:inline;}
+
+*{ box-sizing:border-box;}
+@font-face {
+    font-family: '方正正中黑简体';
+	src: url('../fonts/font_fz.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/font_fz.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('../fonts/font_fz.woff') format('woff'), /* Modern Browsers */
+             url('../fonts/font_fz.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('../fonts/font_fz.svg#font_fz') format('svg'); /* Legacy iOS */
+}
+.layout{ width:1000px; margin:0px auto; clear:both;}

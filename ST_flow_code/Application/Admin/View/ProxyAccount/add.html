@@ -1,0 +1,20 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxyAccount_voucher_form" >
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>代理商名称：</h5>
+            <div class="add_value">
+                <select name="proxy_id" class="select">
+                    <option value="0">请选择</option>
+                    <volist name="list" id="vo">
+                        <option value="{$vo.proxy_id}">{$vo.proxy_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5>账户余额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" name="account_balance"  value="0" disabled readonly/>元</div>
+        </div>
+    </form>
+</div>

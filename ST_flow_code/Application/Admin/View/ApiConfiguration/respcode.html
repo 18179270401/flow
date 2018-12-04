@@ -1,0 +1,169 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>开发者中心</em>><em>返回码参照</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="apitabcon_box mCustomScrollbar_y" data-mcs-theme="dark">
+        <div class="apitabcon_flowchart">
+            <div class="flowchart_nav">
+                <ul>
+                    <a href="{:U('ApiConfiguration/index')}" />  <li class="green"><p>开发者账号</p></li></a>
+                   <a href="{:U('ApiConfiguration/respcode')}" /> <li class="purple active">
+                        <p>返回码参照</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/document')}" />    <li class="blue">
+                        <p>示例文档</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/faq')}" />      <li class="orange">
+                        <p>FAQ</p>
+                    </li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="apitabcon_table">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="13%">返回码（respCode）</th>
+                    <th width="17%">返回码信息（respMsg）</th>
+
+                    <th width="36%">备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>0000</td>
+                    <td>下单成功</td>
+                    <td>该返回码表示下单成功。</td>
+                </tr>
+                <tr>
+                    <td>0001</td>
+                    <td>充值中</td>
+                    <td>该返回码表示正在充值中。</td>
+                </tr>
+                <tr>
+                    <td>0002</td>
+                    <td>充值成功</td>
+                    <td>该返回码表示充值成功。</td>
+                </tr>
+                <tr>
+                    <td>0003</td>
+                    <td>充值失败</td>
+                    <td>该返回码表示充值失败。</td>
+                </tr>
+                <tr>
+                    <td>1000</td>
+                    <td>用户不存在</td>
+                    <td>请核对账号名称(account)是否正确。</td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>IP鉴权失败</td>
+                    <td>鉴权失败，请核对你的服务器请求IP与所填写的IP鉴权地址。备注：空或者255.255.255.255表示不鉴权。</td>
+                </tr>
+                <tr>
+                    <td>1002</td>
+                    <td>签名校验失败</td>
+                    <td>.签名操作必须完全按照接口文档要求拼接后，将用户获取的apikey 拼接在参数的首尾进行md5加密。</td>
+                </tr>
+                <tr>
+                    <td>1003</td>
+                    <td>该订单不存在</td>
+                    <td>请核对订单号，确认订单是否存在。</td>
+                </tr>
+                <tr>
+                    <td>1004</td>
+                    <td>您无权查看别人的订单状态</td>
+                    <td>核对所请求的订单是否为当前账号。</td>
+                </tr>
+                <tr>
+                    <td>1005</td>
+                    <td>参数提交不完全</td>
+                    <td>请核对你所提交的参数。</td>
+                </tr>
+                <tr>
+                    <td>3002</td>
+                    <td>无效手机号</td>
+                    <td>请核对你提交的手机号码。</td>
+                </tr>
+                <tr>
+                    <td>3003</td>
+                    <td>无效区域代号</td>
+                    <td>请核对手机号的和充值的地区标识。</td>
+                </tr>
+                <tr>
+                    <td>3004</td>
+                    <td>无效流量包大小</td>
+                    <td>请核对提交的订单流量包size值。</td>
+                </tr>
+                <tr>
+                    <td>3005</td>
+                    <td>无法找到相应的产品</td>
+                    <td>请核对是否存在相对于的产品</td>
+                </tr>
+                <tr>
+                    <td>3006</td>
+                    <td>无法找到相应的库存</td>
+                    <td>请核对你的库存。</td>
+                </tr>
+                <tr>
+                    <td>3007</td>
+                    <td>用户无权限给此运营商的手机号充流量</td>
+                    <td>请核对是的运营商权限。</td>
+                </tr>
+                <tr>
+                    <td>4000</td>
+                    <td>余额不足</td>
+                    <td>请核对你的账户余额。</td>
+                </tr>
+                <tr>
+                    <td>4001</td>
+                    <td>余额不足（上级）</td>
+                    <td>请联系上级，咨询余额是否不足。</td>
+                </tr>
+                <tr>
+                    <td>4002</td>
+                    <td>缓存订单余额不足</td>
+                    <td>用户缓存订单余额不足。</td>
+                </tr>
+                <tr>
+                    <td>4003</td>
+                    <td>号码充值失败次数过多</td>
+                    <td>号码充值失败次数过多, 请暂时不要再试。</td>
+                </tr>
+
+                <tr>
+                    <td>8000</td>
+                    <td>其他错误。请联系工程师跟进。</td>
+                    <td>请联系技术。</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="apitabcon_instructions">
+            <dl>
+                <dt>备注:</dt>
+                <dd>1.开发者接口开发者，反馈错误信息请先核对上面返回码进行排查。</dd>
+                <dd>2.如还未及时解决请联系相关技术人员。</dd>
+            </dl>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

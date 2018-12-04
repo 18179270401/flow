@@ -1,0 +1,141 @@
+<script type="text/javascript">
+  $(function(){
+
+      var province_id = '{$proxy.province}';
+      if(province_id != ''){
+          $("select[name='city_id'] option",top.document).remove();
+          var title = '<option value="">请选择市</option>';
+          $("select[name='city_id']",top.document).append(title) ;
+
+          var html = '';
+          $("div.dis option[data = '"+province_id+"']",top.document).each(function(){
+            var value = $(this).attr('value');
+            var text = $(this).html();
+            var selected = $(this).attr('selected');
+            html += '<option '+selected+' value="'+value+'">'+text+'</option>';
+           })
+          $("select[name='city_id']",top.document).append(html) ;
+      }
+      
+
+      //点击切换效果效果
+      $("select[name='province_id']",top.document).change(function(){
+        //获取值
+        var val = $(this).val();
+        //取消市区的选择
+        $("select[name='city_id'] option",top.document).removeAttr("selected");
+            $("select[name='city_id'] option",top.document).remove();
+            var title = '<option value="">请选择市</option>';
+            $("select[name='city_id']",top.document).append(title) ;
+            //当选择了请选择省
+            if(val != ''){
+                var html = '';
+                $("div.dis option[data = '"+val+"']",top.document).each(function(){
+                    var value = $(this).attr('value');
+                    var text = $(this).html();
+                    html += '<option value="'+value+'">'+text+'</option>';
+                })
+                $("select[name='city_id']",top.document).append(html) ;
+            }
+      });
+
+  })
+
+</script>
+<div id="proxy_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+  <form name="proxy_edit_form">
+    <input type="hidden" name="proxy_id" value="{$proxy.proxy_id}">
+    <div class="add_list">
+          <h5><em class="wildcard">*</em>登录名称：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext"
+              field="登录名称"
+              maxlength="20"
+             name="login_name" value="{$proxy.login_name}" style="width:190px;" /><em style="color:#8d98b3;">@{$proxy.proxy_code}</em></span>
+          </div>
+    </div>
+    <div class="add_list">
+          <h5><em class="wildcard">*</em>代理商名称：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext"
+              field="代理商名称"
+             maxlength="30"
+             name="proxy_name" value="{$proxy.proxy_name}"/></span>
+          </div>
+    </div>
+     <div class="add_list">
+        <h5><em class="wildcard">*</em>联系人：</h5>
+        <div class="add_value"><input type="text" class="inputtext" 
+           field="联系人"
+          maxlength="20"
+          name="contact_name"  value="{$proxy.contact_name}"/></div>
+    </div>
+     <div class="add_list">
+        <h5><em class="wildcard">*</em>联系人电话：</h5>
+        <div class="add_value"><input type="text" class="inputtext"
+          field="联系电话"
+          maxlength="20"
+          vtype="tel"
+         name="contact_tel"  value="{$proxy.contact_tel}"/></div>
+    </div>
+     <div class="add_list">
+        <h5>邮箱：</h5>
+        <div class="add_value"><input type="text" class="inputtext" 
+          empty="true"
+          field="邮箱"
+          vtype="email"
+          maxlength="50"
+          name="email"  value="{$proxy.email}"/></div>
+    </div>
+    <div class="add_list">
+        <h5>省市：</h5>
+        <div class="add_value">
+          <select class="select" name="province_id" style="min-width:80px;width:117px;" empty="true">
+            <option value="">请选择省</option>
+            <volist name="province_list" id="vo">
+                <option <if condition="$proxy.province eq $vo['province_id']">selected</if> value="{$vo.province_id}">{$vo.province_name}</option>
+            </volist>
+          </select>
+          <select class="select" name="city_id" style="min-width:80px;width:117px;" empty="true">
+            <option value="">请选择市</option>
+           
+          </select>
+          <div class="dis" style="display:none;">
+             <volist name="city_list" id="vo">
+                <option <if condition="$proxy.city eq $vo['city_id']">selected</if> data="{$vo.province_id}" value="{$vo.city_id}">{$vo.city_name}</option>
+            </volist>
+          </div>
+        </div>
+    </div>
+      <div class="add_list">
+          <h5>公司电话：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext" name="tel"
+                         vtype="tel"
+                         field="公司电话"
+                         maxlength="20"
+                         empty="true"
+                         value="{$proxy.tel}"/></span>
+          </div>
+      </div>
+    <div class="add_list">
+        <h5>地址：</h5>
+        <div class="add_value"><input type="text" class="inputtext"
+          empty="true"
+          field="地址"
+         name="address"  value="{$proxy.address}"/></div>
+    </div>
+    <if condition="$proxy.top_proxy_id  neq '0' ">
+    <div class="add_list">  
+      <h5><em class="wildcard">*</em>支持运营商：</h5>
+      <div class="add_value">
+          <volist name="operator_list" id="vo">
+              <input type="checkbox" {$vo.checked}  name="operator_list[]" value="{$vo.operator_id}" style="display:none" id="{$vo.operator_id}_operator">
+            <label class="checkbox  {$vo.checked} " for="{$vo.operator_id}_operator" ><em>{$vo.operator_name}</em></label>
+          </volist>
+      </div>
+
+    </div>
+    </if>
+    </form>
+</div>

@@ -1,0 +1,74 @@
+<div id="proxy_set_sale_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+  <script>
+  $(function(){
+    $("select[name='depart']",parent.parent.document).change(function(){
+      var value = $(this).val();
+      if(value == ''){
+        $("select[name='sale_id'] option",parent.parent.document).show();
+      }else{
+        $("select[name='sale_id'] option",parent.parent.document).hide();
+        $("select[name='sale_id'] option",parent.parent.document).each(function(){
+            var opval = $(this).attr('value');
+            if(!opval){
+               $(this).show();
+            }
+            var val = $(this).attr('data');
+            if(val == value){
+              $(this).show();
+            }
+        });
+      }
+    });
+
+  })
+    
+
+  </script>
+  <form name="proxy_set_sale_form">
+    <div class="add_list">
+          <h5>代理商编号：</h5>
+          <div class="add_value">
+            <span>{$proxy.proxy_code}
+              <!--
+              <input type="text" class="inputtext"  disabled value="{$proxy.proxy_code}" readonly/>
+              --> 
+            </span>
+          </div>
+    </div>
+    <div class="add_list">
+          <h5>代理商名称：</h5>
+          <div class="add_value">
+            <span>
+              {$proxy.proxy_name}
+              <!--
+              <input type="text" class="inputtext"  disabled value="{$proxy.proxy_name}" readonly/>
+              --> 
+            </span>
+          </div>
+    </div>
+    <input type="hidden" name="proxy_id" value="{$proxy.proxy_id}">
+    <div class="add_list">
+        <h5>所属部门：</h5>
+        <div class="add_value">
+            <select class="select" name="depart" >
+              <option value="">请选择所属部门</option>
+              <volist name="depart_list" id="vo">
+                <option   <if condition="$user.depart_id eq $vo['depart_id']">selected</if> value="{$vo.depart_id}" >{$vo.depart_name}</option>
+              </volist>
+            </select>
+        </div>
+    </div>
+    <div class="add_list">
+        <h5>客户经理：</h5>
+        <div class="add_value">
+            <select class="select" name="sale_id" >
+              <option value="">请选择客户经理</option>
+              <volist name="user_list" id="vo">
+                <option value="{$vo.user_id}"  <if condition="$vo.user_id eq $proxy['sale_id']">selected</if> data={$vo.depart_id} >{$vo.user_name}</option>
+              </volist>
+            </select>
+        </div>
+    </div>
+
+    </form>
+</div>

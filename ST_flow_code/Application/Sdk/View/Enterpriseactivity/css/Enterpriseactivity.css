@@ -1,0 +1,135 @@
+/* 重置样式 */
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{box-sizing:border-box; border:0px; padding:0px; margin:0px;}
+img,a img{box-sizing:border-box; margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;} 
+h1,h2,h3,h4,h5,h6{box-sizing:border-box; font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{box-sizing:border-box; list-style:none;}
+address,cite,code,em,th,i{box-sizing:border-box; font-weight:normal; font-style:normal;}
+table{ box-sizing:border-box; border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{box-sizing:border-box; font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{ box-sizing:border-box; line-height:normal;}
+a{box-sizing:border-box;  color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{box-sizing:border-box;  color:#e76f12; text-decoration:none; }
+a:active{ box-sizing:border-box; outline: none; star:expression(this.onFocus=this.blur());}
+
+body {
+	background: #f07225;
+}
+
+.rootView {
+	position: absolute;
+}
+
+.rootView img {
+	width: 100%;
+}
+
+.topDiv {
+	position: relative;
+	text-align: center;
+	padding-top: 4rem;
+}
+
+.btnDiv {
+	position: relative;
+	text-align: center;
+	padding-top: 0.3rem;
+}
+
+.atyTimeDiv {
+	position: relative;
+	margin-top: 2.8rem;
+	margin-left: 8rem;
+}
+
+.lineUp {
+	position: relative;
+	background: #b11d29;
+	height: 1px;
+	margin-top:2.2rem;
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+
+.showTime {
+	position: relative;
+	 WIDTH: 100%;  
+	 color:#fff;
+	 FONT-FAMILY: arial; 
+	 TEXT-ALIGN: center;
+	 margin-top: 0.6rem;
+	 margin-bottom: 1rem;
+}
+
+.showTime span {
+	font-size: 1rem;
+	font-style: italic;
+}
+
+hr {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: #b11d29;
+	height: 1px;
+}
+
+.lineDown {
+	position: relative;
+	text-align: center;
+}
+
+.lineDown span {
+	display: block;
+	text-align: center;
+	font-size: 0.7rem;
+	color: #b11d29;
+}
+
+.lineDown .ActivityRuleslefthr {
+	float: left;
+	width: 5rem;
+	height: 1px;
+	margin-top: 0.4rem;
+	margin-left: 2rem;
+}
+
+.lineDown .ActivityRulescenter {
+	width: 5.0rem;
+	height: 1px;
+	float: left;
+}
+
+.lineDown .ActivityRulesrighthr {
+	width: 5rem;
+	height: 0.7rem;
+	float: left;
+	margin-right: 2rem;
+	margin-top: 0.4rem;
+}
+
+.activeTime {
+	position: relative;
+	color: #b11d29;
+	margin-top: 2.3rem;
+	margin-left: 2rem;
+	margin-right: 2rem;
+	font-size: 0.7rem;
+}
+
+#atyTimeTitle {
+	color: yellow;
+	font-size: 0.7rem;
+}
+
+#atyTimeStart , #atyTimeEnd {
+	color: white;
+	font-size: 0.7rem;
+}
+
+#timeDescribe {
+	font-size:.8em;
+	line-height:2em;
+	color: yellow;
+	margin: 0;
+}

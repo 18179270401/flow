@@ -1,0 +1,44 @@
+body,div,h1,h2,h3,h4,h5,h6,p,a,b,i,span,em,button,input,ul,li{margin: 0;padding: 0;}
+*{box-sizing: border-box;}
+body,html{width: 100%;height: 100%;}
+body{font-family: "微软雅黑",arial;}
+a{text-decoration: none;}
+button{outline: none;}
+ul{list-style: none;}
+em{font-style: normal;}
+/*通用文本样式*/
+.red_Btxt{font-size: 0.6666rem;color: #d91e19;}
+.red_txt{color: #d91e19;}
+.throuline_txt{text-decoration: line-through;color: #C3BCB8!important;}
+/*通用按钮样式*/
+.red_btn{height: 1.7777rem;padding: 0 0.6481rem;font-size: 0.6666rem;color: #d91e19; line-height: 1rem;background: transparent;border: 1px solid #d91e19;border-radius: 4px;}
+.red_btn.active{background-color: #d91e19;color: #fff;}
+
+/*公告*/
+.notice{padding-bottom: 0.5rem;}
+.notice h3{line-height: 2.6666rem;font-size: 1.4rem;text-align: center;}
+.notice span{display: block;padding-left: 1.2rem; line-height: 1.2rem;font-size: 0.8rem;}
+
+.main_row{min-height: 100%;padding-bottom: 1.4592rem; background: url(../images/main_bg_02.jpg) no-repeat center bottom;background-size: cover; position: relative;}
+
+.user_con{padding-left: 0.8333rem;border-bottom: 1px solid #c3bcb8;border-top: 1px solid #c3bcb8;margin-top: -1px;}
+.tel_infor{padding: 0.48888rem 0 0.38888rem;}
+.tel_infor input[type=tel]{height: 1.6666rem;line-height: 1.6666rem;color: #000;font-size: 1.5412rem;background: transparent;border: none;outline: none;}
+.tel_infor span{display: block; height: 1.1111rem; line-height: 1.1111rem;font-size: 0.6666rem; color: #666;}
+
+.header_warning{height: 1.2407rem;line-height: 1.2407rem;}
+
+.recharge_type{padding: 0.6296rem 0 0.6296rem 0.8333rem; line-height: 1.7777rem;overflow: hidden;}
+.recharge_type span{display: block;float: left;}
+.recharge_type button{display: block;float: left;margin-left: 2.1296rem;}
+
+.recharge_list{padding: 0.7037rem 0 0 0;overflow: hidden;}
+.recharge_list li{width: 33%; height: 4.2592rem;float: left; color: #000;margin-bottom: 0.3333rem; text-align: center; background: url(../images/recharge_item_03.png) no-repeat center;background-size: contain;}
+/*.recharge_list li.active{color: #fff;background-image: url(../images/recharge_item_act.png);}*/
+.item_row{width: 6.1851rem;height: 100%;margin: 0 auto; display: -webkit-box;-webkit-box-align:center;}
+.item_txt{width: 100%;}
+.item_txt span{font-size: 0.85rem;line-height: 0.9rem;display: block;}
+.item_txt em{font-size: 0.5648rem;line-height: 0.8rem; display: block;}
+
+.footer_warning{height: 1.2592rem;padding: 0 0.4rem;background-color: #fff;line-height: 1rem;text-align: center;border-radius: 6px; position: absolute;left: 50%;bottom: 0.2rem;transform: translateX(-50%);border: 1px solid #d91e19;}
+

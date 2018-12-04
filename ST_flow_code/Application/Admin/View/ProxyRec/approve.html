@@ -1,0 +1,101 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" id="character_box">
+    <div class="detail_box" style="padding:0 0;">  
+      <table width="100%">
+                <!--<thead>
+                    <th width="100%" colspan="4">代理商充值信息</th>
+                </thead>-->
+                <tbody>
+                <tr>
+                    <th width="17%">代理商名称：</th>
+                    <td width="25%">{$proxy_name}</td>
+                    <th width="20%" >代理商编号：</th>
+                    <td width="33%">{$proxy_code}</td>
+                </tr>
+                <tr>
+                    <th>充值类型：</th>
+                    <td>
+                        <if condition="$apply_type eq 1" >
+                            正常充值
+                        <else/>
+                            测试款
+                        </if>
+                    </td>
+                    <th>付款方式：</th>
+                    <td>
+                        <if condition="$source eq 0">
+                        <elseif condition="$source eq 1" />
+                         汇款
+                        <elseif  condition="$source eq 2"/>
+                        微信支付
+                        <else/>
+                        支付宝支付
+                        </if>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <if condition="$source eq 1">
+                            打款户名：
+                        <elseif  condition="$source eq 2"/>
+                            支付订单号：
+                        <else/>
+                            交易号：
+                        </if>
+                    </th>
+                    <td>{$transaction_number}</td>
+                    <th>付款日期：</th>
+                     <td>{$transaction_date}</td>
+                </tr>
+                <tr>
+                    <th>充值金额：</th>
+                    <td>{$apply_money|default="0.00"}元</td>
+                    <th>审核状态：</th>
+                    <td>{$approve_status|get_apply_status}<if condition="$approve_status eq 5">【已充值】</if></td>
+                </tr>
+                <tr>
+                    <th>附件凭证：</th>
+                    <td colspan="3">
+                        <if condition="$credential_one neq ''">
+                        <img src="{$credential_one}" width="20px" height="20px" style="width:20px;height:20px;margin-top:2px;margin-left:8px;float:left;"><span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($credential_one); </php></span>
+                            <button style="margin-top:3px;" type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('ProxyRec/show',array('apply_id'=>$apply_id,'download'=>1))}')">
+                                <i class="minicon export_icon"></i><span>下载</span>
+                            </button>
+                        <else />
+                        没有可用附件
+                        </if>
+                    </td>
+                </tr>
+                <tr>
+                    <th>备注：</th>
+                    <td colspan="3">{$remark}</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+    <form name="proxyAccount_approve_form">
+        <input type="hidden"  name="apply_id" value="{$apply_id}" />
+        <input type="hidden" name="apply_type" value="{$apply_type}"/>
+        <div class="checkinfo_con">
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核：</h5>
+                <div class="add_value">
+                    <empty name="type">
+                        <label class="radio  checked" value="1"><em>复审通过</em></label>
+                        <label class="radio"  value="2"><em>复审驳回</em></label>
+                        <else/>
+                        <label class="radio  checked" value="1"><em>初审通过</em></label>
+                        <label class="radio"  value="2"><em>初审驳回</em></label>
+                    </empty>
+                    <input type="hidden" name="approve_status"  value="1" />
+                </div>
+            </div>
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核原因：</h5>
+                <div class="add_value">
+                    <textarea class="textarea" name="approve_remark" empty="true"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+</div>

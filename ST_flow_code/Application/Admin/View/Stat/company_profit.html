@@ -1,0 +1,124 @@
+<include file="Common/header" />
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span></span>
+            </div>
+
+            <div class="operation_info">
+                <if condition="is_jurisdiction('Stat/company_profit_export_excel')">
+                    <button class="btn  export_button"  data-url="Stat/company_profit_export_excel" data-type="url">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </if>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="search_box">
+        <form method="get"  name="excel" action="/index.php/Admin/Stat/company_profit">
+            <div class="search_nav" style="min-height:65px;">
+                <ul>
+
+                    <li>
+                        <input type="text" class="inputtext" name="company_name" maxlength="20" value="{$Think.get.company_name}" placeholder="用户名称"/>
+                    </li>
+
+                    <li>
+                        <label class="inputlabel">运营商：</label>
+                        <select class="select" name="operator_id" style='min-width:80px'>
+                            <option value="">请选择</option>
+                            <volist name="operator" id="voo">
+                                <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+
+                    <li>
+                        <label class="inputlabel">日期时间段：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_time" placeholder="开始时间" value="{$start_time}" style='min-width:80px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_time" placeholder="结束时间" value="{$end_time}" style='min-width:80px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly/>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+            <div class="prepaidtip" style="right: 0;text-align: right;">
+                <p> 原价总额：【共：<span style="color:#5cb95c;">{$all_stat_price|default='0.000'}</span>元】，销售总额：【共：<span style="color:#5cb95c;">{$all_discount_price|default='0.000'}</span>元】，
+                     成本总额：【共：<span style="color:#5cb95c;">{$all_top_price|default='0.000'}</span>元】，<!--全国通道利润：【共：<span style="color:#5cb95c;">{$all_country_p|default=0.00}</span>元】，
+                     分流通道利润：【共：<span style="color:#5cb95c;">{$all_province_p|default=0.00}</span>元】，省网通道利润：【共：<span style="color:#5cb95c;">{$all_split_p|default=0.00}</span>元】，-->
+                     利润汇总：【共：<span style="color:#5cb95c;">{$all_profit_price|default='0.000'}</span>元】
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="120" class="change">用户名称</th>
+                            <th width="100" class="change">通道编码</th>
+                            <th width="120" class="change">通道名称</th>
+                            <th width="100" class="change">销售折扣(折)</th>
+                            <th width="100" class="change">成本折扣(折)</th>
+                            <th width="80" class="change">订单总数</th>
+                            <th width="100" class="change">原价总额(元)</th>
+                            <th width="100" class="change">销售总额(元)</th>
+                            <th width="100" class="change">成本总额(元)</th>
+                            <!--<th width="100" class="change">利润总额(元)</th>-->
+                            <th width="100" class="change">全国通道利润</th>
+                            <th width="100" class="change">分流通道利润</th>
+                            <th width="100" class="change">省网通道利润</th>
+                            <th width="100" class="change">利润汇总</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.company_name}</td>
+                            <td>{$vo.channel_code}</td>
+                            <td>{$vo.channel_name}</td>
+                            <td>{$vo.sale_discount}</td>
+                            <td>{$vo.top_discount}</td>
+                            <td>{$vo.stat_count}</td>
+                            <td>{$vo.stat_price}</td>
+                            <td>{$vo.discount_price}</td>
+                            <td>{$vo.top_price}</td>
+                            <!--<td>{$vo.profit_price}</td>-->
+                            <td>{$vo.country_p}</td>
+                            <td>{$vo.split_p}</td>
+                            <td>{$vo.province_p}</td>
+                            <td>{$vo.profit_price}</td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

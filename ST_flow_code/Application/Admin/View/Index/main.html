@@ -1,0 +1,264 @@
+<include file="Common/header" />
+<script type="text/javascript" src="__PUBLIC__/Admin/js/echarts.min.js"></script>
+<div class="main_con min1000 mCustomScrollbar_xy" data-mcs-theme="dark">
+<if condition='($user_type neq 3) and ($upper_role eq 2)'>
+  <div class="main_piece">
+      <div class="customer_nav">
+        <ul>
+          <li>
+            <div class="customer_con newbusiness">
+              <div class="customer_img">
+                <i></i>
+              </div>
+              <div class="customer_info">
+                <span>{$info.enterprise_same_day}</span>
+                <p>今日新增企业</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="customer_con totalnum">
+              <div class="customer_img">
+                <i></i>
+              </div>
+              <div class="customer_info">
+                <span>{$info.enterprise_total}</span>
+                <p>企业总数</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="customer_con newagents">
+              <div class="customer_img">
+                <i></i>
+              </div>
+              <div class="customer_info">
+                <span>{$info.proxy_same_day}</span>
+                <p>今日新增代理商</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="customer_con totalagents">
+              <div class="customer_img">
+                <i></i>
+              </div>
+              <div class="customer_info">
+                <span>{$info.proxy_total}</span>
+                <p>代理商总数</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+  </div>
+<else/>
+    <div class="main_piece">
+        <div class="customer_nav" style=" background-color:#fff; margin:10px 10px 0; padding:10px 20px; border:1px solid #ddd; font-size: 14px;color:#71777e">
+            <span style="padding-right:10px; "><em style="font-weight:bold;color:#15a5fb;">{$enterprise_name}</em></span><span style="padding-right:10px; ">累计存款：<em style="font-weight:bold;color:#15a5fb;">{$all_money|default="0"}</em>元</span><span style="padding-right:10px; ">累计消费：<em style="font-weight:bold;color:#15a5fb;">{$user_money|default="0"} </em>元</span><span style="padding-right:10px; ">可用额度：<em style="font-weight:bold;color:#15a5fb;">{$a_balence|default="0"}</em> 元</span>
+            <!--<span style="padding-right:10px; ">当月流量情况：</span>--><span style="padding-right:10px; ">用户数量：<em style="font-weight:bold;color:#15a5fb;">{$users|default="0"}</em> 位</span><span style="padding-right:10px; ">当月流量总数：<em style="font-weight:bold;color:#15a5fb;">{$product|default="0"}</em> MB</span>
+        </div>
+    </div>
+</if>
+  <div class="main_piece">
+    <div class="chart_con width50">
+        <div class="chart_tit">
+          <h2><i class="midicon trafficrecha_icon"></i><span>用户数占比图（单位：位）</span></h2>
+          <div class="dropdown">
+              <a id="dLabel" href="javascript:" class="droptit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="text" id="operator_text">本周</span>
+                <span class="caret">
+                  <i class="arrow"></i>
+                </span>
+              </a>
+              <ul class="dropmenu" aria-labelledby="dLabel">
+                <li data-function="flow_operator" class="current"><a href="JavaScript:void(0);">本周</a></li>
+                <li data-function="flow_operator"><a href="JavaScript:void(0);">本月</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="chart_info" id="flow_list_style1"><!-- 饼状 --></div>
+    </div>
+    
+    <div class="chart_con width50">
+        <div class="chart_tit">
+          <h2><i class="midicon regionaldistr_icon"></i><span>流量充值柱状图（单位：MB）</span></h2>
+          <div class="dropdown">
+              <a id="dLabel2" class="droptit" href="javascript:" data-toggle="dropdown">
+                <span class="text" id="province_text">本周</span>
+                <span class="caret">
+                  <i class="arrow"></i>
+                </span>
+              </a>
+              <ul class="dropmenu" aria-labelledby="dLabe2l">
+                <li data-function="flow_date" class="current"><a href="JavaScript:void(0);">本周</a></li>
+                <li data-function="flow_date"><a href="JavaScript:void(0);">本月</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="chart_info" id="flow_list_style2"><!-- 线状 --></div>
+    </div>
+  </div>
+  
+  <div class="main_piece">
+    <div class="chart_con">
+        <div class="chart_tit">
+          <h2><i class="midicon accounting_icon"></i><span>用户数分布（单位：位）</span></h2>
+            <div class="dropdown">
+                <a id="dLabel3" class="droptit" href="javascript:" data-toggle="dropdown">
+                    <span class="text" id="province_text2">中国移动</span>
+                <span class="caret">
+                  <i class="arrow"></i>
+                </span>
+                </a>
+                <ul class="dropmenu" aria-labelledby="dLabel3">
+                    <li data-function="flow_province" class="current"><a href="JavaScript:void(0);">中国移动</a></li>
+                    <li data-function="flow_province"><a href="JavaScript:void(0);">中国联通</a></li>
+                    <li data-function="flow_province"><a href="JavaScript:void(0);">中国电信</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+              <a id="dLabel2" class="droptit" href="javascript:" data-toggle="dropdown">
+                <span class="text" id="date_text">本周</span>
+                <span class="caret">
+                  <i class="arrow"></i>
+                </span>
+              </a>
+              <ul class="dropmenu" aria-labelledby="dLabe2l">
+                <li data-function="flow_province" class="current"><a href="JavaScript:void(0);">本周</a></li>
+                <li data-function="flow_province"><a href="JavaScript:void(0);">本月</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="chart_info" id="flow_list_style3"><!-- 柱状 --></div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    //按运营商读取
+    function flow_operator(){
+        var date = $("#operator_text").html();
+        $.post("/index.php/Admin/Index/main_ajax?operation=operator",{date:date},function(dataall){
+            var myChart1 = echarts.init(document.getElementById('flow_list_style1'));
+            option = {
+				backgroundColor: '#fff',
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+					y:'center',
+					right:'5%',
+                    data:dataall.info.order_name
+                },
+				color:['#b6a2de','#5ab1ef','#f5994e'],
+                series: [
+                    {
+                        name:'用户数',
+                        type:'pie',
+                        radius: ['60%', '80%'],
+						center: ['40%', '50%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:dataall.info.order_size[0].value, name:dataall.info.order_size[0].name},
+                            {value:dataall.info.order_size[1].value, name:dataall.info.order_size[1].name},
+                            {value:dataall.info.order_size[2].value, name:dataall.info.order_size[2].name}
+                        ]
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option);
+            //实例日期流量信息
+            flow_date();
+        },"json");
+    }
+    flow_operator();    //实例运营商流量信息
+    
+    //按日期读取
+    function flow_date(){
+        var date = $("#province_text").html();
+        $.post("/index.php/Admin/Index/main_ajax?operation=date",{date:date},function(dataall){
+            var myChart2 = echarts.init(document.getElementById('flow_list_style2'));
+            var option = {
+                backgroundColor: '#fff',
+                tooltip: {},
+                color:['#ff8e00'],
+                xAxis: {
+                    data: dataall.info.order_name
+                },
+                grid: {
+                    top: '5%',
+                    left: '3%',
+                    right: '3%',
+                    bottom: '5%',
+                    containLabel: true
+                },
+                yAxis: {},
+                series: [{
+                    name: '流量数',
+                    type: 'bar',
+                    data: dataall.info.order_size
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart2.setOption(option);
+            flow_province()
+        },"json");
+    }
+    
+    //按省读取
+    function flow_province(){
+        var date = $("#date_text").html();
+        var operator = $("#province_text2").html();
+        $.post("/index.php/Admin/Index/main_ajax?operation=province",{date:date,operator:operator},function(dataall){
+            var myChart = echarts.init(document.getElementById('flow_list_style3'));
+            // 指定图表的配置项和数据
+            var option = {
+				backgroundColor: '#fff',
+                tooltip: {},
+				color:['#ff8e00'],
+                xAxis: {
+                    data: dataall.info.order_name
+                },
+                grid: {
+                    top: '5%',
+                    left: '3%',
+                    right: '3%',
+                    bottom: '5%',
+                    containLabel: true
+                },
+                yAxis: {},
+                series: [{
+                    name: '用户数',
+                    type: 'bar',
+                    data: dataall.info.order_size
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },"json");
+    }
+    
+</script>
+<include file="Common/footer" />

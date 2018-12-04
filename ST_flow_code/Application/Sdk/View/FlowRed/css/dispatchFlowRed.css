@@ -1,0 +1,49 @@
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;}
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+/**{ box-sizing:border-box;}*/
+
+.titleBlock{
+	background: #D84E43;
+	padding-bottom: 0.7rem;
+	padding-top: 0.7rem;
+	text-align: right;
+}
+
+.titleFlowRecord{
+	
+	font-size: 0.9rem;
+	color: #fff4bf;
+	margin-right: 0.8rem;
+}
+
+.flowRedBg{
+	width: 100%;
+}
+
+.dispatchBlock{
+	margin-top: 3.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.dispatchFlowRed{
+	border: none;
+	width: 100%;
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+	margin-left: auto;
+	margin-right: auto;
+	background-size: 100% 100%;
+	color: #FFFFFF;
+	font-size: 0.8rem;
+}

@@ -1,0 +1,183 @@
+<include file="Common/header" />
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+
+</script>
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>流量退款管理</em></span>
+            </div>
+            <div class="operation_info">
+                <if condition="$refund_status eq '1'">
+                    <isshow url="OrderRefund/add">
+                        <button class="btn add_btn order_refund_add_btn">
+                            <i class="minicon addoperation_icon"></i><span>新增流量退款</span>
+                        </button>
+                    </isshow>
+                </if>
+                <if condition="is_jurisdiction('OrderRefund/add') and is_jurisdiction('OrderRefund/export_excel')">
+                    <span class="line">|</span>
+                </if>
+                <isshow url="OrderRefund/export_excel">
+                    <button class="btn add_btn export_button" data-url="OrderRefund">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+    </div>
+
+    <div class="search_box">
+        <form method="get"name="excel" action="/index.php/Admin/OrderRefund/index">
+            <div class="search_nav" style="min-height: 90px;">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="user_name" value="{$Think.get.user_name}" placeholder="用户名称"/>
+                    </li>
+                    <li>
+                        <input type="text" class="inputtext" name="mobile" value="{$Think.get.mobile}" placeholder="手机号"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">退款状态：</label>
+                        <select class="select" name="status" style="min-width:100px">
+                            <option value="" selected>全部</option>
+                            <option value="1" <if condition='$Think.get.status eq 1'>selected</if>>待审核</option>
+                            <option value="2" <if condition='$Think.get.status eq 2'>selected</if>>初审通过</option>
+                            <option value="3" <if condition='$Think.get.status eq 3'>selected</if>>初审驳回</option>
+                            <option value="4" <if condition='$Think.get.status eq 4'>selected</if>>退款完成</option>
+                            <option value="5" <if condition='$Think.get.status eq 5'>selected</if>>退款失败</option>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+
+                    <!-- <li>
+                         <label class="inputlabel">申请时间：</label>
+                         <input type="text" class="inputtext" name="start_datetime" placeholder="开始时间" value="{$Think.get.start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+                         <em class="inputto">至</em>
+                         <input type="text" class="inputtext" name="end_datetime" placeholder="结束时间"  value="{$Think.get.end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+                     </li>-->
+                    <li>
+                        <label class="inputlabel">申请时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">充值时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_o_date"  value="{$start_o_date}" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_o_date"   value="{$end_o_date}" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+            <div class="prepaidtip" style="right: 0;text-align: right;">
+                    <p>退款订单总数：【共<span style="color:#5cb95c;">{$oder_all_list.order_count|default=0}</span>条】，退款金额合计：【共<span style="color:#5cb95c;">{$oder_all_list.all_price|default="0.00"}</span>元】</p>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="130" class="change">用户名称</th>
+                            <th width="130" class="change">退款编号</th>
+                            <th width="80" class="change">手机号</th>
+                            <th width="80" class="change">支付类型</th>
+                            <th width="70" class="change">退款金额(元)</th>
+                            <if condition="$usr_type eq 1">
+                                <th width="90" class="change">通道编号</th>
+                            </if>
+                            <th width="80" class="change">退款原因</th>
+                            <th width="70" class="change">退款状态</th>
+                            <th width='100' class="change">申请时间</th>
+                            <th width='100' class="change">充值时间</th>
+                            <th width="130" class="change">订单号</th>
+                            <th width="140">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="order_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td title="<if condition="$vo.proxy_name eq ''">{$vo.enterprise_name}<else />{$vo.proxy_name}</if>"><if condition="$vo.proxy_name eq ''">{$vo.enterprise_name}<else />{$vo.proxy_name}</if></td>
+                            <td>{$vo.refund_code} </td>
+                            <td class="money_style">{$vo.mobile}</td>
+                            <td><if condition="$vo.pay_type eq '1'">余额充值<else />微信支付</if></td>
+                            <td>{$vo.discount_price} </td>
+                            <if condition="$usr_type eq 1">
+                                <if condition="($vo.o_order_status eq 4) or ($vo.o_order_status eq 5) or ($vo.o_order_status eq 6)">
+                                    <td title="{$vo.back_channel_code}">{$vo.back_channel_code}</td>
+                                    <else />
+                                    <td title="{$vo.channel_code}">{$vo.channel_code}</td>
+                                </if>
+                            </if>
+                            <td>{$vo.refund_cause|get_refund_cause}</td>
+                            <td><if condition="$vo.status eq 1">待审核<elseif condition="$vo.status eq 2"/>初审通过<elseif condition="$vo.status eq 3"/>初审驳回<elseif condition="$vo.status eq 4"/>退款完成<else />退款失败</if></td>
+                            <td>{$vo.create_date}</td>
+                            <td><php>echo substr($vo['order_date'],0,19);</php></td>
+                            <td>{$vo.order_code}</td>
+                            <td class="operation_td">
+                                <button class="operationbtn refundid_detailed_function" value="{$vo.refund_id}">
+                                    <!-- <i class="minicon detailed_icon"></i>-->
+                                    <span>查看</span>
+                                </button>
+                                <if condition="(is_jurisdiction('OrderRefund/orderrefund_approve_c')) AND ($vo.status eq 1) and ($usr_type eq 1)">
+                                    <isshow url="OrderRefund/orderrefund_approve_c">
+                                        <button class="operationbtn orderrefund_approve_function" data-value="orderrefund_approve_c" value="{$vo.refund_id}">
+                                            <!--<i class="minicon check_icon"></i>-->
+                                            <span>初审</span>
+                                        </button>
+                                    </isshow>
+                                </if>
+                                <if condition="(is_jurisdiction('OrderRefund/orderrefund_approve')) AND ($vo.status eq 2) and ($usr_type eq 1)">
+                                    <isshow url="OrderRefund/orderrefund_approve">
+                                        <button class="operationbtn orderrefund_approve_function" data-value="orderrefund_approve" value="{$vo.refund_id}">
+                                            <!--<i class="minicon check_icon"></i>-->
+                                            <span>复审</span>
+                                        </button>
+                                    </isshow>
+                                </if>
+                                <if condition="(is_jurisdiction('OrderRefund/delete')) AND (($vo.status eq 3) OR ($vo.status eq 5))">
+                                    <isshow url="OrderRefund/delete">
+                                        <button class="operationbtn orderrefund_delete_function"    value="{$vo.refund_id}" data-deletemsg="{$vo.refund_id}">
+                                            <!-- <i class="minicon delete_icon"></i>-->
+                                            <span>删除</span>
+                                        </button>
+                                    </isshow>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

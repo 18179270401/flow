@@ -1,0 +1,191 @@
+<include file="Common/header" />
+<style>
+    .add_list h5{width:160px;}
+    .add_value{margin-left:165px;max-width:500px;}
+    .add_value .inputtext,.add_value .textarea{width:380px;}
+</style>
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>参数管理</em>><em>参数列表</em></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="receivingset_box white">
+        <div class="receivingset_choice bottomnone">
+            <form name="form1" id="form1" action="/index.php/Admin/System/Save">
+
+               <div class="add_list">
+                    <h5><span class="wildcard"></span>系统标题：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="display_title"  value="{:C('DOMAIN_LOGIN_DEFAULT_INFO.display_title')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">网页浏览器标签页上的标题</span></div>
+                </div>     
+
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>代理商树形根名称：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="PROXY_NAME"  value="{:C('PROXY_NAME')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">代理商树形菜单上根目录的名称</span></div>
+                </div>
+
+                 <div class="add_list">
+                    <h5><span class="wildcard"></span>代理商的起始编号：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="DES_PROXY_ID"  <if condition="$p_status eq 2">readonly="readonly" style="background-color:#E0E0E0"</if> value="{:C('DES_PROXY_ID')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">新增第一个代理商的起始编号,如果已经添加代理商，该参数无效</span></div>
+                </div>
+
+                 <div class="add_list">
+                    <h5><span class="wildcard"></span>企业客户的起始编号：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="DES_ENTERPRISE_ID" <if condition="$e_status eq 2">readonly="readonly" style="background-color:#E0E0E0"</if>  value="{:C('DES_ENTERPRISE_ID')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">新增第一个企业的起始编号,如果已经添加企业，该参数无效</span></div>
+                </div>
+
+                 <div class="add_list">
+                    <h5 class="form_add_list_left"><span class="wildcard"></span>流量充值地址：</h5>
+                    <div class="add_value">
+                        <input type="text" class="inputtext" name="COMMIT_URL"  value="{:C('COMMIT_URL')}" />
+                    </div>
+                    <div class="promptinfo"><span style="color:#333333;">该参数设定平台上使用流量充值的提交地址</span></div>
+                </div>
+
+                 <div class="add_list">
+                    <h5><span class="wildcard"></span>提交订单地址：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="API_SUBMIT"  value="{:C('API_SUBMIT')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">开发者中心中显示给接口使用者的订单提交地址</span></div>
+                </div>
+
+
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>查询订单地址：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="API_QUERY"  value="{:C('API_QUERY')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">开发者中心中显示给接口使用者的订单查询地址</span></div>
+                </div>
+
+
+                <div class="add_list">
+                    <h5><span class="wildcard"></span>查询余额地址：</h5>
+                    <div class="add_value"><input type="text" class="inputtext" name="API_BALANCE"  value="{:C('API_BALANCE')}"/></div>
+                    <div class="promptinfo"><span style="color:#333333;">开发者中心中显示给接口使用者的查询余额地址</span></div>
+                </div>
+
+                           
+
+                <div class="graphicsset_nav graphicssetnew_nav">
+                <dl>
+                     <dd>
+                        <h3>网站标题LOGO：</h3>
+                        <div class="graphicsset_img" style="height: 16px; padding-top:24px; line-height:0px"><img style="max-width: 212px;max-height: 52px;" src="{:C('DOMAIN_LOGIN_DEFAULT_INFO.display_icon')}"  id="display_icon" alt="网站标题LOGO" /></div>
+                        <div class="graphicsset_con">
+                            <button class="btn add_btn"><span>上传</span></button>
+                            <button type="button" class="btn export_btn" onclick="down_file('{:U('System/index',array('download'=>'display_icon'))}')">
+                                <span>下载</span>
+                            </button>
+                            <input type="file" id="display_icon_upload" name="display_icon"  class="file"/>
+                            <span class="description">图片尺寸大小（16x16）</span>
+                        </div>
+                    </dd>
+
+                    
+                    <dd>
+                        <h3>登录页面LOGO：</h3>
+                        <div class="graphicsset_img" style="height:36px;"><img style="max-width: 255px;max-height: 52px;" src="{:C('DOMAIN_LOGIN_DEFAULT_INFO.display_picture')}"  id="display_picture" alt="登录页面LOGO" /></div>
+                        <div class="graphicsset_con">
+                            <button class="btn add_btn"><span>上传</span></button>
+                            <button type="button" class="btn export_btn" onclick="down_file('{:U('System/index',array('download'=>'display_picture'))}')">
+                                <span>下载</span>
+                            </button>
+                            <input type="file" id="display_picture_upload" name="display_picture"  class="file"/>
+                            <span class="description">图片尺寸大小（255x36）</span>
+                        </div>
+                    </dd>
+
+                    <dd>
+                        <h3>首页LOGO：</h3>
+                        <div class="graphicsset_img" style="height: 52px; padding-top:10px;"><img style="max-width: 212px;max-height: 52px;" src="{:C('DOMAIN_LOGIN_DEFAULT_INFO.logo')}" id="logo" alt="登录后LOGO" /></div>
+                        <div class="graphicsset_con">
+                            <button class="btn add_btn"><span>上传</span></button>
+                            <button type="button" class="btn export_btn" onclick="down_file('{:U('System/index',array('download'=>'logo'))}')">
+                                <span>下载</span>
+                            </button>
+                            <input type="file" id="logo_upload" name="logo" class="file"/>
+                            <span class="description">图片尺寸大小（212x52）</span>
+                        </div>
+                    </dd>
+
+                   
+                </dl>
+            </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="graphicsset_bottom">
+        <button class="btn add_btn fr" onclick="set_add()"><span>保存</span></button>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+       $(function(){
+        //图片上传预览
+        $("#display_icon_upload").on("change", function(e){ //宣传图
+            var file = e.target.files[0];
+            preview(file,"display_icon");
+        });
+
+        $("#display_picture_upload").on("change", function(e){ //宣传图
+            var file = e.target.files[0];
+            preview(file,"display_picture");
+        });
+
+        $("#logo_upload").on("change", function(e){ //宣传图
+            var file = e.target.files[0];
+            preview(file,"logo");
+        });
+
+    });
+
+
+    //显示上传图片
+    function preview(file, idadd) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+idadd+'').attr("src", e.target.result);
+        }
+        reader.readAsDataURL(file);
+    }
+
+
+    //提交信息
+    function set_add() {
+        var formData = new FormData($("form[name='form1']")[0]);
+        $.ajax({
+            url :"/index.php/Admin/System/Save",
+            type : 'post',
+            data : formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.status == 'success') {
+                    $("#display_icon_upload").val("");
+                    $("#display_picture_upload").val("");
+                    $("#logo_upload").val("");
+                    location.reload();
+                }
+                alertbox(data);
+            },
+            error: function (data) {
+                alertbox(data);
+            }
+        });
+    }
+</script>
+<include file="Common/footer" />
+

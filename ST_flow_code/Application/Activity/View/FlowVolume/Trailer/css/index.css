@@ -1,0 +1,165 @@
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, input, th, td, button
+{margin: 0; padding: 0; border: 0; outline: none;}
+
+body{
+	background-color: #ef0b1f;
+}
+.content{
+	background: url(../imgs/trailer_bg.png);
+	background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+	height: 36rem;
+    position: relative;
+}
+
+#show-logo {
+	position: relative;
+	text-align: center;
+	top: 5.15rem;
+	left: 6.5rem;
+	/*background-color: red;*/
+	height: 2rem;
+	width: 6rem;
+}
+
+#show-logo img {
+	height: 100%;
+	/*background: blue;*/
+}
+
+#show-flow {
+	position: absolute;
+	text-align: center;
+	left: 5.5rem;
+	top: 14rem;
+}
+#show-flow label {
+	color: #ed0b1e;
+	font-size: 2rem;
+}
+
+#value-flow {
+	position: absolute;
+	text-align: center;
+	top: 14rem;
+	left: 12rem;
+}
+
+#value-flow label{
+	color: white;
+	font-size: 1rem;
+}
+
+.div-txt {
+	border-radius: 0.6rem;
+	color: white;
+	background: #555555;
+	filter:alpha(opacity=50); 
+	-moz-opacity:0.5; 
+	opacity:0.5;
+	position: absolute;
+	font-size: 0.6rem;
+	top: 17.4rem;
+	left: 4rem;
+	text-align: center;
+	width: 11.3rem;
+}
+
+.div-txt label{
+	
+}
+
+.div-button {
+
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 19rem;
+}
+
+.div-button button {
+	background: url(../imgs/btn_bg.png);
+	height: 2rem;
+	width: 11.5rem;
+}
+
+.div-button button label{
+	color: #ac4700;
+	font-size: 0.8rem;
+}
+
+.title-line {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: 22rem;
+}
+.title-line label {
+	color: white;
+	font-size: 1rem;
+}
+.title-line .line-left{
+	position: absolute;
+	display: inline-block;
+	background: white;
+	left: 1rem;
+	top: 0.5rem;
+	width: 6rem;
+	height: 2px;
+}
+.title-line .line-right{
+	position: absolute;
+	display: inline-block;
+	background: white;
+	right: 1rem;
+	top: 0.5rem;
+	width: 6rem;
+	height: 2px;
+}
+
+.div-carousel {
+	position: absolute;
+	height: 12rem; 
+	top: 23.5rem;
+	left: 2rem;
+	width: 80%;
+	text-align: center;
+}
+
+.ui-view {
+	list-style:none;
+	/*background: blue;*/
+	height: 12rem; 
+	overflow:hidden
+}
+
+.li-view {
+	height: 4rem;
+	/*background: blue;*/
+}
+
+.li-view p {
+	color: white;
+	margin: 0.2rem;
+	font-size: 0.8rem;
+}
+
+#li-phone {
+	/*background: red;*/
+	float: left;
+	display: inline-block;
+	margin-top: 1.3rem;
+}
+
+.li-right {
+	display: inline-block;
+	/*background: red;*/
+	float: right;
+	margin-top: 0.7rem;
+}
+
+.li-right span {
+	color: #8a0602;
+}

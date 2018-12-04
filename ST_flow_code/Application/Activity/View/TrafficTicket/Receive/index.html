@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>领取流量券成功</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <link href="__PUBLIC__/utils/css/mui.min.css?s={$version_number}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{$role}css/ResetStyle.css?s={$version_number}">
+    <link rel="stylesheet" type="text/css" href="{$role}css/index.css?s={$version_number}">
+</head>
+<body>
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="aid" id="aid" value="{$aid}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+
+        <div class="rootView">
+            <img src="{$role}images/ReceiveBg.jpg" />
+        </div>
+        <div class="numberLabel">
+            <label>{$size}<span>{$flowUnit}</span></label>
+        </div>
+        <div class="LogoView">
+            <!--{$role}images/ReceiveTrafficLogo.png-->
+            <img src="{$logo_img}">
+        </div>
+        <div class="TextLabelView">
+            <label class="Congratulationlabel">恭喜你,兑换了{$product_name}流量</label>
+            <label class="SufficientValuelabel">流量将直接充值到手机号码中,请留意短信通知</label>
+        </div>
+        <div class="ruleView">
+            <img src="{$role}images/rule.png">
+        </div>
+        <ul class="mui-table-view mui-table-view-chevron" id="mui-table-view"style="background: none;height: 9rem;margin-top: 25.8rem;overflow: hidden;pointer-events: none;">
+            <!--<li class="mui-table-view-cell mui-media" style="height: 3rem;padding: 0;margin: 0rem 1rem; background-color: red">-->
+                <!--<img class="mui-media-object mui-pull-left" src="{$role}images/phone.png"-->
+                     <!--style="width: 2rem !important;height: 2rem !important;max-width:2rem !important;padding: 0rem;margin: 0.5rem; ">-->
+                <!--<div class="mui-media-body" style="color:white;-->
+            <!--display:inline-block;font-size:0.7rem;margin-top:0.5rem;">小飞哥-->
+                    <!--<p class="mui-ellipsis" style="font-size:0.7rem;margin-top:0.3rem;">18296122589-->
+                    <!--</p></div>-->
+                <!--<div class="mui-media-right" style="font-size:0.7rem;margin-top:0.5rem;">-->
+                    <!--抢到10M流量-->
+                    <!--<p class="mui-ellipsis" style="text-align:right;-->
+            <!--font-size:0.7rem;margin-top:0.3rem;">2016-05-25-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</li>-->
+        </ul>
+</body>
+<script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+<script type="text/javascript" src="__PUBLIC__/utils/js/mui.min.js"></script>
+<script type="text/javascript" charset="UTF-8">
+    mui.init();
+</script>
+<script type="text/javascript" src="__PUBLIC__/utils/js/zepto.js?s={$version_number}"></script>
+
+<script type="text/javascript" src="{$role}js/index.js?s={$version_number}"></script>
+</html>

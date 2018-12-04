@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>流量充值</title>
+
+    <title>微信支付启动中...</title>
+	<script type="text/javascript">
+    //调用微信JS api 支付
+    var jsApiParameters={$jsApiParameters};
+    var url= "<?php echo $url;?>";
+    function jsApiCall()
+    {   
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',jsApiParameters,
+       function(res){     
+           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                window.location=url;
+          	 }else{
+            //alert(res.err_code+res.err_desc+res.err_msg);
+            //window.location="wxform.html";
+           } 
+       }
+        );
+    }
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+         }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+         }
+    }else{
+         jsApiCall();
+    }
+    </script>
+</head>
+</head>
+</html>

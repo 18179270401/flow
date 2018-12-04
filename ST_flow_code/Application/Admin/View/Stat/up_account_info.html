@@ -1,0 +1,102 @@
+<include file="Common/header" />
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span></span>
+            </div>
+
+            <div class="operation_info">
+                <if condition="is_jurisdiction('Stat/up_account_info_export_excel')">
+                    <button class="btn  export_button"  data-url="Stat/up_account_info_export_excel" data-type="url">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </if>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="search_box">
+        <form method="get"  name="excel" action="/index.php/Admin/Stat/up_account_info">
+            <div class="search_nav" style="min-height:60px;">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="channel_code" maxlength="20" value="{$Think.get.channel_code}" style='min-width:150px;max-width:150px' placeholder="通道编码"/>
+                    </li>
+
+                    <li>
+                        <input type="text" class="inputtext" name="channel_name" maxlength="20" value="{$Think.get.channel_name}" placeholder="通道名称"/>
+                    </li>
+
+                    <li>
+                        <label class="inputlabel">日期时间段：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_time" placeholder="开始时间" value="{$start_time}" style='min-width:100px;max-width:100px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_time" placeholder="结束时间" value="{$end_time}" style='min-width:100px;max-width:100px' onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly/>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+            <div class="prepaidtip" style="right: 0;text-align: right;">
+                <p> 订单总数：【共：<span style="color:#5cb95c;">{$all_stat_count|default=0}</span>单】，流量总计：【共：<span style="color:#5cb95c;">{$all_product_size|default=0}</span>M】，成本总额：【共：<span style="color:#5cb95c;">{$all_top_price|default='0.000'}</span>元】，原价总额：【共：<span style="color:#5cb95c;">{$all_stat_price|default='0.000'}</span>元】，销售总额：【共：<span style="color:#5cb95c;">{$all_discount_price|default='0.000'}</span>元】</p>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="120" class="change">通道编码</th>
+                            <th width="120" class="change">通道名称</th>
+                            <th width="80" class="change">产品规格</th>
+                            <th width="100" class="change">订单总数</th>
+                            <th width="100" class="change">流量总计（M）</th>
+                            <th width="100" class="change">成本总额</th>
+                            <th width="100" class="change">原价总额</th>
+                            <th width="100" class="change">销售总额</th>
+                            <th width="100" class="change">折扣(折)</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.channel_code}</td>
+                            <td>{$vo.channel_name}</td>
+                            <td>{$vo.product_name}</td>
+                            <td>{$vo.stat_count}</td>
+                            <td>{$vo.product_size}</td>
+                            <td>{$vo.top_price}</td>
+                            <td>{$vo.stat_price}</td>
+                            <td>{$vo.discount_price}</td>
+                            <td>{$vo.discount}</td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<include file="Common/footer" />

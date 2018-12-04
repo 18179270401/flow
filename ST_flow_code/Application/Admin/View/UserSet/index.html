@@ -1,0 +1,105 @@
+<style type="text/css">
+    .graphicsset_img img {
+        max-width: 212px;
+        max-height: 52px;
+    }
+</style>
+<include file="Common/header" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>系统管理</em>><em>系统设置</em></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="receivingset_box white">
+        <form name="scenebase_add_form" id="form1" style="height:95%">
+            <input type="hidden" name="info_id" value="{$list.info_id}" />
+
+            <div class="graphicsset_nav">
+                <dl>
+                    <dd>
+                        <h3>企业LOGO：</h3>
+                        <div class="graphicsset_img" style="width:212px;height: 52px;line-height:0px"><img style="max-width: 212px;max-height: 52px;" <if condition="$info.logo_img eq ''" >src="/Public/Uploads/User_logo/default.png" <else />src="{$info.logo_img}"</if> id="upload_img" alt="企业LOGO" /></div>
+                        <div class="graphicsset_con">
+                            <button class="btn add_btn"><span>上传</span></button>
+                            <button type="button" class="btn export_btn" onclick="down_file('{:U('UserSet/img_download',array('download'=>'logo_img'))}')">
+                                <span>下载</span>
+                            </button>
+                            <input type="file" id="upload" name="logo_img" class="file"/>
+                            <span class="description">图片尺寸大小（212x52）</span>
+                        </div>
+                    </dd>
+
+                    <dd>
+                        <h3>系统名称：</h3>
+                        <span class="graphicsset_span"><input type="text" class="inputtext" name="web_name" value="<if condition='$info.web_name eq "" '>尚通流量分发管理平台<else />{$info.web_name}</if>"/></span>
+                    </dd>
+                    <if condition="$user_type neq 3">
+                    <dd>
+                        <h3>下级是否可见：</h3>
+                        <span class="graphicsset_span">
+                            <label class="radio <if condition='($info.is_sub_use eq "1") or ($info.is_sub_use eq null) '>checked</if>" value="1"><em>是</em></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label class="radio <if condition='$info.is_sub_use eq "0"'>checked</if>" value="0"><em>否</em></label>
+                            <input type="hidden" name="is_sub_use"  value="<if condition='$info.is_sub_use eq null '>1<else />{$info.is_sub_use}</if>" />
+                        </span>
+                    </dd>
+                    </if>
+                </dl>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="graphicsset_bottom">
+        <button class="btn add_btn fr" onclick="set_add()"><span>保存</span></button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        //图片上传预览
+        $("#upload").on("change", function(e){ //宣传图
+            var file = e.target.files[0];
+            preview(file,"upload_img");
+        });
+
+    });
+
+
+    //显示上传图片
+    function preview(file, idadd) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+idadd).attr("src", e.target.result);
+        }
+        reader.readAsDataURL(file);
+    }
+
+    //提交信息
+    function set_add() {
+        var formData = new FormData($("form[name='scenebase_add_form']")[0]);
+        $.ajax({
+            url :"/index.php/Admin/UserSet/index/type/operation",
+            type : 'post',
+            data : formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.status == 'success') {
+                    $("#upload").val("");
+                    location.reload();
+                }
+                alertbox(data);
+            },
+            error: function (data) {
+                alertbox(data);
+            }
+        });
+    }
+</script>
+<include file="Common/footer" />

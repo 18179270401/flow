@@ -1,0 +1,68 @@
+<div id="ticket_exchange_show_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tbody>
+        <tr>
+            <th width="30%">兑换码：</th>
+            <td width="70%">{$info.redeem_code}</td>
+        </tr>
+        <tr>
+            <th>手机号：</th>
+            <td>{$info.mobile}</td>
+        </tr>
+        <tr>
+            <th>运营商：</th>
+            <td>
+                <if condition="$info.operator_id eq 1">
+                    中国移动
+                </if>
+                <if condition="$info.operator_id eq 2">
+                    中国联通
+                </if>
+                <if condition="$info.operator_id eq 3">
+                    中国电信
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <th>流量包名称：</th>
+            <td>{$info.product_name}</td>
+        </tr>
+        
+        <tr>
+            <th>兑换时间：</th>
+            <td>{$info.exchange_time}</td>
+        </tr>
+        <tr>
+            <th>活动名称：</th>
+            <td>
+            <if condition="$info.user_activity_name neq null">
+                {$info.user_activity_name}
+            <else/>
+                {$info.activity_name}
+            </if>
+            </td>
+        </tr>
+        <tr>
+            <th>充值状态：</th>
+            <td>
+                <if condition="$info.order_id eq null"><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                <elseif condition="$info.order_status eq '6'"/><span class="recharge_statue recharge_failed"><em>充值失败</em></span>
+                <elseif condition="$info.order_status eq '2'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                <elseif condition="$info.order_status eq '5'"/><span class="recharge_statue recharge_success"><em>充值成功</em></span>
+                <else /><span class="recharge_statue recharge_send"><em>正在送充</em></span></elseif></if>
+            </td>
+        </tr>
+        <if condition="$info.order_id neq null">
+            <tr>
+                <th>下单订单号：</th>
+                <td colspan="3">{$info.order_id}</td>
+            </tr>
+        <else/>
+            <tr>
+                <th>备注：</th>
+                <td colspan="3">{$info.remark}</td>
+            </tr>
+        </if>
+        </tbody>
+    </table>
+</div>

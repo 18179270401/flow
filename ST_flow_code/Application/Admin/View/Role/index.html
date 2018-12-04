@@ -1,0 +1,139 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <!--<div class="operation_con">
+    <button class="btn add_btn" id="role_add_btn">
+      <i class="minicon newagents_icon"></i><span>新增角色</span>
+    </button>
+  </div>-->
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>系统管理</em>><em>角色权限</em></span>
+        </div>
+        <div class="operation_info">
+          <isshow url="Role/add">
+            <button class="btn add_btn role_add_btn">
+              <i class="minicon addoperation_icon"></i><span>新增角色</span>
+            </button>
+          </isshow>
+            <if condition="is_jurisdiction('Role/add') and is_jurisdiction('Role/export_excel')">
+                <span class="line">|</span>
+            </if>
+			<if condition="is_jurisdiction('Role/export_excel')">
+              <button class="btn  export_button"  data-url="Role">
+                <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+              </button>
+			</if>
+        </div>
+      </div>
+  </div>
+  
+  <div class="search_box">
+  <form id="rolemyformid1"  method="get" name="excel" action="/index.php/Admin/Role/index">
+    <div class="search_nav">
+      <ul>
+        <li>
+          <input type="text" name="role_name" class="inputtext" value="{$Think.get.role_name}" placeholder="角色名称" />
+        </li>
+          <li>
+              <label class="inputlabel">所属部门：</label>
+              <select class="select" name="depart_id" style="min-width:80px;">
+                  <option value="-1" <if condition='$depart_id eq "-1"'>selected</if> >全部</option>
+                  <volist name="arr_depart" id="vo">
+                      <option value="{$vo.depart_id}" <if condition="$vo['depart_id'] eq $depart_id">selected</if> >{$vo.depart_name}</option>
+                  </volist>
+              </select>
+          </li>
+        <li>
+          <label class="inputlabel">使用状态：</label>
+          <select class="select" name="status">
+            <option value="9" <if condition='$status eq "9"'>selected</if> >全部</option>
+            <option value="1" <if condition='$status eq "1"'>selected</if> >正常</option>
+            <option value="0" <if condition='$status eq "0"'>selected</if>>已禁用</option>
+          </select>
+            <input type="hidden" value="1"/>
+         </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+      <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+  </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50px">序号</th>
+                    <th width="130px">角色名称</th>
+                    <th width="140px" >所属部门</th>
+                    <th width="150px" class="change">备注</th>
+                    <!--<th width="100px" class="change">最后编辑时间</th>-->
+                    <!-- <th width="50px" class="change">状态</th> -->
+                    <th width="210px">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="role_list" id="vo">
+            <tr>
+                <td>{$vo.sort_no}</td>
+                <td>{$vo.role_name}</td>
+                <td>{$vo.depart_name}</td>
+                <td>{$vo.remark}</td>
+                <!--<td>{$vo.modify_date}</td>-->
+                <!-- <td><if condition="$vo['status'] eq 0">已禁用<elseif condition="$vo['status'] eq 1" />正常<else />已删除</if></td> -->
+                <td class="operation_td">
+                  <button class="operationbtn role_show_edit" value="{$vo.role_id}">
+                    <!-- <i class="minicon edit_icon"></i> -->
+                    <span>查看</span>
+                  </button>
+                  <isshow url="role/edit">
+                    <button class="operationbtn role_edit" value="{$vo.role_id}">
+                    <!-- <i class="minicon edit_icon"></i> -->
+                    <span>编辑</span>
+                    </button>
+                  </isshow>
+                  <isshow url="role/set_role_page">   
+                    <button class="operationbtn role_set" value="{$vo.role_id}" show-name="{$vo.role_name}">
+                    <!-- <i class="minicon competence_icon"></i> -->
+                    <span>设置权限</span>
+                    </button>
+                  </isshow>
+                  <isshow url="role/toggle_status">
+                    <button class="operationbtn role_toggle_status" value="{$vo.role_id}" role-status="{$vo['status']}" show-name="{$vo.role_name}" user-role-sum="{$vo.user_role_sum}" data-original-title='<if condition="$vo.status eq 0">启用<elseif condition="$vo.status eq 1" />禁用</if>'>
+                    <span><if condition="$vo['status'] eq 0">启用<elseif condition="$vo['status'] eq 1" />禁用</if></span>
+                    </button>
+                  </isshow>
+                   <isshow url="role/delete">
+                    <button class="operationbtn role_delete" value="{$vo.role_id}" show-name="{$vo.role_name}" user-role-sum="{$vo.user_role_sum}">
+                    <span>删除</span>
+                    </button>
+                  </isshow>
+                </td>
+            </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  
+  <div class="page_box">
+	<div class="page_con">
+		{$page}
+    </div>
+  </div>
+
+</div>
+
+<include file="Common/footer" />

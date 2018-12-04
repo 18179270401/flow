@@ -1,0 +1,120 @@
+<script type="text/javascript">
+  $(function(){
+
+      var province_id = '{$proxy.province}';
+      if(province_id){
+        $("select[name='city_id'] option[data != '"+province_id+"']",top.document).hide();
+      }else{
+        $("select[name='city_id'] option",top.document).hide();
+      }
+      
+      $("select[name='city_id'] option[value='']",top.document).show();
+
+      $("select[name='province_id']",top.document).change(function(){
+          var val = $(this).val();
+          $("select[name='city_id'] option",top.document).removeAttr("selected");
+          if(val == ''){
+            $("select[name='city_id'] option",top.document).hide();
+            $("select[name='city_id'] option[value='']",top.document).show();
+          }else{
+            $("select[name='city_id'] option",top.document).show();
+            $("select[name='city_id'] option[data !='"+val+"']",top.document).hide();
+            $("select[name='city_id'] option[value='']",top.document).show();
+          }
+         
+      });
+  })
+
+</script>
+<div id="proxy_approve_again_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+  <form name="proxy_approve_again_form">
+    <div class="add_list">
+          <h5><em class="wildcard">*</em>代理商名称：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext" name="proxy_name" 
+              field="代理商名称"
+             maxlength="30"
+              value="{$proxy.proxy_name}" /></span>
+          </div>
+    </div>
+    <div class="add_list">
+          <h5><em class="wildcard">*</em>公司电话：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext" name="tel"
+               vtype="tel"
+              field="公司电话"
+              maxlength="20"
+             value="{$proxy.tel}" /></span>
+          </div>
+    </div>
+     <div class="add_list">
+          <h5><em class="wildcard">*</em>联系人：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext" name="contact_name"
+              field="联系人"
+          maxlength="20"
+             value="{$proxy.contact_name}" /></span>
+          </div>
+    </div>
+     <div class="add_list">
+          <h5><em class="wildcard">*</em>联系人电话：</h5>
+          <div class="add_value">
+            <span><input type="text" class="inputtext"
+               field="联系电话"
+          maxlength="20"
+          vtype="tel"
+             name="contact_tel" value="{$proxy.contact_tel}" /></span>
+          </div>
+    </div>
+    
+   <div class="add_list">
+        <h5>邮箱：</h5>
+        <div class="add_value"><input type="text" class="inputtext"
+           empty="true"
+          field="邮箱"
+          vtype="email"
+          maxlength="50"
+         name="email" value="{$proxy.email}"/></div>
+
+    </div>
+    <div class="add_list">
+        <h5>省市：</h5>
+        <div class="add_value">
+          <select class="select" name="province_id" style="min-width:80px;width:117px;" empty="true">
+            <option value="">请选择省</option>
+            <volist name="province_list" id="vo">
+                <option <if condition="$proxy.province eq $vo['province_id']">selected</if> value="{$vo.province_id}">{$vo.province_name}</option>
+            </volist>
+          </select>
+          <select class="select" name="city_id" style="min-width:80px;width:117px;" empty="true">
+            <option value="">请选择市</option>
+            <volist name="city_list" id="vo">
+                <option <if condition="$proxy.city eq $vo['city_id']">selected</if> data="{$vo.province_id}" value="{$vo.city_id}">{$vo.city_name}</option>
+            </volist>
+          </select>
+        </div>
+    </div>
+    <div class="add_list">
+        <h5>地址：</h5>
+        <div class="add_value"><input type="text" class="inputtext"
+          empty="true"
+          field="地址"
+         name="address" value="{$proxy.address}"/></div>
+
+    </div>
+    <div class="add_list">  
+      <h5><em class="wildcard">*</em>支持运营商：</h5>
+      <div class="add_value">
+          <volist name="operator_list" id="vo">
+              <input type="checkbox" class="undis" name="operator_list[]" value="{$vo.operator_id}" <in name="vo.operator_id" value="$proxy['operator']"> checked  </in>  id="{$vo.operator_id}_operator"   >
+            <label class="checkbox <in name="vo.operator_id" value="$proxy['operator']"> checked  </in> " for="{$vo.operator_id}_operator" ><em> 
+               {$vo.operator_name}</em></label>
+          </volist>
+      </div>
+    </div>
+    <input type="hidden" name="proxy_id" value="{$proxy.proxy_id}">
+ 
+
+    
+    </form>
+</div>

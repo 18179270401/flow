@@ -1,0 +1,25 @@
+.pink_txt{color: #ff678c!important;font-weight: bold;}
+.bold_txt{font-weight: bold;}
+
+.container{position: relative; padding: 0.5rem 0 1.7rem;min-height: 100%;background-color: #fff;}
+.logo{display: block;margin-top: 0.35rem; display: inline-block; width: 2.5rem;height: 2.5rem;background: url(../images/rechargeicon.png) no-repeat center;background-size: 100%;}
+.order_item{padding: 1.25rem 0.677rem 0; height: 7.9947rem;background: url(../images/order_bg_02.png) no-repeat center;background-size: 100%;}
+.order_info{padding: 0 0 0.625rem 0.667rem;overflow: hidden;white-space: nowrap;}
+.order_txt{display:inline-block;margin-left: 0.1rem;}
+.order_txt h5{font-size: 1rem;line-height: 1.25rem;}
+.order_txt p{font-size: 0.66rem;line-height: 1rem;color: #6e6e6e;}
+.pack_type{margin-left: 0.5rem;}
+
+.order_table{padding: 0 0.78125rem 0; font-size: 0.75rem;}
+.order_border{padding-top: 0.3125rem; border-top: 1px solid #eee;}
+.order_table td{width: 33.333333%;white-space: nowrap;}
+.order_table td>span{display: block;line-height: 0.78125rem;color: #474646;}
+.order_table td>em{color: #6e6e6e;line-height: 0.78125rem;}
+
+
+.no_data{text-align: center;padding-top: 1.97395rem;}
+.no_data img{width: 5.911458rem;height: 8.0729rem;}
+.no_data span{display: block;height: 2.5rem;line-height: 2.5rem; font-size: 0.9375rem;color: #a49c9c;}
+
+.contact_us{position: absolute;left: 50%;bottom: 0;line-height: 1.7rem; transform: translate(-50%);}
+.contact_us a,.contact_us em{font-size: .7rem;color: #868686;}

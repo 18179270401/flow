@@ -1,0 +1,84 @@
+
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="enterpriseRecharge_voucher_form" >
+        <input type="hidden"  name="apply_id" value="{$apply_id}" />
+        <input type="hidden"  name="images" value="{$credential_one}" />
+        <input type="hidden" name="proxy_type" value="{$proxy_type}" />
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>企业名称：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="delegate_name" id="inputusername" field="企业名称" data-usertype="enterprise" value="{$enterprise_id|obj_data=2,name}">
+                <input type='hidden' name='enterprise_id' id='user_type_ids' value='{$enterprise_id}'>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>充值类型：</h5>
+            <div class="add_value">
+                <select name="apply_type" class="select" id="recharge_type" msg="请选择申请类型" onchange="content_hide()">
+                    <option value="1" <if condition='$apply_type eq 1'>selected</if>>正常充值</option>
+                    <option value="2"  <if condition='$apply_type eq 2'>selected</if>>测试款</option>    
+                </select>
+            </div>
+        </div>
+        <div class="recharge_type_div" <if condition='$apply_type eq 2'>style="display:none;"</if>>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>付款方式：</h5>
+            <div class="add_value">
+                <if condition='$proxy_type eq 1'>
+                    <select name="source" id="source" class="select"  empty="true" msg="请选择付款方式" onchange="payment_name()">
+                        <option value="" selected>请选择</option>
+                        <volist name="source_name" id="sourcename">
+                            <option value="{$key}" <if condition='$source eq $key'>selected</if> >{$sourcename}</option>
+                        </volist>
+                    </select>
+                    <else/>
+                        <select name="source" id="source" class="select"  empty="true" msg="请选择付款方式" onchange="payment_name()">
+                            <option value="" selected>请选择</option>
+                            <option value="1" <if condition='$source eq 1'>selected</if>>汇款</option>
+                            <option value="2" <if condition='$source eq 2'>selected</if>>微信支付</option>
+                            <option value="3" <if condition='$source eq 3'>selected</if>>支付宝支付</option>
+                        </select>
+                </if>
+
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em><span id="source_name">
+                {$source|get_text_name=1}
+            </span>：</h5>
+            <div class="add_value"><input type="text" class="inputtext"  empty="true" id="source_input" field="{$source|get_text_name=1}"  name="transaction_number" value="{$transaction_number}" /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>付款日期：</h5>
+            <div class="add_value"><input type="text" field="付款日期"  empty="true" class="inputtext create_date" name="transaction_date"  value="{$transaction_date}" onClick="WdatePicker()" readonly/></div>
+        </div>
+    </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>充值金额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" field="付款金额" vtype="money" name="apply_money" value="{$apply_money}" maxlength="8"/></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+    <div class="recharge_type_div" <if condition='$apply_type eq 2'>style="display:none;"</if>>
+        <div class="add_list">
+            <h5>附件凭证：</h5>
+            <div class="add_value">
+                <input type="file" class="fileinput maxwidth156" empty="true" name="file"/><br/>
+                <if condition="$credential_one neq '' ">
+                    <img src="{$credential_one}" class="imginput"><span><php> echo basename($credential_one);</php></span>
+                    <button type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('EnterpriseRecharge/voucher',array('apply_id'=>$apply_id,'download'=>1))}')">
+                        <i class="minicon export_icon"></i><span>下载</span>
+                    </button>
+                    <else />
+                    <span>没有可用附件</span>
+                </if>
+            </div>
+        </div>
+    </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true" >{$remark}</textarea>
+            </div>
+        </div>
+    </form>
+</div>

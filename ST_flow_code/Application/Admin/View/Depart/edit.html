@@ -1,0 +1,33 @@
+<!-- 添加节点 -->
+<div id="depart_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+  <form name="depart_edit_form">
+    <input type="hidden" name="depart_id" value="{$info.depart_id}">
+
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>部门名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" field="部门名称" name="depart_name" value="{$info.depart_name}"/></div>
+    </div>
+
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>部门负责人：</h5>
+        <div class="add_value">
+            <select name="depart_manager" class="select" field="部门负责人">
+                <option value="">请选择</option>
+                <volist name="manager_list" id="vo">
+                    <option value="{$vo.id}" <if condition='$info.depart_manager eq $vo["id"]'>selected</if>>{$vo.name}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    <!--
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>排序号：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="order_num" value="{$info.order_num}" /></div>
+    </div>
+    -->
+    <div class="add_list">
+        <h5>备注：</h5>
+        <div class="add_value"><textarea class="textarea" name="remark" empty="true">{$info.remark}</textarea></div>
+    </div>
+  </form>
+</div>

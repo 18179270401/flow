@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>流量充值</title>
+		<script src="__PUBLIC__/utils/js/mui.min.js?s={$version_number}"></script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/utils/css/loaders.css" />
+		<link href="__PUBLIC__/utils/css/mui.min.css?s={$version_number}" rel="stylesheet" />
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<script src="__PUBLIC__/utils/js/get_para.js?s={$version_number}"></script>
+
+		<link href="{$role}css/index.css?s={$version_number}" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			//		if ($('.loader').height() < parseInt(document.documentElement.clientHeight)) {
+			//		}
+		</script>
+	</head>
+
+	<body>
+		<div class="modelClass" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);position: fixed;z-index: 9999;display: none;">
+
+			<div class="loader" style="text-align: center;margin-left: auto;margin-right: auto;width: 100%;height:100%;">
+				<div class="loader-inner ball-spin-fade-loader" style="display: inline-block;">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mui-content">
+
+			<div class="spaceHeader" style="height: 20px;"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell unselectcell">
+					<div class="mui-input-row">
+						<input type="tel" class="mui-input-clear inputText" placeholder="请输入手机号码" oninput="test(this)" style="border-width: 0px;margin: 0px;padding: 0px;font-size: 23px; display: inline-block; float: left; width: 90%" value="">
+
+					</div>
+
+					<h5 id="OperatorsName"></h5>
+				</li>
+			</ul>
+			<div class="title">
+				<h5 id="tipH5" style="padding-left: 15px;">全国可以用，立即生效，当月有效</h5>
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell unselectcell">
+					<h4 style="display: inline-block; font-weight:normal;">充值类型:</h4>
+					<button id="countryButton" type="button" onclick="countryClick(this)" class="mui-btn-danger" style="margin-left: 10%;">
+								全国
+					</button>
+					<button id="provinceButton" type="button" onclick="provinceClick(this)" class="mui-btn-danger" style="margin-left: 10%;background-color: white;border-color: gray;color: black;">
+								省内
+							</button>
+				</li>
+			</ul>
+
+			<!-- 充值明细 -->
+			<ul id="tableView" class="mui-table-view mui-grid-view mui-grid-9" style="background-color: rgba(0,0,0,0);border-width: 0px; padding:0px ;">
+				<div class="list1"></div>
+				<div class="list2"></div>
+			</ul>
+		</div>
+		<div id="space"></div>
+		<div style="height: 10px;"></div>
+		<div id="hrefA" style="text-align: center;cursor: pointer;">
+			<if condition='$consumer_phone neq null'>
+			<h4 style="color:#596D96;font-size: 15px;height: 25px;line-height: 25px;"><a style="color:#596D96;font-size: 15px;" href="tel:{$consumer_phone}">客服电话 |</a><a style="color:#596D96;font-size: 15px;" class="tipA" onclick="tipClick()"> 常见问题</a></h4>
+			<else/>
+			<h4 style="color:#596D96;font-size: 15px;height: 25px;line-height: 25px;"><a style="color:#596D96;font-size: 15px;" href="javascript:void(0)">客服电话 |</a><a style="color:#596D96;font-size: 15px;" class="tipA" onclick="tipClick()"> 常见问题</a></h4>
+			</if>
+		</div>
+		<div style="height: 10px;"></div>
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		<input type="hidden" name="openid" id="openid" value="{$openid}">
+		<input type="hidden" name="code" id="code" value="<?php echo $_GET['code'];?>">
+		<div id="wxpay"></div>
+		<!--流量分享需求-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<!--流量分享需求-->
+
+		<!--分享流量-->
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?s={$version_number}"></script>
+		<script type="text/javascript" src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+		<script>
+			function tipClick() {
+				window.location.href = "/index.php/Sdk/WxFlowPayment/showTip?user_type={$user_type}&user_id={$user_id}";
+			}
+
+			htmlFontSize();
+			window.onresize = function() {
+				htmlFontSize();
+			}
+
+			function htmlFontSize() {
+				var w = document.documentElement.clientWidth;
+				var h = parseInt(document.documentElement.clientHeight);
+				var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+				document.documentElement.style.fontSize = (i) * 40.0 + "px";
+				$('.loader-inner').css('margin-top', (h - $('.loader-inner').height()) / 2 + 'px');
+				var phone = getCookie('inputText');
+
+    			if(phone != "18507085074")
+					$('.inputText').val(getCookie('inputText'));
+				loadSpace();
+			}
+
+			function loadSpace() {
+
+				$('#space').height(0);
+				var h = parseFloat(document.documentElement.clientHeight);
+				if(h - $('#space').position().top - $('#hrefA').height() - 15 - 15>=0) {
+					$('#space').height(h - $('#space').position().top - $('#hrefA').height() - 15 -10);
+				}
+			}
+		</script>
+		<script src="{$role}js/index.js?random=99999">
+		</script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+	</body>
+
+</html>

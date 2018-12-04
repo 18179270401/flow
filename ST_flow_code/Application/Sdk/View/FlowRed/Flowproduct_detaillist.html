@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>流量产品</title>
+		<link href="{$role}css/Flowproduct.css" rel="stylesheet" />
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<script type="text/javascript" charset="UTF-8">
+			var DateArray;
+			window.onload = function(){
+				var packetjson = localStorage.getItem("SelectMobleFlow");
+				if(!packetjson)
+				{
+					DateArray = new Array();
+				}
+				else
+				{
+					DateArray = JSON.parse(packetjson);
+				}
+					
+				
+				var ChinaMobile = "中国移动";
+				if({$Type} == 1)
+				{
+					ChinaMobile = "中国移动";
+					packetjson = localStorage.getItem("ChinaMobile");
+				}
+				else if({$Type} == 2)
+				{
+					ChinaMobile = "中国联通";
+					packetjson = localStorage.getItem("ChinaUnicom");
+				}
+				else if({$Type} == 3)
+				{
+					ChinaMobile = "中国电信";
+					packetjson = localStorage.getItem("ChinaTelecomArray");
+				}
+
+				var packet = JSON.parse(packetjson); 
+				//创建流量包ui
+				for(var i in packet)
+				{
+					CreateUI(i,packet,ChinaMobile);
+				}
+			};
+			
+			function CreateUI(i,packet,ChinaMobile)
+			{
+					var id = packet[i].id;
+					var lcoalcount=0;
+					//判断已选数量
+					for(var packeti in DateArray)
+					{
+						var item=DateArray[packeti];
+						var dateid=item['id'];
+						if(id == dateid)
+						{
+							lcoalcount++;
+						}
+					}
+					var size = packet[i].size;
+					var price = packet[i].price;
+					var price_market = packet[i].price_market;
+					packet[i]['FlowType'] = {$Type};
+					
+
+					var url = ' '+'<ul><br><ul><li class="list">' +
+					'<span class=\"Chinamoblie\">'+ ChinaMobile+'</span>'+
+					'<span class=\"flowsizespan\">'+ size +'</span>'+
+					'<span class=\"marketspan\">' + price_market +'元</span>'+
+					'<img class=\"leftbtnspan\" src="{$role}images/TrafficRed_Del.png">'+
+					'<span class=\"countspan\">'+lcoalcount+'</span>'+
+					'<img class=\"rightbtnspan\" src="{$role}images/TrafficRed_Add.png">	'+
+					'</li></ul></ul>';	
+					$('.helpCenter_list').append(url);
+					
+					$(".leftbtnspan").eq(i).bind("click",function(){
+						var value = this.jsonvalue;
+					   	var text = $(".countspan").eq(value).html();
+					   	text--
+					   	if(text < 0)
+					   	{
+					   		return;
+					   	}
+					   	$(".countspan").eq(value).html(text);
+						var jsonData = this.jsonData;
+						var find = 0;
+						var ChangeDateArray = new Array();
+						for(var localcount in DateArray)
+						{
+							var item=DateArray[localcount];
+							//找到该对象 则不添加进去
+							if(item.id == jsonData.id && find == 0)
+							{
+								find == 1;
+							}
+							else
+							{
+								//将所有对象再次添加进去
+								ChangeDateArray.push(item);
+							}
+						}
+						DateArray = ChangeDateArray;
+					})
+					$(".leftbtnspan").eq(i)[0].jsonvalue = i;
+					$(".leftbtnspan").eq(i)[0].jsonData = packet[i];
+					
+					
+					$(".rightbtnspan").eq(i).bind("click",function(){
+						var value = this.jsonvalue;
+					   	var text = $(".countspan").eq(value).html();
+					   	text++
+					   	$(".countspan").eq(value).html(text);
+						var jsonData = this.jsonData;
+						DateArray.push(jsonData);
+					})
+					$(".rightbtnspan").eq(i)[0].jsonvalue = i;
+					$(".rightbtnspan").eq(i)[0].jsonData = packet[i];
+			}
+			
+			
+			function subumit()
+			{
+				localStorage.setItem("SelectMobleFlow",JSON.stringify(DateArray));
+				location.href = document.referrer;
+			};
+	</script>
+	</head>
+	<body style="background:#EEEEF5;">
+		<div class="helpCenter_list">
+			
+		</div>
+			<br>
+				<div class="btn_subumit">
+					<input onclick="subumit()" type="button"  style="background:url({$role}images/TrafficRed_Success.png) no-repeat;" name="sub" class="submit" style="border-radius: 1rem;" value="确定" />
+				</div>		
+			<br>
+	</body>
+</html>

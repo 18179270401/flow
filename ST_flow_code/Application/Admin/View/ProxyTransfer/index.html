@@ -1,0 +1,186 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+
+        <div class="currenttit">
+          <i></i><span><em>资金管理</em>><em>代理商资金划拨管理</em></span>
+        </div>
+
+        <div class="operation_info">
+          <if condition="is_jurisdiction('ProxyTransfer/add')">
+            <button class="btn add_btn proxy_transfer_apply_add_btn">
+              <i class="minicon addoperation_icon"></i><span>新增资金划拨</span>
+            </button>
+          </if>
+
+          <if condition="is_jurisdiction('ProxyTransfer/add') and is_jurisdiction('ProxyTransfer/export_excel')">
+            <span class="line">|</span>
+          </if>
+
+          <if condition="is_jurisdiction('ProxyTransfer/export_excel')">
+            <button class="btn  export_button" data-url="ProxyTransfer">
+              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+            </button>
+          </if>
+        </div>
+
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get"  name="excel" action="/index.php/Admin/ProxyTransfer/index">
+        <div class="search_nav minheight60">
+            <ul>
+
+              <li>
+                  <input type="text" class="inputtext" name="apply_code" maxlength="20" value="{$Think.get.apply_code}" placeholder="申请编号"/>
+              </li>
+
+              <li>
+                  <input type="text" class="inputtext" name="pay_code"  value="{$Think.get.pay_code}" placeholder="支出代理商编号"/>
+              </li>
+
+              <li>
+                  <input type="text" class="inputtext" name="pay_proxy"  value="{$Think.get.pay_proxy}" placeholder="支出代理商名称"/>
+              </li>
+
+              <li>
+                  <input type="text" class="inputtext" name="receive_code"  value="{$Think.get.receive_code}" placeholder="接收代理商编号"/>
+              </li>
+
+              <li>
+                  <input type="text" class="inputtext" name="receive_proxy"  value="{$Think.get.receive_proxy}" placeholder="接收代理商名称"/>
+              </li>
+
+              <li>
+                  <label class="inputlabel">审核状态：</label>
+                  <select class="select" name="approve_status" style='min-width:80px'>
+                      <option value="" selected >全部</option>
+                      <volist name="approve_status_list" id="vo">
+                          <option value="{$key}" <if condition='$Think.get.approve_status eq $key'>selected</if>>{$vo}</option>
+                      </volist>
+                  </select>
+                  <input type="hidden" value=""/>
+              </li>
+
+              <li>
+                  <label class="inputlabel">申请时间：</label>
+                  <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                  <em class="inputto">至</em>
+                  <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              </li>
+
+            </ul>
+        </div>
+        <div class="search_btncon">
+            <button class="btn add_btn">
+              <i class="minicon search_icon"></i><span>查询</span>
+            </button>
+
+            <button type="button" class="btn export_btn  reset_button">
+                <i class="minicon reload_icon"></i><span>重置</span>
+            </button>
+        </div>
+        <div class="prepaidtip" >
+            <p> 划拨金额合计：【<span style="color:#5cb95c;">{$sum_results.sum_money_one|default="0.000"}</span>元】</p>
+        </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    
+                    <th width="120" class="change">支出代理商编号</th>
+                    <th width="160" class="change">支出代理商名称</th>
+                    <th width="120" class="change">接收代理商编号</th>
+                    <th width="160" class="change">接收代理商名称</th>
+                    <th width="210" class="change">申请编号</th>
+                    <th width="100" class="change">划拨金额(元)</th>
+                    <th width="100" class="change">审核状态</th>
+                    <th width="80" class="change">申请人</th>
+                    <th width="150" class="change">申请时间</th>
+                    <th width="220">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.pay_proxy_code}</td>
+                    <td>{$vo.pay_proxy_name}</td>
+                    <td>{$vo.receive_proxy_code}</td>
+                    <td>{$vo.receive_proxy_name}</td>  
+                    <td>{$vo.apply_code}</td>  
+                    <td class="money_style">{$vo.apply_money}</td>                
+                    <td>{$vo.approve_status|get_contract_status}</td>
+                    <td>{$vo.apply_user_id|get_user_name}</td>
+                    <td>{$vo.apply_date|default="--"}</td>                    
+                    
+                    <td class="operation_td">
+                        <button class="operationbtn proxy_transfer_apply_detailed_btn" value="{$vo.apply_id}">
+                            <span>查看</span>
+                        </button>
+
+                        <if condition="($vo.approve_status eq 1) AND ($vo.create_user_id eq $self_id)" >
+                          <if condition="is_jurisdiction('ProxyTransfer/send')">
+                              <button class="operationbtn proxy_transfer_apply_send_btn"  value="{$vo.apply_id}" >
+                                  <span>送审</span>
+                              </button>
+                          </if>
+                        </if>
+
+                        <if condition="(($vo.approve_status eq 1) OR ($vo.approve_status eq 4) OR ($vo.approve_status eq 6))  AND ($vo.create_user_id eq $self_id)" >
+                          <if condition="is_jurisdiction('ProxyTransfer/edit')">
+                              <button class="operationbtn proxy_transfer_apply_edit_btn"  value="{$vo.apply_id}" >
+                                  <span>编辑</span>
+                              </button>
+                          </if>
+                        </if>
+
+                        <if condition="(($vo.approve_status eq 1) OR ($vo.approve_status eq 4) OR ($vo.approve_status eq 6))  AND ($vo.create_user_id eq $self_id)" >
+                          <if condition="is_jurisdiction('ProxyTransfer/delete')">
+                              <button class="operationbtn proxy_transfer_apply_delete_btn"  value="{$vo.apply_id}"  data-name="{$vo.apply_code}" >
+                                  <span>删除</span>
+                              </button>
+                          </if>
+                        </if>
+
+                        <if condition="$vo.approve_status eq 2 " >
+                            <if condition="is_jurisdiction('ProxyTransfer/approve')">
+                                <button class="operationbtn  proxy_transfer_apply_approve_btn" value="{$vo.apply_id}" >
+                                    <span>初审</span>
+                                </button>
+                            </if>
+                        </if>
+
+                        <if condition="$vo.approve_status eq 3 " >
+                            <if condition="is_jurisdiction('ProxyTransfer/approve_t')">
+                                <button class="operationbtn  proxy_transfer_apply_approve_t_btn" value="{$vo.apply_id}" >
+                                    <span>复审</span>
+                                </button>
+                            </if>
+                        </if>
+
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

@@ -1,0 +1,122 @@
+<div id="orderrefund_view_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <thead>
+        <tr>
+            <th width="100%" colspan="4">退款信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th width="15%">用户名称：</th>
+            <td width="50%"><if condition="$orderrefund.proxy_name eq ''">{$orderrefund.enterprise_name}<else />{$orderrefund.proxy_name}</if></td>
+            <th width="15%">退款金额：</th>
+            <td width="20%">{$orderrefund.discount_price|default="0.000"}元</td>
+        </tr>
+        <tr>
+            <th>退款原因：</th>
+            <td colspan="3">{$orderrefund.refund_cause|get_refund_cause}</td>
+        </tr>
+        <tr>
+            <th>退款理由：</th>
+            <td colspan="3">{$orderrefund.remark}</td>
+        </tr>
+        <tr>
+            <th>退款状态：</th>
+            <td><if condition="$orderrefund.status eq '1'">待审核<elseif condition="$orderrefund.status eq '2'"/>初审通过<elseif condition="$orderrefund.status eq '3'"/>初审驳回<elseif condition="$orderrefund.status eq '4'"/>退款完成<else />退款失败</if></td>
+            <th>送审人：</th>
+            <td>{$orderrefund.create_user_id|get_user_name}</td>
+        </tr>
+        <tr>
+            <th>附件凭证：</th>
+            <td colspan="3"><if condition="$orderrefund.credential_one eq ''">没有附件<else /> <img src="{$orderrefund.credential_one}" STYLE="width: 20px;height: 15px;" class="imginput"><span><php> echo basename($orderrefund['credential_one']);</php></span>
+                <button type="button" class="btn export_btn filedown_btn" onclick="down_file('{:U('OrderRefund/show',array('refund_id'=>$orderrefund['refund_id'],'download'=>1))}')">
+                    <i class="minicon export_icon"></i><span>下载</span>
+                </button>
+            </if></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table width="100%">
+        <thead>
+        <tr>
+            <th width="100%" colspan="4">订单信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <if condition="$user_type eq '1'">
+        <tr>
+            <th width="15%">通道编码：</th>
+            <td width="45%">   <if condition="($orderrefund.o_order_status eq 4) or ($orderrefund.o_order_status eq 5) or ($orderrefund.o_order_status eq 6)">
+                {$orderrefund.back_channel_code}
+                <else />
+                {$orderrefund.channel_code}
+            </if></td>
+            <th width="20%">通道订单号：</th>
+            <td width="20%">{$orderrefund.o_channel_order_code}</td>
+        </tr>
+
+            </if>
+        <tr>
+            <th>订单号：</th>
+            <td>{$orderrefund.order_code}</td>
+            <th>手机号：</th>
+            <td>{$orderrefund.mobile}</td>
+        </tr>
+        <tr>
+            <th>运营商：</th>
+            <td>{$orderrefund.o_operator_id|get_operator_name}</td>
+            <th>归属地：</th>
+            <td>{$orderrefund.city_name}</td>
+        </tr>
+        <tr>
+            <th>流量包名称：</th>
+            <td>{$orderrefund.product_name}</td>
+            <th>折后价格：</th>
+            <td>{$orderrefund.discount_price|default="0.000"}元</td>
+        </tr>
+        <if condition="$user_type eq '1'">
+        <tr>
+            <th>订单信息：</th>
+            <td colspan="3">{$orderrefund.back_content}</td>
+        </tr>
+        </if>
+        </tbody>
+    </table>
+
+    <volist name="process" id="vo" empty="">
+        <table width="100%">
+            <thead>
+            <tr>
+                <th width="100%" colspan="4">{$vo.approve_stage|get_approve_stage}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th width="20%">审核状态：</th>
+                <td width="30%">
+                    <if condition="$vo.approve_stage eq 1">
+                        {$vo.approve_status|get_apply_status2=2}
+                        <elseif condition="$vo.approve_stage eq 2" />
+                        {$vo.approve_status|get_apply_status2=3}
+                        <else/>
+                        {$vo.approve_status|get_apply_status2=4}
+                    </if>
+                </td>
+                <th width="20%">审核人：</th>
+                <td width="30%">{$vo.approve_user_id|get_user_name}</td>
+            </tr>
+            <tr>
+                <th>审核时间：</th>
+                <td colspan="3"><if condition="$vo.approve_date neq '0000-00-00 00:00:00' ">{$vo.approve_date}</if></td>
+            </tr>
+            <tr>
+                <th >审核备注：</th>
+                <td colspan="3">{$vo.approve_remark}</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </volist>
+
+</div>

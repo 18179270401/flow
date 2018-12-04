@@ -1,0 +1,116 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="operation_box">
+    <div class="operation_con">
+        <div class="currenttit">
+            <i></i><span><em>日志查询</em>><em>登录日志</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="Loginlog/export_excel">
+                <button class="btn  export_button" data-url="Loginlog">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+    </div>
+    </div>
+    <div class="search_box">
+        <form name="excel"  method="get" action="/index.php/Admin/Loginlog/index">
+        <div class="search_nav">
+            <ul>
+                <li>
+                    <input type="text" class="inputtext" name="login_user_name" value="{$Think.get.login_user_name}" placeholder="登录用户名"/>
+                </li>
+                <li>
+                    <input type="text" class="inputtext" name="login_name_full" value="{$Think.get.login_name_full}" placeholder="登录全称"/>
+                </li>
+                    <li>
+                        <label class="inputlabel">用户类型：</label>
+                        <select class="select" name="user_type" style="min-width:80px">
+                            <option value="9" selected>全部</option>
+                            <option value="1" <if condition='$Think.get.user_type eq 1'>selected</if>>尚通端</option>
+                            <option value="2" <if condition='$Think.get.user_type eq 2'>selected</if>>代理商端</option>
+                            <option value="3" <if condition='$Think.get.user_type eq 3'>selected</if>>企业端</option>
+                        </select>
+                        <input type="hidden" value="9"/>
+                    </li>
+                <li>
+                    <label class="inputlabel">登录时间：</label>
+                    <input type="text" class="inputtext" name="start_datetime"  placeholder="开始时间" value="{$start_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+                    <em class="inputto">至</em>
+                    <input type="text" class="inputtext" name="end_datetime"  placeholder="结束时间" value="{$end_datetime}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+                </li>
+
+            </ul>
+        </div>
+        <div class="search_btncon">
+            <button class="btn add_btn">
+                <i class="minicon search_icon"></i><span>查询</span>
+            </button>
+
+            <button type="button" class="btn export_btn  reset_button" onclick="function(){return false;}">
+                <i class="minicon reload_icon"></i><span>重置</span>
+            </button>
+        </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50px">序号</th>
+                            <th width="100px" class="change">登录用户名</th>
+                            <th width="100px" class="change">登录全称</th>
+                            <th width="100px" class="change">用户类型</th>
+                            <th width="100px" class="change">IP地址</th>
+                            <th width="100px" class="change">登录时间</th>
+    
+    
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody">
+                <table>
+                    <volist name="loginlog_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td>{$vo.login_user_name}</td>
+                            <td>{$vo.login_name_full}</td>
+                            <td> {$vo.user_type|get_sys_type}</td>
+                            <?php if(strstr($vo['ip_addr'],'.')){?>
+                                <td><?php echo $vo['ip_addr'];?></td>
+                            <?php }else{?>
+                                <td><?php echo long2ip($vo['ip_addr']);?></td>
+                            <?php }?>
+                            <td>{$vo.login_date}</td>
+
+
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+    parent.layer.closeAll();
+</script>
+</body>
+</html>

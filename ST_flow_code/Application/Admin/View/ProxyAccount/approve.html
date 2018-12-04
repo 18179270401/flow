@@ -1,0 +1,51 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" id="character_box" style="display:none;">
+    <form name="proxyAccount_approve_form">
+        <input type="hidden"  name="apply_money" value="{$apply_money}" />
+        <input type="hidden"  name="apply_code" value="{$apply_code}" />
+        <input type="hidden"  name="proxy_id" value="{$proxy_id}" />
+        <div class="checkinfo_con">
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核：</h5>
+                <div class="add_value">
+                    <label class="radio  checked" value="1"><em>通过</em></label>
+                    <label class="radio "  value="2"><em>驳回</em></label>
+                    <input type="hidden" name="approve_status"  value="1" />
+                </div>
+            </div>
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核原因：</h5>
+                <div class="add_value">
+                    <textarea class="textarea" name="approve_remark"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+        <div class="billinginfo_box">
+            <div class="billinginfo_tit">
+                <h2>信息</h2>
+            </div>
+            <div class="billinginfo_con">
+                <div class="billinginfo_mess">
+                    <ul>
+                        <li><label>企业名称：</label><span>{$proxy_name}</span></li>
+                        <li><label>充值金额：</label><span>{$apply_money}元</span></li>
+                    </ul>
+                </div>
+                <div class="billinginfo_list">
+                    <ul>
+                        <li>
+                            <label class="label">附件：</label>
+                            <div class="billinginfo_content">
+                                <a href="{:U('ProxyAccount/approve',array('apply_code'=>$apply_code,'download'=>1))}">
+                                    <button class="btn export_btn">
+                                        <i class="minicon export_icon"></i><span>点击下载</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+</div>

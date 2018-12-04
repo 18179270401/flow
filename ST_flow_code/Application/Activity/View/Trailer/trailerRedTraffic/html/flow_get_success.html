@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>领取成功</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" type="text/css" href="../css/flow_get_success.css" />
+</head>
+
+<body class="parent-layout">
+	
+	
+    <div class="red-packet" style="margin-top:2rem;">
+        <image src="../images/darunfa_logo.png" style="margin-top:2.8rem;width:2.3rem;">
+            <div style="margin-top:2.6rem;" id="txtFlowValue">10M</div>
+    </div>
+    <div style="margin-top:1rem;margin-bottom:1rem">
+        <div style="font-size:1rem;color:#870702" id="txtGetFlowValue">恭喜你，抢到了<span id="txtGetFlowValueSize" style="color: #FFCC33;">10M</span>流量</div>
+        <div style="font-size:0.75rem;color:#870702" id="txtGetFlowValueInfo">流量将直接充值到手机号码中，请留意短信通知</div>
+    </div>
+    <div>
+        <button id="blue_btn" class="blue-button">找流量商尚通合作</button>
+        <button id="red_btn" class="red-button">关注尚通科技</button>
+    </div>
+    <div style="margin-top:4rem;margin-bottom:3rem">
+        <image src="../images/awardee.png" width=85% height=12%>
+        <image src="../images/avatar.png" width=10% height=12% style="float:left;margin-left:2rem;margin-top:0.2rem;">
+            <div style="float:right;margin-top:0.2rem">
+                <div style="float:left;text-align:left;margin-right:3rem">
+                    <div id="nickname" style="color:#7b4a29;font-size:0.8rem;">马文琴</div>
+                    <div id="mobile" style="color:#fca102;font-size:0.8rem;">181****1331</div>
+                </div>
+                <div style="float:right;text-align:right;margin-right:2rem">
+                    <div id="product" style="color:#7b4a29;font-size:0.8rem;">抢到10M流量</div>
+                    <div id="date" style="color:#fca102;font-size:0.8rem;">06-10 18:18</div>
+                </div>
+            </div>
+    </div>
+    <div>
+        <image src="../images/rule.png" width=85% height=10%>
+            <div>
+                <p1 style="color:#7b4a29;font-size:0.7rem;">
+                    1.活动时间：2016-04-22 00:00:00 至2016-05-05 00:00:00</br>
+                    2.活动时间：2016-04-22 00:00:00 至2016-05-05 00:00:00</br>
+                    3.活动时间：2016-04-22 00:00:00 至2016-05-05 00:00:00</br>
+                </p1>
+            </div>
+    </div>
+    <script src="../../../../utils/js/jquery-2.2.3.js"></script>
+    <script src="../../../../utils/js/get_para.js"></script>
+    <script src="../js/flow_get_success.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        htmlFontSize();
+        window.onresize = function() {
+            htmlFontSize();
+        }
+
+        function htmlFontSize() {
+            var w = document.documentElement.clientWidth;
+            document.documentElement.style.fontSize = (parseInt(w) / 768) * 40 + "px";
+        }
+    </script>
+</body>

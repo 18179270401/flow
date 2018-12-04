@@ -1,0 +1,351 @@
+body,html{
+
+    padding: 0px;
+    margin: 0px;
+
+}
+#a,#b,#e{
+    background-color: #fffaf6;
+    background-image: url("../images/flow_xiao.png");
+    background-repeat:no-repeat;
+}
+.mmain{
+	height:57%;
+	width:100%;
+	background: #ce3a38;
+/* 	position:fixed; */
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #777777;  
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #777777;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #777777;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #777777;
+}
+
+.main{
+	background-color: #fffaf6;
+    background-image: url("../images/flow_xiao.png");
+    background-repeat:no-repeat;
+    background-size:100%	 100%; 
+}
+
+.head{
+    font-size: 0.22in;
+    color: white;
+    border: 0px solid blue;
+    text-align: center;
+    white-space:nowrap;
+    height: 0.4in;
+    line-height: 0.4in;
+    margin-top: 0.05in;
+}
+.head .back{
+
+    float: left;
+    background-image: url("../images/package/fanghui.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding:0.12in;
+    margin: 0.07in;
+
+
+    border: 0px solid blue;
+
+}
+.head .right{
+    padding:0.12in;
+    margin: 0.07in;
+    border: 0px solid blue;
+    float: right;
+}
+.head .label{
+    border: 0px solid blue;
+
+}
+.icon{
+    background-image: url("../images/flow.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.8in;
+    margin: 0.1in 0in;
+}
+.himg{
+    margin-top: 0.2in;
+    text-align: center;
+    height: 0.6in;
+}
+.texta,.textb,.textc,.textd,.texte{
+    text-align: center;
+    font-size: 0.15in;
+    color: #333333;
+}
+.texta{
+    font-size: 0.16in;
+}
+.textc{
+    margin-top: 0.1in;
+
+ }
+#b .textc{
+    margin-top: 0.5in;
+}
+.texte{
+    margin-top: 0.23in;
+}
+
+.textb{
+    color: #fc0202;
+    font-weight:bold;
+    font-family:  KaiTi;
+}
+.textd{
+    margin-top: 0.68in;
+}
+
+.textd input[type=tel]{
+     font-size: 0.21in;
+/*      margin-left:10px;  */
+	background:#e6a4a1;
+	margin-top:12px;
+	width:75%;
+     border-radius: 3px;
+     text-align: center;
+     border-style:solid; 
+     border-width:1px; 
+     border-color:#FFF;
+ }
+.texte button{
+    font-size: 0.15in;
+    border:none;
+    border-radius: 3px;
+    text-align: center;
+    height:35px;
+    width: 75%;
+/*     margin-left:8px;  */
+    background-color: #ffe75d;
+    -webkit-border-radius: 3px;
+    color: #ce3a37;
+    padding: 5px;
+    font-weight:bolder;
+}
+.alert{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(256,256,256,0.5);
+}
+#e .downicon{
+    background-image: url("../images/package/xiaozai.png");
+    width: 90%;
+
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center top;
+
+    position: absolute;
+    top:2.6in;
+    left:5%;
+    right:5%;
+    bottom: 5%;
+
+}
+#e .downicon button{
+    border: none;
+    background-color: #fb3538;
+    color: white;
+    border-radius: 100px;
+    width: 30%;
+
+    font-size: 0.11in;
+    position: static;
+    margin-top: 20%;
+    margin-left: 35%;
+    height: 15%;
+}
+.flowAlert .bg{
+    background-image: url("../images/flow_dahongbao.png");
+    width: 20rem;
+    height: 27.36rem;
+    background-size:100% 100%;
+    
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin: 20% 0px auto;
+}
+.flowAlert .bg .text{
+    text-align: center;
+}
+.flowAlert .bg .text p{
+    margin: 5px 0px;
+}
+.flowAlert .bg .text .a{
+    font-size: 1.2rem;
+    color: #fff02c;
+    font-weight: bold;
+    padding-top: 40%;
+   /*  height: 100px; */
+   min-height:100px;
+   height:auto;
+
+}
+.flowAlert .bg .text .c{
+    font-size: 1.2rem;
+    color: #e93a20;
+    font-weight: bold;
+    padding-top: 30px;
+    min-height:100px;
+   	height:auto;
+   	margin:auto;
+   	width:100%;
+   	padding-top:0px;
+}
+.flowAlert .bg .text .d{
+    font-size: 1rem;
+    color: #fff02c;
+    font-weight: bold;
+
+}
+.flowAlert .bg .text .b{
+    position: fixed;
+    height: 20%;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+.flowAlert .bg .text .b button{
+  /*   background: url("../images/package/text_btn.png") no-repeat center; */
+    border: none;
+    background-size: contain;
+    /* width: 255px; */
+    width:50%;
+    max-width:260px;
+    height: 50px;
+    background-color: #FF5454;
+    color: white;
+    border-radius: 15px;
+ 	font-size: 20px;
+}
+.down{
+    margin: 5% 5%;
+    background-color: white;
+    padding: 5% 5%;
+    line-height: 30px;
+    font-size: 18px;
+    border-radius: 7px;
+    box-shadow: 2px 2px 10px #06C;
+    z-index: 999;
+    position: absolute;
+    width: 80%;
+    display: block;
+    top: 0px;
+}
+.list_user{
+    border: 1px solid red;
+    width: 70%;
+    margin:  auto;
+    border-radius: 10px;
+    background: white;
+    font-size: 14px;
+    box-shadow: 0px 0px 3px #000000;
+
+}
+
+.list_user .item{
+    padding: 10px 0px;
+    margin: 0px 10px;
+    border-bottom: 1px solid #c1120e;
+    text-indent: 14px;
+
+}
+.list_user .item:last-child{
+    border-bottom: none;
+}
+
+
+.flow_trail{
+	width:100%;
+	background: #ce3a38;
+}
+
+.no_flow_button{
+	background-image: url("../images/flow_get_button.png");
+	 border: none;
+    background-size: contain;
+    /* width: 255px; */
+    width:50%;
+    max-width:260px;
+    height: 50px;
+    border-radius: 15px;
+ 	font-size: 20px;
+}
+
+.notice{
+	padding: 10px 0px;
+    margin: 0px 10px;
+    font-size: 10px;
+    color: #7d0000;
+	text-align: center;
+}
+
+.mui-media-right{
+	float: right;
+	color: white;
+	margin-right: -50px;
+}
+
+.mui-table-view-cell:after{
+    position: static;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    /* height: 1px; */
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+
+.mui-table-view:after {
+    position: static;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* height: 1px; */
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+}
+
+
+.content {
+    width: 80%;
+    height: 80%;
+    border-radius: 8px;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    left: 50%;
+    display: none;
+}

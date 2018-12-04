@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="__PUBLIC__/WxHome/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/WxHome/css/base.css">
+		<script type="text/javascript" src="__PUBLIC__/WxHome/js/setFontSize.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/WxHome/js/common.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/echarts.min.js"></script>
+		<title>首页</title>
+	</head>
+	<body>
+		<div class="banner">
+			<div class="now_balance">
+				<h5>当前余额（元）</h5>
+				<div class="cut_off">
+					<em class="before"></em>
+					<i></i>
+					<em class="after"></em>
+				</div>
+				<h3>{$account_balance|default=0}</h3>
+				<p>{$enterprise_name}</p>
+			</div>
+			<div class="banner_mask">
+				<div class="col_5">
+					<div class="mask_txt">
+						<h3>冻结余额（元）</h3>
+						<h5>{$freeze_money|default=0}</h5>
+					</div>
+				</div>
+				<div class="col_5">
+					<div class="mask_txt">
+						<h3>累计存款（元）</h3>
+						<h5>{$deposit_sum|default=0}</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main">
+			<div class="data_tabs">
+				<ul>
+					<li class="active"><a href="javascript:;">本周</a></li>
+					<li><a href="javascript:;">本月</a></li>
+				</ul>
+			</div>
+			<div class="data_table" >
+				<div class="data_tit" id='p1'>
+					<a href="javascript:;"><i class="homeicon pie"></i>运营商用户数占比图（单位：位）<span class="toright"></span></a>
+				</div>
+				<div class="data_body" id="people_chart_view" style='padding-bottom:10px'></div>
+			</div>
+			<div class="data_table">
+				<div class="data_tit" id='p2'>
+					<a href="javascript:;"><i class="homeicon line"></i>流量充值柱状图（单位：MB）<span class="toright"></span></a>
+				</div>
+        <div class="data_body" id="flow_chart_view"></div>
+			</div>
+			<div class="data_table">
+				<div class="data_tit" id='p3'>
+					<a href="javascript:;"><i class="homeicon upline"></i>用户地域分布柱状图（单位：位）<span class="toright"></span></a>
+				</div>
+        <div class="data_body" id="province_chart_view"></div>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li class="active">
+					<a href="javascript:;" id='home'>
+						<i class="footericon home"></i>
+						<h3>首页</h3>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" id='rechart_search'>
+						<i class="footericon rechart_search"></i>
+						<h3>充值查询</h3>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" id='myself'>
+						<i class="footericon myself"></i>
+						<h3>我</h3>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="loading_mask">
+			<div class="loading_row">
+				<div class="loading_img"></div>
+				<p>系统载入中，请稍候...</p>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+var p_user_id = {$p_user_id};
+function get_chart_data(type){
+	$('.loading_mask').show();
+	var url = '/index.php/WxHome/Home/get_chart_data?type='+type+'&p_user_id='+p_user_id;
+	var data = {};
+	var fun = function(data){
+		$('.loading_mask').hide();
+		peopleOption = {
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: "{b}: {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'horizontal',
+		        x: 'center',
+		        y:'bottom',
+		        data:['中国移动','中国联通','中国电信']
+		    },
+		    color:['#b4a4dd','#5db2ed','#f19956'],
+		    series: [
+		        {
+		            type:'pie',
+		            radius: ['50%', '70%'],
+		            avoidLabelOverlap: false,
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                },
+		                emphasis: {
+		                    show: true,
+		                    textStyle: {
+		                        fontSize: '30',
+		                        fontWeight: 'bold'
+		                    }
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:data.data_p1
+		        }
+		    ]
+		};
+		flowOption = {
+		           tooltip: {
+		             trigger: 'item',
+		             formatter: "{b} : {c}"
+		           },
+		           xAxis: {
+		               data: data.ops_p2
+		           },
+		           itemStyle:{
+		               normal:{
+		               color:function(params) {
+		                     var colorList = [
+		                       '#b4a4dd','#5db2ed','#f19956'
+		                     ];
+		                     return colorList[params.dataIndex]
+		                 },
+		            }
+		          },
+		           yAxis: {},
+		           series: [{
+		               type: 'bar',
+		               data: data.data_p2
+		           }]
+		};
+
+		provinceOption = {
+		           tooltip: {
+		             trigger: 'item',
+		             formatter: "{b} : {c}"
+		           },
+		           xAxis: {
+		                type : 'category',
+		                data: data.ops_p3
+		           },
+		           itemStyle:{
+		               normal:{
+		                 color: function(params) {
+		                       var colorList = [
+		                          '#D7504B','#F0805A',
+		                       ];
+		                       return colorList[params.dataIndex%2]
+		                   }
+		            }
+		          },
+		           yAxis: {type : 'value'},
+		           series: [{
+		               type: 'bar',
+		               data: data.data_p3
+		           }]
+		};
+		peopleChart.setOption(peopleOption);
+		flowChart.setOption(flowOption);
+		provinceChart.setOption(provinceOption);
+	}
+	$.get(url,data,fun,'json');
+}
+var peopleChart = echarts.init(document.getElementById('people_chart_view'));
+var flowChart = echarts.init(document.getElementById('flow_chart_view'));
+var provinceChart = echarts.init(document.getElementById('province_chart_view'));
+get_chart_data(1);
+
+$("#p1").click(function(){
+	window.location.href = '/index.php/WxHome/OperatorPiechart/index';
+})
+$("#p2").click(function(){
+	window.location.href = '/index.php/WxHome/FlowChart/index';
+})
+$("#p3").click(function(){
+	window.location.href = '/index.php/WxHome/provinceChart/index';
+})
+$('#rechart_search').click(function(){
+	window.location.href = '/index.php/WxHome/User/showrecharge_record';
+})
+$('#myself').click(function(){
+	window.location.href = '/index.php/WxHome/User/show_account_manage';
+})
+$(".data_tabs li").click(function(){
+	$(".data_tabs li").removeClass("active");
+	$(this).addClass("active");
+	if($(this).text() == '本周'){
+		get_chart_data(1);
+	}else{
+		get_chart_data(2);
+	}
+});
+</script>

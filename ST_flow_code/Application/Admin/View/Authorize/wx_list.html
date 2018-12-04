@@ -1,0 +1,56 @@
+<include file="Common/header" />
+<div class="main_con">
+  <div class="thepublic_box" style="margin: 0 0; border: none;  height: 100%">
+      <form method="get" action="{:U('Authorize/wx_source_local')}">
+      <div class="indicatsearch_con">
+              <label class="inputlabel">截止时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime" placeholder="开始时间" value="<if condition='$Think.get.start_datetime eq null '> {$default_start}<else />{$Think.get.start_datetime}</if>" style='min-width:80px'onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime" placeholder="结束时间" value="<if condition='$Think.get.end_datetime eq null '> {$default_end}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly/>
+          <button class="btn add_btn">
+            <i class="minicon search_icon"></i><span>查询</span>
+          </button>
+      </div>
+      </form>
+    <div class="tablelist_box">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tbody>
+                    <tr>
+                        <th>时间</th>
+                        <th>新增关注人数</th>
+                        <th>取消关注人数</th>
+                        <th>净增关注人数</th>
+                        <th>累计关注人数</th>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" style="calc(100%-100px);">
+          <table>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.create_date}</td>
+                    <td>{$vo.attention_new}</td>
+                    <td>{$vo.attention_cancel}</td>
+                    <td>{$vo.attention_grow}</td>
+                    <td>{$vo.attention_total}</td>
+                </tr>
+            </volist>
+             </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+  </div>
+</div>
+<include file="Common/footer" />

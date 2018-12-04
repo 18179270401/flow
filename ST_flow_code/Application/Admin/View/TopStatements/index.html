@@ -1,0 +1,91 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span></span>
+        </div>
+          <div class="operation_info">
+          </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/TopStatements/index">
+    <div class="search_nav minheight30">
+      <ul>
+          <li>
+              <input type="text" class="inputtext" name="channel_code" maxlength="15" style='min-width:80px' value="{$Think.get.channel_code}" placeholder="通道编号"/>
+          </li>
+        <li>
+          <input type="text" class="inputtext" name="channel_name" value="{$Think.get.channel_name}" placeholder="通道名称"/>
+        </li>
+          <!--<li>
+              <label class="inputlabel">操作时间：</label>
+              <input type="text" class="inputtext inputdateall" name="start_datetime"  value="<if condition='$Think.get.start_datetime eq "" '> {$d_sdata}<else />{$Think.get.start_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+              <em class="inputto">至</em>
+              <input type="text" class="inputtext inputdateall" name="end_datetime"   value="<if condition='$Think.get.end_datetime eq "" '> {$d_edata}<else />{$Think.get.end_datetime}</if>" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+          </li>-->
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="70" class="change">通道编号</th>
+                    <th width="130" class="change">通道名称</th>
+                    <th width="100" class="change">结算月份</th>
+                    <th width="100" class="change">订单数(个)</th>
+                    <th width="100" class="change">原价(元)</th>
+                    <th width="100" class="change">折扣价(元)</th>
+                    <th width="150">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.channel_code}</td>
+                    <td>{$vo.channel_name} </td>
+                    <td>{$vo.stat_month}</td>
+                    <td>{$vo.counts|default="0"}</td>
+                    <td>{$vo.bprice|default="0"}</td>
+                    <td>{$vo.dprice|default="0"}</td>
+                    <td>
+                        <isshow url="TopStatements/export_excel">
+                            <button class="operationbtn enterprisestatements_excel_btn" value="{$vo.channel_id}" data-toggle="tooltip" data-type="TopStatements" data-value="{$vo.stat_month}" data-placement="<if condition='$i eq count($list)'>top<else />bottom</if>" >
+                                <span>导出</span>
+                            </button>
+                        </isshow>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

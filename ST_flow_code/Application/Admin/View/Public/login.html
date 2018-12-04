@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$display_title}</title>
+    <link href="{$display_icon}" rel="bookmark" type="image/x-icon" />
+    <link href="{$display_icon}" rel="icon" type="image/x-icon" />
+    <link href="{$display_icon}" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="__PUBLIC__/New/css/reset.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/New/css/index.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/New/css/login.css?s={$version_number}">
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.12.1.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/bootstrap.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.mCustomScrollbar.concat.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.mousewheel.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/select2.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/windowGroup.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/Windowtab.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/taskBar.js?s={$version_number}"></script> 
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/bootstrap-datetimepicker.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/common.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-wen.js?s={$version_number}"></script>
+    <script type="text/javascript">
+    $(function(){
+      $("input[name='username']").first().focus();
+    })
+      
+    </script>
+</head>
+
+<body class="white">
+<div class="loginheader">
+  <div class="layout">
+    <a href="#" class="logo"><img src="{$display_picture}" alt="img" style="max-width: 212px;max-height: 36px;"/></a>
+  </div>
+</div>
+<div class="loginbody">
+  <div class="loginmain">
+      <div class="loginbox">
+        <div class="logintit">
+          <h2>登录</h2>
+        </div>
+        <div class="logincon" style="height: 295px;">
+            <form id="login_id" name="login_name">
+            <div class="error"><span id="error_msg"></span></div>
+            <div class="logintext">
+              <label class="minicon user_icon"></label><input type="text" placeholder="请输入用户名@公司编号" class="text" name="username" id="username" value="{$cookie.username}" />
+            </div>
+            <div class="logintext">
+              <label class="minicon password_icon"></label><input type="password" placeholder="请输入登录密码" class="text" name="password" id="password" value="{$cookie.password}" />
+            </div>
+            <div class="logintext codetext">
+              <input type="text" class="text" name="verify" placeholder="请输入验证码" />
+              <span class="code_img"><img src="{:U('Public/create_verify',array('rand'=>1))}" alt="img" width="115" height="37" id="login_verify_img" /></span>
+            </div>
+            <div class="forgetpass">
+				<input type="hidden" name="remember_pass" id="remember_pass" <if condition='!empty($cookie)'>value="1"<else/>value="0"</if>>
+				<label class="checkbox <if condition='!empty($cookie)'>checked</if>" onclick="remember_pass2()"><em>记住密码</em></label>
+                <a href="/index.php/Admin/Public/back_password">忘记密码？</a>
+            </div>
+            </form>
+            <div class="loginbtncon">
+              <button type="button" class="loginbtn" id="login_loginbtn">登 录</button>
+            </div>
+        </div>
+      </div>
+      <div class="warning">*建议使用IE9浏览器、电脑分辨率为1024*768以上</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function remember_pass2(){
+    var remember_pass = $("#remember_pass").val();
+    var s = remember_pass==1?"0":"1";
+    $("#remember_pass").val(s);
+}
+</script>
+
+<div class="loginfooter">
+  <p>{$display_end}</p>
+</div>
+<div id="layerdivid"></div>
+</body>
+</html>

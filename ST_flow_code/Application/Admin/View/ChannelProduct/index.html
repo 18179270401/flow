@@ -1,0 +1,179 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>产品管理</em>><em>通道产品</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="ChannelProduct/add">
+            <button class="btn add_btn channelproduct_add_btn">
+              <i class="minicon addoperation_icon"></i><span>新增通道产品</span>
+            </button>
+                <if condition="is_jurisdiction('ChannelProduct/add') and is_jurisdiction('ChannelProduct/export_excel')">
+                    <span class="line">|</span>
+                </if>
+            </isshow>
+            <isshow url="ChannelProduct/export_excel">
+                <button class="btn  export_button"  data-url="ChannelProduct">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form method="get"   name="excel" action="/index.php/Admin/ChannelProduct/index">
+      <div class="search_nav">
+        <ul>
+          <li>
+            <input type="text" class="inputtext" name="product_name" value="{$Think.get.product_name}" placeholder="产品名称"/>
+          </li>
+          <li>
+            <input type="text" class="inputtext" name="number" style='min-width:80px' value="{$Think.get.number}" placeholder="产品编号"/>
+          </li>
+            <li>
+                <input type="text" class="inputtext" name="channel_code" style='min-width:80px' value="{$Think.get.channel_code}" placeholder="通道编码"/>
+              <!--  <label class="inputlabel">通道编码：</label>
+                <select class="select" name="channel_code" style='min-width:80px'>
+                    <option value="">请选择</option>
+                    <volist name="channel" id="voc">
+                        <option value="{$voc.channel_code}" <if condition='$Think.get.channel_code eq $voc["channel_code"]'>selected</if> >{$voc.channel_code}</option>
+                    </volist>
+                </select>
+                <input type="hidden" value=""/>-->
+            </li>
+          <li>
+              <input type="text" class="inputtext" name="channel_name" style='min-width:80px' value="{$Think.get.channel_name}" placeholder="通道名称"/>
+              <!--<label class="inputlabel">通道名称：</label>
+              <select class="select" name="channel_id" style='min-width:80px'>
+                <option value="">请选择</option>
+                <volist name="channel" id="voc">
+                    <option value="{$voc.channel_id}" <if condition='$Think.get.channel_id eq $voc["channel_id"]'>selected</if> >{$voc.channel_name}</option>
+                </volist>
+              </select>
+              <input type="hidden" value=""/>-->
+            </li>
+            <li>
+              <label class="inputlabel">运营商：</label>
+              <select class="select" name="operator_id" style='min-width:80px'>
+                <option value="">请选择</option>
+                <volist name="operator" id="voo">
+                    <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                </volist>
+              </select>
+                <input type="hidden" value=""/>
+            </li>
+            <li>
+              <label class="inputlabel">省份：</label>
+              <select class="select" name="province_id" id="province_id" style='min-width:80px' onchange="get_is_filter(1)">
+                <option value="">请选择</option>
+                <volist name="province" id="vop">
+                    <option value="{$vop.province_id}" <if condition='$Think.get.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+                </volist>
+              </select>
+                <input type="hidden" value=""/>
+            </li>
+            <li>
+                <label class="inputlabel">市：</label>
+                <select class="select" name="city_id" id="city_id" style='min-width:100px'>
+                    <option value="">请选择</option>
+                    <volist name="citys" id="v">
+                        <option value="{$v.city_id}" <if condition='$Think.get.city_id eq $v["city_id"]'>selected</if> >{$v.city_name}</option>
+                    </volist>
+                </select>
+                <input type="hidden" value=""/>
+            </li>
+          <li>
+              <label class="inputlabel">状态：</label>
+              <select class="select" name="status" style='min-width:80px' >
+                <option value="9" >全部</option>
+                <option value="1" <if condition='($Think.get.status eq 1) or ($Think.get.status eq null)'>selected</if>>正常</option>
+                <option value="0" <if condition='$Think.get.status eq "0"'>selected</if>>已禁用</option>
+              </select>
+              <input type="hidden" value="1"/>
+            </li>
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con " data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="80">序号</th>
+                    <th width="80" class="change">产品名称</th>
+                    <th width="110" class="change">产品编号</th>
+                    <th width="80" class="change">标准价格(元)</th>
+                    <th width="90" class="change">通道编码</th>
+                    <th width="140" class="change">通道名称</th>
+                    <th width="90" class="change">流量包大小(M)</th>
+                    <th width="60" class="change">运营商</th>
+                    <th width="60" class="change">省份</th>
+                    <th width="60" class="change">市</th>
+                    <!--<th width="100" class="change">产品类型</th>-->
+                    <!--<th width="80" class="change">状态</th>-->
+                    <th width="130">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="channelproduct_list" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td>{$vo.product_name}</td>
+                  <td>{$vo.number}</td>
+                  <td>{$vo.price}</td>
+                  <td>{$vo.channel_code}</td>
+                  <td>{$vo.channel_name}</td>
+                  <td>{$vo.size}</td>
+                  <td>{$vo.operator_name}</td>
+                  <td>{$vo.city_id|get_city_province_name=$vo['province_id']}</td>
+                  <td>{$vo.city_name|default='--'}</td>
+                  <!--<td><if condition="$vo.product_type eq '0'">全国流量<else />省内全国流量</if></td>-->
+                  <!--<td><if condition="$vo.status eq '0'">已禁用<else />正常</if></td>-->
+                  <td class="operation_td">
+                      <button class="operationbtn channelproduct_show_btn" value="{$vo.product_id}">
+                          <!--<i class="minicon edit_icon"></i>-->
+                          <span>查看</span>
+                      </button>
+                    <isshow url="ChannelProduct/edit"> 
+                      <button class="operationbtn channelproduct_edit_btn" value="{$vo.product_id}">
+                      <!--<i class="minicon edit_icon"></i>-->
+                      <span>编辑</span>
+                      </button>
+                    </isshow>
+                    <isshow url="ChannelProduct/toggle_status">
+                      <button class="operationbtn channelproduct_toggle_status_btn" data-original-title="<if condition="$vo.status eq 1">禁用<else />启用</if>" value="{$vo.product_id}" data-value="{$vo.product_name}">
+                      <!--<i <if condition="$vo['status'] eq 0">class="minicon reviewpass_icon"<elseif condition="$vo['status'] eq 1" />class="minicon reviewdis_icon"</if> ></i>-->
+                      <span><if condition="$vo['status'] eq 0">启用<elseif condition="$vo['status'] eq 1" />禁用</if></span>
+                      </button>
+                    </isshow>
+
+                  </td>
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

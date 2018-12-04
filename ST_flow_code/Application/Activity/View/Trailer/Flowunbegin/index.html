@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>倒计时</title>
+	<!--分享流量-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+	<script type="text/javascript" src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+	
+    <link rel="stylesheet" type="text/css" href="{$role}css/flow_unbegin.css?s={$version_number}" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+
+<body>
+	<input type="hidden" name="start_date" id="start_date" value="{$start_date}">
+    <div class="content">
+        <div class="slogan"></div>
+        <div class="count-down">
+            <p>距离下一场开始</p>
+            <div id="countDown" class="countDown">
+                <div class='num'>
+                    <div class='num-item' id="t_h0">0</div>
+                    <div class='num-item' id="t_h1">0</div>
+                </div>
+                <span class="unit">时</span>
+                <div class='num'>
+                    <div class='num-item' id="t_m0">0</div>
+                    <div class='num-item' id="t_m1">0</div>
+                </div>
+                <span class="unit">分</span>
+                <div class='num'>
+                    <div class='num-item' id="t_s0">0</div>
+                    <div class='num-item' id="t_s1">0</div>
+                </div>
+                <span class="unit">秒</span>
+            </div>
+        </div>
+        <div class="rulelayout">
+            <div class="rule-line"></div>
+            <div class="rule-content">
+	        		{$activity_rule}
+                <!--1.活动时间：2016-05-01 10:000 至 2016-08-01</br>
+					2.活动时间内得累计赠送200G流量，赠完为止。</br>
+					3.每个用户最高可获得200M，每天可以参与一次大抽奖。</br>
+					4.号码处于欠费停机状态均不能参加活动。请确保手机处于正常状态，否则运营商可能会充值失败。</br>
+					5.联通纯2G,3G用户，未实名认证用户以及单一流量规格包叠加超过5次会充值实效，符合此条件用户建议使用其他手机号参与活动。</br>
+					6.抢到的流量将在24小时内充值到手机号码中，请留意短信通知，当月有效，江西省内可用，且有限使用该赠送流量。</br>
+					7.本次活动移动，联通，电信，江西省内用户均可参与，若出现兑奖异常，请及时给客服留言寻求帮助。</br>
+					8.如果你喜欢本次活动，请在右上角为我们活动点赞。</br>-->
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+		<!--流量分享需求-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<!--流量分享需求-->
+<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+<script src="{$role}js/countDown.js?s={$version_number}" type="text/javascript" charset="utf-8"></script>
+<script>
+    htmlFontSize();
+    window.onresize = function() {
+        htmlFontSize();
+    }
+    function htmlFontSize() {
+        var w = document.documentElement.clientWidth;
+        var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+        document.documentElement.style.fontSize = (i) * 40.0 + "px";
+    }
+</script>
+
+</html>

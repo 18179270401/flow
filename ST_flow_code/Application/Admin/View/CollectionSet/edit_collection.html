@@ -1,0 +1,126 @@
+
+<div id="edit_collection_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="edit_collection_form" >
+        <div class="receivingset_nav" style="margin-top:0px;">
+        <ul>
+            <li class="show_enterprise show_st dhide">
+                <div class="add_list">
+                    <h5>企业名称：</h5>
+                    <div class="add_value">
+                        <span>{$uset.enterprise_name}</span>
+                        <input type='hidden' name='enterprise_id' id='user_type_ids' value='{$uset.enterprise_id}'>
+                        <input type="hidden" name="account_id"  value="{$uset.account_id}">
+                    </div>
+                </div>
+            </li>
+            <li class="show_enterprise show_st dhide">
+                <div class="add_list">
+                    <h5>公众号APPID：</h5>
+                    <div class="add_value show_wx_appid">
+                        <input type="text" class="inputtext" style="display: block;" name="wx_appid" empty="true" value="{$uset.wx_appid}">
+                    </div>
+                    <div class="promptinfo"><span>APPID：绑定公众账号APPID</span></div>
+                </div>
+            </li>
+            <li class="show_enterprise show_st dhide">
+                <div class="add_list">
+                    <h5>公众号SECERT：</h5>
+                    <div class="add_value show_wx_appsecret">
+                        <input type="text" class="inputtext" style="display: block;" name="wx_appsecret" empty="true" value="{$uset.wx_appsecret}">
+                    </div>
+                    <div class="promptinfo"><span>公众帐号secert(仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置)</span></div>
+                </div>
+            </li>
+            <li class="show_enterprise dhide">
+                <div class="add_list">
+                    <h5>商户号：</h5>
+                    <div class="add_value show_wx_mchid">
+                        <input type="text" class="inputtext" style="display: block;" empty="true" name="wx_mchid" value="{$uset.wx_mchid}">
+                    </div>
+                    <div class="promptinfo"><span>商户号（开户邮件中可查看）</span></div>
+                </div>
+            </li>
+            <li class="show_enterprise dhide">
+                <div class="add_list">
+                    <h5>商户密钥：</h5>
+                    <div class="add_value show_wx_key">
+                        <input type="text" class="inputtext" style="display: block;" empty="true" name="wx_key" value="{$uset.wx_key}">
+                    </div>
+                     <div class="promptinfo"><span>商户支付密钥，参考开户邮件设置（登录商户平台自行设置）</span></div>
+                </div>
+            </li>
+            <li class="show_enterprise dhide">
+                <div class="add_list">
+                    <h5>微信PEM1：</h5>
+                    <div class="add_value">
+                        <span id="xs_wx_pem_file_one" style="display: block;"> <if condition="$uset.wx_pem_file_one neq '' "><php> echo basename($uset['wx_pem_file_one']);</php></if></span>
+                    </div>
+                    <a href="#" class="operation_a " data-filename="wx_pem_file_one"><i class="minicon upload_icon"></i></a>
+                    <input type="file" class="file file_edit_sence"  name="wx_pem_file_one" id="wx_pem_file_one" data-toggle="tooltip" data-placement="bottom" data-original-title="上传"/>
+                    <div class="promptinfo"><span>PEM文件(名称为apiclient_cert)，用于认证退款</span></div>
+                </div>
+            </li>
+            <li class="show_enterprise dhide">
+                <div class="add_list">
+                    <h5>微信PEM2：</h5>
+                    <div class="add_value">
+                        <span id="xs_wx_pem_file_two" style="display: block;"> <if condition="$uset.wx_pem_file_two neq '' "><php> echo basename($uset['wx_pem_file_two']);</php></if></span>
+                    </div>
+                    <a href="#" class="operation_a"><i class="minicon upload_icon"></i></a>
+                    <input type="file" class="file file_edit_sence" name="wx_pem_file_two" id="wx_pem_file_two" data-toggle="tooltip" data-placement="bottom" data-original-title="上传"/>
+                    <div class="promptinfo"><span>PEM文件(名称为apiclient_key)，用于认证退款</span></div>
+                </div>
+            </li>
+            <li>
+                <div class="add_list">
+                    <h5>流量红包地址：</h5>
+                    <div class="add_value" style="max-width:430px">
+                        <span  class="graphicsset_span">{$uset.redpack_address}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                    <div class="operation_a" style="width:90px;height:50px;">
+                <!--      <button type="button" class="btn export_btn btn_copy2"  data-addr="{$uset.redpack_address}" onclick="return false;"  style="margin-top:0;"><span>复制</span></button>
+              -->      </div>
+                </div>
+            </li>
+            <li>
+                <div class="add_list">
+                    <h5>流量充值地址：</h5>
+                    <div class="add_value" style="max-width:430px">
+                        <span class="graphicsset_span">{$uset.recharge_address}</span>
+                    </div>
+                    <div class="operation_a" style="width:90px;height:50px;">
+                  <!--      <button type="button"  class="btn export_btn btn_copy2" data-addr="{$uset.recharge_address}" onclick="return false;" style="margin-top:0;"><span>复制</span></button>
+          -->          </div>
+                </div>
+            </li>
+            <li class="show_enterprise dhide">
+                <div class="add_list">
+                    <h5>客服电话：</h5>
+                    <div class="add_value show_wx_mchid">
+                        <input type="text" class="inputtext" style="display: block;" empty="true" name="consumer_phone" value="{$uset.consumer_phone}" maxlength="15">
+                        <!--<span id="span_wx_mchid">{$list.wx_mchid}</span>-->
+                    </div>
+                    <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_mchid" data-inputname="wx_mchid" data-inputvalue="{$list.wx_mchid}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                    <div class="promptinfo"><span></span></div>
+                </div>
+            </li>
+            <li class="show_enterprise">
+                <div class="add_list">
+                    <h5>充值说明：</h5>
+                    <div class="add_value show_wx_mchid">
+                            <textarea class="textarea" name="explanation" style="width:400px;height:220px"  empty="true">{$uset.explanation}
+                            </textarea>
+                        <!--<span id="span_wx_mchid">{$list.wx_mchid}</span>-->
+                    </div>
+                    <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_mchid" data-inputname="wx_mchid" data-inputvalue="{$list.wx_mchid}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                    <div class="promptinfo"><span></span></div>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    /*jQuery.getScript("/Public/Admin/js/jquery.zclip.min.js");*/
+    jQuery.getScript("/Public/Admin/js/js-operation-copy.js");
+</script>

@@ -1,0 +1,181 @@
+<include file="Common/header" />
+<div class="main_con">
+
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>通道管理</em>><em>尚通资源管理</em></span>
+            </div>
+            
+        </div>
+    </div>
+    <div class="search_box">
+        <form method="get" name="excel" action="/index.php/Admin/Samtonchannel/index">
+            <div class="search_nav">
+                <ul>
+                    <li>
+                          <label class="inputlabel">省份：</label>
+                          <select class="select" name="province_id" id="province_id" style='min-width:80px' onchange="get_is_filter(1)">
+                            <option value="">请选择</option>
+                            <volist name="provinces" id="vop">
+                                <option value="{$vop.province_id}" <if condition='$Think.get.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+                            </volist>
+                          </select>
+                            <input type="hidden" value=""/>
+                        </li>
+                        <li>
+                            <label class="inputlabel">市：</label>
+                            <select class="select" name="city_id" id="city_id" style='min-width:100px'>
+                                <option value="">请选择</option>
+                                <volist name="citys" id="v">
+                                    <option value="{$v.city_id}" <if condition='$Think.get.city_id eq $v["city_id"]'>selected</if> >{$v.city_name}</option>
+                                </volist>
+                            </select>
+                        </li>
+                      <li>
+                    <li>
+                        <label class="inputlabel">通道状态：</label>
+                        <select class="select" name="channel_status" style='min-width:80px'>
+                            <option value="9" >全部</option>
+                            <option value="1" <if condition='($Think.get.channel_status eq 1) or ($Think.get.channel_status eq null)'>selected</if>>正常</option>
+                            <option value="0" <if condition='$Think.get.channel_status eq "0"'>selected</if>>暂停</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label class="inputlabel">使用状态：</label>
+                        <select class="select" name="use_status" style='min-width:80px'>
+                            <option value="9" >全部</option>
+                            <option value="1" <if condition='($Think.get.use_status eq 1) or ($Think.get.use_status eq null)'>selected</if>>使用中</option>
+                            <option value="0" <if condition='$Think.get.use_status eq "0"'>selected</if>>已停用</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con " data-mcs-theme="dark">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="240" class="change">通道名称</th>
+                            <th width="100" class="change">省份</th>
+                            <th width="100" class="change">市</th>
+                            <th width="80" class="change">移动折扣</th>
+                            <th width="80" class="change">联通折扣</th>
+                            <th width="80" class="change">电信折扣</th>
+                            <th width="80" class="change">通道状态</th>
+                            <th width="80" class="change">使用状态</th>
+                            <th width="100">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <table>
+                    <volist name="channel_list" id="vo">
+                        <tr>
+                            <td>{$vo.sort_no}</td>
+                            <td class="channel_name">{$vo.channel_name}</td>
+                            <td>{$vo.province_name}</td>
+                            <td>{$vo.city_name|default="--"}</td>
+                            <td>{$vo.yddiscount}</td>
+                            <td>{$vo.ltdiscount}</td>
+                            <td>{$vo.dxdiscount}</td>
+                            <td><if condition="$vo.channel_status eq '1'">正常<else/>暂停</if></td>
+                            <td><if condition="$vo.use_status eq '1'">使用中<else/>已停用</if></td>
+                            <td class="operation_td">
+                                <button class="operationbtn Samtonchannel_show_btn" value="{$vo.channel_id}">
+                                    <!--<i class="minicon edit_icon"></i>-->
+                                    <span>查看</span>
+                                </button>
+                                <isshow url="Samtonchannel/status">
+                                    <button class="operationbtn Samtonchannel_status_btn" data-original-title=" <if condition="$vo.use_status eq 1">停用<else />启用</if>" value="{$vo.channel_id}" other="{$vo.use_status}" >
+                                    <!--<i <if condition="$vo['status'] eq 0">class="minicon reviewpass_icon"<elseif condition="$vo['status'] eq 1" />class="minicon reviewdis_icon"</if> ></i>-->
+                                    <span><if condition="$vo['use_status'] eq 0">启用<elseif condition="$vo['use_status'] eq 1" />停用</if></span>
+                                    </button>
+                                </isshow>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<script type="text/javascript">
+
+    //切换使用状态
+    $(".Samtonchannel_status_btn").on('click',function(){
+
+        var channel_id = $(this).attr('value');
+        var use_status = $(this).attr('other');
+        var channel_name = $(this).parent().parent().children("td.channel_name").html();
+
+        if( use_status == 1)
+        {
+            var str = '禁用';
+        }else
+        {
+            var str = '启用';
+        }
+
+        top.layer.confirm('<i class="confirm_icon"></i>确定是否'+str+'通道资源【'+channel_name+'】？', {
+            title:'提示信息',
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            top.layer.closeAll();
+
+            var url = '/index.php/Admin/Samtonchannel/status';
+            var data = {channel_id:channel_id,use_status:use_status};
+            var fun = function(data){
+                if(data.status == 'success'){
+                  location.reload();
+                }
+                alertbox(data);
+              }
+
+            $.post(url,data,fun,'json');
+              
+          }, function(){
+             
+          });
+
+    })
+
+
+    $(".Samtonchannel_show_btn").on('click',function(){
+        var  channel_id = $(this).attr('value');
+        var  load = parent.layer.load(0, {shade: [0.3,'#000']});
+        $("#layerdivid",parent.document).load('/index.php/Admin/Samtonchannel/show?channel_id='+channel_id,function(data){
+            parent.layer.close(load);
+            if(is_layer(data)) {
+                parent.layer.open({
+                    type: 1,
+                    title:'尚通资源详情',
+                    area: ['350px', '460px'], //宽高
+                    content: $('#detail_box',parent.document),
+                    btn:['关闭']
+                });
+            }
+        });
+    })
+
+
+
+
+
+</script>
+<include file="Common/footer" />
+

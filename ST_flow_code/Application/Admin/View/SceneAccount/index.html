@@ -1,0 +1,565 @@
+<include file="Common/header" />
+
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.zclip.min.js?s={$version_number}"></script>
+<input type="hidden" name="swfpath" id="swfpath" value="__PUBLIC__/Admin/js/ZeroClipboard.swf" />
+
+<!--图片上传相关-->
+<script type="text/javascript" src="__PUBLIC__/Admin/js/webuploader.html5only.min.js?s={$version_number}"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/sceneaccountphotoupload.js?s={$version_number}"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/sceneaccountphotoupload.css?s={$version_number}" type="text/css" />
+
+<!--图片上传相关-->
+
+<style type="text/css">
+    .dhide{
+        display: none;
+    }
+</style>
+
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>营销场景</em>><em>微信收款设置</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="receivingset_box white">
+        <form name="sceneaccount_add_form1">
+        <div class="receivingset_hd tab_hd ">
+            <h3 class="active">微信收款设置</h3>
+            <h3>支付宝收款设置</h3>
+        </div>
+        <div class="receivingset_bd tab_bd">
+        <div class="receivingset_nav  bordertop" >
+            <ul>
+                <li class="show_enterprise show_st">
+                    <div class="add_list">
+                        <input type="hidden" name="payment_type_default" value="{$list['payment_type']}" />
+                        <div class="add_list">
+                            <h5><span class="wildcard"></span>收款方式：</h5>
+                            <div class="add_value">
+                                <label data-value="2" onclick="change_ptype(2)" <if condition="$list['payment_type'] eq 2">class="radio checked payment_type"<else/>class="radio payment_type"</if>><em>企业自己收款</em></label>
+                                <label data-value="1" onclick="change_ptype(1)" <if condition="$list['payment_type'] eq 1">class="radio checked payment_type"<else/>class="radio payment_type"</if>><em>运营方收款</em></label>
+                                <input type="hidden" name="payment_type1" id="paymenttypenew" value="{$list['payment_type']}" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="show_enterprise show_st">
+                    <div class="add_list">
+                        <input type="hidden" name="follow_type" id="follow_type" value="{$follow_type}" />
+                        <div class="add_list">
+                            <h5><span class="wildcard"></span>微信关注：</h5>
+                            <div class="add_value">
+                                <label data-value="1" onclick="change_follow_type(1)" <if condition="$follow_type eq 1">class="radio checked payment_type"<else/>class="radio payment_type"</if>><em>不需要关注</em></label>
+                                <label data-value="2" onclick="change_follow_type(2)" <if condition="$follow_type eq 2">class="radio checked payment_type"<else/>class="radio payment_type"</if>><em>需要关注</em></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <input type="hidden" id="account_id" name="account_id" value="{$list.account_id}">
+                <li class="show_enterprise show_st dhide">
+                    <div class="add_list">
+                        <h5>公众号APPID：</h5>
+                        <div class="add_value show_wx_appid">
+                            <input type="text" class="inputtext" style="display: block;" name="wx_appid" value="{$list.wx_appid}">
+                            <!--<span id="span_wx_appid">{$list.wx_appid}</span>-->
+                        </div>
+                        <!--<a href="#" class="operation_a" data-inputname="wx_appid" id="operation_wx_appid" data-toggle="tooltip" data-placement="bottom"  data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>APPID：绑定公众账号APPID</span></div>
+                    </div>
+                </li>
+                <li class="show_enterprise show_st dhide">
+                    <div class="add_list">
+                        <h5>公众号SECERT：</h5>
+                        <div class="add_value show_wx_appsecret">
+                            <input type="text" class="inputtext" style="display: block;" name="wx_appsecret" value="{$list.wx_appsecret}">
+                            <!--<span id="span_wx_appsecret">{$list.wx_appsecret}</span>-->
+                        </div>
+                        <!--<a href="#" class="operation_a" data-inputname="wx_appsecret" id="operation_wx_appsecret" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>公众帐号secert(仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置)</span></div>
+                    </div>
+                </li>
+                <li class="show_enterprise dhide">
+                    <div class="add_list">
+                        <h5>商户号：</h5>
+                        <div class="add_value show_wx_mchid">
+                            <input type="text" class="inputtext" style="display: block;" name="wx_mchid" value="{$list.wx_mchid}">
+                            <!--<span id="span_wx_mchid">{$list.wx_mchid}</span>-->
+                        </div>
+                        <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_mchid" data-inputname="wx_mchid" data-inputvalue="{$list.wx_mchid}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>商户号（开户邮件中可查看）</span></div>
+                    </div>
+                </li>
+                <li class="show_enterprise dhide">
+                    <div class="add_list">
+                        <h5>商户密钥：</h5>
+                        <div class="add_value show_wx_key">
+                            <input type="text" class="inputtext" style="display: block;" name="wx_key" value="{$list.wx_key}">
+                            <!--<span id="span_wx_key">{$list.wx_key}</span>-->
+                        </div>
+                        <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_key" data-inputname="wx_key" data-inputvalue="{$list.wx_key}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>商户支付密钥，参考开户邮件设置（登录商户平台自行设置）</span></div>
+                    </div>
+                </li>
+                <li class="show_enterprise dhide">
+                <div class="add_list">
+                    <h5>微信PEM1：</h5>
+                    <div class="add_value">
+                        <span id="xs_wx_pem_file_one" style="display: block;"> <if condition="$list.wx_pem_file_one neq '' "><php> echo basename($list['wx_pem_file_one']);</php></if></span>
+                        <!--<if condition="$list.wx_pem_file_one neq '' ">
+                            <span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($list['wx_pem_file_one']);</php></span>
+                            <button type="button" style="margin-top:6px;" class="btn export_btn filedown_btn" onclick="location.href='{:U('SceneAccount/index',array('download'=>'wx_pem_file_one','type'=>'download'))}'">
+                                <i class="minicon export_icon"></i><span>下载</span>
+                            </button>
+                        </if>-->
+                      <!--  <input type="file" name="wx_pem_file_one" style="margin-top:5px;" class="fileinput maxwidth156">-->
+                    </div>
+                    <a href="#" class="operation_a " data-filename="wx_pem_file_one"><i class="minicon upload_icon"></i></a>
+                    <input type="file" class="file file_sence"  name="wx_pem_file_one" id="wx_pem_file_one" data-toggle="tooltip" data-placement="bottom" data-original-title="上传"/>
+                    <div class="promptinfo"><span>PEM文件(名称为apiclient_cert)，用于认证退款</span></div>
+                </div>
+                </li>
+                <li class="show_enterprise dhide">
+                    <div class="add_list">
+                        <h5>微信PEM2：</h5>
+                        <div class="add_value">
+                            <span id="xs_wx_pem_file_two" style="display: block;"> <if condition="$list.wx_pem_file_two neq '' "><php> echo basename($list['wx_pem_file_two']);</php></if></span>
+                           <!-- <if condition="$list.wx_pem_file_two neq '' ">
+                                <span style="margin-top:5px;float:left;margin-left:8px;"><php> echo basename($list['wx_pem_file_two']);</php></span>
+                                <button type="button" style="margin-top:6px;" class="btn export_btn filedown_btn" onclick="location.href='{:U('SceneAccount/index',array('download'=>'wx_pem_file_two','type'=>'download'))}'">
+                                    <i class="minicon export_icon"></i><span>下载</span>
+                                </button>
+                            </if>-->
+                            <!--<input type="file" name="wx_pem_file_two" style="margin-top:5px;" class="fileinput maxwidth156">-->
+                        </div>
+                        <a href="#" class="operation_a"><i class="minicon upload_icon"></i></a>
+                        <input type="file" class="file file_sence" name="wx_pem_file_two" id="wx_pem_file_two" data-toggle="tooltip" data-placement="bottom" data-original-title="上传"/>
+                        <div class="promptinfo"><span>PEM文件(名称为apiclient_key)，用于认证退款</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>流量红包地址：</h5>
+                        <div class="add_value" style="max-width:430px">
+                            <span  class="graphicsset_span">{$list.redpack_address}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="add_value">
+                          <button class="btn export_btn btn_copy" data-addr="{$list.redpack_address}" onclick="return false;" style="margin-top:0;"><span>复制</span></button>
+                      </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>流量充值地址：</h5>
+                        <div class="add_value" style="max-width:430px">
+                            <span class="graphicsset_span">{$list.recharge_address}</span>
+                        </div>
+                        <div class="add_value">
+                         <button class="btn export_btn btn_copy" data-addr="{$list.recharge_address}" onclick="return false;" style="margin-top:0;"><span>复制</span></button>
+                       </div>
+                        <div class="add_value" style="margin-left: 20px;">
+                            <a class="btn export_btn get_newsence_url" style="margin-top:0;" value="{$list.account_id}" data-sources="1"><span>生成</span></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>网页流量充值地址：</h5>
+                        <div class="add_value" style="max-width:430px">
+                            <span class="graphicsset_span">{$list.pc_recharge_address}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="add_value">
+                            <button class="btn export_btn btn_copy" data-addr="{$list.pc_recharge_address}" onclick="return false;" style="margin-top:0;"><span>复制</span></button>
+                        </div>
+                        <div class="add_value" style="margin-left: 20px;">
+                            <a class="btn export_btn get_newsence_url" style="margin-top:0;" value="{$list.account_id}" data-sources="2"><span>生成</span></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>流量充值记录地址：</h5>
+                        <div class="add_value" style="max-width:430px">
+                            <span class="graphicsset_span">{$list.recharge_record_address}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="add_value">
+                          <button class="btn export_btn btn_copy" data-addr="{$list.recharge_record_address}" onclick="return false;" style="margin-top:0;"><span>复制</span></button>
+                      </div>
+                     
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="receivingset_bd tab_bd dhide">
+        <div class="receivingset_nav bordertop">
+            <ul class="show_enterprise">
+                <li>
+                    <div class="add_list">
+                        <h5>应用ID：</h5>
+                        <div class="add_value show_alipay_partner">
+                            <input type="text" class="inputtext" style="display: block;" name="pc_alipay_account" value="{$list.pc_alipay_account}">
+                        </div>
+                        <!--<a href="#" class="operation_a" data-inputname="alipay_partner" id="operation_alipay_partner" data-inputvalue="{$list.alipay_partner}" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>您在支付宝后台建立的appid。</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>商户私钥：</h5>
+                        <div class="add_value show_alipay_key">
+							<textarea class="inputtext" style="display: block;min-width:320px;height:140px;" name="pc_alipay_partner" >{$list.pc_alipay_partner}</textarea>
+                            <!--<input type="text" class="inputtext" style="display: block;" name="pc_alipay_partner" value="{$list.pc_alipay_partner}">-->
+                        </div>
+                        <!--<a href="#" class="operation_a" data-inputname="alipay_key" id="operation_alipay_key" data-inputvalue="{$list.alipay_key}" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>您的原始格式RSA私钥。</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>支付宝公钥：</h5>
+                        <div class="add_value show_alipay_key">
+							<textarea class="inputtext" style="display: block;min-width:320px;height:140px;" name="pc_alipay_key" >{$list.pc_alipay_key}</textarea>
+                            <!--<input type="text" class="inputtext" style="display: block;" name="pc_alipay_key" value="{$list.pc_alipay_key}">-->
+                        </div>
+                        <!--<a href="#" class="operation_a" data-inputname="alipay_key" id="operation_alipay_key" data-inputvalue="{$list.alipay_key}" data-toggle="tooltip" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                        <div class="promptinfo"><span>查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。</span></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="add_list">
+                        <h5>流量充值地址：</h5>
+                        <div class="add_value" style="max-width:430px">
+							<span class="graphicsset_span">{$list.recharge_address}</span>
+                            <!--<span class="graphicsset_span">{$list.pc_recharge_address}</span>-->
+                        </div>
+                        <!--<div class="add_value">
+                            <button class="btn export_btn btn_copy" data-addr="{$list.pc_recharge_address}" onclick="return false;" style="margin-top:0;"><span>复制</span></button>
+                        </div>-->
+                        <div class="add_value" style="margin-left: 20px;">
+                            <a class="btn export_btn get_newsence_url" style="margin-top:0;" value="{$list.account_id}" data-sources="1"><span>生成</span></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </div>
+        </div>
+        <div class="receivingset_hd tab_hd ">
+            <h3 class="active">手机充值说明</h3>
+            <h3>网页充值说明</h3>
+            <h3>公告</h3>
+            <h3>轮播图</h3>
+        </div>
+        <div class="receivingset_bd tab_bd">
+            <div class="receivingset_nav  bordertop" >
+                <ul>
+                    <li>
+                        <div class="add_list">
+                            <h5>客服电话：</h5>
+                            <div class="add_value show_wx_mchid">
+                                <input type="text" class="inputtext" style="display: block;" name="consumer_phone" value="{$list.consumer_phone}" maxlength="15">
+                                <!--<span id="span_wx_mchid">{$list.wx_mchid}</span>-->
+                            </div>
+                            <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_mchid" data-inputname="wx_mchid" data-inputvalue="{$list.wx_mchid}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span></span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="add_list">
+                            <h5>充值说明：</h5>
+                            <div class="add_value show_wx_mchid">
+                            <textarea class="textarea" name="explanation" style="width:500px;height:220px"  empty="true">{$list.explanation}
+                            </textarea>
+                                <!--<span id="span_wx_mchid">{$list.wx_mchid}</span>-->
+                            </div>
+                            <!--<a href="#" class="operation_a" data-toggle="tooltip" id="operation_wx_mchid" data-inputname="wx_mchid" data-inputvalue="{$list.wx_mchid}" data-placement="bottom" data-original-title="编辑"><i class="minicon edit_icon"></i></a>-->
+                            <div class="promptinfo"><span></span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="receivingset_bd tab_bd dhide">
+                <div class="receivingset_nav bordertop">
+                    <ul>
+                        <li>
+                            <div class="add_list">
+                                <h5>网页充值说明：</h5>
+                                <div class="add_value show_wx_mchid"><textarea class="textarea" name="pc_explanation" style="width:500px;height:220px"  empty="true">{$list.pc_explanation}</textarea>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="add_list">
+                                <h5>网页公告：</h5>
+                                <div class="add_value show_wx_mchid"><textarea class="textarea" name="pc_notice" style="width:500px;height:220px"  empty="true">{$list.pc_notice}</textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="receivingset_bd tab_bd dhide">
+                <div class="receivingset_nav bordertop">
+                    <ul>
+						<li>
+                            <div class="add_list">
+                                <h5>充值模板：</h5>
+                                <div class="add_value show_wx_mchid">
+									<select name="template_type" class="inputtext" style="display: block;">
+										<option value="" selected>请选择
+										<option value="1" <if condition="$list['template_type'] eq 1">selected</if> >通用版（橙）
+										<option value="2" <if condition="$list['template_type'] eq 2">selected</if> >通用版（含公告）
+										<option value="3" <if condition="$list['template_type'] eq 3">selected</if> >通用版（红）
+										<option value="4" <if condition="$list['template_type'] eq 4">selected</if> >春节版
+										<option value="5" <if condition="$list['template_type'] eq 5">selected</if> >通用版（绿）
+									</select>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="add_list">
+                                <h5>公告内容：</h5>
+                                <div class="add_value show_wx_mchid"><textarea class="textarea" name="pub_notice" style="width:500px;height:220px"  empty="true">{$list.pub_notice}</textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--//轮播图-->
+             <div class="receivingset_bd tab_bd dhide">
+                <div class="receivingset_nav bordertop">
+                    <div class="graphicsset_nav">
+                            <dd>
+                                <h3>轮播图1</h3>
+                                <div class="graphicsset_wimg" style=""><img src="{$goroundimgonepic}" id="upload_img_one" alt="企业LOGO"/></div>
+                                <h3>请上传图片比例  ：宽750：高208</h3>
+                                <div class="graphicsset_con">
+                                    <button type="button" class="btn add_btn"><span>上传</span></button>
+                                    <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowcodeSet/img_download',array('download'=>'logo_img','set_id'=>$list['set_id']))}')">
+                                        <span>下载</span>
+                                    </button>
+                                    <if condition='$goroundimgone eq 2'>
+                                        <button type="button" class="btn add_btn deletebtnone" onclick="onclickhide('one')" ><span>隐藏</span></button>
+                                        <else/>
+                                        <button type="button" class="btn export_btn deletebtnone" onclick="onclickhide('one')" ><span>显示</span></button>
+                                    </if>
+
+                                    <input type="file" id="scene_uploadone"  name="scene_uploadone" class="file"/>
+                                    <!--存储当前图片是显示还是隐藏-->
+	                            	<input type="hidden" name="goroundimgone" id="goroundimgone" value="{$goroundimgone}">
+                                </div>
+                            </dd>
+                            <dd>
+                                <h3>轮播图2</h3>
+                                <div class="graphicsset_wimg"><img src="{$goroundimgtwopic}" id="upload_img_two" alt="企业宣传图" /></div>
+                                <h3>请上传图片比例  ：宽750：高208</h3>
+                                <div class="graphicsset_con">
+                                    <button class="btn add_btn"><span>上传</span></button>
+                                    <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowcodeSet/img_download',array('download'=>'background_img','set_id'=>$list['set_id']))}')">
+                                        <span>下载</span>
+                                    </button>
+                                    
+                                    <if condition='$goroundimgtwo eq 2'>
+                                        <button type="button" class="btn add_btn deletebtntwo" onclick="onclickhide('two')" ><span>隐藏</span></button>
+                                        <else/>
+                                        <button type="button" class="btn export_btn deletebtntwo" onclick="onclickhide('two')" ><span>显示</span></button>
+                                    </if>
+                                    <input type="file" id="scene_uploadtwo" name="scene_uploadtwo" class="file"/>
+                                    <!--存储当前图片是显示还是隐藏-->
+	                            	<input type="hidden" name="goroundimgtwo" id="goroundimgtwo" value="{$goroundimgtwo}">
+                                </div>
+                            </dd>
+                            <dd>
+                                <h3>轮播图3</h3>
+                                <div class="graphicsset_wimg"><img src="{$goroundimgthreepic}" id="upload_img_three" alt="企业宣传图" /></div>
+                                <h3>请上传图片比例  ：宽750：高208</h3>
+                                <div class="graphicsset_con">
+                                    <button type="button" class="btn add_btn"><span>上传</span></button>
+                                    <button type="button" class="btn export_btn" onclick="down_file('{:U('FlowcodeSet/img_download',array('download'=>'background_img','set_id'=>$list['set_id']))}')">
+                                        <span>下载</span>
+                                    </button>
+                                    
+                                    <if condition='$goroundimgthree eq 2'>
+                                        <button type="button" class="btn add_btn deletebtnthree" onclick="onclickhide('three')" ><span>隐藏</span></button>
+                                        <else/>
+                                        <button type="button" class="btn export_btn deletebtnthree" onclick="onclickhide('three')" ><span>显示</span></button>
+                                    </if>
+                                    <input type="file" id="scene_uploadthree" name="scene_uploadthree" class="file"/>
+                                    <!--存储当前图片是显示还是隐藏-->
+	                            	<input type="hidden" name="goroundimgthree" id="goroundimgthree" value="{$goroundimgthree}">
+                                </div>
+                            </dd>
+                    </div>
+                </div>
+            </div>
+            <!--//轮播图-->
+        </div>
+    </form>
+    </div>
+    <div class="graphicsset_bottom">
+        <button class="btn add_btn fr" onclick="set_add2()"><span>保存</span></button>
+    </div>
+		<input type="hidden" name="parsedJson" id="parsedJson" value="{$list.user_headpics}">
+</div>
+<script type="text/javascript">
+$(function(){
+    var payment_type_default = $("input[name='payment_type_default']").val();
+    if(payment_type_default == 1) {
+        $(".show_st").show();
+    } else {
+        $(".show_enterprise").show();
+    }
+
+    $(".file_sence").change(function(){
+        var id =$(this).attr("id");
+        set_add1(id);
+    });
+    $(".btn_copy").zclip({
+        path:$("#swfpath").val(), //记得把ZeroClipboard.swf引入到项目中
+        copy:function(){
+            return $(this).attr("data-addr");
+        }
+    });
+    $("#scene_uploadone").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"upload_img_one","phone_inner");
+            set_add1("scene_uploadone");
+    });
+  
+    $("#scene_uploadtwo").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"upload_img_two","phone_inner");
+            set_add1("scene_uploadtwo");
+    });
+    $("#scene_uploadthree").on("change", function(e){
+            var file = e.target.files[0];
+            preview(file,"upload_img_three","phone_inner");
+            set_add1("scene_uploadthree");
+    });
+    
+});
+
+//＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊图片上传
+function onclickhide(contents)
+{
+    var goroudimgcss = "#goroundimg"+contents;
+    var goroundimg1statue = $(goroudimgcss).val();
+  
+    var cssvalue = ".deletebtn"+contents;
+    
+    if(goroundimg1statue == 1)
+    {
+         //显示当前走马灯
+        $(cssvalue).addClass("add_btn");
+        $(cssvalue).removeClass("export_btn");
+        $(cssvalue+ " span").text("隐藏");
+    }
+    else
+    {
+        //显示当前走马灯
+        $(cssvalue).removeClass("add_btn");
+        $(cssvalue).addClass("export_btn");
+        $(cssvalue+ " span").text("显示");
+    }
+
+    if(goroundimg1statue == 1)
+    {
+        goroundimg1statue = 2;
+    }
+    else
+    {
+        goroundimg1statue = 1;
+    }
+    $(goroudimgcss).val(goroundimg1statue);
+}
+
+//显示上传图片
+function preview(file, idadd, bg_idadd) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#'+idadd).attr("src", e.target.result);
+            if(bg_idadd == "phone_inner"){
+                $('.'+bg_idadd).css("background-image", "url("+e.target.result+")");
+            } else {
+                $('#'+bg_idadd).attr("src", e.target.result);
+            }
+        }
+        reader.readAsDataURL(file);
+    }
+
+//改变方式是否需要关注
+function change_follow_type(ptype) {
+    //$("input[name='payment_type1']").val(ptype); //无效？？
+    $("input[name='follow_type']").val(ptype);
+}
+
+function change_ptype(ptype) {
+    //$("input[name='payment_type1']").val(ptype); //无效？？
+    $("input[name='payment_type_default']").val(ptype);
+    if(1 == ptype) { //运营方收款 show_enterprise show_st
+        $(".show_enterprise").hide();
+        $(".show_st").show();
+    } else if(2 == ptype) { //企业收款
+        $(".show_st").hide();
+        $(".show_enterprise").show();
+    }
+}
+
+//保存文件
+function set_add1(id){
+    var formData = new FormData($("form[name='sceneaccount_add_form1']")[0]);
+    $.ajax({
+        url :"/index.php/Admin/SceneAccount/index/type/operation",
+        type : 'post',
+        data : formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if(data.status == 'success') {
+                //alertbox(data);
+                $("#"+id).val("");
+                var da=data.data;
+                for(var key in da){
+                    $("#xs_"+key).html(da[key]);
+                }
+            } else {
+                alertbox(data);
+            }
+        },
+        error: function (data) {
+            alertbox(data);
+        }
+    });
+}
+
+//保存
+function set_add2() {
+    var formData = new FormData($("form[name='sceneaccount_add_form1']")[0]);
+    $.ajax({
+        url :"/index.php/Admin/SceneAccount/index/type/operation",
+        type : 'post',
+        data : formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if(data.status == 'success') {
+                alertbox(data);
+            } else {
+                alertbox(data);
+            }
+        },
+        error: function (data) {
+            alertbox(data);
+        }
+    });
+}
+</script>
+<include file="Common/footer" />

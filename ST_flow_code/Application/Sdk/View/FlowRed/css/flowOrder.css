@@ -1,0 +1,71 @@
+body{font:12px Arial,"Hiragino Sans GB","微软雅黑","黑体-简",Helvetica,sans-serif; color:#4c4d4d; background:#ecf0f1;}
+body,div,p,span,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,pre,form,tr,td,th,table{border:0px; padding:0px; margin:0px;}
+img,a img{margin:0px; padding:0px; border:0px; font-size: 0px; line-height: 0px;}
+h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal;}
+ul,li,ol,dt,dl,dd{ list-style:none;}
+address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+label,input,textarea,select,button{font-family:Arial,"Hiragino Sans GB","微软雅黑","黑体-简"; margin:0px; padding:0px; vertical-align:middle; outline:none;}
+input,button,select,img{line-height:normal;}
+a{ color:#4c4d4d;text-decoration:none; outline: none;}
+a:hover{ color:#e76f12; text-decoration:none; }
+a:active{ outline: none; star:expression(this.onFocus=this.blur());}
+/**{ box-sizing:border-box;}*/
+
+.orderInfo_list{
+	margin-top: 2rem;
+}
+
+.orderInfo_list .list{
+	width: 100%;
+	background: #fff;
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+}
+
+.orderInfo_list .list1{
+	border-top: 1px solid #999999;
+}
+
+/*.orderInfo_list .list2{
+	border-top: 0.2px solid #999999;
+	border-bottom: 0.2px solid #999999;
+}*/
+.line{
+	margin: 0px 0px 0px 0.7rem;
+	border-width: 1px 0px 0px 0px;
+	border-color: #999999;
+}
+
+
+.orderInfo_list .list3{
+	border-bottom: 1px solid #999999;
+}
+
+.orderInfo_list .list span{
+	color: #000000;
+	font-size: 0.8rem;
+	margin-left: 0.7rem;
+}
+.orderInfo_list .list .orderInfoValue{
+	margin-left: 1.6rem;
+}
+
+.paymentBlock{
+	margin-top: 3rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.paymentButton{
+	border: none;
+	width: 100%;
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+	margin-left: auto;
+	margin-right: auto;
+	background: url(../images/payment_btn.png);
+	background-size: 100% 100%;
+	color: #FFFFFF;
+	font-size: 0.8rem;
+}

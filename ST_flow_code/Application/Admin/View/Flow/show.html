@@ -1,0 +1,36 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="40%">流量包名称：</th>
+            <td width="60%">{$product_name}</td>
+        </tr>
+        <tr>
+            <th width="40%">流量包大小：</th>
+            <td width="60%">{$size}M</td>
+        </tr>
+        <tr>
+            <th>运营商：</th>
+            <td>{$operator_name}</td>
+        </tr>
+        <tr>
+            <th>省份：</th>
+            <td>{$province_name}</td>
+        </tr>
+        <tr>
+            <th>标准价格：</th>
+            <td class="money_style">{$base_price|default="0.00"} 元</td>
+        </tr>
+        <!--
+        <tr>
+            <th >主通道：</th>
+            <td>{$channel_name}</td>
+            <th>备用通道：</th>
+            <td>{$channel_name2}</td>
+        </tr>
+        -->
+        <tr>
+            <th>产品状态：</th>
+            <td><if condition="$status eq '0'">已禁用<else />正常</if></td>
+        </tr>
+    </table>
+</div>

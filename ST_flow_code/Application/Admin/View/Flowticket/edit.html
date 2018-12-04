@@ -1,0 +1,70 @@
+<!-- 编辑菜单 -->
+<div id="sceneactivity_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="sceneactivity_edit_form">
+
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>活动：</h5>
+          <div class="add_value">
+              <span>{$info.activity_name}</span>
+              <!--<select name="activity_id" class="select">
+                  <volist name="arr_activity" id="vo">
+                      <option value="{$vo.activity_id}" <if condition="$info['activity_id'] eq $vo['activity_id']"></if> >{$vo.activity_name}</option>
+                  </volist>
+              </select>-->
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>活动名称：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext start_datetime" field="活动名称" name="user_activity_name" value="{$info.user_activity_name}"/>
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>活动开始时间：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext start_datetime" field="活动开始时间" name="start_date" placeholder="开始时间" value="{$info.start_date}" style="" onclick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="" />
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>活动结束时间：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext start_datetime" field="活动结束时间" name="end_date" placeholder="结束时间" value="{$info.end_date}"  style="" onclick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="" />
+          </div>
+      </div>
+      <div class="add_list" style='display:none'>
+          <h5><em class="wildcard">*</em>参与次数：</h5>
+          <div class="add_value">
+              <input type="text" field="参与次数" class="inputtext" maxlength="6" name="number" value="{$info.number}" onkeyup="value=value.replace(/[^0-9]/g,'')" style="min-width:80px;width:100px;float:left;" />
+              <span style="margin-left:5px;margin-right:19px;float:left;">
+                    <em class="inputto" >次</em>
+              </span>
+              <select name="frequency" class="select" style="min-width:80px;width:100px;float:left;">
+                  <volist name="arrfrequency" id="vo" key="k">
+                      <option value="{$k}" <if condition="$info['frequency'] eq $k">selected</if> >{$vo}</option>
+                  </volist>
+              </select>
+          </div>
+      </div>
+      <div class="add_list" style='display:none'>
+          <h5>活动金额：</h5>
+          <div class="add_value"><input type="text" class="inputtext" field="活动金额" style="width:160px" vtype="money" empty="true" name="activity_money" value="{$info.activity_money}" maxlength="7" /></div>
+          <div class="promptinfo"><span>小时</span></div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>券过期时间：</h5>
+          <div class="add_value"><input type="text" class="inputtext" field="活动金额" style="width:160px" vtype="money" empty="true" name="ticket_effective_duration" value="{$info.ticket_effective_duration}" maxlength="7" /></div>
+          <div class="promptinfo"><span>小时后过期</span></div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>营销链接：</h5>
+          <div class="add_value"><input type="text" class="inputtext" field="营销链接"empty="true" name="user_activity_guide_link" value="{$info.user_activity_guide_link}" /></div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>活动规则：</h5>
+          <div class="add_value"><textarea field="活动规则" style="height:300px;" class="textarea" name="activity_rule" empty="true">{$info.activity_rule}</textarea></div>
+      </div>
+
+      <input type="hidden" name="activity_status" value="{$info.activity_status}">
+      <input type="hidden" name="user_activity_id" value="{$info.user_activity_id}" />
+  </form>
+</div>

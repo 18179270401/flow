@@ -1,0 +1,61 @@
+<div class="checkinfo_box mCustomScrollbar_y" data-mcs-theme="dark" id="add_box" style="display:none;">
+    <div class="detail_box" style="padding:0 0;">  
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <th width="17%">支出代理商编号：</th>
+                    <td width="25%">{$info.pay_proxy_code}</td>
+                    <th width="20%">支出代理商名称：</th>
+                    <td width="33%">{$info.pay_proxy_name}</td>
+                </tr>
+                <tr>
+                    <th>接收代理商编号：</th>
+                    <td>{$info.receive_proxy_code}</td>
+                    <th>接收代理商名称：</th>
+                    <td>{$info.receive_proxy_name}</td>
+                </tr>
+                <tr>
+                    <th>申请编号：</th>
+                    <td colspan="3">{$info.apply_code}</td>
+                </tr>                
+                <tr>
+                    <th>划拨金额(元)：</th>
+                    <td colspan="3">{$info.apply_money}</td>
+                </tr>
+                <tr>
+                    <th>备注：</th>
+                    <td colspan="3">{$info.remark}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form name="proxy_transfer_apply_approve_form">
+        <input type="hidden" name="apply_id" value="{$info.apply_id}"/>
+        <input type="hidden" name="type" value="{$type}"/> 
+        <div class="checkinfo_con">
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核：</h5>
+                <div class="add_value">
+                <empty name="type">
+                    <label class="radio  checked" value="1"><em>复审通过</em></label>
+                    <label class="radio"  value="2"><em>复审驳回</em></label>
+                <else/>
+                    <label class="radio  checked" value="1"><em>初审通过</em></label>
+                    <label class="radio"  value="2"><em>初审驳回</em></label>
+                </empty>
+                    <input type="hidden" name="approve_status"  value="1" />
+                </div>
+            </div>
+            
+            <div class="add_list">
+                <h5><span class="wildcard"></span>审核原因：</h5>
+                <div class="add_value">
+                    <textarea class="textarea" name="approve_remark" empty="true"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+</div>
+

@@ -1,0 +1,142 @@
+<include file="Common/header" />
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.zclip.min.js?s={$version_number}"></script>
+<input type="hidden" name="swfpath" id="swfpath" value="__PUBLIC__/Admin/js/ZeroClipboard.swf" />
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>营销场景</em>><em>活动管理</em></span>
+        </div>
+        <div class="operation_info">
+            <if condition="is_jurisdiction('SceneActivity/add')">
+                <button class="btn add_btn sceneactivity_add_btn">
+                    <i class="minicon addoperation_icon"></i><span>新增活动</span>
+                </button>
+            </if>
+
+            <!--<if condition="is_jurisdiction('SceneActivity/add') and is_jurisdiction('SceneActivity/export_excel')">
+              <span class="line">|</span>
+            </if>
+
+            <if condition="is_jurisdiction('SceneActivity/export_excel')">
+              <button class="btn  export_button" data-url="SceneActivity">
+                <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+              </button>
+            </if>-->
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/SceneActivity/index">
+    <div class="search_nav">
+      <ul>
+        <li>
+          <input type="text" class="inputtext" name="activity_name" value="{$Think.get.activity_name}" placeholder="活动名称"/>
+        </li>
+          <!--
+        <li>
+            <label class="inputlabel">活动时间：</label>
+            <input type="text" class="inputtext" name="start_date"  placeholder="开始时间" value="{$Think.get.start_date}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+            <em class="inputto">至</em>
+            <input type="text" class="inputtext" name="end_date"  placeholder="结束时间" value="{$Think.get.end_date}" style='min-width:80px' onClick="WdatePicker()" readonly/>
+        </li>
+        -->
+        <li>
+          <label class="inputlabel">活动状态：</label>
+          <select class="select" style='min-width:80px' name="status">
+            <option value="9" <if condition='($Think.get.status eq 9)or ($Think.get.status eq null)'>selected</if>>全部</option>
+            <option value="1" <if condition='$Think.get.status eq 1'>selected</if>>进行中</option>
+            <option value="2" <if condition='$Think.get.status eq 2'>selected</if>>未开始</option>
+              <option value="3" <if condition='$Think.get.status eq 3'>selected</if>>已结束</option>
+          </select>
+            <input type="hidden" value="1"/>
+        </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+    <div class="receivingset_box white">
+        <div class="saleset_hd">
+            <div class="event_con">
+                <ul>
+                    <volist name="user_activity_list" id="vo">
+                        <li >
+                            <h3 style="height: 32px;">
+                                <if condition="$vo.user_activity_name neq null">
+                                  <em></em>{$vo.user_activity_name}
+                                <else/>
+                                  <em></em>{$vo.activity_name}
+                                </if>
+                                <if condition="$vo.activity_money neq null && $vo.activity_money neq 0">
+                                <span style="float: right;">
+                                    活动金额：{$vo.activity_money}元&nbsp;&nbsp;
+                                    已用金额：<if condition="$vo.used_money neq null">{$vo.used_money}<else/>0</if>元
+                                </span>
+                                </if>
+                            </h3>
+                            <div class="event_details">
+                                <div class="event_img"><img src="__PUBLIC__/Admin/images/event_0{$vo.activity_id}.png"></div>
+                                <div class="event_text">
+                                    <p>开始日期：{$vo.start_date}</p>
+                                    <p>结束日期：{$vo.end_date}</p>
+                                    <p>参与次数：{$vo.number}</p>
+                                    <p>参与频率：{$vo.frequency|get_scene_frequency}</p>
+                                    <p>活动状态：{$vo.stat}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <a href="javascript:void(0);" class="details_btn activity_detailed_btn "  value="{$vo.user_activity_id}">活动详情配置</a></p>
+                                </div>
+                            </div>
+                            <div class="event_manage">
+                                <a class=" scene_activity_show_btn" href="javascript:void(0);" value="{$vo.user_activity_id}">
+                                    <span>查看</span>
+                                </a>
+                                <if condition="is_jurisdiction('SceneActivity/edit')">
+                                <a class="operationbtn scene_activity_edit_btn" href="javascript:void(0);" value="{$vo.user_activity_id}">
+                                    <!--<i class="minicon edit_icon"></i>-->
+                                    <span>编辑</span>
+                                </a>
+                                </if>
+                                <if condition="is_jurisdiction('SceneActivity/set')">
+                                    <a class="operationbtn scene_activity_set_btn" href="javascript:void(0);" value="{$vo.user_activity_id}">
+                                        <!--<i class="minicon edit_icon"></i>-->
+                                        <span>配置流量包</span>
+                                    </a>
+                                </if>
+                                <if condition="is_jurisdiction('SceneActivity/map_lbs')">
+                                    <a class="operationbtn " href="javascript:void(0);" value="{$vo.user_activity_id}" onclick="top.openMenu('119_{$vo.user_activity_id}','{$vo.activity_name}&nbsp;LBS定位','{:U('SceneActivity/map_lbs',array('user_activity_id'=>$vo['user_activity_id']),'')}');">
+                                        <!--<i class="minicon edit_icon scene_activity_lbs_btn" ></i>-->
+                                        <span>LBS定位</span>
+                                    </a>
+                                </if>
+                                <if condition="is_jurisdiction('SceneActivity/delete')">
+                                    <a class="operationbtn scene_activity_delete_btn " href="javascript:void(0);" value="{$vo.user_activity_id}" data-name="{$vo.activity_name}">
+                                        <!--<i class="minicon edit_icon"></i>-->
+                                        <span>删除</span>
+                                    </a>
+                                </if>
+                            </div>
+                            <div class="event_link"><h5>活动链接：</h5><span class="input"><input type="text"  readonly class="inputtext" value="{$vo.activityaddress}"></span><button class="btn copy_btn " data-addr="{$vo.activityaddress}"><span>复制</span></button></div>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $(".copy_btn").zclip({
+            path: $("#swfpath").val(), //记得把ZeroClipboard.swf引入到项目中
+            copy: function () {
+                return $(this).attr("data-addr");
+            }
+        });
+    });
+</script>
+<include file="Common/footer" />

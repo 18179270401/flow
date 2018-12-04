@@ -1,0 +1,69 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="enterpriseRecharge_voucher_form" >
+        <input type="hidden" name="apply_type" value="1"/>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>企业名称：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="delegate_name" id="inputusername" field="企业名称" data-usertype="enterprise">
+                <input type='hidden' name='enterprise_id' id='user_type_ids' value=''>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>充值类型：</h5>
+            <div class="add_value">
+                <select name="apply_type" class="select" id="recharge_type" msg="请选择申请类型" onchange="content_hide()">
+                    <option value="1" selected>正常充值</option>
+                    <option value="2">测试款</option>    
+                </select>
+            </div>
+        </div>
+        <div class="recharge_type_div">
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>付款方式：</h5>
+            <div class="add_value">
+                <if condition='$proxy_type eq 1'>
+                    <select name="source" id="source" class="select" empty="true" msg="请选择付款方式" onchange="payment_name()">
+                        <option value="" selected>请选择</option>
+                        <volist name="source_name" id="sourcename">
+                            <option value="{$key}">{$sourcename}</option>
+                        </volist>
+                    </select>
+                    <else/>
+                    <select name="source" id="source" class="select" empty="true" msg="请选择付款方式" onchange="payment_name()">
+                        <option value="" selected>请选择</option>
+                        <option value="1">汇款</option>
+                        <option value="2">微信支付</option>
+                        <option value="3">支付宝支付</option>
+                    </select>
+                </if>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em><span id="source_name">打款户名</span>：</h5>
+            <div class="add_value"><input type="text" class="inputtext" empty="true" id="source_input" field="打款户名" name="transaction_number"  /></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>付款日期：</h5>
+            <div class="add_value"><input type="text" class="inputtext create_date" empty="true" onClick="WdatePicker()" readonly field="付款日期" name="transaction_date" /></div>
+        </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>付款金额：</h5>
+            <div class="add_value"><input type="text" class="inputtext" name="apply_money" maxlength="8" field="付款金额"  vtype="money" /></div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="recharge_type_div">
+        <div class="add_list">
+            <h5>附件凭证：</h5>
+            <div class="add_value"><input type="file" name="file" empty="true"/></div>
+        </div>
+    </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+

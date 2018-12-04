@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$sys_name}</title>
+    <!-- css -->
+    <link href="{$display_icon}" rel="bookmark" type="image/x-icon" />
+    <link href="{$display_icon}" rel="icon" type="image/x-icon" />
+    <link href="{$display_icon}" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/reset.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.mCustomScrollbar.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-datetimepicker.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/layer.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/index.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/main.css?s={$version_number}">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.treeview.css?s={$version_number}">
+    <!-- js -->
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.12.1.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/bootstrap.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.mCustomScrollbar.concat.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.mousewheel.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/select2.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/windowGroup.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/Windowtab.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/taskBar.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/layer.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/bootstrap-datetimepicker.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/bootstrap-datetimepicker.zh-TW.js?s={$version_number}" ></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.treeview.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.cookie.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/scrolltext.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/common.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/DatePicker/WdatePicker.js?s={$version_number}"><!-- 时间选择 --></script>
+    <!-- 以下为工具函数 -->
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/util.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-wen.js?s={$version_number}"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-li.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-hui.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-jun.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-qian.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-peng.js?s={$version_number}"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-zhen.js?s={$version_number}"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-shui.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-henry.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/js-operation-qian-2.js?s={$version_number}"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/slider.js?s={$version_number}"></script>
+
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js?s={$version_number}"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js?s={$version_number}"></script>
+    <![endif]-->
+
+    <style>
+        .money_style{text-align: left;}
+    </style>
+
+    <script type="text/javascript">
+      //将当前操制器名赋到js变量
+      var newaction = "{$Think.const.CONTROLLER_NAME}{$Think.const.ACTION_NAME}";
+    </script>
+  </head>
+<body>
+
+
+<notempty name="province">
+<div class="region_box undis" id="discount_province_box">
+  <div class="region_tit">
+    <h5>地区</h5>
+  </div>
+  <div class="region_con">
+    <ul>
+      <volist name="province" id="vopppp">
+      	<li><a href="javascript:void(0);" onclick="chooseprovince({$vopppp.province_id},'{$vopppp.province_name}')">{$vopppp.province_name}</a></li>
+      </volist>
+    </ul>
+   </div>
+</div>
+</notempty>
+
+
+<div id="inputusernamelist" style="display:none;"><!-- 列表出代理商或企业名称 --></div>

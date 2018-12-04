@@ -1,0 +1,150 @@
+<!-- 添加自定义回复 -->
+<div id="customreply_add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+    <form name="customreply_add_form">
+        <div class="add_list">
+            <h5>关注回复：</h5>
+            <div class="add_value" >
+                <label class="radio enterprise_type " data-value="1"><em>是</em></label>
+                <label class="radio enterprise_type checked"  data-value="2"><em>否</em></label>
+                <input type="hidden" id="enterprise_type" name="reply_concern"  value="" />
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>回复类型：</h5>
+            <div class="add_value">
+                <select name="reply_type" id="reply_type" class="select" msg="自定义回复类型" onchange="customreply_type()">
+                    <option value="1">文字回复</option>
+                    <option value="2">单图片回复</option>
+                    <option value="3">多图片回复</option>
+                    <option value="4">活动回复</option>
+                </select>
+            </div>
+        </div>
+        <!-- 文字活动开始 -->
+        <div id="wzhf">
+            <div class="add_list" >
+                <h5><em class="wildcard">*</em>回复内容：</h5>
+                <div class="add_value" style="margin-bottom: 10px;"><textarea field="内容" maxlength="100"  style="height:100px;" class="textarea" name="replytext_contact" id="replytext_contact" empty="true"></textarea></div>
+            </div>
+        </div>
+        <!-- 文字活动结束 -->
+
+        <!-- 单图文活动开始 -->
+        <div id="dtphf" style="display:none;">
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>回复标题：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replyimg_title" empty="true" id="replyimg_title" file="标题" maxlength="20"> </div>
+            </div>
+            <div class="add_list" >
+                <h5><em class="wildcard">*</em>回复内容：</h5>
+                <div class="add_value" style="margin-bottom: 10px;"><textarea field="内容"   style="height:100px;" class="textarea" maxlength="100" name="replyimg_description" id="replyimg_description" empty="true"></textarea></div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replyimg_url"maxlength="50" id="replyimg_url" file="链接" empty="true"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片：</h5>
+                <div class="add_value"><input type="file" name="replyimg_img" empty="true"/></div>
+            </div>
+        </div>
+       <!-- 单图文回复结束-->
+
+        <!-- 多图文回复开始 -->
+        <div id="mtphf" style="display:none;">
+            <div class="add_list">
+            <h5><em class="wildcard">*</em>回复标题1：</h5>
+            <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title1"  id="replymoreimg_title" file="标题" empty="true" maxlength="20"> </div>
+        </div>
+            <div class="add_list">
+                <h5>回复链接1：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_url1" maxlength="50" id="replymoreimg_url" file="链接" empty="true"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片1：</h5>
+                <div class="add_value"><input type="file" name="replymoreimg_img1" empty="true"/></div>
+            </div>
+            <div class="add_list">
+                <h5>回复标题2：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title2" id="replymoreimg_title2" file="标题" empty="true" maxlength="20"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接2：</h5>
+                <div class="add_value"><input type="text" class="inputtext" maxlength="50" name="replymoreimg_url2" id="replymoreimg_url2" file="链接" empty="true"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片2：</h5>
+                <div class="add_value"><input type="file" name="replymoreimg_img2" empty="true"/></div>
+            </div>
+            <div class="add_list">
+                <h5>回复标题3：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title3" id="replymoreimg_title3" file="标题" empty="true" maxlength="20"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接3：</h5>
+                <div class="add_value"><input type="text" class="inputtext" maxlength="50" name="replymoreimg_url3" id="replymoreimg_url3" file="链接" empty="true"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片3：</h5>
+                <div class="add_value"><input type="file" name="replymoreimg_img3" empty="true"/></div>
+            </div>
+            <div class="add_list">
+                <h5>回复标题4：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replymoreimg_title4" id="replymoreimg_title4" maxlength="20" file="标题" empty="true"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复链接4：</h5>
+                <div class="add_value"><input type="text" class="inputtext" maxlength="50" name="replymoreimg_url4" id="replymoreimg_url4" file="链接" empty="true"> </div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片4：</h5>
+                <div class="add_value"><input type="file" name="replymoreimg_img4" empty="true"/></div>
+            </div>
+        </div>
+        <!-- 多图文回复结束 -->
+
+        <!-- 活动回复开始-->
+        <div id="hdhf" style="display:none;">
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>活动名称：</h5>
+                <div class="add_value">
+                    <select name="user_activity_id" id="user_activity_id" class="select" msg="请选择活动" empty="true">
+                        <option value="">请选择</option>
+                        <volist name="activity" id="v">
+                            <option value="{$v.user_activity_id}">
+                                <if condition="$v.user_activity_type eq 2">
+                                    券：
+                                </if>
+                                <if condition="$v.user_activity_name neq null">
+                                   {$v.user_activity_name}
+                                <else/>
+                                    {$v.activity_name}
+                                </if>
+                            </option>
+                        </volist>
+                        <option value="-1">每日签到</option>
+                    </select>
+                </div>
+            </div>
+            <div class="add_list">
+                <h5><em class="wildcard">*</em>回复标题：</h5>
+                <div class="add_value"><input type="text" class="inputtext" name="replyactivity_title" id="replyactivity_title" file="标题" empty="true" maxlength="20"> </div>
+            </div>
+            <div class="add_list" >
+                <h5>回复详细内容：</h5>
+                <div class="add_value" style="margin-bottom: 10px;"><textarea field="回复详细内容" maxlength="100"  style="height:100px;" class="textarea" name="replyactivity_description" id="replyactivity_description" empty="true"></textarea></div>
+            </div>
+            <div class="add_list">
+                <h5>回复图片：</h5>
+                <div class="add_value"><input type="file" name="replyactivity_img" empty="true"/></div>
+            </div>
+        </div>
+        <!-- 活动回复结束 -->
+
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>关键字：</h5>
+            <div class="add_value"><input type="text" placeholder='用户输入关键字可回复相应信息' class="inputtext" maxlength="20" name="reply_keyword" id="reply_keyword" file="关键字" empty="true"><span></span></div>
+        </div>
+  </form>
+</div>
+

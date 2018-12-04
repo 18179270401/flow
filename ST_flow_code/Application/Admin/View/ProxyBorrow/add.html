@@ -1,0 +1,30 @@
+<div id="add_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <form name="proxyBorrow_add_form" >
+        <input type="hidden" name="apply_type" value="1"/>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>代理商名称：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="delegate_name" id="inputusername" field="代理商名称" data-usertype="proxy">
+                <input type='hidden' name='proxy_id' id='user_type_ids' value=''>
+            </div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>授信金额：</h5>
+            <div class="add_value">
+                <input type="text" class="inputtext" name="loan_money" maxlength="7" field="授信金额" />
+            </div>
+            <div class="promptinfo"><span>元</span></div>
+        </div>
+        <div class="add_list">
+            <h5><em class="wildcard">*</em>预计还款时间：</h5>
+            <div class="add_value"><input type="text" class="inputtext repayment_date" onClick="WdatePicker({minDate:'%y-%M-{%d+1}'})" readonly field="预计还款时间" name="repayment_date" /></div>
+        </div>
+        <div class="add_list">
+            <h5>备注：</h5>
+            <div class="add_value">
+                <textarea class="textarea" name="remark" empty="true"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+

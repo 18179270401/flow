@@ -1,0 +1,178 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>资金管理</em>><em>代理商账户管理</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="ProxyAccount/export_excel">
+                <button class="btn  export_button" data-url="ProxyAccount">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+      </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get"  name="excel" action="/index.php/Admin/ProxyAccount/index">
+    <div class="search_nav minheight60">
+      <ul>
+          <li>
+              <input type="text" class="inputtext" style='min-width:80px' maxlength="6" name="proxy_code" value="{$Think.get.proxy_code}" placeholder="代理商编号"/>
+          </li>
+        <li>
+          <input type="text" class="inputtext" name="proxy_name" value="{$Think.get.proxy_name}" placeholder="代理商名称"/>
+        </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+            <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+
+        <div class="prepaidtip" >
+
+            <p> 账户余额合计：【<span style="color:#5cb95c;"><php>echo ($sum_results['sum_money_one']-$sum_results['loan_money_one']);</php></span>元】，授信金额合计：【<span style="color:#5cb95c;"><php>echo ($sum_results['loan_money_one']);</php></span>元】，冻结金额合计：【<span class="red">{$sum_results.sum_money_tow|default="0.000"}</span>元】</p>
+
+        </div>
+
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con" data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+            <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="120">代理商编号</th>
+                    <th width="250" class="change">代理商名称</th>
+                    <th width="100" class="change">账户余额(元)</th>
+                    <!-- <th width="100" class="change">授信金额(元)</th> -->
+                    <th width="100" class="change">冻结金额(元)</th>
+                    <!--
+                    <if condition="$usr_type eq 1">
+                        <th width="100" >提醒金额(元)</th>
+                    </if>
+                    -->
+                    <th class="change" width="150">操作</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.proxy_code}</td>
+                    <td>{$vo.proxy_name} </td>
+                    <td class="money_style"><php>echo ($vo['account_balance']);</php></td>
+                    <!-- <td class="money_style"><php>echo ($vo['account_balance']-$vo['loan_money']);</php></td>
+                    <td class="money_style">{$vo.loan_money}</td> -->
+                    <td class="money_style">{$vo.freeze_money|default="0.000"}</td>
+                    <!--
+                    <if condition="$usr_type eq 1">
+                        <td class="money_style">{$vo.new_quota_remind|default="--"}</td>
+                    </if>
+                    -->
+                    <td class="operation_td">
+                    <button class="operationbtn detailed_function" value="{$vo.account_id}" >
+                          <span>查看</span>
+                      </button>
+                      <!-- 尚通端 -->
+                      <if condition="$usr_type eq 1">
+                        <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/transfer'))">
+                            <if condition="$is_proxy eq $vo['top_proxy_id']">
+                            <isshow url="ProxyAccount/transfer">
+                              <button class="operationbtn transfer_function" data-status="{$usr_type}" value="{$vo.account_id}" >
+                                  <!--<i class="minicon recharge_icon"></i>-->
+                                  <span>充值</span>
+                              </button>
+                            </isshow>
+                            </if>
+                        </if>
+                        <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/return_money'))">
+                            <if condition="$is_proxy eq $vo['top_proxy_id']">
+                              <isshow url="ProxyAccount/return_money">
+                                <button class="operationbtn return_function" data-status="{$usr_type}" value="{$vo.account_id}" >
+                                  <!--<i class="minicon recharge_icon"></i>-->
+                                  <span>收回</span>
+                                </button>
+                              </isshow>
+                            </if>
+                        </if>
+                        <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/return_money'))">
+                            <if condition="$is_proxy eq $vo['top_proxy_id']">
+                             <isshow url="ProxyAccount/freeze_money"> 
+                              <button class="operationbtn proxy_freeze_function" value="{$vo.account_id}" >
+                                  <!--<i class="minicon recharge_icon"></i>-->
+                                  <span>冻结</span>
+                              </button>
+                            </isshow>
+                            </if>
+                        </if>
+                          <!--
+                          <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/set_quota_remind'))">
+                              <isshow url="ProxyAccount/set_quota_remind">
+                                  <button class="operationbtn set_quota_remind_function"  value="{$vo.account_id}" >
+                                      <span>提醒额度</span>
+                                  </button>
+                              </isshow>
+                          </if>
+                          -->
+                      </if>
+                      <!-- 代理商端 -->
+                      <if condition="$usr_type eq 2">
+                        <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/transfer'))">
+                            <if condition="$is_proxy eq $vo['top_proxy_id']">
+                            <isshow url="ProxyAccount/transfer">  
+                              <button class="operationbtn transfer_function" value="{$vo.account_id}" >
+                                <!--<i class="minicon recharge_icon"></i>-->
+                                <span>充值</span>
+                              </button>
+                            </isshow>
+                            </if>
+                        </if>
+                        <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/return_money'))">
+                            <if condition="$is_proxy eq $vo['top_proxy_id']">
+                             <isshow url="ProxyAccount/return_money"> 
+                              <button class="operationbtn return_function" value="{$vo.account_id}" >
+                                  <!--<i class="minicon recharge_icon"></i>-->
+                                  <span>收回</span>
+                              </button>
+                            </isshow>
+                            </if>
+                        </if>
+                         <if condition="($is_admin) or (is_jurisdiction('ProxyAccount/return_money'))">
+                            <if condition="$is_proxy eq $vo['top_proxy_id']">
+                             <isshow url="ProxyAccount/freeze_money"> 
+                              <button class="operationbtn proxy_freeze_function" value="{$vo.account_id}" >
+                                  <!--<i class="minicon recharge_icon"></i>-->
+                                  <span>冻结</span>
+                              </button>
+                            </isshow>
+                            </if>
+                        </if>
+                      </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

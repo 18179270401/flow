@@ -1,0 +1,26 @@
+<div id="detail_box" class="detail_box mCustomScrollbar_y" data-mcs-theme="dark" style="display:none;">
+    <table width="100%">
+        <tr>
+            <th width="20%">功能名称：</th>
+            <td width="30%">{$function_name}</td>
+            <th width="20%">功能地址：</th>
+            <td width="30%">{$action_url}</td>
+        </tr>
+        <tr>
+            <th>所属菜单：</th>
+            <td>{$menu_name}</td>
+            <th >所属平台：</th>
+            <td >{$sys_type|get_sys_type}</td>
+        </tr>
+        <tr>
+            <th >功能状态：</th>
+            <td ><if condition="$status eq '0'">已禁用<elseif  condition="$status eq '1'"/>正常 <else/>已删除</if></td>
+            <th >排序号：</th>
+            <td >{$order_num}</td>
+        </tr>
+        <tr>
+            <th >备注：</th>
+            <td colspan="3">{$remark}</td>
+        </tr>
+    </table>
+</div>

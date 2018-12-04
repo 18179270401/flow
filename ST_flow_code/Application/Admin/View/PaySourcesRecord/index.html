@@ -1,0 +1,86 @@
+<include file="Common/header" />
+
+<div class="main_con">
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+                <i></i><span></span>
+        </div>
+         <div class="operation_info">
+          <if condition="is_jurisdiction('PaySourcesRecord/export_excel')">
+            <button class="btn  export_button" data-url="PaySourcesRecord">
+              <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+            </button>
+          </if>
+        </div>
+      </div>
+  </div>
+
+  <div class="search_box">
+    <form method="get" action="" name="excel" action="/index.php/Admin/PaySourcesRecord/index">
+    <div class="search_nav"> 
+      <ul>
+          <li>
+              <input type="text" class="inputtext" name="sources_name" value="{$Think.get.sources_name}" placeholder="渠道名称"/>
+          </li>
+      </ul>
+    </div>
+    <div class="search_btncon">
+      <button class="btn add_btn">
+        <i class="minicon search_icon"></i><span>查询</span>
+      </button>
+        <button type="button" class="btn export_btn  reset_button">
+        <i class="minicon reload_icon"></i><span>重置</span>
+        </button>
+    </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con" data-mcs-theme="dark">
+        <div class="tablelist_theadbox">
+        <div class="tablelist_thead">
+          <table>
+            <tr>
+                <th width="50">序号</th>
+                <th width="80">渠道名称</th>
+                <th width="270">充值链接</th>
+                <th width="100">创建时间</th>
+                <th width="130">操作</th>
+            </tr>
+          </table>
+        </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="list" id="vo">
+                <tr>
+                    <td>{$vo.sort_no}</td>
+                    <td>{$vo.sources_name}</td>
+                    <td>{$vo.sources_url}</td>
+                    <td>{$vo.create_date}</td>
+                    <td class="operation_td">
+                        <button class="operationbtn pay_sources_show_btn" value="{$vo.sources_id}">
+                                <!--<i class="minicon edit_icon"></i>-->
+                            <span>查看</span>
+                        </button>
+                        <if condition="is_jurisdiction('PaySourcesRecord/delete')">
+                            <button class="operationbtn pay_sources_delete_btn" value="{$vo.sources_id}" >
+                                <!--<i class="minicon edit_icon"></i>-->
+                                <span>删除</span>
+                            </button>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+        {$page}
+    </div>
+  </div>
+</div>
+
+<include file="Common/footer" />

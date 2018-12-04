@@ -1,0 +1,129 @@
+<include file="Common/header" />
+<div class="main_con">
+
+  <div class="operation_box">
+      <div class="operation_con">
+        <div class="currenttit">
+          <i></i><span><em>通道管理</em>><em>通道折扣记录</em></span>
+        </div>
+        <div class="operation_info">
+            <isshow url="ChannelDiscountRecord/export_excel">
+                <button class="btn  export_button" data-url="ChannelDiscountRecord">
+                    <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                </button>
+            </isshow>
+        </div>
+      </div>
+  </div>
+  <div class="search_box">
+    <form method="get" name="excel" action="/index.php/Admin/ChannelDiscountRecord/index">
+      <div class="search_nav">
+        <ul>
+            <li>
+                <input type="text" class="inputtext" name="channel_code" value="{$Think.get.channel_code}" placeholder="通道编码" style="width:100px;min-width:60px;"/>
+            </li>
+            <li>
+                <input type="text" class="inputtext" name="channel_name" value="{$Think.get.channel_name}" placeholder="通道名称" style="width:100px;min-width:60px;"/>
+            </li>
+
+            <li>
+              <label class="inputlabel">运营商：</label>
+              <select class="select" name="operator_id" style='min-width:80px'>
+                <option value="">请选择</option>
+                <volist name="operator" id="voo">
+                    <option value="{$voo.operator_id}" <if condition='$Think.get.operator_id eq $voo["operator_id"]'>selected</if> >{$voo.operator_name}</option>
+                </volist>
+              </select>
+                <input type="hidden" value=""/>
+            </li>
+
+            <li>
+              <label class="inputlabel">省份：</label>
+              <select class="select" name="province_id" id="province_id" style='min-width:80px' onchange="get_is_filter(1)">
+                <option value="">请选择</option>
+                <volist name="province" id="vop">
+                    <option value="{$vop.province_id}" <if condition='$Think.get.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+                </volist>
+              </select>
+                <input type="hidden" value=""/>
+            </li>
+            <li>
+                <label class="inputlabel">市：</label>
+                <select class="select" name="city_id" id="city_id" style='min-width:80px'>
+                    <option value="">请选择</option>
+                    <volist name="citys" id="v">
+                        <option value="{$v.city_id}" <if condition='$Think.get.city_id eq $v["city_id"]'>selected</if> >{$v.city_name}</option>
+                    </volist>
+                </select>
+                <input type="hidden" value=""/>
+            </li>
+            <li>
+                <label class="inputlabel">折扣类型：</label>
+                <select class="select" name="discount_type" style='min-width:80px'>
+                    <option value="">请选择</option>
+                    <option value="1" <if condition='$Think.get.discount_type eq 1'>selected</if> >普通折扣</option>
+                    <option value="2" <if condition='$Think.get.discount_type eq 2'>selected</if> >返利折扣</option>
+                </select>
+                <input type="hidden" value=""/>
+            </li>
+        </ul>
+      </div>
+      <div class="search_btncon">
+        <button class="btn add_btn">
+          <i class="minicon search_icon"></i><span>查询</span>
+        </button>
+          <button type="button" class="btn export_btn  reset_button">
+              <i class="minicon reload_icon"></i><span>重置</span>
+          </button>
+      </div>
+    </form>
+  </div>
+  <div class="tablelist_box tablelistboxH">
+    <div class="tablelist_con " data-mcs-theme="dark">
+      <div class="tablelist_theadbox">
+           <div class="tablelist_thead">
+              <table>
+                <tr>
+                    <th width="50">序号</th>
+                    <th width="100" class="change">通道编码</th>
+                    <th width="120" class="change">通道名称</th>
+                    <th width="120" class="change">运营商</th>
+                    <th width="100" class="change">省份</th>
+                    <th width="100" class="change">市</th>
+                    <th width="80" class="change">折扣类型</th>
+                    <th width="80" class="change">操作前折扣数</th>
+                    <th width="80" class="change">操作后折扣数</th>
+                    <th width="80" class="change">操作人</th>
+                    <th width="120" class="change">操作时间</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div class="tablelist_tbody" data-mcs-theme="dark">
+          <table>
+            <volist name="channeldiscountrecord_list" id="vo">
+              <tr>
+                  <td>{$vo.sort_no}</td>
+                  <td>{$vo.channel_code}</td>
+                  <td>{$vo.channel_name}</td>
+                  <td>{$vo.operator_name}</td>
+                  <td>{$vo.city_id|get_city_province_name=$vo['province_id']}</td>
+                  <td>{$vo.city_name|default='--'}</td>
+                  <td><if condition='$vo.discount_type eq 1'>普通折扣<else/>返利折扣</if></td>
+                  <td>{$vo.discount_before|show_discount_ten=###} 折</td>
+                  <td>{$vo.discount_after|show_discount_ten=###} 折</td>
+                  <td>{$vo.user_name}</td>
+                  <td>{$vo.create_date}</td>
+              </tr>
+            </volist>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="page_box">
+    <div class="page_con">
+      {$page}
+    </div>
+  </div>
+</div>
+<include file="Common/footer" />

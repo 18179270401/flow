@@ -1,0 +1,74 @@
+<include file="Common/header" />
+
+<script>
+    $(function(){
+        $("#searchbtn").click(function(){
+            $("#myformid1").submit();
+        })
+    })
+
+</script>
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                <i></i><span><em>流量中心</em>><em>开发者中心</em>><em>FAQ</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="apitabcon_box mCustomScrollbar_y" data-mcs-theme="dark">
+        <div class="apitabcon_flowchart">
+            <div class="flowchart_nav">
+                <ul>
+                    <a href="{:U('ApiConfiguration/index')}" />  <li  class="green"><p>开发者账号</p></li></a>
+                   <a href="{:U('ApiConfiguration/respcode')}" /> <li class="purple">
+                        <p>返回码参照</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/document')}" />    <li class="blue">
+                        <p>示例文档</p>
+                    </li></a>
+                    <a href="{:U('ApiConfiguration/faq')}" />      <li class="orange active" >
+                        <p>FAQ</p>
+                    </li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="apiinstructions_box heightcalc139 margin10">
+            <div class="apiinstructions_tit">
+                <h2>开发者账号</h2>
+            </div>
+            <div class="faq_nav heightcalc37 mCustomScrollbar_y" data-mcs-theme="dark">
+                <dl>
+                    <dt>
+                    <h2>账号名称(account)和Key值(apikey)在哪获取？</h2>
+                    </dt>
+                    <dd>
+                        <p>用户登录平台，在导航菜单流量中心-开发者中心-开发者账号下面。对接api主要参数就是这2个，请保证账号的安全性。</p>
+                    </dd>
+                    <dt>
+                    <h2>回调地址在哪配置？</h2>
+                    </dt>
+                    <dd>
+                        <p>在导航菜单流量中心-开发者中心-开发者账号下面。回调地址主要是用户需要平台主动发送订单最终信息给用户自己的终端。</p>
+                    </dd>
+                    <dt>
+                    <h2>IP鉴权地址怎么填写？</h2>
+                    </dt>
+                    <dd>
+                        <p>有需要对用户接口发送的服务器进行ip限制，就可以使用ip鉴权进行配置。多个ip使用英文,号分隔。配置空或者255.255.255.255表示不鉴权。</p>
+                    </dd>
+                    <dt>
+                    <h2>签名sign的加密格式是什么？</h2>
+                    </dt>
+                    <dd>
+                        <p>例如：apiKey+account=XXXXX&action=Charge&phone=XXXXX&range=0&size=10&timeStamp=********+apiKey。</p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	
+	<!--分享流量-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+	<script type="text/javascript" src="{$role}js/shareFlowRed.js"></script>
+	<link rel="stylesheet" type="text/css" href="{$role}css/frequency-limit.css" />
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta charset="UTF-8">
+		<title>结束</title>
+		<input type="hidden" name="timestamp" id="sharelink" value="{$sharelink}">
+	</head>
+
+	<body>
+		<div class="share_bg" id="share_bg" style="position:absolute;top:0; display: none;width:100%;background-color: #000000;opacity: 0.8;" onclick="hidenShareBg()">
+			<img src="{$role}image/shareTips.png" pointer-events:none; style="width: 100%;" />
+		</div>	
+		<div class="lightBg"></div>
+		<div class="redPacketWord"></div>
+		<div id="checkButtonCustom" class="checkButtonCustom">
+			<button type="button" style="color: white; border-radius: 2rem; background: url({$role}image/Sharebtn_bg.png);" id="share-btn" onclick="onShareFlowRed()">发给朋友抢</button>
+		</div>
+		
+		
+		<!--流量分享需求-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<!--流量分享需求-->
+	</body>
+
+	<script src="__PUBLIC__/utils/js/jquery-2.2.3.js"></script>
+	<script>
+		htmlFontSize();
+		window.onresize = function() {
+			htmlFontSize();
+		}
+  
+		function htmlFontSize() {
+			var w = document.documentElement.clientWidth;
+			var h = parseInt(document.documentElement.clientHeight);
+			var i = (parseInt(w) - 15.0 / 375.0 * parseInt(w)) / 768.0;
+			document.documentElement.style.fontSize = (i) * 40.0 + "px";
+	 		if($('body').height() < h){
+						$('#share_bg').height(h);
+					}else{
+						$('#share_bg').height($('body').height());
+			}  
+		}
+	</script>
+
+</html>

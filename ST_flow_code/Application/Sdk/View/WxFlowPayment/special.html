@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta content="telephone=no" name="format-detection">
+		<link rel="stylesheet" href="{$role}css/base.css" />
+		<script type="text/javascript" src="{$role}js/setFontSize.js" ></script>
+		<script src="__PUBLIC__/utils/js/jquery-2.2.3.js?s={$version_number}"></script>
+		<script type="text/javascript" src="{$role}js/common.js" ></script>
+		<title>流量充值</title>
+	</head>
+	<body>
+<!--等待加载框-->
+		<div class="modelClass" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);position: fixed;z-index: 9999;display: none;">
+
+			<div class="loader" style="text-align: center;margin-left: auto;margin-right: auto;width: 100%;height:100%;">
+				<div class="loader-inner ball-spin-fade-loader" style="display: inline-block;">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+<!--等待加载框结束-->
+
+		<div class="main_row">
+			<!--<div class="notice">
+				<p1>{$pub_notice}</p1>
+			</div>-->
+			<div class="user_con">
+				<div class="tel_infor">
+					<input type="tel" class="inputText" placeholder="请输入您的手机号码"  oninput="test(this)" style="border-width: 0px;margin: 0px;padding: 0px;font-size: 23px; width: 90%" value=""></input>
+					<span  id="OperatorsName">三网通用</span>
+				</div>
+			</div>
+			<div class="header_warning user_con">
+				<p class="red_Btxt" id="tipH5">全国可以用，立即生效，当月有效</p>
+			</div>
+			<div class="recharge_type user_con">
+				<span class="red_Btxt">充值类型:</span>
+				<button type="button" onclick="countryClick(this)" class="red_btn active">全国</button>
+				<button type="button" onclick="provinceClick(this)" class="red_btn">省内</button>
+			</div>
+			<div class="recharge_list list1">
+				<ul>
+				</ul>
+			</div>
+			<div class="recharge_list list2">
+				<ul>
+					<!--<li>
+						<div class="item_row">
+							<div class="item_txt">
+								<span>￥20</span>
+								<em class="throuline_txt">原价3.00元</em>
+								<em>充值500积分</em>
+							</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+			<if condition='$consumer_phone neq null'>
+					<div class="footer_warning">
+						<a href="tel:{$consumer_phone}" class="red_Btxt">客服电话</a>
+						<em class="red_Btxt">|</em>
+						<a href="javascript:void(0);" class="red_Btxt" onclick="tipClick()">常见问题</a>
+					</div>
+					<else/>
+					<div class="footer_warning">
+						<a href="javascript:void(0)"; class="red_Btxt">客服电话</a>
+						<em class="red_Btxt">|</em>
+						<a  class="red_Btxt" onclick="tipClick()">常见问题</a>
+					</div>
+			</if>
+		</div>
+
+		<input type="hidden" name="user_type" id="user_type" value="{$user_type}">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		<input type="hidden" name="openid" id="openid" value="{$openid}">
+		<input type="hidden" name="code" id="code" value="<?php echo $_GET['code'];?>">
+		<div id="wxpay"></div>
+		<!--流量分享需求-->
+		<input type="hidden" name="timestamp" id="timestamp" value="{$timestamp}">
+		<input type="hidden" name="nonceStr" id="nonceStr" value="{$nonceStr}">
+		<input type="hidden" name="signature" id="signature" value="{$signature}">
+		<input type="hidden" name="APPID" id="APPID" value="{$APPID}">
+		<input type="hidden" name="FlowProductTitle" id="FlowProductTitle" value="{$FlowProductTitle}">
+		<input type="hidden" name="FlowProductdesc" id="FlowProductdesc" value="{$FlowProductdesc}">
+		<input type="hidden" name="Link" id="Link" value="{$Link}">
+		<input type="hidden" name="localimgUrl" id="localimgUrl" value="{$localimgUrl}">
+		<!--流量分享需求-->
+
+		<!--分享流量-->
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?s={$version_number}"></script>
+		<script type="text/javascript" src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+
+	</body>
+		<script>
+			function tipClick() {
+				window.location.href = "/index.php/Sdk/WxFlowPayment/showTip?user_type={$user_type}&user_id={$user_id}";
+			}
+		</script>
+		<script src="{$role}js/speclal.js?random=99999">
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="{$role}js/shareFlowRed.js?s={$version_number}"></script>
+</html>

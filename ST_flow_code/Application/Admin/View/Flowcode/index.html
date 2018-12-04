@@ -1,0 +1,229 @@
+<include file="Common/header" />
+<div class="main_con">
+    <div class="operation_box">
+        <div class="operation_con">
+            <div class="currenttit">
+                    <i></i><span></span>
+            </div>
+            <div class="operation_info">
+                <isshow url="Flowcode/pl_activated">
+                    <button class="btn add_btn" onclick="submit_all(2)">
+                        <i class="minicon submitoperation_icon"></i><span>批量激活</span>
+                    </button>
+                </isshow>
+                <span class="line">|</span>
+                <isshow url="Flowcode/add">
+                    <button class="btn add_btn flowcode_add_btn">
+                        <i class="minicon addoperation_icon"></i><span>新增流量码</span>
+                    </button>
+                </isshow>
+                <span class="line">|</span>
+                <isshow url="Flowcode/export_excel">
+                    <button class="btn  export_button" data-url="Flowcode">
+                        <i class="minicon exportoperation_icon"></i><span>导出Excel</span>
+                    </button>
+                </isshow>
+            </div>
+        </div>
+    </div>
+    <div class="search_box">
+        <form method="get" name="excel" action="/index.php/Admin/Flowcode/index">
+            <div class="search_nav">
+                <ul>
+                    <li>
+                        <input type="text" class="inputtext" name="flowcode_code" value="{$Think.get.flowcode_code}" placeholder="流量码" style="min-width:120px;" />
+                    </li>
+                    <li>
+                        <input type="text" class="inputtext" name="product_name" value="{$Think.get.product_name}" placeholder="流量包名称" style="min-width:120px;"/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">属性：</label>
+                        <select class="select" name="type" style="min-width:80px">
+                            <option value="">请选择</option>
+                            <volist name="types" id="vo">
+                                <option value="{$key}" <if condition='$Think.get.type eq $key'>selected</if> >{$vo}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">状态：</label>
+                        <select class="select" name="status" style="min-width:80px">
+                            <option value="">请选择</option>
+                            <volist name="statuss" id="vo">
+                                <option value="{$key}" <if condition='$Think.get.status eq $key'>selected</if> >{$vo}</option>
+                            </volist>
+                        </select>
+                        <input type="hidden" value=""/>
+                    </li>
+                    <li>
+                        <label class="inputlabel">生成时间：</label>
+                        <input type="text" class="inputtext inputdateall" name="start_datetime"  value="{$start_datetime}" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <em class="inputto">至</em>
+                        <input type="text" class="inputtext inputdateall" name="end_datetime"   value="{$end_datetime}" style='min-width:80px' onClick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="search_btncon">
+                <button class="btn add_btn">
+                    <i class="minicon search_icon"></i><span>查询</span>
+                </button>
+
+                <button type="button" class="btn export_btn  reset_button">
+                    <i class="minicon reload_icon"></i><span>重置</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="tablelist_box tablelistboxH">
+        <div class="tablelist_con">
+            <div class="tablelist_theadbox">
+                <div class="tablelist_thead">
+                    <table>
+                        <tr>
+                            <th width="50">
+                                <label class="checkbox" data-cache-all="1" onclick="order_cache_all(this)"><em class="checkbox_alignment"></em></label>
+                            </th>
+                            <th width="50">序号</th>
+                            <th width="120" class="change">流量码</th>
+                            <th width="100" class="change" title="流量包名称">流量包名称</th>
+                            <th width="70" class="change">属性</th>
+                            <th width="70" class="change">状态</th>
+                            <th width="110" class="change">生成时间</th>
+                            <th width="110" class="change">截止时间</th>
+                            <th width="120" class="change">操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tablelist_tbody" data-mcs-theme="dark">
+                <form method="post" name="" id="order_batch_from" action="JavaScript:;">
+                <table>
+                    <volist name="flow_list" id="vo">
+                        <tr>
+                            <td width="50">
+                                <input type="checkbox" class="checkboxidall" name="order_ids[]" value="{$vo.flowcode_id}" style="display:none" id="{$vo.flowcode_id}_all">
+                                <label class="checkbox checkboxall" for="{$vo.flowcode_id}_all"><em class="checkbox_alignment"></em></label>
+                            </td>
+                            <td>{$vo.sort_no}</td>
+                            <td><span title="{$vo.flowcode_code}">{$vo.flowcode_code}</span></td>
+                            <td title="{$vo.product_name}">{$vo.product_name}</td>
+                            <td>{$vo.type|get_flowcode_type}</td>
+                            <td>{$vo.status|get_flowcode_status}</td>
+                            <td>{$vo.create_date}</td>
+                            <td>{$vo.end_time|default="--"}</td>
+                            <td class="operation_td">
+                                <isshow url="OrderCache/show">
+                                    <button class="operationbtn orderCache_view_btn" value="{$vo.flowcode_id}">
+                                        <span>查看</span>
+                                    </button>
+                                </isshow>
+                                <if condition="$vo.status eq 1">
+                                    <isshow url="Flowcode/activated">
+                                        <button class="operationbtn flowcode_activated"  data-name="{$vo.flowcode_code}" value="{$vo.flowcode_id}">
+                                            <span>激活</span>
+                                        </button>
+                                    </isshow>
+                                </if>
+                                <if condition="($vo.status eq 1) or($vo['status'] eq 2)">
+                                <isshow url="Flowcode/invalid">
+                                    <button class="operationbtn flowcode_invalid" data-name="{$vo.flowcode_code}" value="{$vo.flowcode_id}">
+                                        <span>作废</span>
+                                    </button>
+                                </isshow>
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="page_box">
+        <div class="page_con">
+            {$page}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //进入页面默认去掉所有复选框钩选状态
+    $(function(){
+        $(".checkboxall").removeClass("checked");
+        $(".checkboxidall").prop("checked",false);
+    });
+
+    //查看缓存订单信息
+    $('.orderCache_view_btn').on('click',function(){
+        var order_id = $(this).attr('value');
+        var  load = parent.layer.load(0, {shade: [0.3,'#000']});
+        var enterprise_id = $(this).attr('value');
+        var title = '缓存订单信息';
+        var area =  ['600px', '450px'];
+        var view_name = 'order_view_box';
+        var table_id = $('#table_id').val();
+        var view_url = '/index.php/Admin/OrderCache/show?order_id='+order_id+'&table_id='+table_id;
+        view_order(title,area,view_name,view_url);
+    });
+    //全选和非全选操作
+    function order_cache_all(obj){
+        if($(obj).attr("data-cache-all")==1){
+            $(obj).attr("data-cache-all",2);
+            $(".checkboxall").addClass("checked");
+            $(".checkboxidall").prop("checked",true);
+        }else{
+            $(obj).attr("data-cache-all",1);
+            $(".checkboxall").removeClass("checked");
+            $(".checkboxidall").prop("checked",false);
+        }
+    }
+    //点击批量提交
+    function submit_all(contents){
+        var msg_name = "激活";
+        parent.layer.confirm('<i class="confirm_icon"></i>确定是否'+msg_name+'所选流量码？', {
+            title:"提示信息",
+            btn: ['确定','取消'] //按钮
+        },function(){
+            parent.layer.closeAll();
+            operation_fun();
+        }, function() {
+            location.reload();
+        });
+    }
+//    //点击批量删除
+//    function delete_all(contents){
+//        var msg_name = "关闭";
+//        parent.layer.confirm('<i class="confirm_icon"></i>确定是否'+msg_name+'所选订单？', {
+//            title:"提示信息",
+//            btn: ['确定','取消'] //按钮
+//        },function(){
+//            parent.layer.closeAll();
+//            operation_fun("order_delete",msg_name);
+//        }, function() {
+//            location.reload();
+//        });
+//    }
+    //提交和删除公共调用方法
+    function operation_fun(){
+        $.ajax({
+            url :"/index.php/Admin/Flowcode/pl_activated",
+            type : 'post',
+            data :$("#order_batch_from").serialize(),
+            dataType :'json',
+            success : function(data) {
+                if(data.status=="success"){
+                    location.reload();
+                }
+                alertbox(data);
+            }
+        });
+    }
+</script>
+
+<script>
+    parent.layer.closeAll();
+</script>
+</body>
+</html>

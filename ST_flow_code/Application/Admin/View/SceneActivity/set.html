@@ -1,0 +1,96 @@
+<div id="types_box" class="types_box" style="overflow: visible;" >
+    <form name="sceneactivity_set_form" style="height:100%;">
+        <!-- Nav tabs -->
+        <div class="types_tabs_bar">
+            <ul class="nav types-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">中国移动</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">中国联通</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">中国电信</a></li>
+            </ul>
+        </div>
+        <!-- Tab panes -->
+        <div class="tab-content types_content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <table width="100%">
+                    <tr>
+                        <th width="40%">流量包描述</th>
+                        <th width="25%">配置</th>
+                        <th width="35%">中奖率</th>
+                    </tr>
+                </table>
+                <input type="hidden" name="user_activity_id" id="user_activity_id" value="{$user_activity_id}">
+                <div class="types_list mCustomScrollbar_y" data-mcs-theme="dark">
+                    <table width="100%">
+                        <volist name="p_yd" id="yd">
+                            <tr id="{$yd.product_id}">
+                                <td width="40%"><span class="color_box blue_box"><em>{$yd.product_name}</em>中国移动</span></td>
+                                <td width="25%"><label <if condition="$yd['probability'] neq null">class="checkbox checked"<else/>class="checkbox"</if>    data-productid="{$yd.product_id}" name="checkbox_{$yd.product_id}" data-operator_id="{$yd.operator_id}" id="scene_checkbox" ><em></em></label></td>
+                                <td width="35%">
+                                  <div class="fl slider_box">
+                                    <div class="slider" data-position="{$yd.probability}" data-target="#probability_{$yd.product_id}" data-role="slider" data-max-value="100" data-min-value="0"></div>
+                                  </div>
+                                  <div class="slider_value fr">
+                                    <input id="inp_{$yd.product_id}" type="hidden" name="yd_{$yd.product_id}" <if condition="$yd['probability'] neq null">value="2"<else/>value="1"</if>><input type="text" id="probability_{$yd.product_id}"  maxlength="3" value="{$yd.probability}" empty="true" name="probability_{$yd.product_id}"  class="inputtext w50 " onkeyup="value=value.replace(/[^0-9]/g,'')"/><span>%</span></td>
+                                  </div>
+                            </tr>
+                        </volist>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="profile">
+                <table width="100%">
+                    <tr>
+                        <th width="40%">流量包描述</th>
+                        <th width="25%">配置</th>
+                        <th width="35%">中奖率</th>
+                    </tr>
+                </table>
+                <div class="types_list mCustomScrollbar_y" data-mcs-theme="dark">
+                    <table width="100%">
+                        <volist name="p_lt" id="lt">
+                            <tr id="{$lt.product_id}">
+                                <td width="40%"><span class="color_box blue_box"><em>{$lt.product_name}</em>中国联通</span></td>
+                                <td width="25%"><label <if condition="$lt['probability'] neq null">class="checkbox checked"<else/>class="checkbox"</if>    data-productid="{$lt.product_id}" name="checkbox_{$lt.product_id}" data-operator_id="{$lt.operator_id}" id="scene_checkbox" ><em></em></label></td>
+                                <td width="35%">
+                                  <div class="fl slider_box">
+                                    <div class="slider" data-position="{$lt.probability}" data-target="#probability_{$lt.product_id}" data-role="slider" data-max-value="100" data-min-value="0"></div>
+                                  </div>
+                                  <div class="slider_value fr">
+                                    <input type="hidden" id="inp_{$lt.product_id}" name="lt_{$lt.product_id}" <if condition="$lt['probability'] neq null">value="2"<else/>value="1"</if>><input type="text" id="probability_{$lt.product_id}"  empty="true" maxlength="3" value="{$lt.probability}" name="probability_{$lt.product_id}" class="inputtext w50 probability" onkeyup="value=value.replace(/[^0-9]/g,'')"/><span>%</span>
+                                  </div>
+                                </td>
+                            </tr>
+                        </volist>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="messages">
+                <table width="100%">
+                    <tr>
+                        <th width="40%">流量包描述</th>
+                        <th width="25%">配置</th>
+                        <th width="35%">中奖率</th>
+                    </tr>
+                </table>
+                <div class="types_list mCustomScrollbar_y" data-mcs-theme="dark">
+                    <table width="100%">
+                        <volist name="p_dx" id="dx">
+                            <tr id="{$dx.product_id}">
+                                <td width="40%"><span class="color_box blue_box"><em>{$dx.product_name}</em>中国电信</span></td>
+                                <td width="25%"><label <if condition="$dx['probability'] neq null">class="checkbox checked"<else/>class="checkbox"</if>    data-productid="{$dx.product_id}" name="checkbox_{$dx.product_id}" data-operator_id="{$dx.operator_id}" id="scene_checkbox" ><em></em></label></td>
+                                <td width="35%">
+                                  <div class="fl slider_box">
+                                    <div class="slider" data-position="{$dx.probability}" data-target="#probability_{$dx.product_id}" data-role="slider" data-max-value="100" data-min-value="0"></div>
+                                  </div>
+                                  <div class="slider_value fr">
+                                    <input type="hidden" id="inp_{$dx.product_id}" name="dx_{$dx.product_id}" <if condition="$dx['probability'] neq null">value="2"<else/>value="1"</if>><input type="text" id="probability_{$dx.product_id}" empty="true" maxlength="3" value="{$dx.probability}" name="probability_{$dx.product_id}" class="inputtext w50 probability" onkeyup="value=value.replace(/[^0-9]/g,'')"/><span>%</span></td>
+                                  </div>
+                            </tr>
+                        </volist>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="types_text">勾选流量中奖率，勾选设置0表示该产品无法中奖（建议勾选四个流量包）上限概率总和为100%</div>
+    </form>
+</div>

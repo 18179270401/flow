@@ -1,0 +1,64 @@
+<!-- 修改通道 -->
+<div id="channel_edit_box" class="add_box mCustomScrollbar_y" data-mcs-theme="dark">
+  <form name="channel_edit_form">
+
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" maxlength="30" name="channel_name" field="通道名称" value="{$info.channel_name}" /></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道编码：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="channel_code" maxlength="20" field="通道编码" value="{$info.channel_code}" /></div>
+    </div>
+    <div class="add_list">
+        <h5><em class="wildcard">*</em>通道文件名称：</h5>
+        <div class="add_value"><input type="text" class="inputtext" name="channel_file_name" maxlength="30" field="通道文件名称" value="{$info.channel_file_name}"/></div>
+    </div>
+      <input type="hidden" class="inputtext" field="移动折扣" name="discount_mobile" value="{$info.discount_mobile|show_discount_ten=###}" maxlength="4" onkeyup="value=value.replace(/[^0-9.]/g,'')" />
+      <input type="hidden" class="inputtext" field="联通折扣" name="discount_unicom" value="{$info.discount_unicom|show_discount_ten=###}" maxlength="4" onkeyup="value=value.replace(/[^0-9.]/g,'')" />
+      <input type="hidden" class="inputtext" field="电信折扣" name="discount_telecom" value="{$info.discount_telecom|show_discount_ten=###}" maxlength="4" onkeyup="value=value.replace(/[^0-9.]/g,'')" />
+      <!-- <div class="add_list">
+          <h5><em class="wildcard">*</em>移动折扣：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext" field="移动折扣" name="discount_mobile" value="{$info.discount_mobile|show_discount_ten=###}" maxlength="4" onkeyup="value=value.replace(/[^0-9.]/g,'')" />
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>联通折扣：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext" field="联通折扣" name="discount_unicom" value="{$info.discount_unicom|show_discount_ten=###}" maxlength="4" onkeyup="value=value.replace(/[^0-9.]/g,'')" />
+          </div>
+      </div>
+      <div class="add_list">
+          <h5><em class="wildcard">*</em>电信折扣：</h5>
+          <div class="add_value">
+              <input type="text" class="inputtext" field="电信折扣" name="discount_telecom" value="{$info.discount_telecom|show_discount_ten=###}" maxlength="4" onkeyup="value=value.replace(/[^0-9.]/g,'')" />
+          </div>
+      </div>-->
+      <div class="add_list">
+        <h5>省份：</h5>
+        <div class="add_value">
+            <select name="province_id" id="province_id" class="select" msg="请选择省份" onchange="get_is_filter(1)" empty="true">
+                <option value="" >请选择</option>
+                <volist name="province" id="vop">
+                    <option value="{$vop.province_id}" <if condition='$info.province_id eq $vop["province_id"]'>selected</if> >{$vop.province_name}</option>
+                </volist>
+            </select>
+        </div>
+      </div>
+      <div class="add_list" id="filter_city">
+          <h5>市：</h5>
+          <div class="add_value">
+              <select name="city_id" id="city_id" class="select" empty="true">
+                  <option value="" <if condition='$info.city_id eq 0'>selected</if> >请选择</option>
+                  <volist name="citys" id="v">
+                      <option value="{$v.city_id}" <if condition='$info.city_id eq $v["city_id"]'>selected</if> >{$v.city_name}</option>
+                  </volist>
+              </select>
+          </div>
+      </div>
+      
+    <input type="hidden" name="channel_id" value="{$info.channel_id}" />
+  </form>
+</div>
+
